@@ -110,6 +110,13 @@ yarn-error.log*
 # Build scripts
 bin/
 
+# Documentation and reports (dev only)
+docs/
+reports/
+
+# Development containers
+.devcontainer/
+
 # Git hooks
 .husky/
 
