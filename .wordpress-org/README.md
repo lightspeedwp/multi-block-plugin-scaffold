@@ -1,3 +1,12 @@
+---
+title: WordPress.org Assets
+description: WordPress plugin directory assets
+category: Documentation
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # WordPress.org Assets
 
 This directory contains assets for the WordPress.org plugin directory.

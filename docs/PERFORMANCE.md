@@ -1,4 +1,11 @@
-# Performance Monitoring
+---
+title: Performance Monitoring
+description: Performance monitoring tools and best practices
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 This plugin includes comprehensive performance monitoring tools to ensure optimal performance and user experience.
 

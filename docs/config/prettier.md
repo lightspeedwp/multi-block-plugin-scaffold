@@ -1,4 +1,11 @@
-# Prettier Configuration
+---
+title: Prettier Configuration
+description: Code formatter configuration and best practices
+category: Configuration
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

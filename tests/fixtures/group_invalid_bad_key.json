@@ -1,0 +1,10 @@
+{
+  "title": "Invalid Key Format",
+  "fields": [
+    {
+      "key": "field_test",
+      "type": "text"
+    }
+  ],
+  "location": []
+}

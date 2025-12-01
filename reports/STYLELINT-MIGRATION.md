@@ -1,4 +1,12 @@
-# Stylelint 13.x to 16.x Migration Summary
+---
+title: Stylelint Migration Report
+description: Migration details from Stylelint 13.x to 16.x
+category: Reports
+type: Report
+audience: Developers
+date: 2025-12-01
+---
+
 
 **Date:** 1 December 2025
 **Status:** ✅ Complete

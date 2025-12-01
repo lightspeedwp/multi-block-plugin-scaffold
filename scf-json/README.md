@@ -1,3 +1,12 @@
+---
+title: SCF Configuration
+description: Secure Custom Fields JSON definitions
+category: Documentation
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # SCF JSON Field Groups
 
 This directory contains JSON exports of Secure Custom Fields (SCF) field groups for the plugin.

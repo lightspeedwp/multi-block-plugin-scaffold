@@ -1,4 +1,11 @@
-# Testing Guide
+---
+title: Testing Guide
+description: Complete guide to running and writing tests for block plugins
+category: Testing
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 Complete guide to running and writing tests for the {{name}} block plugin scaffold.
 
@@ -204,11 +211,285 @@ test.describe( 'Search Functionality', () => {
 } );
 ```
 
-## Test Coverage
+## SCF Field Group Validation Testing
 
-### Viewing Coverage Reports
+### Overview
 
-#### JavaScript Coverage
+The SCF (Secure Custom Fields) Local JSON feature stores field group configurations as JSON files in version control. Comprehensive validation testing ensures these field groups meet schema requirements before they're loaded into WordPress.
+
+### Schema Validation
+
+All SCF field groups must conform to the JSON Schema defined in:
+
+```plaintext
+scf-json/schema/scf-field-group.schema.json
+```
+
+**Key Validation Rules:**
+
+- Field Group Key: Must start with `group_` and contain only lowercase alphanumeric characters and underscores
+- Title: Required string field
+- Fields Array: Must contain at least one field definition
+- Location Rules: Must define where the field group displays in WordPress
+- Field Keys: Non-layout fields must start with `field_` (layout fields: tab, accordion, message are exempted)
+
+### Running SCF Validation Tests
+
+```bash
+# Run all SCF tests
+npm run test -- tests/php/test-scf-json*.php
+
+# Run specific SCF test file
+npm run test:php -- tests/php/test-scf-json-schema-validation.php
+
+# Run with coverage
+npm run test -- tests/php/test-scf-json*.php --coverage-html coverage/php/
+```
+
+### Test Files
+
+**Schema Validation Tests** — `test-scf-json-schema-validation.php`
+
+- Validates JSON schema structure
+- Checks required properties (key, title, fields, location)
+- Validates field type enumerations (40+ field types)
+- Tests location rule parameters
+- Verifies container field structure (group, repeater, flexible_content)
+
+**Save/Load Integration Tests** — `test-scf-json-save-load.php`
+
+- Tests directory creation and file operations
+- Validates JSON encoding/decoding round-trips
+- Tests ACF filter integration
+- Verifies special character handling
+
+**Meta Setup/Reset Tests** — `test-scf-json-meta.php`
+
+- Tests field group setup operations
+- Validates state transitions (create → update → delete)
+- Tests concurrent operations
+- Verifies metadata preservation
+
+**Fixture-Based Tests** — `test-scf-json-fixtures.php`
+
+- Tests using real field group examples
+- Validates comprehensive field group structure
+- Tests error handling with invalid fixtures
+
+### Test Fixtures
+
+Located in `tests/fixtures/`:
+
+**Valid Fixtures:**
+
+- `group_valid_complete.json` — Complete field group with all field types (text, group, repeater, flexible_content)
+
+**Invalid Fixtures:**
+
+- `group_invalid_missing_title.json` — Missing required `title` property
+- `group_invalid_bad_key.json` — Missing required `key` property
+- `group_invalid_field_type.json` — Field with invalid type
+- `group_invalid_no_location.json` — Missing required `location` array
+
+### SCF Validation Class
+
+The `{{namespace|pascalCase}}_SCF_JSON_Validator` class provides comprehensive validation:
+
+```php
+<?php
+// Example usage
+$validator = new {{namespace|pascalCase}}_SCF_JSON_Validator();
+
+// Validate single file
+$result = $validator->validate( '/path/to/group_example.json' );
+
+if ( ! $result['valid'] ) {
+    foreach ( $result['errors'] as $error ) {
+        echo 'Error: ' . $error . "\n";
+    }
+}
+
+// Validate all files in directory
+$all_results = $validator->validate_all_files();
+foreach ( $all_results as $filename => $result ) {
+    if ( ! $result['valid'] ) {
+        error_log( "Validation failed for $filename" );
+    }
+}
+```
+
+**Validation Result Structure:**
+
+```php
+array(
+    'valid'    => true,              // Overall validation status
+    'errors'   => array(),           // Critical validation errors
+    'warnings' => array(),           // Non-blocking warnings
+)
+```
+
+### Field Group Structure Example
+
+**Minimal Valid Field Group:**
+
+```json
+{
+  "key": "group_example",
+  "title": "Example Field Group",
+  "fields": [
+    {
+      "key": "field_example",
+      "name": "example_field",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ]
+}
+```
+
+**Complete Field Group with Container Fields:**
+
+```json
+{
+  "key": "group_advanced",
+  "title": "Advanced Field Group",
+  "fields": [
+    {
+      "key": "field_group_nested",
+      "name": "nested_group",
+      "type": "group",
+      "sub_fields": [
+        {
+          "key": "field_nested_item",
+          "name": "nested_item",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_repeater_items",
+      "name": "repeater_items",
+      "type": "repeater",
+      "sub_fields": [
+        {
+          "key": "field_item_name",
+          "name": "item_name",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_flexible_content",
+      "name": "content_sections",
+      "type": "flexible_content",
+      "layouts": [
+        {
+          "key": "layout_text",
+          "name": "text_section",
+          "label": "Text Section",
+          "sub_fields": [
+            {
+              "key": "field_section_text",
+              "name": "section_text",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [[]]
+}
+```
+
+### Common Validation Issues
+
+**Issue**: "Field group key must start with 'group_'"
+
+**Solution**: Ensure your field group key follows the pattern:
+
+```json
+{
+  "key": "group_my_fields",  // ✅ Correct
+  "key": "my_fields"         // ❌ Incorrect
+}
+```
+
+**Issue**: "Field key must start with 'field_'"
+
+**Solution**: Non-layout fields require the `field_` prefix:
+
+```json
+{
+  "fields": [
+    {
+      "key": "field_my_text",  // ✅ Correct for text field
+      "type": "text"
+    },
+    {
+      "key": "tab_section",    // ✅ Correct for tab (layout field)
+      "type": "tab"
+    }
+  ]
+}
+```
+
+**Issue**: "Missing required property: location"
+
+**Solution**: All field groups must define location rules:
+
+```json
+{
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ]
+}
+```
+
+### Validating During Development
+
+Add validation to your build process:
+
+```bash
+# In npm scripts
+"test:scf": "npm run test -- tests/php/test-scf-json*.php",
+"validate:scf": "npm run test:scf -- --verbose"
+```
+
+Run before committing field group changes:
+
+```bash
+npm run validate:scf
+```
+
+### Integration with CI/CD
+
+SCF validation runs automatically in GitHub Actions:
+
+```yaml
+- name: Validate SCF Field Groups
+  run: npm run test:scf
+```
+
+All field group JSON files must pass validation before PRs can be merged.
+
+## Coverage Reports
+
+### JavaScript Coverage
 
 ```bash
 npm run test:js -- --coverage
@@ -216,7 +497,7 @@ npm run test:js -- --coverage
 
 Report saved to: `coverage/js/`
 
-#### PHP Coverage
+### PHP Coverage
 
 ```bash
 npm run test:php -- --coverage-html coverage/php/

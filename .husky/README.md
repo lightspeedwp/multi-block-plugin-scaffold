@@ -1,3 +1,12 @@
+---
+title: Git Hooks Configuration
+description: Pre-commit and git hooks setup
+category: Project
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
+
 # Husky Git Hooks
 
 This directory contains Git hook scripts managed by Husky.

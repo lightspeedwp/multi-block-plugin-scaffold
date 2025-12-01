@@ -1,4 +1,11 @@
-# Deprecation Workflow
+---
+title: Deprecation Policy
+description: Guidelines for deprecating and removing features
+category: Documentation
+type: Policy
+audience: Developers
+date: 2025-12-01
+---
 
 This document outlines the standardized process for deprecating functions, hooks, and features in a way that provides clear migration paths and sufficient warning to developers.
 

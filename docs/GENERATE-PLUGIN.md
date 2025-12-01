@@ -1,4 +1,11 @@
-# Single Block Plugin Generation & Build Scripts
+---
+title: Generate Plugin
+description: Guide to generating and building new block plugins from the scaffold
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 This document explains how to use the scripts in the `bin/` directory to generate, build, and test a new single block plugin from this scaffold.
 

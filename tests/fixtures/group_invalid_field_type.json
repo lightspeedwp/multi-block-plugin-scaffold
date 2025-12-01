@@ -1,0 +1,20 @@
+{
+  "key": "group_invalid_type",
+  "title": "Invalid Field Type",
+  "fields": [
+    {
+      "key": "field_bad_type",
+      "name": "bad_type",
+      "type": "nonexistent_type"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ]
+}

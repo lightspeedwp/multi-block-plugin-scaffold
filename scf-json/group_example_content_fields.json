@@ -1,0 +1,103 @@
+{
+  "key": "group_example_content_fields",
+  "title": "Example: Content Fields",
+  "description": "Demonstrates content field types: WYSIWYG editor, oEmbed, image, file, gallery.",
+  "fields": [
+    {
+      "key": "field_example_wysiwyg",
+      "name": "example_wysiwyg",
+      "label": "Rich Text Editor",
+      "type": "wysiwyg",
+      "required": 0,
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 1,
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_oembed",
+      "name": "example_oembed",
+      "label": "Embed Media (oEmbed)",
+      "type": "oembed",
+      "required": 0,
+      "width": 400,
+      "height": 300,
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_image",
+      "name": "example_image",
+      "label": "Featured Image",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "large",
+      "library": "all",
+      "min_width": 300,
+      "min_height": 300,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_file",
+      "name": "example_file",
+      "label": "Document File",
+      "type": "file",
+      "required": 0,
+      "return_format": "array",
+      "library": "all",
+      "min_size": "0",
+      "max_size": "10485760",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_gallery",
+      "name": "example_gallery",
+      "label": "Image Gallery",
+      "type": "gallery",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "min": 0,
+      "max": 0,
+      "insert": "append",
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

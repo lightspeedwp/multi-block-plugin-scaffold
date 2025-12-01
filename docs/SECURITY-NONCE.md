@@ -1,4 +1,11 @@
-# Nonce Verification Utilities
+---
+title: Nonce Verification Utilities
+description: Nonce utilities for WordPress security and request validation
+category: Development
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 This scaffold includes generic nonce helpers in `inc/nonce.php` with the `lswp_` prefix.
 

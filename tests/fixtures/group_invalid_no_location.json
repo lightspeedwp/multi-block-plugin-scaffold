@@ -1,0 +1,10 @@
+{
+  "key": "group_invalid_location_missing",
+  "title": "Invalid Location Missing",
+  "fields": [
+    {
+      "key": "field_test",
+      "type": "text"
+    }
+  ]
+}

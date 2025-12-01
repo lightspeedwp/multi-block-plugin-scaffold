@@ -1,0 +1,203 @@
+{
+  "key": "group_example_advanced_fields",
+  "title": "Example: Advanced Fields",
+  "description": "Demonstrates advanced container and layout fields: group, repeater, flexible content, and layout helpers.",
+  "fields": [
+    {
+      "key": "field_example_group",
+      "name": "example_group",
+      "label": "Content Group",
+      "type": "group",
+      "required": 0,
+      "layout": "table",
+      "sub_fields": [
+        {
+          "key": "field_group_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text",
+          "required": 1,
+          "wrapper": {
+            "width": "100",
+            "class": "",
+            "id": ""
+          }
+        },
+        {
+          "key": "field_group_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea",
+          "required": 0,
+          "rows": 3,
+          "wrapper": {
+            "width": "100",
+            "class": "",
+            "id": ""
+          }
+        }
+      ],
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_repeater",
+      "name": "example_repeater",
+      "label": "Repeater Items",
+      "type": "repeater",
+      "required": 0,
+      "collapsed": "",
+      "min": 0,
+      "max": 0,
+      "layout": "table",
+      "button_label": "Add Item",
+      "sub_fields": [
+        {
+          "key": "field_repeater_title",
+          "name": "title",
+          "label": "Title",
+          "type": "text",
+          "required": 1,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          }
+        },
+        {
+          "key": "field_repeater_value",
+          "name": "value",
+          "label": "Value",
+          "type": "text",
+          "required": 0,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          }
+        }
+      ],
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_flexible_content",
+      "name": "example_flexible_content",
+      "label": "Flexible Content Sections",
+      "type": "flexible_content",
+      "required": 0,
+      "button_label": "Add Section",
+      "layouts": [
+        {
+          "key": "layout_text_section",
+          "name": "text_section",
+          "label": "Text Section",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_flex_section_title",
+              "name": "section_title",
+              "label": "Title",
+              "type": "text",
+              "required": 1,
+              "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+              }
+            },
+            {
+              "key": "field_flex_section_content",
+              "name": "section_content",
+              "label": "Content",
+              "type": "wysiwyg",
+              "required": 0,
+              "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+              }
+            }
+          ],
+          "min": "",
+          "max": ""
+        },
+        {
+          "key": "layout_image_section",
+          "name": "image_section",
+          "label": "Image Section",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_flex_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "required": 1,
+              "return_format": "array",
+              "preview_size": "large",
+              "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+              }
+            }
+          ],
+          "min": "",
+          "max": ""
+        }
+      ],
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "tab_information_section",
+      "label": "Information",
+      "type": "tab",
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top"
+    },
+    {
+      "key": "field_info_text",
+      "name": "info_text",
+      "label": "Information",
+      "type": "message",
+      "message": "This is additional information about this field group.",
+      "new_lines": "wpautop",
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

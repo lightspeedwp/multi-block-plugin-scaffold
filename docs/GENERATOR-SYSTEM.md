@@ -1,4 +1,11 @@
-# Generator System Documentation
+---
+title: Generator System
+description: Comprehensive generator system for creating WordPress block plugins
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

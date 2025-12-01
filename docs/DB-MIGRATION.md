@@ -1,4 +1,11 @@
-# Database Migration System
+---
+title: Database Migration Guide
+description: Guide for creating and running database migrations
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 Plugin includes a simple database migration handler in `inc/db-migration.php`.
 

@@ -1,0 +1,114 @@
+{
+  "key": "group_example_choice_fields",
+  "title": "Example: Choice Fields",
+  "description": "Demonstrates choice field types: select, checkbox, radio, button group, true/false.",
+  "fields": [
+    {
+      "key": "field_example_select",
+      "name": "example_select",
+      "label": "Select Field",
+      "type": "select",
+      "required": 0,
+      "multiple": 0,
+      "ui": 1,
+      "ajax": 0,
+      "choices": {
+        "option_1": "Option 1",
+        "option_2": "Option 2",
+        "option_3": "Option 3"
+      },
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_checkbox",
+      "name": "example_checkbox",
+      "label": "Checkbox Field",
+      "type": "checkbox",
+      "required": 0,
+      "choices": {
+        "choice_a": "Choice A",
+        "choice_b": "Choice B",
+        "choice_c": "Choice C"
+      },
+      "layout": "vertical",
+      "return_format": "value",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_radio",
+      "name": "example_radio",
+      "label": "Radio Button Field",
+      "type": "radio",
+      "required": 0,
+      "choices": {
+        "yes": "Yes",
+        "no": "No",
+        "maybe": "Maybe"
+      },
+      "layout": "vertical",
+      "return_format": "value",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_button_group",
+      "name": "example_button_group",
+      "label": "Button Group Field",
+      "type": "button_group",
+      "required": 0,
+      "choices": {
+        "left": "Left",
+        "center": "Center",
+        "right": "Right"
+      },
+      "return_format": "value",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_true_false",
+      "name": "example_true_false",
+      "label": "True/False Toggle",
+      "type": "true_false",
+      "required": 0,
+      "ui": 1,
+      "ui_on_text": "Yes",
+      "ui_off_text": "No",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

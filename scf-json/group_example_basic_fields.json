@@ -1,0 +1,107 @@
+{
+  "key": "group_example_basic_fields",
+  "title": "Example: Basic Fields",
+  "description": "Demonstrates basic SCF field types: text, textarea, email, url, number, password.",
+  "fields": [
+    {
+      "key": "field_example_text",
+      "name": "example_text",
+      "label": "Text Field",
+      "type": "text",
+      "required": 0,
+      "placeholder": "Enter text here",
+      "maxlength": 255,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_textarea",
+      "name": "example_textarea",
+      "label": "Textarea Field",
+      "type": "textarea",
+      "required": 0,
+      "rows": 4,
+      "placeholder": "Enter longer text here",
+      "maxlength": 1000,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_email",
+      "name": "example_email",
+      "label": "Email Field",
+      "type": "email",
+      "required": 0,
+      "placeholder": "name@example.com",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_url",
+      "name": "example_url",
+      "label": "URL Field",
+      "type": "url",
+      "required": 0,
+      "placeholder": "https://example.com",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_number",
+      "name": "example_number",
+      "label": "Number Field",
+      "type": "number",
+      "required": 0,
+      "min": "0",
+      "max": "100",
+      "step": "1",
+      "placeholder": "0",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_password",
+      "name": "example_password",
+      "label": "Password Field",
+      "type": "password",
+      "required": 0,
+      "placeholder": "••••••••",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

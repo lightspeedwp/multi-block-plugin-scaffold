@@ -1,3 +1,12 @@
+---
+title: Workflows Directory
+description: CI/CD workflow automation and configuration
+category: Project
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # GitHub Actions Workflows
 
 This directory contains GitHub Actions workflow definitions for CI/CD automation.

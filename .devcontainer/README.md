@@ -1,3 +1,12 @@
+---
+title: Dev Container Configuration
+description: Docker development environment setup
+category: Project
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
+
 # Development Container
 
 This directory contains configuration for VS Code Dev Containers, providing a consistent Docker-based development environment.

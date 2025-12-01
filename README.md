@@ -1,3 +1,12 @@
+---
+title: Directory Index
+description: Documentation for this directory
+category: Documentation
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # {{name}}
 
 {{description}}
@@ -24,12 +33,14 @@ A multi-block WordPress plugin scaffold with support for:
 ## Installation
 
 1. Clone this repository to your WordPress plugins directory:
+
    ```bash
    cd wp-content/plugins/
    git clone https://github.com/{{author}}/{{slug}}.git
    ```
 
 2. Install dependencies:
+
    ```bash
    cd {{slug}}
    npm install
@@ -37,6 +48,7 @@ A multi-block WordPress plugin scaffold with support for:
    ```
 
 3. Build the plugin:
+
    ```bash
    npm run build
    ```
@@ -122,6 +134,7 @@ Display a single post in a card layout.
 ### {{name}} Collection
 
 Display a collection of posts with:
+
 - Grid, list, or slider layout
 - Taxonomy filtering
 - Featured posts filter
@@ -130,6 +143,7 @@ Display a collection of posts with:
 ### {{name}} Slider
 
 Display posts or custom slides in a carousel with:
+
 - Autoplay
 - Navigation dots and arrows
 - Touch/swipe support
@@ -138,6 +152,7 @@ Display posts or custom slides in a carousel with:
 ### Featured {{name_plural}}
 
 Highlight featured posts with:
+
 - Grid layout
 - Featured-first layout
 - Hero layout

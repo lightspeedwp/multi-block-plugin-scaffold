@@ -1,4 +1,11 @@
-# npm-package-json-lint Configuration
+---
+title: npm-package-json-lint Configuration
+description: Package.json validation rules and standards
+category: Configuration
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

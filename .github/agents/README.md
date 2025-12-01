@@ -1,3 +1,12 @@
+---
+title: Agents Directory
+description: Automation agents and specifications
+category: Project
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # AI Agents
 
 This directory contains AI agent configurations for automated multi-block plugin development tasks.

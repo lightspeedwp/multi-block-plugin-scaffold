@@ -1,4 +1,11 @@
-# Build Process Documentation
+---
+title: Build Process
+description: Detailed documentation of the build system and asset compilation
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

@@ -1,3 +1,12 @@
+---
+title: PHP Block Instructions
+description: Standards for PHP in WordPress blocks
+category: Project
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
+
 # PHP Block & Template Instructions
 
 ## Pattern Registration

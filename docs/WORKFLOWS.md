@@ -1,4 +1,11 @@
-# GitHub Workflows Guide
+---
+title: GitHub Workflows Guide
+description: CI/CD workflows and GitHub Actions documentation
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 Complete guide to CI/CD workflows for the {{name}} block plugin scaffold.
 
@@ -220,27 +227,27 @@ flowchart TD
     Start[Push/PR] --> Quality[Code Quality]
     Start --> Build[Build & Test]
     Start --> i18n[Internationalization]
-    
+
     Quality --> Lint[Lint JS/CSS/PHP]
     Quality --> Format[Format Check]
-    
+
     Build --> Compile[Build Assets]
     Build --> TestJS[Jest Tests]
     Build --> TestPHP[PHPUnit Tests]
     Build --> TestE2E[Playwright Tests]
-    
+
     i18n --> Validate[Validate i18n]
     i18n --> GeneratePOT[Generate POT]
-    
+
     Lint --> Pass{All Pass?}
     Format --> Pass
     TestJS --> Pass
     TestPHP --> Pass
     TestE2E --> Pass
-    
+
     Pass -->|Yes| Deploy{Branch?}
     Pass -->|No| Fail[Fail]
-    
+
     Deploy -->|main| Production[Deploy Production]
     Deploy -->|develop| Staging[Deploy Staging]
     Deploy -->|feature| Review[PR Review]
@@ -514,11 +521,11 @@ Never log secrets:
 
 ## Summary
 
-✅ **Automated CI/CD** - Every commit is tested  
-✅ **Multiple Checks** - Quality, build, tests, performance, security  
-✅ **Branch Protection** - Prevent bad code from merging  
-✅ **Monitoring** - Track workflow status and history  
+✅ **Automated CI/CD** - Every commit is tested
+✅ **Multiple Checks** - Quality, build, tests, performance, security
+✅ **Branch Protection** - Prevent bad code from merging
+✅ **Monitoring** - Track workflow status and history
 ✅ **Notifications** - Get alerts on failures
 
-For agent documentation, see [AGENTS.md](./AGENTS.md).  
+For agent documentation, see [AGENTS.md](./AGENTS.md).
 For testing documentation, see [TESTING.md](./TESTING.md).

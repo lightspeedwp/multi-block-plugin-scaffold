@@ -1,4 +1,11 @@
-# AI Agents Guide
+---
+title: AI Agents Guide
+description: Overview of AI agents available for development automation and code quality
+category: Documentation
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 Overview of AI agents available for the {{name}} block plugin scaffold.
 
@@ -191,7 +198,7 @@ Usage examples
 
 ### 1. Let Agents Handle Repetitive Tasks
 
-✅ **Good**: Let build agent handle linting, formatting, validation  
+✅ **Good**: Let build agent handle linting, formatting, validation
 ❌ **Bad**: Manually run each tool before commit
 
 ### 2. Review Agent Output
@@ -291,10 +298,10 @@ Pre-commit hooks configured in:
 
 ## Summary
 
-✅ **Automated Quality** - Agents maintain code standards  
-✅ **Consistent Workflow** - Same process for all developers  
-✅ **Error Prevention** - Catch issues before they reach production  
+✅ **Automated Quality** - Agents maintain code standards
+✅ **Consistent Workflow** - Same process for all developers
+✅ **Error Prevention** - Catch issues before they reach production
 ✅ **Time Savings** - Automate repetitive tasks
 
-For CI/CD workflows, see [WORKFLOWS.md](./WORKFLOWS.md).  
+For CI/CD workflows, see [WORKFLOWS.md](./WORKFLOWS.md).
 For testing documentation, see [TESTING.md](./TESTING.md).

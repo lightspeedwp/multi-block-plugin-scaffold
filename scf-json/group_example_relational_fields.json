@@ -1,0 +1,125 @@
+{
+  "key": "group_example_relational_fields",
+  "title": "Example: Relational Fields",
+  "description": "Demonstrates relational field types: link, post object, page link, relationship, taxonomy, user.",
+  "fields": [
+    {
+      "key": "field_example_link",
+      "name": "example_link",
+      "label": "Link Field",
+      "type": "link",
+      "required": 0,
+      "return_format": "array",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_post_object",
+      "name": "example_post_object",
+      "label": "Post Selection",
+      "type": "post_object",
+      "required": 0,
+      "post_type": "post",
+      "multiple": 0,
+      "return_format": "object",
+      "ui": 1,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_page_link",
+      "name": "example_page_link",
+      "label": "Page Link Field",
+      "type": "page_link",
+      "required": 0,
+      "multiple": 0,
+      "allow_null": 1,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_relationship",
+      "name": "example_relationship",
+      "label": "Relationship Field",
+      "type": "relationship",
+      "required": 0,
+      "post_type": "post",
+      "taxonomy": "",
+      "filters": [
+        "search",
+        "post_type",
+        "taxonomy"
+      ],
+      "elements": "",
+      "min": "",
+      "max": "",
+      "return_format": "object",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_taxonomy",
+      "name": "example_taxonomy",
+      "label": "Taxonomy Selection",
+      "type": "taxonomy",
+      "required": 0,
+      "taxonomy": "category",
+      "field_type": "checkbox",
+      "allow_null": 0,
+      "add_term": 1,
+      "save_terms": 0,
+      "load_terms": 0,
+      "return_format": "id",
+      "multiple": 0,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_user",
+      "name": "example_user",
+      "label": "User Selection",
+      "type": "user",
+      "required": 0,
+      "role": "",
+      "multiple": 0,
+      "allow_null": 0,
+      "return_format": "object",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

@@ -1,0 +1,81 @@
+{
+  "key": "group_example_date_time_fields",
+  "title": "Example: Date & Time Fields",
+  "description": "Demonstrates date/time field types: date picker, date time picker, time picker, color picker.",
+  "fields": [
+    {
+      "key": "field_example_date_picker",
+      "name": "example_date_picker",
+      "label": "Date Picker",
+      "type": "date_picker",
+      "required": 0,
+      "display_format": "m/d/Y",
+      "return_format": "Y-m-d",
+      "first_day": 1,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_date_time_picker",
+      "name": "example_date_time_picker",
+      "label": "Date Time Picker",
+      "type": "date_time_picker",
+      "required": 0,
+      "display_format": "m/d/Y g:i a",
+      "return_format": "Y-m-d H:i:s",
+      "first_day": 1,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_time_picker",
+      "name": "example_time_picker",
+      "label": "Time Picker",
+      "type": "time_picker",
+      "required": 0,
+      "display_format": "g:i a",
+      "return_format": "H:i:s",
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_example_color_picker",
+      "name": "example_color_picker",
+      "label": "Color Picker",
+      "type": "color_picker",
+      "required": 0,
+      "return_format": "string",
+      "alpha_enabled": 0,
+      "wrapper": {
+        "width": "50",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

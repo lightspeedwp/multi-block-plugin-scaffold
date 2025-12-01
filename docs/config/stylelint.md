@@ -1,4 +1,11 @@
-# Stylelint Configuration
+---
+title: Stylelint Configuration
+description: CSS linting rules and code quality standards
+category: Configuration
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

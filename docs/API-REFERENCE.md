@@ -1,4 +1,11 @@
-# API Reference
+---
+title: API Reference
+description: Complete API documentation for PHP and JavaScript functions
+category: Documentation
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 Complete API documentation for the {{name}} single block plugin scaffold.
 

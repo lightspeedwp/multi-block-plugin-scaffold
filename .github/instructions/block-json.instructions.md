@@ -1,3 +1,12 @@
+---
+title: Block JSON Instructions
+description: Standards for block.json configuration
+category: Project
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
+
 # block.json Instructions
 
 ## Essentials

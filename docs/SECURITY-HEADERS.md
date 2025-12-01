@@ -1,4 +1,11 @@
-# Security Headers for WordPress Plugins
+---
+title: Security Headers Guide
+description: Implementing security headers for WordPress plugins
+category: Development
+type: Guide
+audience: Developers
+date: 2025-12-01
+---
 
 Harden your plugin by setting modern security headers at the server or via WordPress. Prefer server configuration for performance and global coverage; use WordPress only when you must scope headers or cannot change server config.
 

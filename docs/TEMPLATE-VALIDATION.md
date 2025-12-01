@@ -1,4 +1,11 @@
-# Template Validation Report
+---
+title: Template Validation Report
+description: Template validation and health check report
+category: Testing
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

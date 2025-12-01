@@ -1,3 +1,12 @@
+---
+title: Prompts Directory
+description: Prompt templates and AI instruction prompts
+category: Project
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # AI Prompts
 
 This directory contains reusable prompt templates for AI-assisted multi-block plugin development.

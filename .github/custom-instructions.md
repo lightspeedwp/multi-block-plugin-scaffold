@@ -1,3 +1,12 @@
+---
+title: Custom AI Instructions
+description: Custom instructions for AI assistants and Copilot
+category: Project
+type: Guide
+audience: AI Assistants, Developers
+date: 2025-12-01
+---
+
 # Multi-Block Plugin Scaffold: AI, Copilot, and Development Instructions
 
 ## Overview & Related Files

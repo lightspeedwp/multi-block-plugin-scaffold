@@ -1,4 +1,11 @@
-# Configuration Documentation
+---
+title: Configuration Documentation Index
+description: Complete index of all tool configuration files and documentation
+category: Configuration
+type: Index
+audience: Developers
+date: 2025-12-01
+---
 
 This directory contains comprehensive documentation for all configuration files used in the single block plugin scaffold.
 

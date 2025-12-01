@@ -1,3 +1,12 @@
+---
+title: Instructions Directory
+description: Developer and AI instruction files
+category: Project
+type: Index
+audience: Developers, AI Assistants
+date: 2025-12-01
+---
+
 # Development Instructions
 
 This directory contains detailed instructions and guidelines for AI-assisted multi-block plugin development.

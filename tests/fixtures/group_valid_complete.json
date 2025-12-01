@@ -1,0 +1,184 @@
+{
+  "key": "group_valid_complete",
+  "title": "Valid Complete Field Group Fixture",
+  "description": "Comprehensive valid field group demonstrating all property types and configurations.",
+  "fields": [
+    {
+      "key": "field_text_basic",
+      "name": "text_basic",
+      "label": "Basic Text Field",
+      "type": "text",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "Enter text here"
+    },
+    {
+      "key": "field_group_nested",
+      "name": "group_nested",
+      "label": "Nested Group",
+      "type": "group",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "sub_fields": [
+        {
+          "key": "field_nested_text",
+          "name": "nested_text",
+          "label": "Nested Text",
+          "type": "text",
+          "required": 0,
+          "wrapper": {
+            "width": "100",
+            "class": "",
+            "id": ""
+          }
+        },
+        {
+          "key": "field_nested_number",
+          "name": "nested_number",
+          "label": "Nested Number",
+          "type": "number",
+          "required": 0,
+          "wrapper": {
+            "width": "100",
+            "class": "",
+            "id": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "field_repeater_items",
+      "name": "repeater_items",
+      "label": "Items Repeater",
+      "type": "repeater",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      },
+      "collapsed": "",
+      "min": 0,
+      "max": 0,
+      "layout": "table",
+      "button_label": "Add Item",
+      "sub_fields": [
+        {
+          "key": "field_item_name",
+          "name": "item_name",
+          "label": "Item Name",
+          "type": "text",
+          "required": 1,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          }
+        },
+        {
+          "key": "field_item_price",
+          "name": "item_price",
+          "label": "Item Price",
+          "type": "number",
+          "required": 1,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          },
+          "step": "0.01"
+        }
+      ]
+    },
+    {
+      "key": "field_flexible_sections",
+      "name": "flexible_sections",
+      "label": "Flexible Sections",
+      "type": "flexible_content",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "100",
+        "class": "",
+        "id": ""
+      },
+      "button_label": "Add Section",
+      "layouts": [
+        {
+          "key": "layout_text_block",
+          "name": "text_block",
+          "label": "Text Block",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_flex_text_content",
+              "name": "text_content",
+              "label": "Content",
+              "type": "textarea",
+              "required": 1,
+              "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+              }
+            }
+          ],
+          "min": "",
+          "max": ""
+        },
+        {
+          "key": "layout_image_block",
+          "name": "image_block",
+          "label": "Image Block",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_flex_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "required": 1,
+              "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+              },
+              "return_format": "array",
+              "preview_size": "medium"
+            }
+          ],
+          "min": "",
+          "max": ""
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "post"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true
+}

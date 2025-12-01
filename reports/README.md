@@ -1,4 +1,12 @@
-# Reports
+---
+title: Reports Index
+description: Point-in-time summaries and analysis documents
+category: Reports
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 
 This directory contains summaries, migration reports, and analysis documents that are **point-in-time** records rather than ongoing developer documentation.
 

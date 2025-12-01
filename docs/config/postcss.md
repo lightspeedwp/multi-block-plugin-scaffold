@@ -1,4 +1,11 @@
-# PostCSS Configuration
+---
+title: PostCSS Configuration
+description: CSS post-processing and transformation configuration
+category: Configuration
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

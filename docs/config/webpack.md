@@ -1,4 +1,11 @@
-# Webpack Configuration
+---
+title: Webpack Configuration
+description: Module bundler configuration and build pipeline
+category: Configuration
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

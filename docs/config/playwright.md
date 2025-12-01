@@ -1,5 +1,12 @@
 ````markdown
-# Playwright Configuration
+---
+title: Playwright Configuration
+description: End-to-end testing framework configuration and best practices
+category: Configuration
+type: Reference
+audience: Developers
+date: 2025-12-01
+---
 
 ## Overview
 

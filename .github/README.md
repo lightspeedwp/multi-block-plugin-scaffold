@@ -1,3 +1,12 @@
+---
+title: GitHub Configuration
+description: GitHub-specific configuration files
+category: Project
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # GitHub Configuration
 
 This directory contains GitHub-specific configuration files for the {{name}} multi-block plugin.

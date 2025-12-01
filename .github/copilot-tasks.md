@@ -1,3 +1,12 @@
+---
+title: Copilot Tasklist
+description: Tracked tasks and audit items for automation
+category: Project
+type: Index
+audience: Developers
+date: 2025-12-01
+---
+
 # Copilot Tasklist - Multi-Block Plugin Scaffold
 
 > **Status**: 🔄 Initial scaffold setup
