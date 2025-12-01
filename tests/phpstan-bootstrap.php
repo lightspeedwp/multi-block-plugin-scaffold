@@ -1,0 +1,66 @@
+<?php
+/**
+ * PHPStan bootstrap file.
+ *
+ * @package {{namespace}}
+ */
+
+// Define constants for PHPStan.
+define( '{{namespace|upper}}_VERSION', '{{version}}' );
+define( '{{namespace|upper}}_PLUGIN_DIR', dirname( __DIR__ ) . '/' );
+define( '{{namespace|upper}}_PLUGIN_URL', 'https://example.com/wp-content/plugins/{{slug}}/' );
+define( '{{namespace|upper}}_PLUGIN_BASENAME', '{{slug}}/{{slug}}.php' );
+
+// Mock ACF functions.
+if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+	function acf_add_local_field_group( array $args ): bool {
+		return true;
+	}
+}
+
+if ( ! function_exists( 'get_field' ) ) {
+	/**
+	 * Get ACF field value.
+	 *
+	 * @param string $field   Field name.
+	 * @param int    $post_id Post ID.
+	 * @return mixed
+	 */
+	function get_field( string $field, int $post_id = 0 ) {
+		return null;
+	}
+}
+
+if ( ! function_exists( 'have_rows' ) ) {
+	function have_rows( string $field, int $post_id = 0 ): bool {
+		return false;
+	}
+}
+
+if ( ! function_exists( 'the_row' ) ) {
+	function the_row(): void {}
+}
+
+if ( ! function_exists( 'get_sub_field' ) ) {
+	/**
+	 * Get sub field value.
+	 *
+	 * @param string $field Field name.
+	 * @return mixed
+	 */
+	function get_sub_field( string $field ) {
+		return null;
+	}
+}
+
+if ( ! function_exists( 'get_row_layout' ) ) {
+	function get_row_layout(): string {
+		return '';
+	}
+}
+
+if ( ! function_exists( 'get_row_index' ) ) {
+	function get_row_index(): int {
+		return 0;
+	}
+}
