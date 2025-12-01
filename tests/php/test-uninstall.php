@@ -52,9 +52,9 @@ class Test_Uninstall extends WP_UnitTestCase {
 		// Delete term.
 		wp_delete_term( $term['term_id'], '{{slug}}_category' );
 
-		// Verify deletion.
+		// Verify deletion - get_term returns WP_Error or null when term doesn't exist.
 		$deleted_term = get_term( $term['term_id'], '{{slug}}_category' );
-		$this->assertNull( $deleted_term );
+		$this->assertTrue( is_wp_error( $deleted_term ) || null === $deleted_term );
 	}
 
 	/**

@@ -87,10 +87,8 @@ export function buildTaxQuery( taxQuery ) {
 	}
 
 	return [
-		{
-			relation: 'AND',
-			...queries,
-		},
+		{ relation: 'AND' },
+		...queries,
 	];
 }
 

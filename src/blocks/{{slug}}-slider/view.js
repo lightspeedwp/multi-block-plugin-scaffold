@@ -104,12 +104,9 @@
 			}
 
 			dots.forEach( function ( dot, index ) {
-				const dotIndex = index * settings.slidesToScroll;
-				const isActive = currentIndex >= dotIndex &&
-					currentIndex < dotIndex + settings.slidesToScroll;
-
-				dot.classList.toggle( 'is-active', isActive || index === Math.floor( currentIndex / settings.slidesToScroll ) );
-				dot.setAttribute( 'aria-selected', dot.classList.contains( 'is-active' ) );
+				const isActive = index === Math.floor( currentIndex / settings.slidesToScroll );
+				dot.classList.toggle( 'is-active', isActive );
+				dot.setAttribute( 'aria-selected', isActive.toString() );
 			} );
 		}
 

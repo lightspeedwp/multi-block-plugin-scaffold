@@ -198,15 +198,15 @@ export default function Slider( {
 					role="tablist"
 					aria-label={ __( 'Slider navigation', '{{textdomain}}' ) }
 				>
-					{ Array.from( { length: maxIndex + 1 } ).map( ( _, index ) => (
+					{ Array.from( { length: Math.ceil( ( totalSlides - slidesToShow ) / slidesToScroll ) + 1 } ).map( ( _, index ) => (
 						<button
 							key={ index }
 							className={ `{{namespace}}-slider__dot ${
-								index === currentIndex ? 'is-active' : ''
+								index === Math.floor( currentIndex / slidesToScroll ) ? 'is-active' : ''
 							}` }
-							onClick={ () => goToSlide( index ) }
+							onClick={ () => goToSlide( index * slidesToScroll ) }
 							role="tab"
-							aria-selected={ index === currentIndex }
+							aria-selected={ index === Math.floor( currentIndex / slidesToScroll ) }
 							aria-label={ `Go to slide ${ index + 1 }` }
 						/>
 					) ) }

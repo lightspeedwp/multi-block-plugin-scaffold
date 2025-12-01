@@ -40,7 +40,7 @@ const filesToUpdate = [
 	},
 	{
 		file: path.join( rootDir, '{{slug}}.php' ),
-		pattern: /define\(\s*'{{namespace\|upper}}_VERSION',\s*'[^']+'\s*\)/,
+		pattern: /define\(\s*'\{\{namespace\|upper\}\}_VERSION',\s*'[^']+'\s*\)/,
 		replacement: `define( '{{namespace|upper}}_VERSION', '${ newVersion }' )`,
 	},
 ];

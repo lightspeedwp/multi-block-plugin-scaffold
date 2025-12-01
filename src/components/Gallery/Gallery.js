@@ -89,6 +89,8 @@ export default function Gallery( {
 					role="dialog"
 					aria-modal="true"
 					aria-label={ __( 'Image lightbox', '{{textdomain}}' ) }
+					tabIndex={ -1 }
+					ref={ ( el ) => el && el.focus() }
 					style={ {
 						position: 'fixed',
 						inset: 0,
@@ -97,6 +99,7 @@ export default function Gallery( {
 						alignItems: 'center',
 						justifyContent: 'center',
 						zIndex: 99999,
+						outline: 'none',
 					} }
 				>
 					<img
