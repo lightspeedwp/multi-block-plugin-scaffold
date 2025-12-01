@@ -1,4 +1,13 @@
-# Multi-Block Plugin Scaffold: Prompt Templates & Authoring
+---
+title: Multi-Block Plugin Prompt Templates
+description: Prompt templates for consistent AI-assisted multi-block plugin development
+category: Documentation
+type: Prompt Templates
+audience: Developers, AI Assistants
+date: 2025-12-01
+---
+
+## Multi-Block Plugin Scaffold: Prompt Templates & Authoring
 
 ## Overview & Related Files
 
