@@ -1,0 +1,135 @@
+# Files to exclude from plugin distribution
+
+# Git and GitHub
+.git/
+.github/
+.gitignore
+.gitattributes
+
+# Development dependencies
+node_modules/
+vendor/
+
+# Source files (uncompiled)
+src/
+
+# Tests
+tests/
+coverage/
+artifacts/
+test-results/
+playwright-report/
+.phpunit.result.cache
+.phpunit.cache
+
+# Performance monitoring
+lighthouse-reports/
+.lighthouserc.js
+.size-limit.json
+webpack-stats.json
+stats.json
+
+# Build configuration files
+package.json
+package-lock.json
+composer.json
+composer.lock
+webpack.config.cjs
+.webpack.config.cjs
+postcss.config.cjs
+.postcss.config.cjs
+stylelint.config.cjs
+.stylelint.config.cjs
+eslint.config.cjs
+.eslint.config.cjs
+jest.config.cjs
+.jest.config.cjs
+prettier.config.cjs
+.prettier.config.cjs
+phpunit.xml
+phpcs.xml
+phpstan.neon
+.wp-env.json
+.browserslistrc
+.editorconfig
+.npmrc
+.nvmrc
+
+# Linting and formatting
+.eslintignore
+.prettierignore
+.eslintcache
+.prettiercache
+.stylelintcache
+.php_cs.cache
+.php-cs-fixer.cache
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Icon?
+Desktop.ini
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lock files
+*.lock
+
+# Backup/temp files
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
+
+# Build scripts
+bin/
+
+# Git hooks
+.husky/
+
+# WordPress.org assets
+.wordpress-org/
+
+# Repository assets (not shipped)
+assets/
+
+# Markdown files (except main readme)
+*.md
+!README.md
+!readme.md
+!CHANGELOG.md
+
+# CodeRabbit config
+.coderabbit.yml
+
+# Distribution ignore file itself
+.distignore
+
+# Other config files
+CODEOWNERS

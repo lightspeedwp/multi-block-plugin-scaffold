@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Block Editor Script",
+        "path": "build/index.js",
+        "limit": "50 KB",
+        "gzip": true,
+        "running": false,
+        "brotli": false
+    },
+    {
+        "name": "Block Frontend Style",
+        "path": "build/style-index.css",
+        "limit": "10 KB",
+        "gzip": true,
+        "running": false,
+        "brotli": false
+    },
+    {
+        "name": "Block Editor Style",
+        "path": "build/index.css",
+        "limit": "5 KB",
+        "gzip": true,
+        "running": false,
+        "brotli": false
+    }
+]

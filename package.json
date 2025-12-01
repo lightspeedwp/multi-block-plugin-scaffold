@@ -20,7 +20,7 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^28.0.0"
+		"@wordpress/scripts": "19.2.4"
 	},
 	"dependencies": {
 		"@wordpress/block-editor": "^13.0.0",

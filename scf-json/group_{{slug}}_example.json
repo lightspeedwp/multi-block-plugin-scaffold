@@ -1,0 +1,578 @@
+{
+    "key": "group_{{slug}}_example",
+    "title": "{{name}} - Example Field Group",
+    "fields": [
+        {
+            "key": "field_{{slug}}_tab_basic",
+            "label": "Basic Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_text",
+            "label": "Text Field",
+            "name": "{{slug}}_example_text",
+            "type": "text",
+            "instructions": "Enter some text. Maximum 100 characters.",
+            "required": 0,
+            "maxlength": 100,
+            "placeholder": "Enter text here...",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_{{slug}}_example_textarea",
+            "label": "Textarea Field",
+            "name": "{{slug}}_example_textarea",
+            "type": "textarea",
+            "instructions": "Enter a longer description.",
+            "rows": 4,
+            "maxlength": 500,
+            "new_lines": "wpautop",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_{{slug}}_example_number",
+            "label": "Number Field",
+            "name": "{{slug}}_example_number",
+            "type": "number",
+            "instructions": "Enter a number between 1 and 100.",
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "default_value": 10
+        },
+        {
+            "key": "field_{{slug}}_example_email",
+            "label": "Email Field",
+            "name": "{{slug}}_example_email",
+            "type": "email",
+            "instructions": "Enter a valid email address.",
+            "placeholder": "email@example.com"
+        },
+        {
+            "key": "field_{{slug}}_example_url",
+            "label": "URL Field",
+            "name": "{{slug}}_example_url",
+            "type": "url",
+            "instructions": "Enter a valid URL.",
+            "placeholder": "https://example.com"
+        },
+        {
+            "key": "field_{{slug}}_example_password",
+            "label": "Password Field",
+            "name": "{{slug}}_example_password",
+            "type": "password",
+            "instructions": "Enter a password (stored securely).",
+            "placeholder": ""
+        },
+        {
+            "key": "field_{{slug}}_tab_content",
+            "label": "Content Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_wysiwyg",
+            "label": "WYSIWYG Editor",
+            "name": "{{slug}}_example_wysiwyg",
+            "type": "wysiwyg",
+            "instructions": "Add rich text content.",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1
+        },
+        {
+            "key": "field_{{slug}}_example_oembed",
+            "label": "oEmbed Field",
+            "name": "{{slug}}_example_oembed",
+            "type": "oembed",
+            "instructions": "Paste a YouTube, Vimeo, or other oEmbed URL.",
+            "width": "",
+            "height": ""
+        },
+        {
+            "key": "field_{{slug}}_tab_media",
+            "label": "Media Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_image",
+            "label": "Image Field",
+            "name": "{{slug}}_example_image",
+            "type": "image",
+            "instructions": "Upload or select an image.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "mime_types": "jpg, jpeg, png, gif, webp"
+        },
+        {
+            "key": "field_{{slug}}_example_file",
+            "label": "File Field",
+            "name": "{{slug}}_example_file",
+            "type": "file",
+            "instructions": "Upload or select a file.",
+            "return_format": "array",
+            "library": "all",
+            "mime_types": "pdf, doc, docx, xls, xlsx"
+        },
+        {
+            "key": "field_{{slug}}_example_gallery",
+            "label": "Gallery Field",
+            "name": "{{slug}}_example_gallery",
+            "type": "gallery",
+            "instructions": "Add multiple images.",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min": 0,
+            "max": 10
+        },
+        {
+            "key": "field_{{slug}}_tab_choice",
+            "label": "Choice Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_select",
+            "label": "Select Field",
+            "name": "{{slug}}_example_select",
+            "type": "select",
+            "instructions": "Choose an option from the dropdown.",
+            "choices": {
+                "option_1": "Option One",
+                "option_2": "Option Two",
+                "option_3": "Option Three"
+            },
+            "default_value": "option_1",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_{{slug}}_example_checkbox",
+            "label": "Checkbox Field",
+            "name": "{{slug}}_example_checkbox",
+            "type": "checkbox",
+            "instructions": "Select one or more options.",
+            "choices": {
+                "red": "Red",
+                "green": "Green",
+                "blue": "Blue"
+            },
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_{{slug}}_example_radio",
+            "label": "Radio Button Field",
+            "name": "{{slug}}_example_radio",
+            "type": "radio",
+            "instructions": "Select one option.",
+            "choices": {
+                "small": "Small",
+                "medium": "Medium",
+                "large": "Large"
+            },
+            "default_value": "medium",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_{{slug}}_example_button_group",
+            "label": "Button Group Field",
+            "name": "{{slug}}_example_button_group",
+            "type": "button_group",
+            "instructions": "Select a layout option.",
+            "choices": {
+                "left": "Left",
+                "center": "Center",
+                "right": "Right"
+            },
+            "default_value": "center",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_{{slug}}_example_true_false",
+            "label": "True/False Field",
+            "name": "{{slug}}_example_true_false",
+            "type": "true_false",
+            "instructions": "Toggle this option on or off.",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
+            "key": "field_{{slug}}_tab_relational",
+            "label": "Relational Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_link",
+            "label": "Link Field",
+            "name": "{{slug}}_example_link",
+            "type": "link",
+            "instructions": "Add a link with title and target.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_{{slug}}_example_post_object",
+            "label": "Post Object Field",
+            "name": "{{slug}}_example_post_object",
+            "type": "post_object",
+            "instructions": "Select a post.",
+            "post_type": ["post", "page"],
+            "taxonomy": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
+            "key": "field_{{slug}}_example_page_link",
+            "label": "Page Link Field",
+            "name": "{{slug}}_example_page_link",
+            "type": "page_link",
+            "instructions": "Select a page to link to.",
+            "post_type": ["page"],
+            "allow_null": 1,
+            "multiple": 0
+        },
+        {
+            "key": "field_{{slug}}_example_relationship",
+            "label": "Relationship Field",
+            "name": "{{slug}}_example_relationship",
+            "type": "relationship",
+            "instructions": "Select related posts.",
+            "post_type": ["post"],
+            "filters": ["search", "post_type", "taxonomy"],
+            "elements": ["featured_image"],
+            "min": 0,
+            "max": 5,
+            "return_format": "object"
+        },
+        {
+            "key": "field_{{slug}}_example_taxonomy",
+            "label": "Taxonomy Field",
+            "name": "{{slug}}_example_taxonomy",
+            "type": "taxonomy",
+            "instructions": "Select categories.",
+            "taxonomy": "category",
+            "field_type": "multi_select",
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id"
+        },
+        {
+            "key": "field_{{slug}}_example_user",
+            "label": "User Field",
+            "name": "{{slug}}_example_user",
+            "type": "user",
+            "instructions": "Select a user.",
+            "role": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "array"
+        },
+        {
+            "key": "field_{{slug}}_tab_datetime",
+            "label": "Date/Time Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_date_picker",
+            "label": "Date Picker Field",
+            "name": "{{slug}}_example_date_picker",
+            "type": "date_picker",
+            "instructions": "Select a date.",
+            "display_format": "d/m/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1
+        },
+        {
+            "key": "field_{{slug}}_example_date_time_picker",
+            "label": "Date Time Picker Field",
+            "name": "{{slug}}_example_date_time_picker",
+            "type": "date_time_picker",
+            "instructions": "Select a date and time.",
+            "display_format": "d/m/Y H:i",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_{{slug}}_example_time_picker",
+            "label": "Time Picker Field",
+            "name": "{{slug}}_example_time_picker",
+            "type": "time_picker",
+            "instructions": "Select a time.",
+            "display_format": "H:i",
+            "return_format": "H:i:s"
+        },
+        {
+            "key": "field_{{slug}}_example_color_picker",
+            "label": "Color Picker Field",
+            "name": "{{slug}}_example_color_picker",
+            "type": "color_picker",
+            "instructions": "Select a color.",
+            "default_value": "#0073aa"
+        },
+        {
+            "key": "field_{{slug}}_tab_layout",
+            "label": "Layout Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_message",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "message": "This is a message field. Use it to display information to content editors.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_{{slug}}_example_accordion_start",
+            "label": "Accordion Example",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "open": 1,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_{{slug}}_accordion_content",
+            "label": "Accordion Content",
+            "name": "{{slug}}_accordion_content",
+            "type": "text",
+            "instructions": "This field is inside an accordion."
+        },
+        {
+            "key": "field_{{slug}}_example_accordion_end",
+            "label": "Accordion End",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_{{slug}}_tab_advanced",
+            "label": "Advanced Fields",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_{{slug}}_example_group",
+            "label": "Group Field",
+            "name": "{{slug}}_example_group",
+            "type": "group",
+            "instructions": "A group of related fields.",
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_{{slug}}_group_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "instructions": "",
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_{{slug}}_group_description",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "instructions": "",
+                    "rows": 3,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_{{slug}}_example_repeater",
+            "label": "Repeater Field",
+            "name": "{{slug}}_example_repeater",
+            "type": "repeater",
+            "instructions": "Add multiple items.",
+            "layout": "table",
+            "button_label": "Add Item",
+            "min": 0,
+            "max": 10,
+            "sub_fields": [
+                {
+                    "key": "field_{{slug}}_repeater_item_title",
+                    "label": "Item Title",
+                    "name": "item_title",
+                    "type": "text",
+                    "instructions": ""
+                },
+                {
+                    "key": "field_{{slug}}_repeater_item_value",
+                    "label": "Item Value",
+                    "name": "item_value",
+                    "type": "number",
+                    "instructions": ""
+                }
+            ]
+        },
+        {
+            "key": "field_{{slug}}_example_flexible_content",
+            "label": "Flexible Content Field",
+            "name": "{{slug}}_example_flexible_content",
+            "type": "flexible_content",
+            "instructions": "Build a custom layout using these components.",
+            "button_label": "Add Component",
+            "min": 0,
+            "max": 20,
+            "layouts": [
+                {
+                    "key": "layout_{{slug}}_text_block",
+                    "name": "text_block",
+                    "label": "Text Block",
+                    "display": "block",
+                    "min": "",
+                    "max": "",
+                    "sub_fields": [
+                        {
+                            "key": "field_{{slug}}_layout_text_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": ""
+                        },
+                        {
+                            "key": "field_{{slug}}_layout_text_content",
+                            "label": "Content",
+                            "name": "content",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "layout_{{slug}}_image_block",
+                    "name": "image_block",
+                    "label": "Image Block",
+                    "display": "block",
+                    "min": "",
+                    "max": "",
+                    "sub_fields": [
+                        {
+                            "key": "field_{{slug}}_layout_image",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "instructions": "",
+                            "return_format": "array",
+                            "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_{{slug}}_layout_image_caption",
+                            "label": "Caption",
+                            "name": "caption",
+                            "type": "text",
+                            "instructions": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "layout_{{slug}}_cta_block",
+                    "name": "cta_block",
+                    "label": "Call to Action",
+                    "display": "block",
+                    "min": "",
+                    "max": "",
+                    "sub_fields": [
+                        {
+                            "key": "field_{{slug}}_layout_cta_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": ""
+                        },
+                        {
+                            "key": "field_{{slug}}_layout_cta_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "textarea",
+                            "instructions": "",
+                            "rows": 2
+                        },
+                        {
+                            "key": "field_{{slug}}_layout_cta_button",
+                            "label": "Button",
+                            "name": "button",
+                            "type": "link",
+                            "instructions": "",
+                            "return_format": "array"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "Example field group demonstrating all available SCF field types.",
+    "show_in_rest": false
+}

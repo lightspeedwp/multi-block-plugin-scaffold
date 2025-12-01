@@ -55,6 +55,8 @@ require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-post-types.php';
 require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-taxonomies.php';
 require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-fields.php';
 require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-repeater-fields.php';
+require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-options.php';
+require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-scf-json.php';
 require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-block-templates.php';
 require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-block-bindings.php';
 require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-patterns.php';
@@ -77,6 +79,8 @@ class {{namespace|pascalCase}}_Plugin {
 		new {{namespace|pascalCase}}_Taxonomies();
 		new {{namespace|pascalCase}}_Fields();
 		new {{namespace|pascalCase}}_Repeater_Fields();
+		new {{namespace|pascalCase}}_Options();
+		new {{namespace|pascalCase}}_SCF_JSON();
 		new {{namespace|pascalCase}}_Block_Templates();
 		new {{namespace|pascalCase}}_Block_Bindings();
 		new {{namespace|pascalCase}}_Patterns();

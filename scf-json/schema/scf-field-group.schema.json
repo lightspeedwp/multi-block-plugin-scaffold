@@ -1,0 +1,656 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://{{plugin_uri}}/scf-json/schema/scf-field-group.schema.json",
+    "title": "SCF Field Group",
+    "description": "JSON Schema for Secure Custom Fields field group exports",
+    "type": "object",
+    "required": ["key", "title", "fields", "location"],
+    "properties": {
+        "key": {
+            "type": "string",
+            "description": "Unique identifier for the field group (must start with 'group_')",
+            "pattern": "^group_[a-z0-9_]+$"
+        },
+        "title": {
+            "type": "string",
+            "description": "Human-readable title for the field group"
+        },
+        "fields": {
+            "type": "array",
+            "description": "Array of field definitions",
+            "items": {
+                "$ref": "#/definitions/field"
+            }
+        },
+        "location": {
+            "type": "array",
+            "description": "Location rules that determine where the field group appears",
+            "items": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/locationRule"
+                }
+            }
+        },
+        "menu_order": {
+            "type": "integer",
+            "description": "Order of the field group in the admin UI",
+            "default": 0
+        },
+        "position": {
+            "type": "string",
+            "description": "Position of the meta box",
+            "enum": ["acf_after_title", "normal", "side"],
+            "default": "normal"
+        },
+        "style": {
+            "type": "string",
+            "description": "Style of the meta box",
+            "enum": ["default", "seamless"],
+            "default": "default"
+        },
+        "label_placement": {
+            "type": "string",
+            "description": "Placement of field labels",
+            "enum": ["top", "left"],
+            "default": "top"
+        },
+        "instruction_placement": {
+            "type": "string",
+            "description": "Placement of field instructions",
+            "enum": ["label", "field"],
+            "default": "label"
+        },
+        "hide_on_screen": {
+            "type": "array",
+            "description": "WordPress elements to hide when this field group is active",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "permalink",
+                    "the_content",
+                    "excerpt",
+                    "discussion",
+                    "comments",
+                    "revisions",
+                    "slug",
+                    "author",
+                    "format",
+                    "page_attributes",
+                    "featured_image",
+                    "categories",
+                    "tags",
+                    "send-trackbacks"
+                ]
+            }
+        },
+        "active": {
+            "oneOf": [
+                {"type": "boolean"},
+                {"type": "integer", "enum": [0, 1]}
+            ],
+            "description": "Whether the field group is active",
+            "default": true
+        },
+        "description": {
+            "type": "string",
+            "description": "Description of the field group"
+        },
+        "show_in_rest": {
+            "oneOf": [
+                {"type": "boolean"},
+                {"type": "integer", "enum": [0, 1]}
+            ],
+            "description": "Whether to expose fields in the REST API",
+            "default": false
+        },
+        "modified": {
+            "type": "integer",
+            "description": "Unix timestamp of last modification"
+        }
+    },
+    "definitions": {
+        "field": {
+            "type": "object",
+            "required": ["key", "label", "name", "type"],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Unique identifier for the field (must start with 'field_')",
+                    "pattern": "^field_[a-z0-9_]+$"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Human-readable label for the field"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Machine name used to save and retrieve the field value",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Field type",
+                    "enum": [
+                        "text",
+                        "textarea",
+                        "number",
+                        "range",
+                        "email",
+                        "url",
+                        "password",
+                        "image",
+                        "file",
+                        "wysiwyg",
+                        "oembed",
+                        "gallery",
+                        "select",
+                        "checkbox",
+                        "radio",
+                        "button_group",
+                        "true_false",
+                        "link",
+                        "post_object",
+                        "page_link",
+                        "relationship",
+                        "taxonomy",
+                        "user",
+                        "google_map",
+                        "date_picker",
+                        "date_time_picker",
+                        "time_picker",
+                        "color_picker",
+                        "message",
+                        "accordion",
+                        "tab",
+                        "group",
+                        "repeater",
+                        "flexible_content",
+                        "clone"
+                    ]
+                },
+                "instructions": {
+                    "type": "string",
+                    "description": "Instructions shown below the field label"
+                },
+                "required": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether the field is required",
+                    "default": false
+                },
+                "conditional_logic": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]},
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/conditionalRule"
+                                }
+                            }
+                        }
+                    ],
+                    "description": "Conditional logic rules for showing/hiding the field"
+                },
+                "wrapper": {
+                    "$ref": "#/definitions/wrapper"
+                },
+                "default_value": {
+                    "description": "Default value for the field"
+                },
+                "placeholder": {
+                    "type": "string",
+                    "description": "Placeholder text for input fields"
+                },
+                "prepend": {
+                    "type": "string",
+                    "description": "Text to display before the input"
+                },
+                "append": {
+                    "type": "string",
+                    "description": "Text to display after the input"
+                },
+                "maxlength": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Maximum character length"
+                },
+                "rows": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Number of rows for textarea fields"
+                },
+                "min": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {"type": "string", "pattern": "^-?[0-9]*\\.?[0-9]*$"}
+                    ],
+                    "description": "Minimum value for number/range fields"
+                },
+                "max": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {"type": "string", "pattern": "^-?[0-9]*\\.?[0-9]*$"}
+                    ],
+                    "description": "Maximum value for number/range fields"
+                },
+                "step": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {"type": "string", "pattern": "^-?[0-9]*\\.?[0-9]*$"}
+                    ],
+                    "description": "Step increment for number/range fields"
+                },
+                "return_format": {
+                    "type": "string",
+                    "description": "Format of the returned value"
+                },
+                "preview_size": {
+                    "type": "string",
+                    "description": "Image size for preview in admin"
+                },
+                "library": {
+                    "type": "string",
+                    "description": "Media library filter",
+                    "enum": ["all", "uploadedTo"]
+                },
+                "mime_types": {
+                    "type": "string",
+                    "description": "Comma-separated list of allowed MIME types"
+                },
+                "choices": {
+                    "type": "object",
+                    "description": "Key-value pairs of choices for select, checkbox, radio fields",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "allow_null": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to allow a null/empty selection"
+                },
+                "multiple": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to allow multiple selections"
+                },
+                "ui": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to use enhanced UI (Select2, toggle switch)"
+                },
+                "ajax": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to use AJAX for loading choices"
+                },
+                "post_type": {
+                    "type": "array",
+                    "description": "Array of post types for post_object and relationship fields",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "taxonomy": {
+                    "type": "array",
+                    "description": "Array of taxonomies for taxonomy field",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "field_type": {
+                    "type": "string",
+                    "description": "Sub-field type for taxonomy and user fields",
+                    "enum": ["checkbox", "multi_select", "radio", "select"]
+                },
+                "add_term": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to allow adding new taxonomy terms"
+                },
+                "save_terms": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to save selected terms to the post"
+                },
+                "load_terms": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to load terms from the post"
+                },
+                "role": {
+                    "type": "array",
+                    "description": "Array of user roles for user field",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "filters": {
+                    "type": "array",
+                    "description": "Filters to show for relationship fields",
+                    "items": {
+                        "type": "string",
+                        "enum": ["search", "post_type", "taxonomy"]
+                    }
+                },
+                "elements": {
+                    "type": "array",
+                    "description": "Elements to display for relationship fields",
+                    "items": {
+                        "type": "string",
+                        "enum": ["featured_image"]
+                    }
+                },
+                "display_format": {
+                    "type": "string",
+                    "description": "Display format for date/time fields"
+                },
+                "first_day": {
+                    "type": "integer",
+                    "description": "First day of the week (0=Sunday, 1=Monday)",
+                    "minimum": 0,
+                    "maximum": 6
+                },
+                "toolbar": {
+                    "type": "string",
+                    "description": "Toolbar preset for WYSIWYG editor",
+                    "enum": ["full", "basic"]
+                },
+                "media_upload": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to allow media uploads in WYSIWYG"
+                },
+                "tabs": {
+                    "type": "string",
+                    "description": "Tab display for WYSIWYG editor",
+                    "enum": ["all", "visual", "text"]
+                },
+                "width": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Width for embed/oembed fields"
+                },
+                "height": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Height for embed/oembed and Google Map fields"
+                },
+                "center_lat": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {"type": "string"}
+                    ],
+                    "description": "Center latitude for Google Map"
+                },
+                "center_lng": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {"type": "string"}
+                    ],
+                    "description": "Center longitude for Google Map"
+                },
+                "zoom": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Zoom level for Google Map"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Message content for message field"
+                },
+                "new_lines": {
+                    "type": "string",
+                    "description": "How to handle new lines in message field",
+                    "enum": ["wpautop", "br", ""]
+                },
+                "esc_html": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to escape HTML in message field"
+                },
+                "open": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether accordion is open by default"
+                },
+                "multi_expand": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether multiple accordions can be open"
+                },
+                "endpoint": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether this is an accordion/tab endpoint"
+                },
+                "placement": {
+                    "type": "string",
+                    "description": "Tab placement",
+                    "enum": ["top", "left"]
+                },
+                "sub_fields": {
+                    "type": "array",
+                    "description": "Sub-fields for group, repeater, and flexible_content fields",
+                    "items": {
+                        "$ref": "#/definitions/field"
+                    }
+                },
+                "layouts": {
+                    "type": "array",
+                    "description": "Layouts for flexible_content field",
+                    "items": {
+                        "$ref": "#/definitions/layout"
+                    }
+                },
+                "layout": {
+                    "type": "string",
+                    "description": "Layout style for repeater and group fields",
+                    "enum": ["table", "block", "row"]
+                },
+                "button_label": {
+                    "type": "string",
+                    "description": "Label for add row button in repeater"
+                },
+                "collapsed": {
+                    "type": "string",
+                    "description": "Sub-field key to use as collapsed row title"
+                },
+                "clone": {
+                    "type": "array",
+                    "description": "Array of field keys or group keys to clone",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "display": {
+                    "type": "string",
+                    "description": "Display mode for clone field",
+                    "enum": ["seamless", "group"]
+                },
+                "prefix_label": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to prefix clone labels"
+                },
+                "prefix_name": {
+                    "oneOf": [
+                        {"type": "boolean"},
+                        {"type": "integer", "enum": [0, 1]}
+                    ],
+                    "description": "Whether to prefix clone names"
+                }
+            }
+        },
+        "layout": {
+            "type": "object",
+            "required": ["key", "name", "label", "sub_fields"],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Unique identifier for the layout",
+                    "pattern": "^layout_[a-z0-9_]+$"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Machine name for the layout"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Human-readable label for the layout"
+                },
+                "display": {
+                    "type": "string",
+                    "description": "Display style for the layout",
+                    "enum": ["table", "block", "row"]
+                },
+                "sub_fields": {
+                    "type": "array",
+                    "description": "Sub-fields for this layout",
+                    "items": {
+                        "$ref": "#/definitions/field"
+                    }
+                },
+                "min": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Minimum number of this layout"
+                },
+                "max": {
+                    "oneOf": [
+                        {"type": "integer"},
+                        {"type": "string", "pattern": "^[0-9]*$"}
+                    ],
+                    "description": "Maximum number of this layout"
+                }
+            }
+        },
+        "locationRule": {
+            "type": "object",
+            "required": ["param", "operator", "value"],
+            "properties": {
+                "param": {
+                    "type": "string",
+                    "description": "Location parameter",
+                    "enum": [
+                        "post_type",
+                        "post_template",
+                        "post_status",
+                        "post_format",
+                        "post_category",
+                        "post_taxonomy",
+                        "post",
+                        "page_template",
+                        "page_type",
+                        "page_parent",
+                        "page",
+                        "current_user",
+                        "current_user_role",
+                        "user_form",
+                        "user_role",
+                        "taxonomy",
+                        "attachment",
+                        "comment",
+                        "widget",
+                        "nav_menu",
+                        "nav_menu_item",
+                        "block",
+                        "options_page"
+                    ]
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Comparison operator",
+                    "enum": ["==", "!="]
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Value to compare against"
+                }
+            }
+        },
+        "conditionalRule": {
+            "type": "object",
+            "required": ["field", "operator", "value"],
+            "properties": {
+                "field": {
+                    "type": "string",
+                    "description": "Field key to evaluate"
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Comparison operator",
+                    "enum": ["==", "!=", "==pattern", "==contains", "==empty", "!=empty"]
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Value to compare against"
+                }
+            }
+        },
+        "wrapper": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "oneOf": [
+                        {"type": "string"},
+                        {"type": "integer"}
+                    ],
+                    "description": "Width percentage or pixel value"
+                },
+                "class": {
+                    "type": "string",
+                    "description": "Additional CSS class(es)"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "HTML ID attribute"
+                }
+            }
+        }
+    }
+}
