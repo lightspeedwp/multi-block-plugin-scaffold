@@ -1,9 +1,9 @@
 ---
-title: Directory Index
-description: Documentation for this directory
-category: Documentation
+title: Project Overview
+description: WordPress multi-block plugin scaffold with comprehensive documentation
+category: Project
 type: Index
-audience: Developers
+audience: Developers, Users
 date: 2025-12-01
 ---
 
@@ -11,7 +11,7 @@ date: 2025-12-01
 
 {{description}}
 
-## Description
+## Key Features
 
 A multi-block WordPress plugin scaffold with support for:
 
