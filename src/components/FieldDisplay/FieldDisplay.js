@@ -1,0 +1,103 @@
+/**
+ * Field Display Component
+ *
+ * Display ACF/SCF field values in blocks.
+ *
+ * @package {{namespace}}
+ */
+
+import { __ } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
+import { Spinner } from '@wordpress/components';
+
+/**
+ * FieldDisplay component.
+ *
+ * @param {Object} props           Component props.
+ * @param {number} props.postId    Post ID.
+ * @param {string} props.fieldName Field name.
+ * @param {string} props.fieldType Field type for formatting.
+ * @param {string} props.className Additional CSS class.
+ *
+ * @return {Element} FieldDisplay component.
+ */
+export default function FieldDisplay( {
+	postId,
+	fieldName,
+	fieldType = 'text',
+	className = '',
+} ) {
+	const { fieldValue, isLoading } = useSelect(
+		( select ) => {
+			if ( ! postId || ! fieldName ) {
+				return { fieldValue: null, isLoading: false };
+			}
+
+			const post = select( 'core' ).getEntityRecord( 'postType', '{{slug}}', postId );
+
+			return {
+				fieldValue: post?.acf?.[ fieldName ] ?? post?.meta?.[ fieldName ] ?? null,
+				isLoading: ! post,
+			};
+		},
+		[ postId, fieldName ]
+	);
+
+	if ( isLoading ) {
+		return <Spinner />;
+	}
+
+	if ( fieldValue === null || fieldValue === undefined ) {
+		return null;
+	}
+
+	const renderValue = () => {
+		switch ( fieldType ) {
+			case 'image':
+				if ( typeof fieldValue === 'object' && fieldValue.url ) {
+					return (
+						<img
+							src={ fieldValue.url }
+							alt={ fieldValue.alt || '' }
+							className={ `${ className }__image` }
+						/>
+					);
+				}
+				return null;
+
+			case 'gallery':
+				if ( Array.isArray( fieldValue ) ) {
+					return (
+						<div className={ `${ className }__gallery` }>
+							{ fieldValue.map( ( image, index ) => (
+								<img
+									key={ image.id || index }
+									src={ image.url }
+									alt={ image.alt || '' }
+								/>
+							) ) }
+						</div>
+					);
+				}
+				return null;
+
+			case 'link':
+				if ( typeof fieldValue === 'object' && fieldValue.url ) {
+					return (
+						<a href={ fieldValue.url } target={ fieldValue.target || '_self' }>
+							{ fieldValue.title || fieldValue.url }
+						</a>
+					);
+				}
+				return null;
+
+			case 'boolean':
+				return fieldValue ? __( 'Yes', '{{textdomain}}' ) : __( 'No', '{{textdomain}}' );
+
+			default:
+				return String( fieldValue );
+		}
+	};
+
+	return <div className={ className }>{ renderValue() }</div>;
+}

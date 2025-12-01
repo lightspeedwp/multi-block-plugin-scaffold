@@ -1,0 +1,16 @@
+/**
+ * {{name}} Card Block - Editor Styles
+ *
+ * @package {{namespace}}
+ */
+
+.wp-block-{{namespace}}-{{slug}}-card {
+	&__placeholder {
+		padding: 2rem;
+		text-align: center;
+		background-color: #f0f0f0;
+		border: 2px dashed #ccc;
+		border-radius: 4px;
+		color: #666;
+	}
+}

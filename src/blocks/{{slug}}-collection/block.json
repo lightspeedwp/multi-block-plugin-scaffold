@@ -1,0 +1,89 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "{{namespace}}/{{slug}}-collection",
+	"title": "{{name}} Collection",
+	"category": "{{slug}}",
+	"icon": "grid-view",
+	"description": "Display a collection of {{name_plural_lower}} with filtering and layout options.",
+	"version": "{{version}}",
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "collection", "{{slug}}", "grid", "list", "query" ],
+	"usesContext": [ "postId", "postType" ],
+	"providesContext": {
+		"{{namespace}}/queryId": "queryId",
+		"postId": "queryId"
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"className": true,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		}
+	},
+	"attributes": {
+		"queryId": {
+			"type": "number"
+		},
+		"query": {
+			"type": "object",
+			"default": {
+				"postType": "{{slug}}",
+				"perPage": 6,
+				"pages": 0,
+				"offset": 0,
+				"order": "desc",
+				"orderBy": "date",
+				"author": "",
+				"search": "",
+				"exclude": [],
+				"sticky": "",
+				"inherit": false,
+				"taxQuery": null,
+				"featured": false
+			}
+		},
+		"layout": {
+			"type": "string",
+			"default": "grid",
+			"enum": [ "grid", "list", "slider" ]
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"displayFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayMeta": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayPagination": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

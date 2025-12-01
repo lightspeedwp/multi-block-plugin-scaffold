@@ -1,0 +1,68 @@
+/**
+ * Slider Component Styles
+ *
+ * @package {{namespace}}
+ */
+
+.{{namespace}}-slider {
+	position: relative;
+	overflow: hidden;
+
+	&__viewport {
+		overflow: hidden;
+	}
+
+	&__track {
+		display: flex;
+	}
+
+	&__slide {
+		flex-shrink: 0;
+	}
+
+	&__image {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	&__arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 10;
+
+		&--prev {
+			left: 1rem;
+		}
+
+		&--next {
+			right: 1rem;
+		}
+	}
+
+	&__dots {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 1rem;
+	}
+
+	&__dot {
+		width: 12px;
+		height: 12px;
+		border: none;
+		border-radius: 50%;
+		background-color: #ccc;
+		cursor: pointer;
+		padding: 0;
+
+		&:hover {
+			background-color: #999;
+		}
+
+		&.is-active {
+			background-color: #333;
+		}
+	}
+}

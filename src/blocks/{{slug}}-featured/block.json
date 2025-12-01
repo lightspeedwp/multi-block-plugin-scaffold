@@ -1,0 +1,71 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "{{namespace}}/{{slug}}-featured",
+	"title": "Featured {{name_plural}}",
+	"category": "{{slug}}",
+	"icon": "star-filled",
+	"description": "Display featured {{name_plural_lower}} in a highlight section.",
+	"version": "{{version}}",
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "featured", "{{slug}}", "highlight" ],
+	"usesContext": [ "postId", "postType" ],
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"className": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"count": {
+			"type": "number",
+			"default": 3
+		},
+		"layout": {
+			"type": "string",
+			"default": "grid",
+			"enum": [ "grid", "featured-first", "hero" ]
+		},
+		"displayFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"displaySubtitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayMeta": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayReadMore": {
+			"type": "boolean",
+			"default": true
+		},
+		"readMoreText": {
+			"type": "string",
+			"default": "Read More"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,12 @@
+/**
+ * {{name}} Collection Block - Editor Styles
+ *
+ * @package {{namespace}}
+ */
+
+.wp-block-{{namespace}}-{{slug}}-collection {
+	.components-spinner {
+		display: block;
+		margin: 2rem auto;
+	}
+}

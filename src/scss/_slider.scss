@@ -1,0 +1,79 @@
+/**
+ * Slider Styles Partial
+ *
+ * @package {{namespace}}
+ */
+
+// Common slider styles shared across blocks.
+.{{namespace}}-slider-common {
+	position: relative;
+	overflow: hidden;
+
+	&__viewport {
+		overflow: hidden;
+	}
+
+	&__track {
+		display: flex;
+		transition: transform var(--{{namespace}}-transition);
+	}
+
+	&__slide {
+		flex-shrink: 0;
+	}
+
+	&__nav {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 1rem 0;
+	}
+
+	&__dot {
+		width: 10px;
+		height: 10px;
+		border: none;
+		border-radius: 50%;
+		background-color: var(--{{namespace}}-border-color);
+		cursor: pointer;
+		padding: 0;
+		transition: background-color var(--{{namespace}}-transition);
+
+		&:hover {
+			background-color: var(--{{namespace}}-secondary-color);
+		}
+
+		&.is-active {
+			background-color: var(--{{namespace}}-primary-color);
+		}
+	}
+
+	&__arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 40px;
+		height: 40px;
+		border: none;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.9);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 10;
+		transition: background-color var(--{{namespace}}-transition);
+
+		&:hover {
+			background-color: #fff;
+		}
+
+		&--prev {
+			left: 1rem;
+		}
+
+		&--next {
+			right: 1rem;
+		}
+	}
+}

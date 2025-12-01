@@ -1,0 +1,71 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "{{namespace}}/{{slug}}-slider",
+	"title": "{{name}} Slider",
+	"category": "{{slug}}",
+	"icon": "slides",
+	"description": "Display {{name_plural_lower}} or custom slides in a slider/carousel.",
+	"version": "{{version}}",
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "slider", "carousel", "{{slug}}" ],
+	"usesContext": [ "postId", "postType" ],
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"className": true,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"source": {
+			"type": "string",
+			"default": "custom",
+			"enum": [ "custom", "posts", "repeater" ]
+		},
+		"slides": {
+			"type": "array",
+			"default": []
+		},
+		"autoplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"autoplaySpeed": {
+			"type": "number",
+			"default": 5000
+		},
+		"showDots": {
+			"type": "boolean",
+			"default": true
+		},
+		"showArrows": {
+			"type": "boolean",
+			"default": true
+		},
+		"infinite": {
+			"type": "boolean",
+			"default": true
+		},
+		"slidesToShow": {
+			"type": "number",
+			"default": 1
+		},
+		"slidesToScroll": {
+			"type": "number",
+			"default": 1
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

@@ -1,0 +1,21 @@
+includes:
+	- vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+	level: 6
+	paths:
+		- {{slug}}.php
+		- inc/
+	excludePaths:
+		- vendor/
+		- tests/
+	bootstrapFiles:
+		- tests/phpstan-bootstrap.php
+	ignoreErrors:
+		- '#Function acf_add_local_field_group not found#'
+		- '#Function get_field not found#'
+		- '#Function have_rows not found#'
+		- '#Function the_row not found#'
+		- '#Function get_sub_field not found#'
+		- '#Function get_row_layout not found#'
+		- '#Function get_row_index not found#'
