@@ -11,3 +11,5 @@ export { default as FieldDisplay } from './FieldDisplay';
 export { default as RepeaterField } from './RepeaterField';
 export { default as Gallery } from './Gallery';
 export { default as QueryControls } from './QueryControls';
+export { default as ScrollToTop } from './ScrollToTop';
+export { default as ScrollDownArrow } from './ScrollDownArrow';

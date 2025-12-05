@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.php": "php",
+			"*.scss": "scss",
+			"*.js": "javascript",
+			"*.jsx": "javascriptreact"
+		},
+		"php.validate.enable": true,
+		"php.validate.run": "onType",
+		"emmet.includeLanguages": {
+			"javascript": "javascriptreact"
+		}
+	}
+}

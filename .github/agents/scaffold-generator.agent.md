@@ -452,9 +452,27 @@ This scaffold requires:
 | SCF Plugin | Required | Latest |
 
 The generated plugin uses WordPress 6.5+ Plugin Dependencies to require SCF:
+
 ```php
 Requires Plugins: secure-custom-fields
 ```
+
+---
+
+## Implementation
+
+This agent is implemented in [`scaffold-generator.agent.js`](./scaffold-generator.agent.js).
+
+**Direct Usage:**
+```bash
+node .github/agents/scaffold-generator.agent.js
+```
+
+**Available Modes:**
+- Interactive: `node scaffold-generator.agent.js`
+- JSON input: `echo '{"slug":"my-plugin"}' | node scaffold-generator.agent.js --json`
+- Validation: `node scaffold-generator.agent.js --validate '{"slug":"test"}'`
+- Schema output: `node scaffold-generator.agent.js --schema`
 
 ---
 

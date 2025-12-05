@@ -36,12 +36,6 @@ This file documents the primary automation agent(s) for this repository, their p
 - **Usage:** Say "Generate a new multi-block plugin" or "Create CPT plugin from scaffold"
 - **Related Prompt:** [generate-plugin.prompt.md](../prompts/generate-plugin.prompt.md)
 
-### Development Assistant Agent
-
-- **Agent Spec:** `.github/agents/development-assistant.agent.md`
-- **Purpose:** AI-powered development assistant for multi-block plugin development, providing guidance on blocks, CPT, SCF fields, and best practices.
-- **Modes:** WordPress Development, Block Development, Post Type, Fields, Testing, Security Audit, Performance, Accessibility
-
 ### General Automation Agent
 
 - **Agent Script:** `.github/agents/agent-script.js`
