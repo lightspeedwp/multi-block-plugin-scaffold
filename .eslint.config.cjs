@@ -5,6 +5,7 @@ module.exports = {
 		es6: true,
 		node: true,
 		jquery: true,
+		jest: true,
 	},
 	globals: {
 		wp: 'readonly',
@@ -14,19 +15,5 @@ module.exports = {
 	rules: {
 		'no-console': 'warn',
 		'no-debugger': 'error',
-		'jsdoc/check-tag-names': [
-			'error',
-			{
-				definedTags: [ 'jest-environment' ],
-			},
-		],
 	},
-	overrides: [
-		{
-			files: [ '*.test.js', '*.spec.js' ],
-			env: {
-				jest: true,
-			},
-		},
-	],
 };

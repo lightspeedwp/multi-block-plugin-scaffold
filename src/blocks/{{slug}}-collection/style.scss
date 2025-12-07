@@ -4,6 +4,8 @@
  * @package {{namespace}}
  */
 
+/* stylelint-disable no-descending-specificity */
+
 .wp-block-{{namespace}}-{{slug}}-collection {
 	&__items {
 		display: grid;

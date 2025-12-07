@@ -1,8 +1,10 @@
 /**
  * Tests for Multi-Block Plugin Scaffold Generator Agent
  *
- * @jest-environment node
+ * @package {{namespace}}
  */
+
+/* eslint-env node, jest */
 
 const {
 	CONFIG_SCHEMA,
@@ -106,12 +108,16 @@ describe('Multi-Block Scaffold Generator Agent', () => {
 
 			it('should accept valid CPT slugs', () => {
 				expect(validateValue('cpt', 'tour', cptSchema)).toHaveLength(0);
-				expect(validateValue('cpt', 'my_cpt', cptSchema)).toHaveLength(0);
+				expect(validateValue('cpt', 'my_cpt', cptSchema)).toHaveLength(
+					0
+				);
 			});
 
 			it('should enforce max 20 character limit', () => {
 				const longSlug = 'a'.repeat(21);
-				expect(validateValue('cpt', longSlug, cptSchema).length).toBeGreaterThan(0);
+				expect(
+					validateValue('cpt', longSlug, cptSchema).length
+				).toBeGreaterThan(0);
 			});
 		});
 
@@ -120,12 +126,18 @@ describe('Multi-Block Scaffold Generator Agent', () => {
 
 			it('should accept boolean values', () => {
 				expect(validateValue('bool', true, boolSchema)).toHaveLength(0);
-				expect(validateValue('bool', false, boolSchema)).toHaveLength(0);
+				expect(validateValue('bool', false, boolSchema)).toHaveLength(
+					0
+				);
 			});
 
 			it('should reject non-boolean values', () => {
-				expect(validateValue('bool', 'true', boolSchema).length).toBeGreaterThan(0);
-				expect(validateValue('bool', 1, boolSchema).length).toBeGreaterThan(0);
+				expect(
+					validateValue('bool', 'true', boolSchema).length
+				).toBeGreaterThan(0);
+				expect(
+					validateValue('bool', 1, boolSchema).length
+				).toBeGreaterThan(0);
 			});
 		});
 	});
@@ -357,7 +369,13 @@ describe('Multi-Block Scaffold Generator Agent', () => {
 				author: 'LightSpeed',
 				author_uri: 'https://lsdev.biz',
 				cpt_slug: 'tour',
-				cpt_supports: ['title', 'editor', 'thumbnail', 'excerpt', 'revisions'],
+				cpt_supports: [
+					'title',
+					'editor',
+					'thumbnail',
+					'excerpt',
+					'revisions',
+				],
 				cpt_has_archive: true,
 				cpt_public: true,
 				cpt_menu_icon: 'dashicons-palmtree',

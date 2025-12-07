@@ -4,6 +4,8 @@
  * @package {{namespace}}
  */
 
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
+
 const { test, expect } = require( '@playwright/test' );
 
 test.describe( '{{name}} Post Type', () => {

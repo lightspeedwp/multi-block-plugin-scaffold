@@ -4,7 +4,7 @@
  * @see https://jestjs.io/docs/configuration
  */
 
-const defaultConfig = require( '@wordpress/scripts/config/jest-unit.config' );
+const defaultConfig = require('@wordpress/scripts/config/jest-unit.config');
 
 module.exports = {
 	...defaultConfig,
@@ -25,9 +25,7 @@ module.exports = {
 	],
 
 	// Setup files
-	setupFilesAfterEnv: [
-		'<rootDir>/tests/setup-tests.js',
-	],
+	setupFilesAfterEnv: ['<rootDir>/tests/setup-tests.js'],
 
 	// Coverage configuration
 	collectCoverageFrom: [

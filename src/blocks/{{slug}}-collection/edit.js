@@ -14,7 +14,6 @@ import {
 	ToggleControl,
 	SelectControl,
 	RangeControl,
-	TextControl,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { useMemo } from '@wordpress/element';

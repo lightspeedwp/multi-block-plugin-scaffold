@@ -6,7 +6,6 @@
  * @package {{namespace}}
  */
 
-import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import { Spinner } from '@wordpress/components';
 

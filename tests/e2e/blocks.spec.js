@@ -4,6 +4,8 @@
  * @package {{namespace}}
  */
 
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
+
 const { test, expect } = require( '@playwright/test' );
 
 test.describe( '{{name}} Blocks Editor', () => {
@@ -23,8 +25,6 @@ test.describe( '{{name}} Blocks Editor', () => {
 		// Open block inserter.
 		await page.click( '.edit-post-header-toolbar__inserter-toggle' );
 
-		// Check for block category.
-		const categoryTab = page.locator( '[aria-label="{{name}}"]' );
 		// Category may or may not be visible depending on block registration.
 		expect( true ).toBe( true );
 	} );
@@ -36,11 +36,6 @@ test.describe( '{{name}} Blocks Editor', () => {
 		// Open block inserter.
 		await page.click( '.edit-post-header-toolbar__inserter-toggle' );
 		await page.fill( '.block-editor-inserter__search input', '{{name}} Card' );
-
-		// Check if block appears in search.
-		const blockItem = page.locator(
-			'.block-editor-block-types-list__item[data-id="{{namespace}}/{{slug}}-card"]'
-		);
 
 		// Block may need to be built first.
 		expect( true ).toBe( true );

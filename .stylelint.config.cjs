@@ -16,5 +16,7 @@ module.exports = {
 				],
 			},
 		],
+		// Allow some selector specificity flexibility in complex block styles
+		'no-descending-specificity': null,
 	},
 };
