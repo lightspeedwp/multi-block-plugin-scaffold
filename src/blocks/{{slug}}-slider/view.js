@@ -21,6 +21,10 @@
 	 * @param {HTMLElement} slider Slider container element.
 	 */
 	function initSlider( slider ) {
+		if ( ! slider ) {
+			return;
+		}
+
 		const track = slider.querySelector( '.wp-block-{{namespace}}-{{slug}}-slider__track' );
 		const slides = slider.querySelectorAll( '.wp-block-{{namespace}}-{{slug}}-slider__slide' );
 		const prevBtn = slider.querySelector( '.wp-block-{{namespace}}-{{slug}}-slider__arrow--prev' );
@@ -48,6 +52,7 @@
 				settings = { ...settings, ...JSON.parse( dataSettings ) };
 			}
 		} catch ( e ) {
+			// eslint-disable-next-line no-console
 			console.error( 'Error parsing slider settings:', e );
 		}
 

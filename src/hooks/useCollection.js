@@ -66,6 +66,7 @@ export default function useCollection( query = {} ) {
 				hasNoPosts: posts && posts.length === 0,
 			};
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[ postType, perPage, page, order, orderBy, search, JSON.stringify( taxQuery ), featured ]
 	);
 }

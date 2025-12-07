@@ -34,6 +34,7 @@ export default function useTaxonomies( taxonomy = '{{slug}}_category', args = {}
 
 			return { terms, isLoading };
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[ taxonomy, JSON.stringify( args ) ]
 	);
 }

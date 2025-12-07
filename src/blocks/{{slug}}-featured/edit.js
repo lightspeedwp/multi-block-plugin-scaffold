@@ -178,9 +178,18 @@ export default function Edit( { attributes, setAttributes } ) {
 									) }
 
 									{ displayReadMore && (
-										<a href="#" className="wp-block-{{namespace}}-{{slug}}-featured__read-more">
-											{ readMoreText }
-										</a>
+									<button
+										type="button"
+										className="wp-block-{{namespace}}-{{slug}}-featured__read-more"
+										onClick={ () => {
+											const postUrl = post.link;
+											if ( postUrl ) {
+												window.location.href = postUrl;
+											}
+										} }
+									>
+										{ readMoreText }
+									</button>
 									) }
 								</div>
 							</article>
