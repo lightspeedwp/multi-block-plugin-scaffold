@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
 	"name": "{{namespace}}/{{slug}}-slider",
 	"title": "{{name}} Slider",
@@ -19,48 +19,78 @@
 			"background": true,
 			"text": true
 		},
+		"dimensions": {
+			"aspectRatio": true
+		},
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fitText": true
 		}
 	},
 	"attributes": {
 		"source": {
 			"type": "string",
+			"role": "content",
 			"default": "custom",
 			"enum": [ "custom", "posts", "repeater" ]
 		},
 		"slides": {
 			"type": "array",
+			"role": "content",
 			"default": []
 		},
 		"autoplay": {
 			"type": "boolean",
+			"role": "content",
 			"default": false
 		},
 		"autoplaySpeed": {
 			"type": "number",
+			"role": "content",
 			"default": 5000
 		},
 		"showDots": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"showArrows": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"infinite": {
 			"type": "boolean",
+			"role": "content",
 			"default": true
 		},
 		"slidesToShow": {
 			"type": "number",
+			"role": "local",
 			"default": 1
 		},
 		"slidesToScroll": {
 			"type": "number",
+			"role": "local",
 			"default": 1
+		}
+	},
+	"selectors": {
+		"root": ".{{namespace}}-{{slug}}-slider",
+		"color": {
+			"text": ".{{namespace}}-{{slug}}-slider__caption",
+			"background": ".{{namespace}}-{{slug}}-slider"
+		},
+		"typography": {
+			"fontSize": ".{{namespace}}-{{slug}}-slider__caption"
+		},
+		"dimensions": {
+			"aspectRatio": ".{{namespace}}-{{slug}}-slider__slide"
 		}
 	},
 	"editorScript": "file:./index.js",

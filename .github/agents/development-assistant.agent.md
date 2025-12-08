@@ -174,10 +174,7 @@ Focus on WCAG 2.1 AA compliance.
 
 ## Related Files
 
-- [Custom Instructions](../custom-instructions.md)
-- [Prompts](../prompts/prompts.md)
-- [Agent Index](./agent.md)
-- [SCF Fields Reference](../instructions/scf-fields.instructions.md)
+- [Prompts Index](../prompts/prompts.md) - Prompt templates and generation workflows
 
 ---
 

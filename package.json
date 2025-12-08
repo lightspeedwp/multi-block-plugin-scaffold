@@ -37,6 +37,11 @@
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"lint": "npm run lint:js && npm run lint:css && npm run lint:pkg-json",
+		"lint:dry-run": "node bin/dry-run-test.js lint:js lint:css lint:pkg-json",
+		"dry-run": "node bin/dry-run-test.js",
+		"dry-run:lint": "node bin/dry-run-test.js lint:js lint:css",
+		"dry-run:test": "node bin/dry-run-test.js test:unit",
+		"dry-run:all": "node bin/dry-run-test.js lint:js lint:css test:unit",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
@@ -121,6 +126,10 @@
 		"hooks": {
 			"pre-commit": "lint-staged"
 		}
+	},
+	"dryRun": {
+		"enabled": true,
+		"description": "Enables dry-run mode for testing with mustache variable substitution"
 	},
 	"wp-env": {
 		"plugins": [

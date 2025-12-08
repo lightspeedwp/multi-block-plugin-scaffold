@@ -21,6 +21,64 @@ The `bin/` directory provides command-line tools for:
 
 ## Scripts
 
+### `dry-run-config.js`
+
+Configuration for dry-run testing with mustache variable substitution.
+
+**Usage:**
+
+```bash
+# Get full configuration
+node bin/dry-run-config.js config
+
+# Get specific value
+node bin/dry-run-config.js value slug
+
+# List files with mustache variables
+node bin/dry-run-config.js files
+
+# Replace variables in a file
+node bin/dry-run-config.js replace src/index.js
+```
+
+**Features:**
+
+- Provides test values for all mustache variables
+- Replace `{{slug}}`, `{{namespace}}`, etc. with valid values
+- Find files containing mustache variables
+- Enable testing on scaffold templates
+
+**See also:** [DRY-RUN-TESTING.md](../docs/DRY-RUN-TESTING.md)
+
+### `dry-run-test.js`
+
+Test runner that temporarily substitutes mustache variables.
+
+**Usage:**
+
+```bash
+# Run with default commands (lint:js, lint:css, test:unit)
+node bin/dry-run-test.js
+
+# Run specific commands
+node bin/dry-run-test.js lint:js test:unit
+
+# Via npm scripts
+npm run dry-run:lint
+npm run dry-run:test
+npm run dry-run:all
+```
+
+**Features:**
+
+- Automatic backup and restore of files
+- Replaces mustache variables with test values
+- Runs linting and tests
+- Safe cleanup on interrupt
+- Colored output for easy debugging
+
+**See also:** [DRY-RUN-TESTING.md](../docs/DRY-RUN-TESTING.md)
+
 ### `generate-plugin.js`
 
 Interactive plugin generator that creates a new multi-block plugin from the scaffold.

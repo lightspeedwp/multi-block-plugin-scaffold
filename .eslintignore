@@ -16,3 +16,6 @@ vendor
 coverage
 playwright-report
 test-results
+
+# Bin scripts (use different linting rules)
+bin/

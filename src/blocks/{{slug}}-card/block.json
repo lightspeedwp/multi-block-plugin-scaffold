@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
 	"name": "{{namespace}}/{{slug}}-card",
 	"title": "{{name}} Card",
@@ -19,37 +19,65 @@
 			"background": true,
 			"text": true
 		},
+		"dimensions": {
+			"aspectRatio": true
+		},
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fitText": false
+		}
+	},
+	"selectors": {
+		"root": ".{{namespace}}-{{slug}}-card",
+		"color": {
+			"text": ".{{namespace}}-{{slug}}-card__content",
+			"background": ".{{namespace}}-{{slug}}-card"
+		},
+		"typography": {
+			"fontSize": ".{{namespace}}-{{slug}}-card__title"
+		},
+		"dimensions": {
+			"aspectRatio": ".{{namespace}}-{{slug}}-card__image"
 		}
 	},
 	"attributes": {
 		"postId": {
-			"type": "number"
+			"type": "number",
+			"role": "content"
 		},
 		"displayFeaturedImage": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayTitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayExcerpt": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayMeta": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displaySubtitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"linkToPost": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		}
 	},

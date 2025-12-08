@@ -478,7 +478,4 @@ node .github/agents/scaffold-generator.agent.js
 
 ## Related Files
 
-- [Generate Plugin Prompt](../prompts/generate-plugin.prompt.md)
-- [Development Assistant](./development-assistant.agent.md)
-- [SCF Fields Reference](../instructions/scf-fields.instructions.md)
-- [Block Bindings Reference](../instructions/block-bindings.instructions.md)
+- [Generate Plugin Prompt](../prompts/generate-plugin.prompt.md) - Interactive generation workflow

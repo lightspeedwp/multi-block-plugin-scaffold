@@ -15,25 +15,21 @@ This repository is designed for advanced AI-assisted and Copilot-driven WordPres
 
 **Related Files:**
 
-- [Development Assistant](./agents/development-assistant.agent.md) — AI development assistant with context-specific modes
-- [Prompts](./prompts/prompts.md) — prompt templates for consistent output
 - [Main Agent Index](./agents/agent.md) — agent specs and usage
-- [AGENTS.md](/AGENTS.md) — org-wide AI rules and global principles
-- [Workflows](./workflows/) — CI/CD, performance, and deployment automation
+- [AGENTS.md](/AGENTS.md) — org-wide AI rules and global principles (reference upward)
 
 **Dynamic References:**
 
 - All instruction files: [`*.instructions.md`](./instructions/)
 - All agent files: [`*.agent.md`](./agents/) and [`*.agent.js`](./agents/)
-- All prompt files: [`*.prompt.md`](./prompts/) (see [prompts.md](./prompts/prompts.md))
+- All prompt files: [`*.prompt.md`](./prompts/)
 
 ---
 
 ## AI & Copilot Operations
 
 - Use Copilot for code generation, refactoring, and documentation, but always review and test generated code.
-- Reference `.github/agents/agent.md` for agent specs, triggers, and environment variables.
-- Use `.github/agents/development-assistant.agent.md` for context-specific development modes (e.g., block authoring, block.json editing, PHP/JS/SCSS best practices).
+- Reference `.github/agents/agent.md` for all agent specs, triggers, and environment variables.
 - Use prompt templates in `.github/prompts/` for consistent, high-quality Copilot output.
 - Tag PRs with `ai-generated` if Copilot or an agent contributed code.
 - Prefer modular, reusable code and minimal dependencies.

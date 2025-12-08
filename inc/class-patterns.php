@@ -39,6 +39,17 @@ class {{namespace|pascalCase}}_Patterns {
 	/**
 	 * Register patterns from patterns directory.
 	 *
+	 * Patterns return associative arrays with properties:
+	 * - slug: Pattern identifier (required)
+	 * - title: Display name (required)
+	 * - description: Pattern description
+	 * - categories: Array of category slugs
+	 * - keywords: Array of search terms
+	 * - viewportWidth: Preview width in pixels
+	 * - blockTypes: Array of applicable block types
+	 * - postTypes: Array of applicable post types
+	 * - content: Block markup HTML (required)
+	 *
 	 * @return void
 	 */
 	public function register_patterns() {
@@ -51,8 +62,41 @@ class {{namespace|pascalCase}}_Patterns {
 		$pattern_files = glob( $patterns_dir . '*.php' );
 
 		foreach ( $pattern_files as $pattern_file ) {
-			// The pattern files register themselves via the file header.
-			require_once $pattern_file;
+			$pattern = require $pattern_file;
+
+			// Skip if pattern doesn't return an array.
+			if ( ! is_array( $pattern ) ) {
+				continue;
+			}
+
+			// Extract pattern slug from array or derive from filename.
+			$slug = $pattern['slug'] ?? $this->get_pattern_slug_from_file( $pattern_file );
+
+			// Skip if no slug available.
+			if ( empty( $slug ) ) {
+				continue;
+			}
+
+			// Register the pattern with WordPress.
+			register_block_pattern( $slug, $pattern );
 		}
+	}
+
+	/**
+	 * Derive pattern slug from filename.
+	 *
+	 * Converts 'patterns/{{slug}}-card.php' to '{{namespace}}/card'
+	 *
+	 * @param string $pattern_file Full path to pattern file.
+	 * @return string Pattern slug.
+	 */
+	private function get_pattern_slug_from_file( $pattern_file ) {
+		$filename = basename( $pattern_file, '.php' );
+
+		// Remove {{slug}}- prefix if present.
+		$pattern_name = str_replace( '{{slug}}-', '', $filename );
+
+		// Return namespaced slug.
+		return '{{namespace}}/' . $pattern_name;
 	}
 }

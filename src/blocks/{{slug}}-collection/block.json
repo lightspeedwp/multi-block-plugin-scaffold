@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
 	"name": "{{namespace}}/{{slug}}-collection",
 	"title": "{{name}} Collection",
@@ -31,10 +31,12 @@
 	},
 	"attributes": {
 		"queryId": {
-			"type": "number"
+			"type": "number",
+			"role": "local"
 		},
 		"query": {
 			"type": "object",
+			"role": "content",
 			"default": {
 				"postType": "{{slug}}",
 				"perPage": 6,
@@ -53,32 +55,46 @@
 		},
 		"layout": {
 			"type": "string",
+			"role": "local",
 			"default": "grid",
 			"enum": [ "grid", "list", "slider" ]
 		},
 		"columns": {
 			"type": "number",
+			"role": "local",
 			"default": 3
 		},
 		"displayFeaturedImage": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayTitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayExcerpt": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayMeta": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayPagination": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
+		}
+	},
+	"selectors": {
+		"root": ".{{namespace}}-{{slug}}-collection",
+		"color": {
+			"text": ".{{namespace}}-{{slug}}-collection__item",
+			"background": ".{{namespace}}-{{slug}}-collection"
 		}
 	},
 	"editorScript": "file:./index.js",

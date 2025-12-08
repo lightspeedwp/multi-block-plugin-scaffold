@@ -195,6 +195,7 @@ Comprehensive documentation is available in the `docs/` directory:
 
 - **[Build Process](docs/BUILD-PROCESS.md)** - Complete build system guide
 - **[Testing Guide](docs/TESTING.md)** - Running and writing tests
+- **[Dry Run Testing](docs/DRY-RUN-TESTING.md)** - Testing with mustache variable substitution
 - **[Internationalization](docs/INTERNATIONALIZATION.md)** - i18n and translation guide
 - **[Tool Configuration](docs/TOOL-CONFIGS.md)** - Linting, formatting, and build tools
 - **[Agents Guide](docs/AGENTS.md)** - AI agents and automation
