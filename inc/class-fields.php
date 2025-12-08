@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Custom Fields Registration using Secure Custom Fields.
  *
@@ -13,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Fields class.
  */
-class {{namespace|pascalCase}}_Fields {
+class Fields {
 
 	/**
 	 * Field group key.

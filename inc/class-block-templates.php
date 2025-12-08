@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Block Templates Registration.
  *
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Block Templates class.
  */
-class {{namespace|pascalCase}}_Block_Templates {
+class Block_Templates {
 
 	/**
 	 * Constructor.

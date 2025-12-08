@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Options Pages Registration using Secure Custom Fields.
  *
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Registers options pages and their associated field groups using SCF.
  */
-class {{namespace|pascalCase}}_Options {
+class Options {
 
 	/**
 	 * Main options page slug.
