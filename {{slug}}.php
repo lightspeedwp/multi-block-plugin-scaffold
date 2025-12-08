@@ -75,15 +75,15 @@ class {{namespace|pascalCase}}_Plugin {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
 		// Initialize components.
-		new {{namespace|pascalCase}}_Post_Types();
-		new {{namespace|pascalCase}}_Taxonomies();
-		new {{namespace|pascalCase}}_Fields();
-		new {{namespace|pascalCase}}_Repeater_Fields();
-		new {{namespace|pascalCase}}_Options();
-		new {{namespace|pascalCase}}_SCF_JSON();
-		new {{namespace|pascalCase}}_Block_Templates();
-		new {{namespace|pascalCase}}_Block_Bindings();
-		new {{namespace|pascalCase}}_Patterns();
+		new \{{namespace|lowerCase}}\classes\Post_Types();
+		new \{{namespace|lowerCase}}\classes\Taxonomies();
+		new \{{namespace|lowerCase}}\classes\Fields();
+		new \{{namespace|lowerCase}}\classes\Repeater_Fields();
+		new \{{namespace|lowerCase}}\classes\Options();
+		new \{{namespace|lowerCase}}\classes\SCF_JSON();
+		new \{{namespace|lowerCase}}\classes\Block_Templates();
+		new \{{namespace|lowerCase}}\classes\Block_Bindings();
+		new \{{namespace|lowerCase}}\classes\Patterns();
 	}
 
 	/**

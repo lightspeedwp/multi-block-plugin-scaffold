@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Block Patterns Registration.
  *
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Patterns class.
  */
-class {{namespace|pascalCase}}_Patterns {
+class Patterns {
 
 	/**
 	 * Constructor.

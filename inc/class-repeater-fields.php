@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Repeater and Flexible Content Fields using Secure Custom Fields.
  *
@@ -13,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Repeater Fields class.
  */
-class {{namespace|pascalCase}}_Repeater_Fields {
+class Repeater_Fields {
 
 	/**
 	 * Constructor.
