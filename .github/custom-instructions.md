@@ -40,6 +40,45 @@ This repository is designed for advanced AI-assisted and Copilot-driven WordPres
 - Agents should be kept in sync with repo tooling (linters, build, tests).
 - Use environment variables for agent runs (see agent.md for details).
 
+## Project Management Files
+
+**IMPORTANT: File Placement Rules**
+
+When creating project tracking files, task lists, or multi-week project plans:
+
+- ✅ **DO**: Create in `.github/project/active/` directory
+- ✅ **DO**: Use naming convention: `{SCOPE}-{DESCRIPTION}-TASKS.md`
+- ✅ **DO**: Include YAML frontmatter with: title, description, category, type, audience, date, status, started, target_completion
+- ✅ **DO**: Structure with phases, numbered tasks, and progress tracking
+- ✅ **DO**: Use status indicators (✅, 🔄, ⏳, 🔥, ⚠️)
+- ✅ **DO**: Include session notes and decision log
+- ✅ **DO**: Reference `.github/project/README.md` for format guidelines
+
+**NEVER Do This**
+
+- ❌ Create task lists in repository root
+- ❌ Create in `.github/tasks/` (deprecated, use `.github/project/active/`)
+- ❌ Create in `docs/` (reserved for permanent documentation)
+- ❌ Create in `reports/` (reserved for point-in-time analysis)
+- ❌ Skip frontmatter metadata
+- ❌ Use ambiguous file names without context
+
+**Examples of Correct Placement**
+
+- ✅ `.github/project/active/CHAIN-REDUCTION-TASKS.md` - Breaking documentation chains
+- ✅ `.github/project/active/CONTEXT_REDUCTION_TASKS.md` - Context reduction initiative
+- ✅ `.github/project/active/TOKEN-OPTIMIZATION-SPRINT.md` - Token budget optimization
+- ❌ CHAIN-REDUCTION-TASKS.md (root - WRONG)
+- ❌ `.github/tasks/CONTEXT_REDUCTION_TASKS.md` (deprecated directory - WRONG)
+
+**Project Completion Workflow**
+
+1. Create file in `.github/project/active/` while project is active
+2. Update regularly with progress and metrics
+3. When complete, move to `.github/project/completed/`
+4. If findings significant, create analysis report in `reports/`
+5. Reference from permanent docs if needed
+
 ---
 
 # {{name}} Multi-Block Plugin Instructions
