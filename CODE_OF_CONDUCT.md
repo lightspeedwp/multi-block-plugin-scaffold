@@ -103,12 +103,14 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 
 #### Primary Contact
 
-- **Email**: conduct@{{author}}.com
+* **Email**: conduct@{{author}}.com
+
 * **GitHub**: [@{{author}}](https://github.com/{{author}})
 
 #### Alternative Contacts
 
 If the primary contact is not appropriate (e.g., they are involved in the issue), contact:
+
 * **WordPress Community Team**: [WordPress Slack moderators](https://make.wordpress.org/chat/)
 * **GitHub Support**: [GitHub Community Guidelines](https://github.com/github/community/discussions)
 

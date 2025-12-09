@@ -18,7 +18,7 @@ This file documents the AI agent system for the Multi-Block Plugin Scaffold. Age
 ## Related Files
 
 - **[Root AGENTS.md](../AGENTS.md)** - Global AI rules, coding standards, and org-wide principles
-- **[.github/agents/agent.md](../.github/agents/agent.md)** - Main agent index and specifications
+- **Agent specifications** - Located in `.github/agents/` directory
 - **[.github/custom-instructions.md](../.github/custom-instructions.md)** - AI/Copilot instructions for this plugin
 - **[.github/prompts/prompts.md](../.github/prompts/prompts.md)** - Prompt templates for consistent output
 - **[WORKFLOWS.md](./WORKFLOWS.md)** - GitHub Actions CI/CD workflows that use agents

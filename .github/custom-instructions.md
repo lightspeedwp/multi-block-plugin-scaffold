@@ -29,7 +29,7 @@ This repository is designed for advanced AI-assisted and Copilot-driven WordPres
 ## AI & Copilot Operations
 
 - Use Copilot for code generation, refactoring, and documentation, but always review and test generated code.
-- Reference `.github/agents/agent.md` for all agent specs, triggers, and environment variables.
+- Agent specifications are located in `.github/agents/` directory with individual spec files.
 - Use prompt templates in `.github/prompts/` for consistent, high-quality Copilot output.
 - Tag PRs with `ai-generated` if Copilot or an agent contributed code.
 - Prefer modular, reusable code and minimal dependencies.

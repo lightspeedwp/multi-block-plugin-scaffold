@@ -109,7 +109,7 @@ Any other context about the problem here.
 
 * **[Usage Guide](USAGE.md)** - How to use the plugin
 * **[Development Guide](DEVELOPMENT.md)** - Technical documentation
-* **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
+* **Contributing Guide** - See repository for contribution guidelines
 * **[FAQ Section](#frequently-asked-questions)** - Common questions
 
 ## Commercial Support
@@ -233,7 +233,7 @@ A: Yes, the plugin is built with accessibility in mind and follows WCAG guidelin
 ### Development and Customization
 
 **Q: Can I contribute to the plugin?**
-A: Absolutely! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+A: Absolutely! Check the repository for contribution guidelines.
 
 **Q: How do I report a bug?**
 A: Create an issue on [GitHub](https://github.com/{{author}}/{{slug}}/issues) with detailed reproduction steps.
