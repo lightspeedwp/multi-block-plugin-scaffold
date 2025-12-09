@@ -713,12 +713,9 @@ npm run test
 
 ## Related Documentation
 
-- [Generator Instructions](.github/instructions/generate-plugin.instructions.md) - Rules for using mustache values
-- [Scaffold Generator Agent](.github/agents/scaffold-generator.agent.md) - Agent specification
-- [Generation Prompt](.github/prompts/generate-plugin.prompt.md) - Interactive prompt template
-- [SCF Fields Reference](.github/instructions/scf-fields.instructions.md) - Field types and usage
-- [Build Process](BUILD-PROCESS.md) - Detailed build documentation
-- [API Reference](API_REFERENCE.md) - PHP and JavaScript APIs
+- **[README.md](./README.md)** - Documentation index
+- **[../.github/instructions/generate-plugin.instructions.md](../.github/instructions/generate-plugin.instructions.md)** - Mustache template rules
+- **[../.github/instructions/scf-fields.instructions.md](../.github/instructions/scf-fields.instructions.md)** - SCF field types
 
 ## Support
 
@@ -728,4 +725,3 @@ For issues or questions:
 2. Review [SUPPORT.md](../SUPPORT.md)
 3. Check [CONTRIBUTING.md](../CONTRIBUTING.md)
 4. Open an issue on GitHub
-5. Use the [Development Assistant](.github/agents/development-assistant.agent.md)

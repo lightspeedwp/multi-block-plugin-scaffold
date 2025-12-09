@@ -575,12 +575,8 @@ grep "error" logs/lint-*.log
 
 ## Related Documentation
 
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Build system and webpack configuration
-- [TESTING.md](./TESTING.md) - Testing strategies and dry-run testing
-- [LOGGING.md](./LOGGING.md) - Comprehensive logging for all tools and processes
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD automation and GitHub Actions
-- [VALIDATION.md](./VALIDATION.md) - Template validation
-- [PERFORMANCE.md](./PERFORMANCE.md) - Performance monitoring and optimization
+- **[BUILD-PROCESS.md](./BUILD-PROCESS.md)** - Build system prerequisite
+- **[README.md](./README.md)** - Documentation index
 
 ## Summary
 

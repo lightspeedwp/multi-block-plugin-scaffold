@@ -304,8 +304,4 @@ npm run performance
 
 ## Related Documentation
 
-- [README](./README.md) - Main documentation index
-- [Deprecation Guide](./DEPRECATION.md) - Deprecation workflow
-- [Security Nonce](./SECURITY-NONCE.md) - Nonce utilities
-- [Database Migration](./DB-MIGRATION.md) - Migration system
-- [Performance](./PERFORMANCE.md) - Performance monitoring
+- **[README.md](./README.md)** - Documentation index

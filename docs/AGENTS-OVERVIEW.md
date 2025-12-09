@@ -255,7 +255,7 @@ Agents are used in these workflows:
    - Dependency scanning
    - SAST analysis
 
-See [WORKFLOWS.md](./WORKFLOWS.md) for complete workflow documentation.
+See **[README.md](./README.md)** for documentation index.
 
 ### Build System Integration
 
@@ -346,6 +346,4 @@ See `docs/DRY-RUN-TESTING.md` for complete dry-run documentation.
 - **Time Savings** - Automate repetitive tasks
 - **Documentation** - Keep docs synchronized with code
 
-For CI/CD workflows, see [WORKFLOWS.md](./WORKFLOWS.md).
-For plugin generation, see [GENERATE-PLUGIN.md](./GENERATE-PLUGIN.md).
-For testing documentation, see [TESTING.md](./TESTING.md).
+See **[README.md](./README.md)** for complete documentation.

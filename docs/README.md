@@ -378,7 +378,7 @@ This scaffold is licensed under {{license}}. Generated plugins inherit this lice
 
 ## Related Documentation
 
-- [Main README](../README.md) - Repository root documentation
-- [Source Directory](../src/README.md) - Source files documentation
-- [Tests Directory](../tests/README.md) - Testing documentation
-- [Build Scripts](../bin/README.md) - Build script documentation
+- **[inc/README.md](../inc/README.md)** - PHP class files documentation
+- **[src/README.md](../src/README.md)** - Source files documentation
+- **[tests/README.md](../tests/README.md)** - Testing documentation
+- **[bin/README.md](../bin/README.md)** - Build script documentation

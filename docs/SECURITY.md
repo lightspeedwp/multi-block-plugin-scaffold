@@ -300,10 +300,7 @@ if (!is_user_logged_in()) {
 
 ## Related Documentation
 
-- [TESTING.md](./TESTING.md) - Security testing strategies
-- [LINTING.md](./LINTING.md) - Code quality standards
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD security checks
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Secure build configuration
+- **[README.md](./README.md)** - Documentation index
 
 ## WordPress Security Resources
 

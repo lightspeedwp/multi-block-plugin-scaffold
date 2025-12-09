@@ -24,7 +24,7 @@ Thank you for your interest in contributing to {{name}}! This document provides 
 
 ## Code of Conduct
 
-This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to {{author}}.
+This project adheres to a Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to {{author}}.
 
 ## Getting Started
 

@@ -186,12 +186,7 @@ If the grep command returns no results, all templates were successfully replaced
 
 ## Related Documentation
 
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Build process and template usage
-- [TESTING.md](./TESTING.md) - Testing with template validation
-- [LINTING.md](./LINTING.md) - Code quality standards
-- [LOGGING.md](./LOGGING.md) - Validation logging
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD validation checks
-- [PERFORMANCE.md](./PERFORMANCE.md) - Performance considerations
+- **[README.md](./README.md)** - Documentation index
 
 ## Validation Date
 

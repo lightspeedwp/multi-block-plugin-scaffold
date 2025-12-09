@@ -521,14 +521,12 @@ build/
 
 ## Related Documentation
 
+- **[README.md](./README.md)** - Documentation index
+
+## External Resources
+
 - [WordPress Block Editor Tutorial](https://developer.wordpress.org/block-editor/getting-started/tutorial/)
 - [File Structure of a Block](https://developer.wordpress.org/block-editor/getting-started/fundamentals/file-structure-of-a-block/)
 - [Block Metadata (block.json)](https://developer.wordpress.org/block-editor/getting-started/fundamentals/block-json/)
 - [Static vs Dynamic Rendering](https://developer.wordpress.org/block-editor/getting-started/fundamentals/static-dynamic-rendering/)
 - [Block Wrapper](https://developer.wordpress.org/block-editor/getting-started/fundamentals/block-wrapper/)
-
-## See Also
-
-- [Instructions for Agents](../.github/instructions/instructions.md)
-- [Custom Instructions](../.github/custom-instructions.md)
-- [Development Guide](../DEVELOPMENT.md)

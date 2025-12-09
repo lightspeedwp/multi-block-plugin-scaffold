@@ -529,11 +529,4 @@ Never log secrets:
 
 ## Related Documentation
 
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Build process automation
-- [TESTING.md](./TESTING.md) - CI/CD testing integration
-- [LINTING.md](./LINTING.md) - Linting in workflows
-- [LOGGING.md](./LOGGING.md) - Workflow execution logging
-- [PERFORMANCE.md](./PERFORMANCE.md) - Performance monitoring in CI/CD
-- [VALIDATION.md](./VALIDATION.md) - Template and code validation
-- [AGENTS-OVERVIEW.md](./AGENTS-OVERVIEW.md) - AI agents in workflows
-- [TESTING.md](./TESTING.md) - Comprehensive testing guide
+- **[README.md](./README.md)** - Documentation index

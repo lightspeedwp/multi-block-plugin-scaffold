@@ -861,8 +861,5 @@ For comprehensive logging documentation, see [LOGGING.md](./LOGGING.md).
 
 ## Related Documentation
 
-- [LOGGING.md](./LOGGING.md) - Comprehensive logging guide
-- [LINTING.md](./LINTING.md) - Linting and code quality standards
-- [VALIDATION.md](./VALIDATION.md) - Template validation
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Build system documentation
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD workflows
+- **[BUILD-PROCESS.md](./BUILD-PROCESS.md)** - Build system prerequisite
+- **[README.md](./README.md)** - Documentation index

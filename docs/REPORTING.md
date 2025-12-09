@@ -635,13 +635,11 @@ Before finalizing a report:
 
 ## Related Documentation
 
-- [reporting.instructions.md](../.github/instructions/reporting.instructions.md) - Rules and standards
-- [reporting.agent.md](../.github/agents/reporting.agent.md) - AI agent for report generation
-- [reporting.prompt.md](../.github/prompts/reporting.prompt.md) - Interactive prompt template
-- [folder-structure.instructions.md](../.github/instructions/folder-structure.instructions.md) - Directory organization
-- [logs/README.md](../logs/README.md) - Logging documentation
-- [tmp/README.md](../tmp/README.md) - Temporary files documentation
-- [reports/README.md](../reports/README.md) - Reports directory index
+- **[README.md](./README.md)** - Documentation index
+- **[../.github/instructions/reporting.instructions.md](../.github/instructions/reporting.instructions.md)** - Rules and standards
+- **[logs/README.md](../logs/README.md)** - Logging documentation
+- **[tmp/README.md](../tmp/README.md)** - Temporary files documentation
+- **[reports/README.md](../reports/README.md)** - Reports directory index
 
 ## Summary
 

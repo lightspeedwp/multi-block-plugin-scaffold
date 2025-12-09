@@ -431,8 +431,4 @@ npm run build
 
 ## Related Documentation
 
-- [LINTING.md](./LINTING.md) - Code quality standards for JavaScript, CSS, and PHP
-- [TESTING.md](./TESTING.md) - Testing strategies, dry-run system, and test logging
-- [LOGGING.md](./LOGGING.md) - Comprehensive logging across builds and workflows
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD automation with GitHub Actions
-- [PERFORMANCE.md](./PERFORMANCE.md) - Performance monitoring and optimization
+- **[README.md](./README.md)** - Documentation index and overview

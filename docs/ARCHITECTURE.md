@@ -716,15 +716,10 @@ See [.github/instructions/generate-plugin.instructions.md](../.github/instructio
 
 ## Related Documentation
 
-- **[AGENTS-OVERVIEW.md](./AGENTS-OVERVIEW.md)** - AI agents system
-- **[WORKFLOWS.md](./WORKFLOWS.md)** - GitHub Actions CI/CD
-- **[GENERATE-PLUGIN.md](./GENERATE-PLUGIN.md)** - Plugin generation
-- **[BUILD-PROCESS.md](./BUILD-PROCESS.md)** - Build system
-- **[TESTING.md](./TESTING.md)** - Testing guide
-- **[FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md)** - Source details
-- **[logs/README.md](../logs/README.md)** - Logging documentation
-- **[tmp/README.md](../tmp/README.md)** - Temporary files
-- **[reports/README.md](../reports/README.md)** - Reports documentation
+- **[README.md](./README.md)** - Documentation index
+- **[logs/README.md](../logs/README.md)** - Logging implementation
+- **[tmp/README.md](../tmp/README.md)** - Temporary files implementation
+- **[reports/README.md](../reports/README.md)** - Reports implementation
 
 ## Summary
 

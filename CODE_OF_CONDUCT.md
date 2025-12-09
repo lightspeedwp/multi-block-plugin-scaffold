@@ -235,7 +235,7 @@ If you need support or have questions about the Code of Conduct:
 
 * **General questions**: [GitHub Discussions](https://github.com/{{author}}/{{slug}}/discussions)
 * **Conduct questions**: conduct@{{author}}.com
-* **Community support**: [SUPPORT.md](./SUPPORT.md)
+* **Community support**: Contact maintainers via GitHub discussions or issues
 
 ### Additional Resources
 

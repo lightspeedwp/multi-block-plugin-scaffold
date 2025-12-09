@@ -545,13 +545,8 @@ grep "ERROR" logs/*.log | sort | uniq -c | sort -rn
 
 ## Related Documentation
 
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Build process with logging
-- [TESTING.md](./TESTING.md) - Testing with integrated logging
-- [LINTING.md](./LINTING.md) - Linting with dry-run logging
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD logging in GitHub Actions
-- [PERFORMANCE.md](./PERFORMANCE.md) - Performance testing and logging
-- [logs/README.md](../logs/README.md) - Logs directory management
-- [DEVELOPMENT.md](../DEVELOPMENT.md) - Development workflow
+- **[logs/README.md](../logs/README.md)** - Logs directory implementation
+- **[README.md](./README.md)** - Documentation index
 
 ## Summary
 

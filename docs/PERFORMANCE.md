@@ -199,12 +199,7 @@ Performance reports are uploaded as artifacts:
 
 ## Related Documentation
 
-- [BUILD-PROCESS.md](./BUILD-PROCESS.md) - Build optimization and asset configuration
-- [WORKFLOWS.md](./WORKFLOWS.md) - CI/CD performance checks
-- [TESTING.md](./TESTING.md) - Testing strategies
-- [LOGGING.md](./LOGGING.md) - Performance test logging
-- [LINTING.md](./LINTING.md) - Code quality standards
-- [VALIDATION.md](./VALIDATION.md) - Template validation
+- **[README.md](./README.md)** - Documentation index
 
 ## Resources
 

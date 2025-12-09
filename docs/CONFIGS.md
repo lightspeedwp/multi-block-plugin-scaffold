@@ -274,7 +274,6 @@ Each tool has its own comprehensive guide with:
 ### Build Process Guides
 
 - [WP-Scripts Configuration](./config/wp-scripts.md) - Complete @wordpress/scripts guide
-- [Build Process](./BUILD-PROCESS.md) - Complete build workflow
 
 ### Tool-Specific Documentation
 
