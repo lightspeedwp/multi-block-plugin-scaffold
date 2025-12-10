@@ -8,6 +8,24 @@ build/
 # Log files
 *.log
 
+# Temporary files
+*.tmp
+*.temp
+
+# Temporary directory
+tmp/
+
+# Logs directory
+logs/
+
+# Generated plugins output (when using generator mode)
+generated-plugins/
+output-plugin/
+output/
+
+# Dry-run backup files
+.dry-run-backup/
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -34,7 +52,3 @@ package-lock.json
 # Test coverage
 coverage/
 .phpunit.result.cache
-
-# Temporary files
-*.tmp
-*.temp

@@ -4,8 +4,10 @@ namespace {{namespace|lowerCase}}\classes;
 /**
  * Custom Taxonomy Registration.
  *
- * @package {{namespace}}
+ * @package {{namespace|lowerCase}}
  */
+
+namespace {{namespace|lowerCase}}\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -66,7 +68,7 @@ class Taxonomies {
 
 		register_taxonomy(
 			self::TAXONOMY,
-			{{namespace|pascalCase}}_Post_Types::POST_TYPE,
+			Post_Types::POST_TYPE,
 			$args
 		);
 	}

@@ -1,7 +1,7 @@
 /**
  * ScrollDownArrow Component Export
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './ScrollDownArrow';

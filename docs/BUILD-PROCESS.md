@@ -428,3 +428,7 @@ npm run build
 - [Block Metadata (block.json)](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/)
 - [WordPress Internationalization](https://developer.wordpress.org/plugins/internationalization/)
 - [Create Block Tutorial](https://developer.wordpress.org/block-editor/getting-started/create-block/)
+
+## Related Documentation
+
+- **[README.md](./README.md)** - Documentation index and overview

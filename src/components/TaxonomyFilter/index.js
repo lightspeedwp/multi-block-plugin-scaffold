@@ -1,7 +1,7 @@
 /**
  * Taxonomy Filter Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './TaxonomyFilter';

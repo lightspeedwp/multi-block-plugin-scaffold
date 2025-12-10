@@ -15,25 +15,21 @@ This repository is designed for advanced AI-assisted and Copilot-driven WordPres
 
 **Related Files:**
 
-- [Development Assistant](./agents/development-assistant.agent.md) — AI development assistant with context-specific modes
-- [Prompts](./prompts/prompts.md) — prompt templates for consistent output
 - [Main Agent Index](./agents/agent.md) — agent specs and usage
-- [AGENTS.md](/AGENTS.md) — org-wide AI rules and global principles
-- [Workflows](./workflows/) — CI/CD, performance, and deployment automation
+- [AGENTS.md](/AGENTS.md) — org-wide AI rules and global principles (reference upward)
 
 **Dynamic References:**
 
 - All instruction files: [`*.instructions.md`](./instructions/)
 - All agent files: [`*.agent.md`](./agents/) and [`*.agent.js`](./agents/)
-- All prompt files: [`*.prompt.md`](./prompts/) (see [prompts.md](./prompts/prompts.md))
+- All prompt files: [`*.prompt.md`](./prompts/)
 
 ---
 
 ## AI & Copilot Operations
 
 - Use Copilot for code generation, refactoring, and documentation, but always review and test generated code.
-- Reference `.github/agents/agent.md` for agent specs, triggers, and environment variables.
-- Use `.github/agents/development-assistant.agent.md` for context-specific development modes (e.g., block authoring, block.json editing, PHP/JS/SCSS best practices).
+- Agent specifications are located in `.github/agents/` directory with individual spec files.
 - Use prompt templates in `.github/prompts/` for consistent, high-quality Copilot output.
 - Tag PRs with `ai-generated` if Copilot or an agent contributed code.
 - Prefer modular, reusable code and minimal dependencies.
@@ -43,6 +39,45 @@ This repository is designed for advanced AI-assisted and Copilot-driven WordPres
 - Use UK English and org style for all documentation and comments.
 - Agents should be kept in sync with repo tooling (linters, build, tests).
 - Use environment variables for agent runs (see agent.md for details).
+
+## Project Management Files
+
+**IMPORTANT: File Placement Rules**
+
+When creating project tracking files, task lists, or multi-week project plans:
+
+- ✅ **DO**: Create in `.github/projects/active/` directory
+- ✅ **DO**: Use naming convention: `{SCOPE}-{DESCRIPTION}-TASKS.md`
+- ✅ **DO**: Include YAML frontmatter with: title, description, category, type, audience, date, status, started, target_completion
+- ✅ **DO**: Structure with phases, numbered tasks, and progress tracking
+- ✅ **DO**: Use status indicators (✅, 🔄, ⏳, 🔥, ⚠️)
+- ✅ **DO**: Include session notes and decision log
+- ✅ **DO**: Reference `.github/projects/README.md` for format guidelines
+
+**NEVER Do This**
+
+- ❌ Create task lists in repository root
+- ❌ Create in `.github/tasks/` (deprecated, use `.github/projects/active/`)
+- ❌ Create in `docs/` (reserved for permanent documentation)
+- ❌ Create in `reports/` (reserved for point-in-time analysis)
+- ❌ Skip frontmatter metadata
+- ❌ Use ambiguous file names without context
+
+**Examples of Correct Placement**
+
+- ✅ `.github/projects/active/CHAIN-REDUCTION-TASKS.md` - Breaking documentation chains
+- ✅ `.github/projects/active/CONTEXT_REDUCTION_TASKS.md` - Context reduction initiative
+- ✅ `.github/projects/active/TOKEN-OPTIMIZATION-SPRINT.md` - Token budget optimization
+- ❌ CHAIN-REDUCTION-TASKS.md (root - WRONG)
+- ❌ `.github/tasks/` (deprecated directory, removed 2025-12-09 - files moved to active/ and reports/)
+
+**Project Completion Workflow**
+
+1. Create file in `.github/projects/active/` while project is active
+2. Update regularly with progress and metrics
+3. When complete, move to `.github/projects/completed/`
+4. If findings significant, create analysis report in `reports/`
+5. Reference from permanent docs if needed
 
 ---
 
@@ -89,7 +124,8 @@ You are an expert WordPress multi-block plugin developer working on {{name}}, a 
 ├── patterns/
 ├── templates/
 ├── parts/
-├── bin/
+├── bin/                      # Shell scripts (.sh files)
+├── scripts/                  # JavaScript files (.js files)
 ├── tests/
 ├── .github/
 ├── docs/

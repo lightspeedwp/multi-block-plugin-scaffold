@@ -2,14 +2,14 @@
 /**
  * PHPStan bootstrap file.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 // Define constants for PHPStan.
-define( '{{namespace|upper}}_VERSION', '{{version}}' );
-define( '{{namespace|upper}}_PLUGIN_DIR', dirname( __DIR__ ) . '/' );
-define( '{{namespace|upper}}_PLUGIN_URL', 'https://example.com/wp-content/plugins/{{slug}}/' );
-define( '{{namespace|upper}}_PLUGIN_BASENAME', '{{slug}}/{{slug}}.php' );
+define( 'EXAMPLE_PLUGIN_VERSION', '1.0.0' );
+define( 'EXAMPLE_PLUGIN_PLUGIN_DIR', dirname( __DIR__ ) . '/' );
+define( 'EXAMPLE_PLUGIN_PLUGIN_URL', 'https://example.com/wp-content/plugins/example-plugin/' );
+define( 'EXAMPLE_PLUGIN_PLUGIN_BASENAME', 'example-plugin/example-plugin.php' );
 
 // Mock ACF functions.
 if ( ! function_exists( 'acf_add_local_field_group' ) ) {

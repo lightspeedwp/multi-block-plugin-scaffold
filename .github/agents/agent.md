@@ -15,15 +15,12 @@ This file documents the primary automation agent(s) for this repository, their p
 
 **Related Files:**
 
-- [Custom Instructions](../custom-instructions.md) — main AI/Copilot and plugin instructions
-- [Prompts](../prompts/prompts.md) — prompt templates for consistent output
-- [Global AI Rules (AGENTS.md)](../../AGENTS.md) — org-wide agent rules, coding standards, and cross-references
+- [Global AI Rules (AGENTS.md)](../../AGENTS.md) — org-wide agent rules, coding standards (parent reference)
 
 **Dynamic References:**
 
-- All instruction files: [`*.instructions.md`](../instructions/)
-- All agent files: [`*.agent.md`](../agents/) and [`*.agent.js`](../agents/) (current directory)
-- All prompt files: [`*.prompt.md`](../prompts/)
+- Agent specifications: [`*.agent.md`](./) (current directory)
+- Agent implementations: [`*.agent.js`](./)
 
 ---
 
@@ -62,6 +59,4 @@ This file documents the primary automation agent(s) for this repository, their p
 
 ---
 
-> **Note:** The files `.github/agents/agent-script.js` and `.github/workflows/agent-workflow.yml` are functional examples. Use them as templates for new agents. All AI ops and instruction files (see Related Files above) should reference these agents and workflows as appropriate for discoverability and onboarding.
-
-For more information on agent usage, see [Custom Instructions](../custom-instructions.md), [Workflows](../workflows/), and [Global AI Rules (AGENTS.md)](../../AGENTS.md).
+> **Note:** The files `.github/agents/agent-script.js` and `.github/workflows/agent-workflow.yml` are functional examples. Use them as templates for new agents.

@@ -1,9 +1,9 @@
 /**
- * Featured {{name_plural}} Block - Save Component
+ * Featured Items Block - Save Component
  *
  * This block uses server-side rendering via render.php.
  *
- * @package {{namespace}}
+ * @package
  */
 
 export default function save() {

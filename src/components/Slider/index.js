@@ -1,7 +1,7 @@
 /**
  * Slider Component Exports
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './Slider';

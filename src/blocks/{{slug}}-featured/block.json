@@ -1,14 +1,14 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-featured",
-	"title": "Featured {{name_plural}}",
-	"category": "{{slug}}",
+	"name": "example_plugin/example-plugin-featured",
+	"title": "Featured Items",
+	"category": "example-plugin",
 	"icon": "star-filled",
-	"description": "Display featured {{name_plural_lower}} in a highlight section.",
-	"version": "{{version}}",
-	"textdomain": "{{textdomain}}",
-	"keywords": [ "featured", "{{slug}}", "highlight" ],
+	"description": "Display featured items in a highlight section.",
+	"version": "1.0.0",
+	"textdomain": "example-plugin",
+	"keywords": [ "featured", "example-plugin", "highlight" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -20,48 +20,79 @@
 			"text": true,
 			"gradients": true
 		},
+		"dimensions": {
+			"aspectRatio": true,
+			"minHeight": true
+		},
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
 		}
 	},
 	"attributes": {
 		"count": {
 			"type": "number",
+			"role": "content",
 			"default": 3
 		},
 		"layout": {
 			"type": "string",
+			"role": "local",
 			"default": "grid",
 			"enum": [ "grid", "featured-first", "hero" ]
 		},
 		"displayFeaturedImage": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayTitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayExcerpt": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displaySubtitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayMeta": {
 			"type": "boolean",
+			"role": "local",
 			"default": false
 		},
 		"displayReadMore": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"readMoreText": {
 			"type": "string",
+			"role": "content",
 			"default": "Read More"
+		}
+	},
+	"selectors": {
+		"root": ".example_plugin-example-plugin-featured",
+		"color": {
+			"text": ".example_plugin-example-plugin-featured__item",
+			"background": ".example_plugin-example-plugin-featured"
+		},
+		"typography": {
+			"fontSize": ".example_plugin-example-plugin-featured__title"
+		},
+		"dimensions": {
+			"aspectRatio": ".example_plugin-example-plugin-featured__image",
+			"minHeight": ".example_plugin-example-plugin-featured--hero"
 		}
 	},
 	"editorScript": "file:./index.js",

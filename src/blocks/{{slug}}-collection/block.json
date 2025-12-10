@@ -1,17 +1,17 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-collection",
-	"title": "{{name}} Collection",
-	"category": "{{slug}}",
+	"name": "example_plugin/example-plugin-collection",
+	"title": "Example Plugin Collection",
+	"category": "example-plugin",
 	"icon": "grid-view",
-	"description": "Display a collection of {{name_plural_lower}} with filtering and layout options.",
-	"version": "{{version}}",
-	"textdomain": "{{textdomain}}",
-	"keywords": [ "collection", "{{slug}}", "grid", "list", "query" ],
+	"description": "Display a collection of items with filtering and layout options.",
+	"version": "1.0.0",
+	"textdomain": "example-plugin",
+	"keywords": [ "collection", "example-plugin", "grid", "list", "query" ],
 	"usesContext": [ "postId", "postType" ],
 	"providesContext": {
-		"{{namespace}}/queryId": "queryId",
+		"example_plugin/queryId": "queryId",
 		"postId": "queryId"
 	},
 	"supports": {
@@ -31,12 +31,14 @@
 	},
 	"attributes": {
 		"queryId": {
-			"type": "number"
+			"type": "number",
+			"role": "local"
 		},
 		"query": {
 			"type": "object",
+			"role": "content",
 			"default": {
-				"postType": "{{slug}}",
+				"postType": "example-plugin",
 				"perPage": 6,
 				"pages": 0,
 				"offset": 0,
@@ -53,32 +55,46 @@
 		},
 		"layout": {
 			"type": "string",
+			"role": "local",
 			"default": "grid",
 			"enum": [ "grid", "list", "slider" ]
 		},
 		"columns": {
 			"type": "number",
+			"role": "local",
 			"default": 3
 		},
 		"displayFeaturedImage": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayTitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayExcerpt": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayMeta": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayPagination": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
+		}
+	},
+	"selectors": {
+		"root": ".example_plugin-example-plugin-collection",
+		"color": {
+			"text": ".example_plugin-example-plugin-collection__item",
+			"background": ".example_plugin-example-plugin-collection"
 		}
 	},
 	"editorScript": "file:./index.js",

@@ -258,29 +258,14 @@ This scaffold uses Mustache-style variables for customization:
 
 ## Documentation
 
-Comprehensive documentation is available in the `docs/` directory:
+Comprehensive documentation is available in the **[docs/](docs/)** directory. See **[docs/README.md](docs/README.md)** for complete navigation and documentation index.
 
-- **[Build Process](docs/BUILD-PROCESS.md)** - Complete build system guide
-- **[Testing Guide](docs/TESTING.md)** - Running and writing tests
-- **[Internationalization](docs/INTERNATIONALIZATION.md)** - i18n and translation guide
-- **[Tool Configuration](docs/TOOL-CONFIGS.md)** - Linting, formatting, and build tools
-- **[Agents Guide](docs/AGENTS.md)** - AI agents and automation
-- **[Workflows Guide](docs/WORKFLOWS.md)** - CI/CD workflows documentation
-- **[API Reference](docs/API-REFERENCE.md)** - Plugin API documentation
-- **[Performance](docs/PERFORMANCE.md)** - Performance optimization guide
-- **[Security](docs/SECURITY-HEADERS.md)** - Security best practices
+### Quick Links
 
-**Configuration Documentation** (`docs/config/`):
-
-- [wp-scripts](docs/config/wp-scripts.md) - Complete @wordpress/scripts guide
-- [Webpack](docs/config/webpack.md) - Bundling configuration
-- [Babel](docs/config/babel.md) - JavaScript compilation
-- [ESLint](docs/config/eslint.md) - JavaScript linting
-- [Stylelint](docs/config/stylelint.md) - CSS/Sass linting
-- [PostCSS](docs/config/postcss.md) - CSS processing
-- [Jest](docs/config/jest.md) - Unit testing
-- [Playwright](docs/config/playwright.md) - E2E testing
-- [Prettier](docs/config/prettier.md) - Code formatting
+- **[Contributing](CONTRIBUTING.md)** - Contribution guidelines
+- **[Code of Conduct](CODE_OF_CONDUCT.md)** - Community standards
+- **[Support](SUPPORT.md)** - Getting help
+- **[Security](SECURITY.md)** - Security policy
 
 ## License
 

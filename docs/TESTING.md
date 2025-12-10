@@ -4,18 +4,22 @@ description: Complete guide to running and writing tests for block plugins
 category: Testing
 type: Guide
 audience: Developers
-date: 2025-12-01
+date: 2025-12-07
 ---
 
 Complete guide to running and writing tests for the {{name}} block plugin scaffold.
 
 ## Overview
 
-This theme includes comprehensive testing coverage:
+This scaffold includes comprehensive testing coverage with integrated logging:
 
 - **JavaScript Unit Tests** (Jest) - Test individual JavaScript components and functions
 - **PHP Unit Tests** (PHPUnit) - Test PHP functions and WordPress functionality
 - **End-to-End Tests** (Playwright) - Test complete user workflows in a real browser
+- **Dry Run Testing** - Test scaffold templates with mustache variable substitution
+- **SCF Field Validation** - Validate field group JSON schemas
+
+All tests automatically log to `logs/` directory. See [LOGGING.md](./LOGGING.md) for details.
 
 ## Test Structure
 
@@ -652,3 +656,210 @@ npx playwright install
 
 For CI/CD workflows, see [WORKFLOWS.md](./WORKFLOWS.md).
 For development setup, see [BUILD-PROCESS.md](./BUILD-PROCESS.md).
+
+## Dry Run Testing
+
+### Overview
+
+The dry-run testing system allows you to test scaffold templates that contain mustache variables without needing to generate a complete plugin first. It temporarily substitutes mustache variables with test values during the testing phase.
+
+### Why Dry Run Testing?
+
+This scaffold uses mustache template variables like `{{slug}}`, `{{namespace}}`, and `{{version}}` throughout the codebase. These variables cause linting and testing to fail since they're not valid JavaScript/PHP syntax. The dry-run system solves this by:
+
+1. **Detecting** files with mustache variables
+2. **Creating backups** of those files
+3. **Substituting** variables with test values
+4. **Running** tests/linting
+5. **Restoring** original files
+
+### Quick Start
+
+```bash
+# Run all tests with variable substitution
+npm run dry-run:all
+
+# Run only linting
+npm run dry-run:lint
+
+# Run only unit tests
+npm run dry-run:test
+
+# Run specific tests with custom commands
+npm run dry-run -- lint:js test:unit
+```
+
+### How It Works
+
+The process:
+
+1. Finds all files with mustache variables (e.g., `{{slug}}`)
+2. Creates complete backups in `.dry-run-backup/` directory
+3. Replaces variables in-place with test values
+4. Runs the specified npm scripts (linting, tests, etc.)
+5. Restores original files from backups
+6. Cleans up backup directory
+
+### Test Values
+
+Default test values used during dry-run mode:
+
+```javascript
+{
+  slug: 'example-plugin',
+  name: 'Example Plugin',
+  namespace: 'example_plugin',
+  textdomain: 'example-plugin',
+  version: '1.0.0',
+  author: 'Example Author',
+  // ... see bin/dry-run-config.js for complete list
+}
+```
+
+### Configuration
+
+The dry-run system consists of two files:
+
+**bin/dry-run-config.js** - Configuration and mustache replacement logic:
+
+```bash
+# Get full configuration
+node bin/dry-run-config.js config
+
+# Get specific value
+node bin/dry-run-config.js value slug
+
+# List files with mustache variables
+node bin/dry-run-config.js files
+
+# Replace variables in a file and output
+node bin/dry-run-config.js replace src/index.js
+```
+
+**bin/dry-run-test.js** - Test runner with backup/restore:
+
+- Finds all files with mustache variables
+- Creates `.dry-run-backup/` directory with copies
+- Replaces variables in-place
+- Runs specified npm scripts
+- Restores original files
+- Cleans up backup directory
+
+### Safety Features
+
+- Always restores files, even on interrupt (Ctrl+C)
+- Creates complete backups before any changes
+- Provides colored output for easy debugging
+- Stops on first failure in CI environments
+
+### Automatic Integration
+
+The dry-run system is automatically integrated into the pre-commit hook. When you commit changes:
+
+1. The hook detects if this is a scaffold template (checks for `{{slug}}` in package.json)
+2. If detected, it runs `npm run dry-run:lint` instead of regular linting
+3. Variables are temporarily replaced, tests run, and originals are restored
+
+### Bypassing Dry-Run
+
+```bash
+# Skip pre-commit hook entirely
+git commit --no-verify -m "message"
+
+# Run standard linting (will fail on scaffold templates)
+npm run lint:js
+npm run lint:css
+```
+
+### Customizing Test Values
+
+Edit `bin/dry-run-config.js` to change default values:
+
+```javascript
+const DRY_RUN_VALUES = {
+  slug: 'my-test-plugin',
+  name: 'My Test Plugin',
+  // ... update other values
+};
+```
+
+### Troubleshooting Dry Run
+
+**Backup Not Restored:**
+
+If files aren't restored (e.g., after force-kill):
+
+```bash
+# Manual restoration from backup
+cp -R .dry-run-backup/* .
+rm -rf .dry-run-backup
+```
+
+**Variables Not Replaced:**
+
+Check that your file pattern is included in `dry-run-test.js`:
+
+```javascript
+const patterns = [
+  'src/**/*.{js,jsx}',
+  // Add your pattern here
+];
+```
+
+**Linting Still Fails:**
+
+1. Check that test values in `dry-run-config.js` are valid
+2. Ensure `.eslintignore` doesn't exclude needed files
+3. Try running with verbose output: `node bin/dry-run-test.js lint:js --verbose`
+
+### Post-Generation
+
+Once you generate a plugin from this scaffold:
+
+1. Mustache variables are replaced with actual values
+2. The dry-run system is no longer needed
+3. Standard linting and testing work normally
+4. Pre-commit hook automatically uses standard mode
+
+### Dry Run Best Practices
+
+1. **Always use dry-run for scaffold development** - Ensures code quality without generating plugins
+2. **Test before committing** - Run `npm run dry-run:all` before commits
+3. **Keep test values realistic** - Use valid plugin identifiers in `DRY_RUN_VALUES`
+4. **Don't commit backup directory** - Already in `.gitignore` as `.dry-run-backup/`
+5. **Update test values when adding new variables** - Add to `DRY_RUN_VALUES` in `dry-run-config.js`
+
+### Related Files
+
+- [bin/dry-run-config.js](../bin/dry-run-config.js) - Configuration and variable replacement
+- [bin/dry-run-test.js](../bin/dry-run-test.js) - Test runner with backup/restore
+- [.husky/pre-commit](../.husky/pre-commit) - Pre-commit hook
+- [.gitignore](../.gitignore) - Backup directory exclusion
+
+## Test Logging
+
+All tests automatically log to `logs/` directory:
+
+- `logs/test-unit-<timestamp>.log` - Jest unit tests
+- `logs/test-phpunit-<timestamp>.log` - PHPUnit tests
+- `logs/test-e2e-<timestamp>.log` - E2E tests
+- `logs/dry-run-<timestamp>.log` - Dry run operations
+
+### Using Logs
+
+```javascript
+// JavaScript
+testLog('INFO', 'Test starting');
+```
+
+```php
+// PHP
+test_log('INFO', 'Test starting');
+```
+
+For comprehensive logging documentation, see [LOGGING.md](./LOGGING.md).
+
+## Related Documentation
+
+- **[BUILD-PROCESS.md](./BUILD-PROCESS.md)** - Build system prerequisite
+- **[README.md](./README.md)** - Documentation index

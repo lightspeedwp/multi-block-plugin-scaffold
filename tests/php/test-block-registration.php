@@ -2,7 +2,7 @@
 /**
  * Block Registration Tests.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
@@ -28,7 +28,7 @@ class Test_Block_Registration extends WP_UnitTestCase {
 		$plugin_blocks = array_filter(
 			array_keys( $registered ),
 			function ( $name ) {
-				return strpos( $name, '{{namespace}}/' ) === 0;
+				return strpos( $name, 'example_plugin/' ) === 0;
 			}
 		);
 
@@ -40,7 +40,7 @@ class Test_Block_Registration extends WP_UnitTestCase {
 	 * Test block category is registered.
 	 */
 	public function test_block_category_registered() {
-		$plugin = new {{namespace|pascalCase}}_Plugin();
+		$plugin = new ExamplePlugin_Plugin();
 
 		$categories = array(
 			array(
@@ -54,6 +54,6 @@ class Test_Block_Registration extends WP_UnitTestCase {
 		$this->assertIsArray( $result );
 
 		$slugs = array_column( $result, 'slug' );
-		$this->assertContains( '{{slug}}', $slugs );
+		$this->assertContains( 'example-plugin', $slugs );
 	}
 }

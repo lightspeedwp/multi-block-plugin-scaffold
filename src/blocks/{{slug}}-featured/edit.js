@@ -1,14 +1,11 @@
 /**
- * Featured {{name_plural}} Block - Editor Component
+ * Featured Items Block - Editor Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
@@ -21,13 +18,13 @@ import { useSelect } from '@wordpress/data';
 /**
  * Featured block edit component.
  *
- * @param {Object} props               Block props.
- * @param {Object} props.attributes    Block attributes.
+ * @param {Object}   props               Block props.
+ * @param {Object}   props.attributes    Block attributes.
  * @param {Function} props.setAttributes Function to update attributes.
  *
  * @return {Element} Block editor component.
  */
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit({ attributes, setAttributes }) {
 	const {
 		count,
 		layout,
@@ -41,161 +38,211 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 
 	const posts = useSelect(
-		( select ) => {
-			return select( 'core' ).getEntityRecords( 'postType', '{{slug}}', {
-				per_page: count,
-				meta_key: '{{slug}}_featured',
-				meta_value: '1',
-				_embed: true,
-			} );
+		(select) => {
+			return select('core').getEntityRecords(
+				'postType',
+				'example-plugin',
+				{
+					per_page: count,
+					meta_key: 'example-plugin_featured',
+					meta_value: '1',
+					_embed: true,
+				}
+			);
 		},
-		[ count ]
+		[count]
 	);
 
-	const blockProps = useBlockProps( {
-		className: `wp-block-{{namespace}}-{{slug}}-featured is-layout-${ layout }`,
-	} );
+	const blockProps = useBlockProps({
+		className: `wp-block-example_plugin-example-plugin-featured is-layout-${layout}`,
+	});
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Settings', '{{textdomain}}' ) }>
+				<PanelBody title={__('Settings', 'example-plugin')}>
 					<RangeControl
-						label={ __( 'Number of Items', '{{textdomain}}' ) }
-						value={ count }
-						onChange={ ( value ) => setAttributes( { count: value } ) }
-						min={ 1 }
-						max={ 6 }
+						label={__('Number of Items', 'example-plugin')}
+						value={count}
+						onChange={(value) => setAttributes({ count: value })}
+						min={1}
+						max={6}
 					/>
 					<SelectControl
-						label={ __( 'Layout', '{{textdomain}}' ) }
-						value={ layout }
-						options={ [
-							{ label: __( 'Grid', '{{textdomain}}' ), value: 'grid' },
-							{ label: __( 'Featured First', '{{textdomain}}' ), value: 'featured-first' },
-							{ label: __( 'Hero', '{{textdomain}}' ), value: 'hero' },
-						] }
-						onChange={ ( value ) => setAttributes( { layout: value } ) }
+						label={__('Layout', 'example-plugin')}
+						value={layout}
+						options={[
+							{
+								label: __('Grid', 'example-plugin'),
+								value: 'grid',
+							},
+							{
+								label: __('Featured First', 'example-plugin'),
+								value: 'featured-first',
+							},
+							{
+								label: __('Hero', 'example-plugin'),
+								value: 'hero',
+							},
+						]}
+						onChange={(value) => setAttributes({ layout: value })}
 					/>
 				</PanelBody>
 
-				<PanelBody title={ __( 'Display Settings', '{{textdomain}}' ) }>
+				<PanelBody title={__('Display Settings', 'example-plugin')}>
 					<ToggleControl
-						label={ __( 'Display Featured Image', '{{textdomain}}' ) }
-						checked={ displayFeaturedImage }
-						onChange={ ( value ) => setAttributes( { displayFeaturedImage: value } ) }
+						label={__('Display Featured Image', 'example-plugin')}
+						checked={displayFeaturedImage}
+						onChange={(value) =>
+							setAttributes({ displayFeaturedImage: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Title', '{{textdomain}}' ) }
-						checked={ displayTitle }
-						onChange={ ( value ) => setAttributes( { displayTitle: value } ) }
+						label={__('Display Title', 'example-plugin')}
+						checked={displayTitle}
+						onChange={(value) =>
+							setAttributes({ displayTitle: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Subtitle', '{{textdomain}}' ) }
-						checked={ displaySubtitle }
-						onChange={ ( value ) => setAttributes( { displaySubtitle: value } ) }
+						label={__('Display Subtitle', 'example-plugin')}
+						checked={displaySubtitle}
+						onChange={(value) =>
+							setAttributes({ displaySubtitle: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Excerpt', '{{textdomain}}' ) }
-						checked={ displayExcerpt }
-						onChange={ ( value ) => setAttributes( { displayExcerpt: value } ) }
+						label={__('Display Excerpt', 'example-plugin')}
+						checked={displayExcerpt}
+						onChange={(value) =>
+							setAttributes({ displayExcerpt: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Meta', '{{textdomain}}' ) }
-						checked={ displayMeta }
-						onChange={ ( value ) => setAttributes( { displayMeta: value } ) }
+						label={__('Display Meta', 'example-plugin')}
+						checked={displayMeta}
+						onChange={(value) =>
+							setAttributes({ displayMeta: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Read More', '{{textdomain}}' ) }
-						checked={ displayReadMore }
-						onChange={ ( value ) => setAttributes( { displayReadMore: value } ) }
+						label={__('Display Read More', 'example-plugin')}
+						checked={displayReadMore}
+						onChange={(value) =>
+							setAttributes({ displayReadMore: value })
+						}
 					/>
-					{ displayReadMore && (
+					{displayReadMore && (
 						<TextControl
-							label={ __( 'Read More Text', '{{textdomain}}' ) }
-							value={ readMoreText }
-							onChange={ ( value ) => setAttributes( { readMoreText: value } ) }
+							label={__('Read More Text', 'example-plugin')}
+							value={readMoreText}
+							onChange={(value) =>
+								setAttributes({ readMoreText: value })
+							}
 						/>
-					) }
+					)}
 				</PanelBody>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ posts === null && (
-					<p className="wp-block-{{namespace}}-{{slug}}-featured__loading">
-						{ __( 'Loading...', '{{textdomain}}' ) }
+			<div {...blockProps}>
+				{posts === null && (
+					<p className="wp-block-example_plugin-example-plugin-featured__loading">
+						{__('Loading…', 'example-plugin')}
 					</p>
-				) }
+				)}
 
-				{ posts && posts.length === 0 && (
-					<p className="wp-block-{{namespace}}-{{slug}}-featured__empty">
-						{ __( 'No featured {{name_plural_lower}} found. Mark some as featured in the post editor.', '{{textdomain}}' ) }
+				{posts && posts.length === 0 && (
+					<p className="wp-block-example_plugin-example-plugin-featured__empty">
+						{__(
+							'No featured items found. Mark some as featured in the post editor.',
+							'example-plugin'
+						)}
 					</p>
-				) }
+				)}
 
-				{ posts && posts.length > 0 && (
-					<div className="wp-block-{{namespace}}-{{slug}}-featured__items">
-						{ posts.map( ( post, index ) => (
+				{posts && posts.length > 0 && (
+					<div className="wp-block-example_plugin-example-plugin-featured__items">
+						{posts.map((post, index) => (
 							<article
-								key={ post.id }
-								className={ `wp-block-{{namespace}}-{{slug}}-featured__item ${
-									index === 0 && layout === 'featured-first' ? 'is-primary' : ''
-								}` }
+								key={post.id}
+								className={`wp-block-example_plugin-example-plugin-featured__item ${
+									index === 0 && layout === 'featured-first'
+										? 'is-primary'
+										: ''
+								}`}
 							>
-								{ displayFeaturedImage && post._embedded?.['wp:featuredmedia']?.[ 0 ] && (
-									<div className="wp-block-{{namespace}}-{{slug}}-featured__image">
-										<img
-											src={ post._embedded['wp:featuredmedia'][ 0 ].source_url }
-											alt={ post._embedded['wp:featuredmedia'][ 0 ].alt_text || '' }
-										/>
-									</div>
-								) }
-
-								<div className="wp-block-{{namespace}}-{{slug}}-featured__content">
-									{ displayTitle && (
-										<h3 className="wp-block-{{namespace}}-{{slug}}-featured__title">
-											{ post.title.rendered }
-										</h3>
-									) }
-
-									{ displaySubtitle && (
-										<p className="wp-block-{{namespace}}-{{slug}}-featured__subtitle">
-											{ __( 'Subtitle', '{{textdomain}}' ) }
-										</p>
-									) }
-
-									{ displayExcerpt && (
-										<div
-											className="wp-block-{{namespace}}-{{slug}}-featured__excerpt"
-											dangerouslySetInnerHTML={ { __html: post.excerpt.rendered } }
-										/>
-									) }
-
-									{ displayMeta && (
-										<div className="wp-block-{{namespace}}-{{slug}}-featured__meta">
-											<time>{ new Date( post.date ).toLocaleDateString() }</time>
+								{displayFeaturedImage &&
+									post._embedded?.[
+										'wp:featuredmedia'
+									]?.[0] && (
+										<div className="wp-block-example_plugin-example-plugin-featured__image">
+											<img
+												src={
+													post._embedded[
+														'wp:featuredmedia'
+													][0].source_url
+												}
+												alt={
+													post._embedded[
+														'wp:featuredmedia'
+													][0].alt_text || ''
+												}
+											/>
 										</div>
-									) }
+									)}
 
-									{ displayReadMore && (
-									<button
-										type="button"
-										className="wp-block-{{namespace}}-{{slug}}-featured__read-more"
-										onClick={ () => {
-											const postUrl = post.link;
-											if ( postUrl ) {
-												window.location.href = postUrl;
-											}
-										} }
-									>
-										{ readMoreText }
-									</button>
-									) }
+								<div className="wp-block-example_plugin-example-plugin-featured__content">
+									{displayTitle && (
+										<h3 className="wp-block-example_plugin-example-plugin-featured__title">
+											{post.title.rendered}
+										</h3>
+									)}
+
+									{displaySubtitle && (
+										<p className="wp-block-example_plugin-example-plugin-featured__subtitle">
+											{__('Subtitle', 'example-plugin')}
+										</p>
+									)}
+
+									{displayExcerpt && (
+										<div
+											className="wp-block-example_plugin-example-plugin-featured__excerpt"
+											dangerouslySetInnerHTML={{
+												__html: post.excerpt.rendered,
+											}}
+										/>
+									)}
+
+									{displayMeta && (
+										<div className="wp-block-example_plugin-example-plugin-featured__meta">
+											<time>
+												{new Date(
+													post.date
+												).toLocaleDateString()}
+											</time>
+										</div>
+									)}
+
+									{displayReadMore && (
+										<button
+											type="button"
+											className="wp-block-example_plugin-example-plugin-featured__read-more"
+											onClick={() => {
+												const postUrl = post.link;
+												if (postUrl) {
+													window.location.href =
+														postUrl;
+												}
+											}}
+										>
+											{readMoreText}
+										</button>
+									)}
 								</div>
 							</article>
-						) ) }
+						))}
 					</div>
-				) }
+				)}
 			</div>
 		</>
 	);

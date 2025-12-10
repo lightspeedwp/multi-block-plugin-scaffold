@@ -1,39 +1,39 @@
 /**
  * Components Tests
  *
- * @package {{namespace}}
+ * @package
  */
 
-describe( '{{name}} Components', () => {
-	beforeEach( () => {
+describe('Example Plugin Components', () => {
+	beforeEach(() => {
 		jest.clearAllMocks();
-	} );
+	});
 
-	describe( 'Slider Component', () => {
-		it( 'should be defined', () => {
+	describe('Slider Component', () => {
+		it('should be defined', () => {
 			// Component test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'PostSelector Component', () => {
-		it( 'should be defined', () => {
+	describe('PostSelector Component', () => {
+		it('should be defined', () => {
 			// Component test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'TaxonomyFilter Component', () => {
-		it( 'should be defined', () => {
+	describe('TaxonomyFilter Component', () => {
+		it('should be defined', () => {
 			// Component test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'Gallery Component', () => {
-		it( 'should be defined', () => {
+	describe('Gallery Component', () => {
+		it('should be defined', () => {
 			// Component test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
-} );
+			expect(true).toBe(true);
+		});
+	});
+});

@@ -3,7 +3,7 @@
  *
  * Utility functions for building and processing queries.
  *
- * @package {{namespace}}
+ * @package
  */
 
 /**
@@ -13,42 +13,40 @@
  *
  * @return {Object} Query arguments.
  */
-export function buildQueryArgs( attributes ) {
-	const {
-		query = {},
-	} = attributes;
+export function buildQueryArgs(attributes) {
+	const { query = {} } = attributes;
 
 	const args = {
-		post_type: query.postType || '{{slug}}',
+		post_type: query.postType || 'example-plugin',
 		posts_per_page: query.perPage || 6,
 		order: query.order || 'desc',
 		orderby: query.orderBy || 'date',
 	};
 
-	if ( query.offset ) {
+	if (query.offset) {
 		args.offset = query.offset;
 	}
 
-	if ( query.author ) {
+	if (query.author) {
 		args.author = query.author;
 	}
 
-	if ( query.search ) {
+	if (query.search) {
 		args.s = query.search;
 	}
 
-	if ( query.exclude && query.exclude.length ) {
+	if (query.exclude && query.exclude.length) {
 		args.post__not_in = query.exclude;
 	}
 
-	if ( query.taxQuery ) {
-		args.tax_query = buildTaxQuery( query.taxQuery );
+	if (query.taxQuery) {
+		args.tax_query = buildTaxQuery(query.taxQuery);
 	}
 
-	if ( query.featured ) {
+	if (query.featured) {
 		args.meta_query = [
 			{
-				key: '{{slug}}_featured',
+				key: 'example-plugin_featured',
 				value: '1',
 				compare: '=',
 			},
@@ -65,31 +63,28 @@ export function buildQueryArgs( attributes ) {
  *
  * @return {Array} Tax query array.
  */
-export function buildTaxQuery( taxQuery ) {
-	if ( ! taxQuery || typeof taxQuery !== 'object' ) {
+export function buildTaxQuery(taxQuery) {
+	if (!taxQuery || typeof taxQuery !== 'object') {
 		return [];
 	}
 
-	const queries = Object.entries( taxQuery )
-		.filter( ( [ , terms ] ) => Array.isArray( terms ) && terms.length > 0 )
-		.map( ( [ taxonomy, terms ] ) => ( {
+	const queries = Object.entries(taxQuery)
+		.filter(([, terms]) => Array.isArray(terms) && terms.length > 0)
+		.map(([taxonomy, terms]) => ({
 			taxonomy,
 			field: 'term_id',
 			terms,
-		} ) );
+		}));
 
-	if ( queries.length === 0 ) {
+	if (queries.length === 0) {
 		return [];
 	}
 
-	if ( queries.length === 1 ) {
+	if (queries.length === 1) {
 		return queries;
 	}
 
-	return [
-		{ relation: 'AND' },
-		...queries,
-	];
+	return [{ relation: 'AND' }, ...queries];
 }
 
 /**
@@ -99,9 +94,12 @@ export function buildTaxQuery( taxQuery ) {
  *
  * @return {Object} Pagination info.
  */
-export function parsePagination( response ) {
+export function parsePagination(response) {
 	return {
-		total: parseInt( response.headers.get( 'X-WP-Total' ) || '0', 10 ),
-		totalPages: parseInt( response.headers.get( 'X-WP-TotalPages' ) || '1', 10 ),
+		total: parseInt(response.headers.get('X-WP-Total') || '0', 10),
+		totalPages: parseInt(
+			response.headers.get('X-WP-TotalPages') || '1',
+			10
+		),
 	};
 }

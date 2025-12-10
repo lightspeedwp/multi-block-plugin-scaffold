@@ -13,18 +13,9 @@ date: 2025-12-01
 
 This repository uses prompt templates to ensure Copilot/AI output is consistent, high-quality, and tailored to multi-block plugin development.
 
-**Related Files:**
-
-- [Development Assistant](../agents/development-assistant.agent.md) — AI development assistant with context-specific modes
-- [Scaffold Generator](../agents/scaffold-generator.agent.md) — Interactive plugin generation agent
-- [Custom Instructions](../custom-instructions.md) — main AI/Copilot and plugin instructions
-- [Main Agent Index](../agents/agent.md) — agent specs and usage
-
 **Dynamic References:**
 
-- All instruction files: [`*.instructions.md`](../instructions/)
-- All agent files: [`*.agent.md`](../agents/) and [`*.agent.js`](../agents/)
-- All prompt files: [`*.prompt.md`](../prompts/) (current directory)
+- All prompt files: [`*.prompt.md`](./) (current directory)
 
 ---
 
@@ -41,9 +32,8 @@ This repository uses prompt templates to ensure Copilot/AI output is consistent,
 To create a new WordPress multi-block plugin from this scaffold:
 
 1. **Use the prompt**: Open [generate-plugin.prompt.md](./generate-plugin.prompt.md) in Copilot
-2. **Or invoke the agent**: Ask the [Scaffold Generator](../agents/scaffold-generator.agent.md)
-3. **Answer the discovery questions** for CPT, taxonomies, and fields
-4. **Review and generate**
+2. **Answer the discovery questions** for CPT, taxonomies, and fields
+3. **Review and generate**
 
 The multi-block generator is comprehensive and will guide you through:
 

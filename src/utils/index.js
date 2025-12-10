@@ -1,7 +1,7 @@
 /**
  * Utility Functions
  *
- * @package {{namespace}}
+ * @package
  */
 
 export * from './query';

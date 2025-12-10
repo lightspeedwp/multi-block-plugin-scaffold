@@ -5,7 +5,7 @@
  * Tests for SCF Local JSON meta operations, including
  * setup, reset, and cleanup functionality.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,19 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Test SCF Local JSON meta setup and reset operations.
  */
-class {{namespace|pascalCase}}_SCF_JSON_Meta_Test extends WP_UnitTestCase {
+class ExamplePlugin_SCF_JSON_Meta_Test extends WP_UnitTestCase {
 
 	/**
 	 * SCF JSON handler instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON
+	 * @var ExamplePlugin_SCF_JSON
 	 */
 	private $scf_json;
 
 	/**
 	 * SCF JSON validator instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON_Validator
+	 * @var ExamplePlugin_SCF_JSON_Validator
 	 */
 	private $validator;
 
@@ -45,13 +45,13 @@ class {{namespace|pascalCase}}_SCF_JSON_Meta_Test extends WP_UnitTestCase {
 		parent::set_up();
 
 		// Initialize SCF JSON handler.
-		if ( class_exists( '{{namespace|pascalCase}}_SCF_JSON' ) ) {
-			$this->scf_json = new {{namespace|pascalCase}}_SCF_JSON();
+		if ( class_exists( 'ExamplePlugin_SCF_JSON' ) ) {
+			$this->scf_json = new ExamplePlugin_SCF_JSON();
 		}
 
 		// Initialize validator if available.
-		if ( class_exists( '{{namespace|pascalCase}}_SCF_JSON_Validator' ) ) {
-			$this->validator = new {{namespace|pascalCase}}_SCF_JSON_Validator();
+		if ( class_exists( 'ExamplePlugin_SCF_JSON_Validator' ) ) {
+			$this->validator = new ExamplePlugin_SCF_JSON_Validator();
 		}
 
 		// Create test JSON directory.
@@ -103,7 +103,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Meta_Test extends WP_UnitTestCase {
 	 */
 	public function test_scf_json_handler_meta_available() {
 		$this->assertTrue(
-			class_exists( '{{namespace|pascalCase}}_SCF_JSON' ),
+			class_exists( 'ExamplePlugin_SCF_JSON' ),
 			'SCF JSON handler should be available'
 		);
 	}
@@ -112,11 +112,11 @@ class {{namespace|pascalCase}}_SCF_JSON_Meta_Test extends WP_UnitTestCase {
 	 * Test validator class is available for meta operations.
 	 */
 	public function test_validator_class_available() {
-		if ( ! class_exists( '{{namespace|pascalCase}}_SCF_JSON_Validator' ) ) {
+		if ( ! class_exists( 'ExamplePlugin_SCF_JSON_Validator' ) ) {
 			$this->markTestSkipped( 'Validator class not yet implemented' );
 		}
 
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_SCF_JSON_Validator' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_SCF_JSON_Validator' ) );
 	}
 
 	/**

@@ -3,7 +3,7 @@
  *
  * Custom hook for fetching taxonomy terms.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { useSelect } from '@wordpress/data';
@@ -16,25 +16,32 @@ import { useSelect } from '@wordpress/data';
  *
  * @return {Object} Terms data and loading state.
  */
-export default function useTaxonomies( taxonomy = '{{slug}}_category', args = {} ) {
+export default function useTaxonomies(
+	taxonomy = 'example-plugin_category',
+	args = {}
+) {
 	return useSelect(
-		( select ) => {
+		(select) => {
 			const queryArgs = {
 				per_page: 100,
 				hide_empty: false,
 				...args,
 			};
 
-			const terms = select( 'core' ).getEntityRecords( 'taxonomy', taxonomy, queryArgs );
-			const isLoading = select( 'core/data' ).isResolving( 'core', 'getEntityRecords', [
+			const terms = select('core').getEntityRecords(
 				'taxonomy',
 				taxonomy,
-				queryArgs,
-			] );
+				queryArgs
+			);
+			const isLoading = select('core/data').isResolving(
+				'core',
+				'getEntityRecords',
+				['taxonomy', taxonomy, queryArgs]
+			);
 
 			return { terms, isLoading };
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[ taxonomy, JSON.stringify( args ) ]
+		[taxonomy, JSON.stringify(args)]
 	);
 }

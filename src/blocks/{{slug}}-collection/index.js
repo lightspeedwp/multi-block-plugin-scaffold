@@ -1,7 +1,7 @@
 /**
- * {{name}} Collection Block
+ * Example Plugin Collection Block
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { registerBlockType } from '@wordpress/blocks';
@@ -12,8 +12,8 @@ import variations from './variations';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType( metadata.name, {
+registerBlockType(metadata.name, {
 	edit: Edit,
 	save,
 	variations,
-} );
+});

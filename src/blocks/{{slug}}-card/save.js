@@ -1,9 +1,9 @@
 /**
- * {{name}} Card Block - Save Component
+ * Example Plugin Card Block - Save Component
  *
  * This block uses server-side rendering via render.php.
  *
- * @package {{namespace}}
+ * @package
  */
 
 export default function save() {

@@ -11,7 +11,7 @@ Complete guide to CI/CD workflows for the {{name}} block plugin scaffold.
 
 ## Overview
 
-This theme uses GitHub Actions to automate:
+This plugin uses GitHub Actions to automate:
 
 - Code quality checks
 - Build and deployment
@@ -400,22 +400,22 @@ npm run test
 
 1. **Cache dependencies**:
 
-```yaml
-- uses: actions/setup-node@v4
-  with:
-    cache: 'npm'
-```
+   ```yaml
+   - uses: actions/setup-node@v4
+     with:
+       cache: 'npm'
+   ```
 
 2. **Run jobs in parallel**:
 
-```yaml
-jobs:
-  test-js:
-    runs-on: ubuntu-latest
-  test-php:
-    runs-on: ubuntu-latest
-  # Both run simultaneously
-```
+   ```yaml
+   jobs:
+     test-js:
+       runs-on: ubuntu-latest
+     test-php:
+       runs-on: ubuntu-latest
+     # Both run simultaneously
+   ```
 
 3. **Skip unnecessary steps**:
 
@@ -433,12 +433,12 @@ jobs:
 
 1. Verify trigger configuration:
 
-```yaml
-on:
-  push:
-    branches: [develop, main]  # Correct branch?
-  pull_request:  # Configured?
-```
+   ```yaml
+   on:
+     push:
+       branches: [develop, main]  # Correct branch?
+     pull_request:  # Configured?
+   ```
 
 2. Check workflow file location:
    - Must be in `.github/workflows/`
@@ -446,10 +446,10 @@ on:
 
 3. Validate YAML syntax:
 
-```bash
-# Use GitHub CLI:
-gh workflow view code-quality.yml
-```
+   ```bash
+   # Use GitHub CLI:
+   gh workflow view code-quality.yml
+   ```
 
 ## Best Practices
 
@@ -527,5 +527,6 @@ Never log secrets:
 ✅ **Monitoring** - Track workflow status and history
 ✅ **Notifications** - Get alerts on failures
 
-For agent documentation, see [AGENTS.md](./AGENTS.md).
-For testing documentation, see [TESTING.md](./TESTING.md).
+## Related Documentation
+
+- **[README.md](./README.md)** - Documentation index

@@ -7,27 +7,43 @@
 
 echo "🔍 Running pre-commit checks for {{name}}..."
 
-# Run JavaScript linting
-echo "🟡 Linting JavaScript..."
-npm run lint:js || {
-    echo "❌ JavaScript linting failed. Please fix the issues and try again."
-    exit 1
-}
+# Check if this is a scaffold template (has mustache variables)
+if grep -q "{{slug}}" package.json 2>/dev/null; then
+    echo "📋 Scaffold template detected - using dry-run mode"
 
-# Run CSS linting
-echo "🟡 Linting CSS..."
-npm run lint:css || {
-    echo "❌ CSS linting failed. Please fix the issues and try again."
-    exit 1
-}
-
-# Run PHP linting (if composer is available)
-if command -v composer &> /dev/null; then
-    echo "🟡 Linting PHP..."
-    composer run lint || {
-        echo "❌ PHP linting failed. Please fix the issues and try again."
+    # Run linting with dry-run mode (substitutes mustache variables temporarily)
+    echo "🟡 Running dry-run linting..."
+    npm run dry-run:lint || {
+        echo "❌ Dry-run linting failed. Please fix the issues and try again."
+        echo "💡 Tip: Variables like {{slug}} are temporarily replaced with test values during linting"
         exit 1
     }
+else
+    # Standard linting for generated plugins
+    echo "🟡 Linting JavaScript..."
+    npm run lint:js || {
+        echo "❌ JavaScript linting failed. Please fix the issues and try again."
+        exit 1
+    }
+
+    echo "🟡 Linting CSS..."
+    npm run lint:css || {
+        echo "❌ CSS linting failed. Please fix the issues and try again."
+        exit 1
+    }
+fi
+
+# Run PHP linting (if composer is available and not in scaffold mode)
+if command -v composer &> /dev/null; then
+    if ! grep -q "{{slug}}" package.json 2>/dev/null; then
+        echo "🟡 Linting PHP..."
+        composer run lint || {
+            echo "❌ PHP linting failed. Please fix the issues and try again."
+            exit 1
+        }
+    else
+        echo "⚠️  Skipping PHP linting (scaffold template mode)"
+    fi
 else
     echo "⚠️  Skipping PHP linting (Composer not available)"
 fi

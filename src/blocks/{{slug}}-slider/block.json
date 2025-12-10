@@ -1,14 +1,14 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-slider",
-	"title": "{{name}} Slider",
-	"category": "{{slug}}",
+	"name": "example_plugin/example-plugin-slider",
+	"title": "Example Plugin Slider",
+	"category": "example-plugin",
 	"icon": "slides",
-	"description": "Display {{name_plural_lower}} or custom slides in a slider/carousel.",
-	"version": "{{version}}",
-	"textdomain": "{{textdomain}}",
-	"keywords": [ "slider", "carousel", "{{slug}}" ],
+	"description": "Display items or custom slides in a slider/carousel.",
+	"version": "1.0.0",
+	"textdomain": "example-plugin",
+	"keywords": [ "slider", "carousel", "example-plugin" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -19,48 +19,78 @@
 			"background": true,
 			"text": true
 		},
+		"dimensions": {
+			"aspectRatio": true
+		},
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fitText": true
 		}
 	},
 	"attributes": {
 		"source": {
 			"type": "string",
+			"role": "content",
 			"default": "custom",
 			"enum": [ "custom", "posts", "repeater" ]
 		},
 		"slides": {
 			"type": "array",
+			"role": "content",
 			"default": []
 		},
 		"autoplay": {
 			"type": "boolean",
+			"role": "content",
 			"default": false
 		},
 		"autoplaySpeed": {
 			"type": "number",
+			"role": "content",
 			"default": 5000
 		},
 		"showDots": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"showArrows": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"infinite": {
 			"type": "boolean",
+			"role": "content",
 			"default": true
 		},
 		"slidesToShow": {
 			"type": "number",
+			"role": "local",
 			"default": 1
 		},
 		"slidesToScroll": {
 			"type": "number",
+			"role": "local",
 			"default": 1
+		}
+	},
+	"selectors": {
+		"root": ".example_plugin-example-plugin-slider",
+		"color": {
+			"text": ".example_plugin-example-plugin-slider__caption",
+			"background": ".example_plugin-example-plugin-slider"
+		},
+		"typography": {
+			"fontSize": ".example_plugin-example-plugin-slider__caption"
+		},
+		"dimensions": {
+			"aspectRatio": ".example_plugin-example-plugin-slider__slide"
 		}
 	},
 	"editorScript": "file:./index.js",

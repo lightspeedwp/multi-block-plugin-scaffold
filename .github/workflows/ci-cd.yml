@@ -27,6 +27,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup logging
+        run: |
+          mkdir -p logs
+          TIMESTAMP=$(date -Iseconds | sed 's/:/-/g')
+          echo "[$(date -Iseconds)] [INFO] CI/CD workflow starting" >> logs/workflow-ci-cd-${TIMESTAMP}.log
+          echo "LOG_FILE=logs/workflow-ci-cd-${TIMESTAMP}.log" >> $GITHUB_ENV
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -47,22 +54,42 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-interaction
 
       - name: Lint JavaScript
-        run: npm run lint:js
+        run: |
+          echo "[$(date -Iseconds)] [INFO] Running JavaScript lint" >> $LOG_FILE
+          npm run lint:js 2>&1 | tee -a $LOG_FILE
 
       - name: Lint CSS
-        run: npm run lint:css
+        run: |
+          echo "[$(date -Iseconds)] [INFO] Running CSS lint" >> $LOG_FILE
+          npm run lint:css 2>&1 | tee -a $LOG_FILE
 
       - name: Lint PHP
-        run: composer run lint
+        run: |
+          echo "[$(date -Iseconds)] [INFO] Running PHP lint" >> $LOG_FILE
+          composer run lint 2>&1 | tee -a $LOG_FILE
 
       - name: Run JavaScript tests
-        run: npm run test:unit
+        run: |
+          echo "[$(date -Iseconds)] [INFO] Running JavaScript tests" >> $LOG_FILE
+          npm run test:unit 2>&1 | tee -a $LOG_FILE
 
       - name: Run PHP tests
-        run: composer run test
+        run: |
+          echo "[$(date -Iseconds)] [INFO] Running PHP tests" >> $LOG_FILE
+          composer run test 2>&1 | tee -a $LOG_FILE
 
       - name: Build plugin
-        run: npm run build
+        run: |
+          echo "[$(date -Iseconds)] [INFO] Building plugin" >> $LOG_FILE
+          npm run build 2>&1 | tee -a $LOG_FILE
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-logs-node-${{ matrix.node-version }}-php-${{ matrix.php-version }}
+          path: logs/
+          retention-days: 7
 
       - name: Archive build artifacts
         if: matrix.node-version == '20.x' && matrix.php-version == '8.1'
@@ -142,6 +169,14 @@ jobs:
         with:
           name: e2e-test-results
           path: test-results/
+
+      - name: Upload E2E logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-logs
+          path: logs/
+          retention-days: 7
 
   deploy:
     name: Deploy Release

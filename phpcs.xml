@@ -22,11 +22,6 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 	</rule>
 
-	<!-- Rules: WordPress VIP Go -->
-	<rule ref="WordPress-VIP-Go">
-		<exclude name="WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant"/>
-	</rule>
-
 	<!-- Set text domain -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>

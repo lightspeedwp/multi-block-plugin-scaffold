@@ -7,10 +7,12 @@ namespace {{namespace|lowerCase}}\classes;
  * Creates global settings pages for site-wide configuration that is not
  * tied to individual posts, pages, or taxonomies.
  *
- * @package {{namespace}}
+ * @package example_plugin
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/first-options-page.md
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/code-reference/api/index.md
  */
+
+namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,14 +30,14 @@ class Options {
 	 *
 	 * @var string
 	 */
-	const OPTIONS_PAGE = '{{slug}}-settings';
+	const OPTIONS_PAGE = 'example-plugin-settings';
 
 	/**
 	 * Field group key for main settings.
 	 *
 	 * @var string
 	 */
-	const FIELD_GROUP = 'group_{{slug}}_options';
+	const FIELD_GROUP = 'group_example-plugin_options';
 
 	/**
 	 * Constructor.
@@ -70,15 +72,15 @@ class Options {
 		// Main options page.
 		acf_add_options_page(
 			array(
-				'page_title'      => __( '{{name}} Settings', '{{textdomain}}' ),
-				'menu_title'      => __( '{{name}}', '{{textdomain}}' ),
+				'page_title'      => __( 'Example Plugin Settings', 'example-plugin' ),
+				'menu_title'      => __( 'Example Plugin', 'example-plugin' ),
 				'menu_slug'       => self::OPTIONS_PAGE,
 				'capability'      => 'manage_options',
 				'icon_url'        => 'dashicons-admin-generic',
 				'redirect'        => false,
 				'position'        => 30,
-				'update_button'   => __( 'Save Settings', '{{textdomain}}' ),
-				'updated_message' => __( 'Settings saved.', '{{textdomain}}' ),
+				'update_button'   => __( 'Save Settings', 'example-plugin' ),
+				'updated_message' => __( 'Settings saved.', 'example-plugin' ),
 				'autoload'        => true,
 			)
 		);
@@ -86,8 +88,8 @@ class Options {
 		// General settings sub-page.
 		acf_add_options_sub_page(
 			array(
-				'page_title'  => __( 'General Settings', '{{textdomain}}' ),
-				'menu_title'  => __( 'General', '{{textdomain}}' ),
+				'page_title'  => __( 'General Settings', 'example-plugin' ),
+				'menu_title'  => __( 'General', 'example-plugin' ),
 				'parent_slug' => self::OPTIONS_PAGE,
 				'menu_slug'   => self::OPTIONS_PAGE . '-general',
 				'capability'  => 'manage_options',
@@ -97,8 +99,8 @@ class Options {
 		// Display settings sub-page.
 		acf_add_options_sub_page(
 			array(
-				'page_title'  => __( 'Display Settings', '{{textdomain}}' ),
-				'menu_title'  => __( 'Display', '{{textdomain}}' ),
+				'page_title'  => __( 'Display Settings', 'example-plugin' ),
+				'menu_title'  => __( 'Display', 'example-plugin' ),
 				'parent_slug' => self::OPTIONS_PAGE,
 				'menu_slug'   => self::OPTIONS_PAGE . '-display',
 				'capability'  => 'manage_options',
@@ -108,8 +110,8 @@ class Options {
 		// API settings sub-page.
 		acf_add_options_sub_page(
 			array(
-				'page_title'  => __( 'API Settings', '{{textdomain}}' ),
-				'menu_title'  => __( 'API', '{{textdomain}}' ),
+				'page_title'  => __( 'API Settings', 'example-plugin' ),
+				'menu_title'  => __( 'API', 'example-plugin' ),
 				'parent_slug' => self::OPTIONS_PAGE,
 				'menu_slug'   => self::OPTIONS_PAGE . '-api',
 				'capability'  => 'manage_options',
@@ -131,98 +133,98 @@ class Options {
 		acf_add_local_field_group(
 			array(
 				'key'             => self::FIELD_GROUP . '_general',
-				'title'           => __( 'General Settings', '{{textdomain}}' ),
+				'title'           => __( 'General Settings', 'example-plugin' ),
 				'fields'          => array(
 					// Tab: Branding.
 					array(
-						'key'   => 'field_{{slug}}_tab_branding',
-						'label' => __( 'Branding', '{{textdomain}}' ),
+						'key'   => 'field_example-plugin_tab_branding',
+						'label' => __( 'Branding', 'example-plugin' ),
 						'type'  => 'tab',
 					),
 					array(
-						'key'           => 'field_{{slug}}_logo',
-						'label'         => __( 'Logo', '{{textdomain}}' ),
-						'name'          => '{{slug}}_logo',
+						'key'           => 'field_example-plugin_logo',
+						'label'         => __( 'Logo', 'example-plugin' ),
+						'name'          => 'example-plugin_logo',
 						'type'          => 'image',
 						'return_format' => 'array',
 						'preview_size'  => 'medium',
 						'library'       => 'all',
-						'instructions'  => __( 'Upload your site logo.', '{{textdomain}}' ),
+						'instructions'  => __( 'Upload your site logo.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_company_name',
-						'label'        => __( 'Company Name', '{{textdomain}}' ),
-						'name'         => '{{slug}}_company_name',
+						'key'          => 'field_example-plugin_company_name',
+						'label'        => __( 'Company Name', 'example-plugin' ),
+						'name'         => 'example-plugin_company_name',
 						'type'         => 'text',
-						'instructions' => __( 'Enter your company or organisation name.', '{{textdomain}}' ),
+						'instructions' => __( 'Enter your company or organisation name.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_tagline',
-						'label'        => __( 'Tagline', '{{textdomain}}' ),
-						'name'         => '{{slug}}_tagline',
+						'key'          => 'field_example-plugin_tagline',
+						'label'        => __( 'Tagline', 'example-plugin' ),
+						'name'         => 'example-plugin_tagline',
 						'type'         => 'text',
-						'instructions' => __( 'Enter a short tagline or slogan.', '{{textdomain}}' ),
+						'instructions' => __( 'Enter a short tagline or slogan.', 'example-plugin' ),
 					),
 					// Tab: Contact.
 					array(
-						'key'   => 'field_{{slug}}_tab_contact',
-						'label' => __( 'Contact', '{{textdomain}}' ),
+						'key'   => 'field_example-plugin_tab_contact',
+						'label' => __( 'Contact', 'example-plugin' ),
 						'type'  => 'tab',
 					),
 					array(
-						'key'          => 'field_{{slug}}_email',
-						'label'        => __( 'Email Address', '{{textdomain}}' ),
-						'name'         => '{{slug}}_email',
+						'key'          => 'field_example-plugin_email',
+						'label'        => __( 'Email Address', 'example-plugin' ),
+						'name'         => 'example-plugin_email',
 						'type'         => 'email',
-						'instructions' => __( 'Primary contact email address.', '{{textdomain}}' ),
+						'instructions' => __( 'Primary contact email address.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_phone',
-						'label'        => __( 'Phone Number', '{{textdomain}}' ),
-						'name'         => '{{slug}}_phone',
+						'key'          => 'field_example-plugin_phone',
+						'label'        => __( 'Phone Number', 'example-plugin' ),
+						'name'         => 'example-plugin_phone',
 						'type'         => 'text',
-						'instructions' => __( 'Primary contact phone number.', '{{textdomain}}' ),
+						'instructions' => __( 'Primary contact phone number.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_address',
-						'label'        => __( 'Address', '{{textdomain}}' ),
-						'name'         => '{{slug}}_address',
+						'key'          => 'field_example-plugin_address',
+						'label'        => __( 'Address', 'example-plugin' ),
+						'name'         => 'example-plugin_address',
 						'type'         => 'textarea',
 						'rows'         => 3,
-						'instructions' => __( 'Physical address or mailing address.', '{{textdomain}}' ),
+						'instructions' => __( 'Physical address or mailing address.', 'example-plugin' ),
 					),
 					// Tab: Social Media.
 					array(
-						'key'   => 'field_{{slug}}_tab_social',
-						'label' => __( 'Social Media', '{{textdomain}}' ),
+						'key'   => 'field_example-plugin_tab_social',
+						'label' => __( 'Social Media', 'example-plugin' ),
 						'type'  => 'tab',
 					),
 					array(
-						'key'          => 'field_{{slug}}_social_links',
-						'label'        => __( 'Social Links', '{{textdomain}}' ),
-						'name'         => '{{slug}}_social_links',
+						'key'          => 'field_example-plugin_social_links',
+						'label'        => __( 'Social Links', 'example-plugin' ),
+						'name'         => 'example-plugin_social_links',
 						'type'         => 'repeater',
 						'layout'       => 'table',
-						'button_label' => __( 'Add Social Link', '{{textdomain}}' ),
+						'button_label' => __( 'Add Social Link', 'example-plugin' ),
 						'sub_fields'   => array(
 							array(
-								'key'     => 'field_{{slug}}_social_platform',
-								'label'   => __( 'Platform', '{{textdomain}}' ),
+								'key'     => 'field_example-plugin_social_platform',
+								'label'   => __( 'Platform', 'example-plugin' ),
 								'name'    => 'platform',
 								'type'    => 'select',
 								'choices' => array(
-									'facebook'  => __( 'Facebook', '{{textdomain}}' ),
-									'twitter'   => __( 'Twitter/X', '{{textdomain}}' ),
-									'instagram' => __( 'Instagram', '{{textdomain}}' ),
-									'linkedin'  => __( 'LinkedIn', '{{textdomain}}' ),
-									'youtube'   => __( 'YouTube', '{{textdomain}}' ),
-									'tiktok'    => __( 'TikTok', '{{textdomain}}' ),
-									'other'     => __( 'Other', '{{textdomain}}' ),
+									'facebook'  => __( 'Facebook', 'example-plugin' ),
+									'twitter'   => __( 'Twitter/X', 'example-plugin' ),
+									'instagram' => __( 'Instagram', 'example-plugin' ),
+									'linkedin'  => __( 'LinkedIn', 'example-plugin' ),
+									'youtube'   => __( 'YouTube', 'example-plugin' ),
+									'tiktok'    => __( 'TikTok', 'example-plugin' ),
+									'other'     => __( 'Other', 'example-plugin' ),
 								),
 							),
 							array(
-								'key'   => 'field_{{slug}}_social_url',
-								'label' => __( 'URL', '{{textdomain}}' ),
+								'key'   => 'field_example-plugin_social_url',
+								'label' => __( 'URL', 'example-plugin' ),
 								'name'  => 'url',
 								'type'  => 'url',
 							),
@@ -249,53 +251,53 @@ class Options {
 		acf_add_local_field_group(
 			array(
 				'key'      => self::FIELD_GROUP . '_display',
-				'title'    => __( 'Display Settings', '{{textdomain}}' ),
+				'title'    => __( 'Display Settings', 'example-plugin' ),
 				'fields'   => array(
 					array(
-						'key'          => 'field_{{slug}}_items_per_page',
-						'label'        => __( 'Items Per Page', '{{textdomain}}' ),
-						'name'         => '{{slug}}_items_per_page',
+						'key'          => 'field_example-plugin_items_per_page',
+						'label'        => __( 'Items Per Page', 'example-plugin' ),
+						'name'         => 'example-plugin_items_per_page',
 						'type'         => 'number',
 						'default'      => 12,
 						'min'          => 1,
 						'max'          => 100,
-						'instructions' => __( 'Number of items to display per page in archive views.', '{{textdomain}}' ),
+						'instructions' => __( 'Number of items to display per page in archive views.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_layout',
-						'label'        => __( 'Archive Layout', '{{textdomain}}' ),
-						'name'         => '{{slug}}_layout',
+						'key'          => 'field_example-plugin_layout',
+						'label'        => __( 'Archive Layout', 'example-plugin' ),
+						'name'         => 'example-plugin_layout',
 						'type'         => 'button_group',
 						'choices'      => array(
-							'grid' => __( 'Grid', '{{textdomain}}' ),
-							'list' => __( 'List', '{{textdomain}}' ),
-							'masonry' => __( 'Masonry', '{{textdomain}}' ),
+							'grid'    => __( 'Grid', 'example-plugin' ),
+							'list'    => __( 'List', 'example-plugin' ),
+							'masonry' => __( 'Masonry', 'example-plugin' ),
 						),
 						'default'      => 'grid',
-						'instructions' => __( 'Choose the default layout for archive pages.', '{{textdomain}}' ),
+						'instructions' => __( 'Choose the default layout for archive pages.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_show_sidebar',
-						'label'        => __( 'Show Sidebar', '{{textdomain}}' ),
-						'name'         => '{{slug}}_show_sidebar',
+						'key'          => 'field_example-plugin_show_sidebar',
+						'label'        => __( 'Show Sidebar', 'example-plugin' ),
+						'name'         => 'example-plugin_show_sidebar',
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'default'      => 1,
-						'instructions' => __( 'Display sidebar on archive and single views.', '{{textdomain}}' ),
+						'instructions' => __( 'Display sidebar on archive and single views.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_featured_image_size',
-						'label'        => __( 'Featured Image Size', '{{textdomain}}' ),
-						'name'         => '{{slug}}_featured_image_size',
+						'key'          => 'field_example-plugin_featured_image_size',
+						'label'        => __( 'Featured Image Size', 'example-plugin' ),
+						'name'         => 'example-plugin_featured_image_size',
 						'type'         => 'select',
 						'choices'      => array(
-							'thumbnail' => __( 'Thumbnail (150x150)', '{{textdomain}}' ),
-							'medium'    => __( 'Medium (300x300)', '{{textdomain}}' ),
-							'large'     => __( 'Large (1024x1024)', '{{textdomain}}' ),
-							'full'      => __( 'Full Size', '{{textdomain}}' ),
+							'thumbnail' => __( 'Thumbnail (150x150)', 'example-plugin' ),
+							'medium'    => __( 'Medium (300x300)', 'example-plugin' ),
+							'large'     => __( 'Large (1024x1024)', 'example-plugin' ),
+							'full'      => __( 'Full Size', 'example-plugin' ),
 						),
 						'default'      => 'medium',
-						'instructions' => __( 'Image size for featured images in listings.', '{{textdomain}}' ),
+						'instructions' => __( 'Image size for featured images in listings.', 'example-plugin' ),
 					),
 				),
 				'location' => array(
@@ -314,47 +316,47 @@ class Options {
 		acf_add_local_field_group(
 			array(
 				'key'      => self::FIELD_GROUP . '_api',
-				'title'    => __( 'API Settings', '{{textdomain}}' ),
+				'title'    => __( 'API Settings', 'example-plugin' ),
 				'fields'   => array(
 					array(
-						'key'          => 'field_{{slug}}_api_key',
-						'label'        => __( 'API Key', '{{textdomain}}' ),
-						'name'         => '{{slug}}_api_key',
+						'key'          => 'field_example-plugin_api_key',
+						'label'        => __( 'API Key', 'example-plugin' ),
+						'name'         => 'example-plugin_api_key',
 						'type'         => 'text',
-						'instructions' => __( 'Enter your API key for external integrations.', '{{textdomain}}' ),
+						'instructions' => __( 'Enter your API key for external integrations.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_api_secret',
-						'label'        => __( 'API Secret', '{{textdomain}}' ),
-						'name'         => '{{slug}}_api_secret',
+						'key'          => 'field_example-plugin_api_secret',
+						'label'        => __( 'API Secret', 'example-plugin' ),
+						'name'         => 'example-plugin_api_secret',
 						'type'         => 'password',
-						'instructions' => __( 'Enter your API secret (stored securely).', '{{textdomain}}' ),
+						'instructions' => __( 'Enter your API secret (stored securely).', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_api_endpoint',
-						'label'        => __( 'API Endpoint', '{{textdomain}}' ),
-						'name'         => '{{slug}}_api_endpoint',
+						'key'          => 'field_example-plugin_api_endpoint',
+						'label'        => __( 'API Endpoint', 'example-plugin' ),
+						'name'         => 'example-plugin_api_endpoint',
 						'type'         => 'url',
-						'instructions' => __( 'Custom API endpoint URL.', '{{textdomain}}' ),
+						'instructions' => __( 'Custom API endpoint URL.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_enable_api',
-						'label'        => __( 'Enable API', '{{textdomain}}' ),
-						'name'         => '{{slug}}_enable_api',
+						'key'          => 'field_example-plugin_enable_api',
+						'label'        => __( 'Enable API', 'example-plugin' ),
+						'name'         => 'example-plugin_enable_api',
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'default'      => 0,
-						'instructions' => __( 'Enable external API integration.', '{{textdomain}}' ),
+						'instructions' => __( 'Enable external API integration.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_api_cache_duration',
-						'label'        => __( 'Cache Duration', '{{textdomain}}' ),
-						'name'         => '{{slug}}_api_cache_duration',
+						'key'          => 'field_example-plugin_api_cache_duration',
+						'label'        => __( 'Cache Duration', 'example-plugin' ),
+						'name'         => 'example-plugin_api_cache_duration',
 						'type'         => 'number',
 						'default'      => 3600,
 						'min'          => 0,
-						'append'       => __( 'seconds', '{{textdomain}}' ),
-						'instructions' => __( 'How long to cache API responses (0 to disable).', '{{textdomain}}' ),
+						'append'       => __( 'seconds', 'example-plugin' ),
+						'instructions' => __( 'How long to cache API responses (0 to disable).', 'example-plugin' ),
 					),
 				),
 				'location' => array(
@@ -384,7 +386,7 @@ class Options {
 			return $default;
 		}
 
-		$value = get_field( '{{slug}}_' . $field_name, 'option' );
+		$value = get_field( 'example-plugin_' . $field_name, 'option' );
 
 		return $value ? $value : $default;
 	}
@@ -403,6 +405,6 @@ class Options {
 			return false;
 		}
 
-		return update_field( '{{slug}}_' . $field_name, $value, 'option' );
+		return update_field( 'example-plugin_' . $field_name, $value, 'option' );
 	}
 }

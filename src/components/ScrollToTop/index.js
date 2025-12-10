@@ -1,7 +1,7 @@
 /**
  * ScrollToTop Component Export
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './ScrollToTop';

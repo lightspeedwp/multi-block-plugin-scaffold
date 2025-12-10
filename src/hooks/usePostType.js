@@ -3,7 +3,7 @@
  *
  * Custom hook for fetching post type data.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { useSelect } from '@wordpress/data';
@@ -16,22 +16,26 @@ import { useSelect } from '@wordpress/data';
  *
  * @return {Object} Post data and loading state.
  */
-export default function usePostType( postId, postType = '{{slug}}' ) {
+export default function usePostType(postId, postType = 'example-plugin') {
 	return useSelect(
-		( select ) => {
-			if ( ! postId ) {
+		(select) => {
+			if (!postId) {
 				return { post: null, isLoading: false };
 			}
 
-			const post = select( 'core' ).getEntityRecord( 'postType', postType, postId );
-			const isLoading = select( 'core/data' ).isResolving( 'core', 'getEntityRecord', [
+			const post = select('core').getEntityRecord(
 				'postType',
 				postType,
-				postId,
-			] );
+				postId
+			);
+			const isLoading = select('core/data').isResolving(
+				'core',
+				'getEntityRecord',
+				['postType', postType, postId]
+			);
 
 			return { post, isLoading };
 		},
-		[ postId, postType ]
+		[postId, postType]
 	);
 }

@@ -1,20 +1,20 @@
 /**
- * {{name}} Collection Block - Frontend View Script
+ * Example Plugin Collection Block - Frontend View Script
  *
- * @package {{namespace}}
+ * @package
  */
 
-document.addEventListener( 'DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 	const sliders = document.querySelectorAll(
-		'.wp-block-{{namespace}}-{{slug}}-collection.is-layout-slider'
+		'.wp-block-example_plugin-example-plugin-collection.is-layout-slider'
 	);
 
-	sliders.forEach( ( slider ) => {
+	sliders.forEach((slider) => {
 		const itemsContainer = slider.querySelector(
-			'.wp-block-{{namespace}}-{{slug}}-collection__items'
+			'.wp-block-example_plugin-example-plugin-collection__items'
 		);
 
-		if ( ! itemsContainer ) {
+		if (!itemsContainer) {
 			return;
 		}
 
@@ -22,27 +22,29 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		itemsContainer.style.scrollBehavior = 'smooth';
 
 		// Optional: Add navigation buttons dynamically.
-		const prevBtn = document.createElement( 'button' );
-		prevBtn.className = 'wp-block-{{namespace}}-{{slug}}-collection__nav-prev';
+		const prevBtn = document.createElement('button');
+		prevBtn.className =
+			'wp-block-example_plugin-example-plugin-collection__nav-prev';
 		prevBtn.innerHTML = '&lsaquo;';
-		prevBtn.setAttribute( 'aria-label', 'Previous' );
+		prevBtn.setAttribute('aria-label', 'Previous');
 
-		const nextBtn = document.createElement( 'button' );
-		nextBtn.className = 'wp-block-{{namespace}}-{{slug}}-collection__nav-next';
+		const nextBtn = document.createElement('button');
+		nextBtn.className =
+			'wp-block-example_plugin-example-plugin-collection__nav-next';
 		nextBtn.innerHTML = '&rsaquo;';
-		nextBtn.setAttribute( 'aria-label', 'Next' );
+		nextBtn.setAttribute('aria-label', 'Next');
 
-		prevBtn.addEventListener( 'click', () => {
+		prevBtn.addEventListener('click', () => {
 			const scrollAmount = itemsContainer.offsetWidth * 0.8;
 			itemsContainer.scrollLeft -= scrollAmount;
-		} );
+		});
 
-		nextBtn.addEventListener( 'click', () => {
+		nextBtn.addEventListener('click', () => {
 			const scrollAmount = itemsContainer.offsetWidth * 0.8;
 			itemsContainer.scrollLeft += scrollAmount;
-		} );
+		});
 
-		slider.appendChild( prevBtn );
-		slider.appendChild( nextBtn );
-	} );
-} );
+		slider.appendChild(prevBtn);
+		slider.appendChild(nextBtn);
+	});
+});

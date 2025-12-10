@@ -2,7 +2,7 @@
 /**
  * Uninstall Tests.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
@@ -25,7 +25,7 @@ class Test_Uninstall extends WP_UnitTestCase {
 		// Create test post.
 		$post_id = $this->factory->post->create(
 			array(
-				'post_type' => '{{slug}}',
+				'post_type' => 'example-plugin',
 			)
 		);
 
@@ -44,16 +44,16 @@ class Test_Uninstall extends WP_UnitTestCase {
 	 */
 	public function test_can_delete_terms() {
 		// Create test term.
-		$term = wp_insert_term( 'Uninstall Test Term', '{{slug}}_category' );
+		$term = wp_insert_term( 'Uninstall Test Term', 'example-plugin_category' );
 
 		$this->assertIsArray( $term );
 		$this->assertArrayHasKey( 'term_id', $term );
 
 		// Delete term.
-		wp_delete_term( $term['term_id'], '{{slug}}_category' );
+		wp_delete_term( $term['term_id'], 'example-plugin_category' );
 
 		// Verify deletion - get_term returns WP_Error or null when term doesn't exist.
-		$deleted_term = get_term( $term['term_id'], '{{slug}}_category' );
+		$deleted_term = get_term( $term['term_id'], 'example-plugin_category' );
 		$this->assertTrue( is_wp_error( $deleted_term ) || null === $deleted_term );
 	}
 
@@ -63,18 +63,18 @@ class Test_Uninstall extends WP_UnitTestCase {
 	public function test_can_delete_post_meta() {
 		$post_id = $this->factory->post->create(
 			array(
-				'post_type' => '{{slug}}',
+				'post_type' => 'example-plugin',
 			)
 		);
 
-		update_post_meta( $post_id, '{{slug}}_test_meta', 'test_value' );
+		update_post_meta( $post_id, 'example-plugin_test_meta', 'test_value' );
 
-		$value = get_post_meta( $post_id, '{{slug}}_test_meta', true );
+		$value = get_post_meta( $post_id, 'example-plugin_test_meta', true );
 		$this->assertEquals( 'test_value', $value );
 
-		delete_post_meta( $post_id, '{{slug}}_test_meta' );
+		delete_post_meta( $post_id, 'example-plugin_test_meta' );
 
-		$deleted_value = get_post_meta( $post_id, '{{slug}}_test_meta', true );
+		$deleted_value = get_post_meta( $post_id, 'example-plugin_test_meta', true );
 		$this->assertEmpty( $deleted_value );
 	}
 }

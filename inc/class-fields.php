@@ -4,9 +4,11 @@ namespace {{namespace|lowerCase}}\classes;
 /**
  * Custom Fields Registration using Secure Custom Fields.
  *
- * @package {{namespace}}
+ * @package example_plugin
  * @see https://wordpress.org/plugins/secure-custom-fields/
  */
+
+namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,7 +24,7 @@ class Fields {
 	 *
 	 * @var string
 	 */
-	const FIELD_GROUP = 'group_{{slug}}_fields';
+	const FIELD_GROUP = 'group_example-plugin_fields';
 
 	/**
 	 * Constructor.
@@ -54,8 +56,8 @@ class Fields {
 					<?php
 					printf(
 						/* translators: %s: Plugin name */
-						esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', '{{textdomain}}' ),
-						'<strong>{{name}}</strong>'
+						esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', 'example-plugin' ),
+						'<strong>Example Plugin</strong>'
 					);
 					?>
 				</p>
@@ -77,42 +79,42 @@ class Fields {
 		acf_add_local_field_group(
 			array(
 				'key'             => self::FIELD_GROUP,
-				'title'           => __( '{{name_singular}} Details', '{{textdomain}}' ),
+				'title'           => __( 'Item Details', 'example-plugin' ),
 				'fields'          => array(
 					array(
-						'key'          => 'field_{{slug}}_subtitle',
-						'label'        => __( 'Subtitle', '{{textdomain}}' ),
-						'name'         => '{{slug}}_subtitle',
+						'key'          => 'field_example-plugin_subtitle',
+						'label'        => __( 'Subtitle', 'example-plugin' ),
+						'name'         => 'example-plugin_subtitle',
 						'type'         => 'text',
-						'instructions' => __( 'Enter a subtitle for this {{name_singular_lower}}.', '{{textdomain}}' ),
+						'instructions' => __( 'Enter a subtitle for this item.', 'example-plugin' ),
 					),
 					array(
-						'key'          => 'field_{{slug}}_featured',
-						'label'        => __( 'Featured', '{{textdomain}}' ),
-						'name'         => '{{slug}}_featured',
+						'key'          => 'field_example-plugin_featured',
+						'label'        => __( 'Featured', 'example-plugin' ),
+						'name'         => 'example-plugin_featured',
 						'type'         => 'true_false',
 						'ui'           => 1,
-						'instructions' => __( 'Mark this {{name_singular_lower}} as featured.', '{{textdomain}}' ),
+						'instructions' => __( 'Mark this item as featured.', 'example-plugin' ),
 					),
 					array(
-						'key'           => 'field_{{slug}}_gallery',
-						'label'         => __( 'Gallery', '{{textdomain}}' ),
-						'name'          => '{{slug}}_gallery',
+						'key'           => 'field_example-plugin_gallery',
+						'label'         => __( 'Gallery', 'example-plugin' ),
+						'name'          => 'example-plugin_gallery',
 						'type'          => 'gallery',
-						'instructions'  => __( 'Add images to the gallery.', '{{textdomain}}' ),
+						'instructions'  => __( 'Add images to the gallery.', 'example-plugin' ),
 						'return_format' => 'array',
 						'preview_size'  => 'medium',
 						'library'       => 'all',
 					),
 					array(
-						'key'           => 'field_{{slug}}_related',
-						'label'         => __( 'Related {{name_plural}}', '{{textdomain}}' ),
-						'name'          => '{{slug}}_related',
+						'key'           => 'field_example-plugin_related',
+						'label'         => __( 'Related Items', 'example-plugin' ),
+						'name'          => 'example-plugin_related',
 						'type'          => 'relationship',
-						'post_type'     => array( {{namespace|pascalCase}}_Post_Types::POST_TYPE ),
+						'post_type'     => array( Post_Types::POST_TYPE ),
 						'filters'       => array( 'search', 'taxonomy' ),
 						'return_format' => 'object',
-						'instructions'  => __( 'Select related {{name_plural_lower}}.', '{{textdomain}}' ),
+						'instructions'  => __( 'Select related items.', 'example-plugin' ),
 					),
 				),
 				'location'        => array(
@@ -120,7 +122,7 @@ class Fields {
 						array(
 							'param'    => 'post_type',
 							'operator' => '==',
-							'value'    => {{namespace|pascalCase}}_Post_Types::POST_TYPE,
+							'value'    => Post_Types::POST_TYPE,
 						),
 					),
 				),

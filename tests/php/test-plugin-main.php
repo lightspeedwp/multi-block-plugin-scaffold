@@ -2,7 +2,7 @@
 /**
  * Main Plugin Tests.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
@@ -21,29 +21,29 @@ class Test_Plugin_Main extends WP_UnitTestCase {
 	 * Test that plugin constants are defined.
 	 */
 	public function test_plugin_constants_defined() {
-		$this->assertTrue( defined( '{{namespace|upper}}_VERSION' ) );
-		$this->assertTrue( defined( '{{namespace|upper}}_PLUGIN_DIR' ) );
-		$this->assertTrue( defined( '{{namespace|upper}}_PLUGIN_URL' ) );
-		$this->assertTrue( defined( '{{namespace|upper}}_PLUGIN_BASENAME' ) );
+		$this->assertTrue( defined( 'EXAMPLE_PLUGIN_VERSION' ) );
+		$this->assertTrue( defined( 'EXAMPLE_PLUGIN_PLUGIN_DIR' ) );
+		$this->assertTrue( defined( 'EXAMPLE_PLUGIN_PLUGIN_URL' ) );
+		$this->assertTrue( defined( 'EXAMPLE_PLUGIN_PLUGIN_BASENAME' ) );
 	}
 
 	/**
 	 * Test that main plugin class exists.
 	 */
 	public function test_main_class_exists() {
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Plugin' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Plugin' ) );
 	}
 
 	/**
 	 * Test that supporting classes exist.
 	 */
 	public function test_supporting_classes_exist() {
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Post_Types' ) );
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Taxonomies' ) );
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Fields' ) );
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Repeater_Fields' ) );
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Block_Templates' ) );
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Block_Bindings' ) );
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Patterns' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Post_Types' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Taxonomies' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Fields' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Repeater_Fields' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Block_Templates' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Block_Bindings' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Patterns' ) );
 	}
 }

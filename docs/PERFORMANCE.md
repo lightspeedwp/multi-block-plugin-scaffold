@@ -197,6 +197,10 @@ Performance reports are uploaded as artifacts:
 3. Identify specific regressions (scripts, styles, metrics)
 4. Optimize or adjust budgets as needed
 
+## Related Documentation
+
+- **[README.md](./README.md)** - Documentation index
+
 ## Resources
 
 - [Lighthouse Documentation](https://developers.google.com/web/tools/lighthouse)

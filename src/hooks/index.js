@@ -1,7 +1,7 @@
 /**
  * Custom Hooks
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default as usePostType } from './usePostType';

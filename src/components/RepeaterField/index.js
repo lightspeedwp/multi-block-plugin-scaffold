@@ -1,7 +1,7 @@
 /**
  * Repeater Field Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './RepeaterField';

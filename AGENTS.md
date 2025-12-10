@@ -2,11 +2,9 @@
 
 ## Agent Directory
 
-- See [Main Agent Index](.github/agents/agent.md) for all agent implementations, specs, and usage.
+- All agent implementations and specs are located in `.github/agents/` directory
 - Each agent must have both a code file (`.js`, `.py`, etc.) and a spec (`.md`) following the template.
-- The main build agent for multi-block plugins is documented in [wp-block-build.agent.md](.github/agents/wp-block-build.agent.md) and implemented in [wp-block-build.agent.js](.github/agents/wp-block-build.agent.js), both referenced by the main agent index and all AI ops files.
-- The build/test/lint workflow is defined in [block-plugin-build-and-e2e.yml](.github/workflows/block-plugin-build-and-e2e.yml).
-- All contributors must follow the org [Coding Standards](.github/instructions/coding-standards.instructions.md).
+- All contributors must follow the org coding standards defined in `.github/instructions/`.
 
 ## Agent Test Status
 
@@ -71,7 +69,7 @@ Start here for all key standards:
 | Resource Name           | Reference | Purpose / Notes |
 | ----------------------- | --------- | --------------- |
 | **Custom Instructions** | [.github/custom-instructions.md](.github/custom-instructions.md) | Central Copilot/org instructions, prompts, and standards |
-| **Main Agent Index**    | [.github/agents/agent.md](.github/agents/agent.md) | Directory of agent specs, stubs, usage, implementation |
+| **Agent Directory**     | `.github/agents/` | Directory of agent specs, stubs, and implementations |
 | **WP Block Build Agent Spec** | [.github/agents/wp-block-build.agent.md](.github/agents/wp-block-build.agent.md) | Detailed build process for multi-block plugin agent |
 | **Development Assistant** | [.github/agents/development-assistant.agent.md](.github/agents/development-assistant.agent.md) | AI development assistant with context-specific modes |
 | **Prompts Index**       | [.github/prompts/prompts.md](.github/prompts/prompts.md) | Master prompt index and authoring conventions |

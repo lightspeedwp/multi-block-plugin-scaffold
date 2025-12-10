@@ -1,14 +1,14 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-card",
-	"title": "{{name}} Card",
-	"category": "{{slug}}",
+	"name": "example_plugin/example-plugin-card",
+	"title": "Example Plugin Card",
+	"category": "example-plugin",
 	"icon": "id-alt",
-	"description": "Display a single {{name_singular_lower}} in a card layout.",
-	"version": "{{version}}",
-	"textdomain": "{{textdomain}}",
-	"keywords": [ "card", "{{slug}}", "post" ],
+	"description": "Display a single item in a card layout.",
+	"version": "1.0.0",
+	"textdomain": "example-plugin",
+	"keywords": [ "card", "example-plugin", "post" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -19,37 +19,65 @@
 			"background": true,
 			"text": true
 		},
+		"dimensions": {
+			"aspectRatio": true
+		},
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fitText": false
+		}
+	},
+	"selectors": {
+		"root": ".example_plugin-example-plugin-card",
+		"color": {
+			"text": ".example_plugin-example-plugin-card__content",
+			"background": ".example_plugin-example-plugin-card"
+		},
+		"typography": {
+			"fontSize": ".example_plugin-example-plugin-card__title"
+		},
+		"dimensions": {
+			"aspectRatio": ".example_plugin-example-plugin-card__image"
 		}
 	},
 	"attributes": {
 		"postId": {
-			"type": "number"
+			"type": "number",
+			"role": "content"
 		},
 		"displayFeaturedImage": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayTitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayExcerpt": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displayMeta": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"displaySubtitle": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		},
 		"linkToPost": {
 			"type": "boolean",
+			"role": "local",
 			"default": true
 		}
 	},

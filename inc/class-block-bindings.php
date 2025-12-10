@@ -4,9 +4,11 @@ namespace {{namespace|lowerCase}}\classes;
 /**
  * Block Bindings Registration.
  *
- * @package {{namespace}}
+ * @package example_plugin
  * @since 6.5.0 Block Bindings API
  */
+
+namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,58 +30,47 @@ class Block_Bindings {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'register_bindings' ) );
+		add_action( 'init', array( $this, 'register_sources' ) );
 	}
 
 	/**
-	 * Register block bindings source.
+	 * Register bindings sources.
 	 *
 	 * @return void
 	 */
-	public function register_bindings() {
+	public function register_sources() {
 		if ( ! function_exists( 'register_block_bindings_source' ) ) {
 			return;
 		}
 
 		register_block_bindings_source(
-			self::SOURCE,
+			'example-plugin/post-meta',
 			array(
-				'label'              => __( '{{name}} Fields', '{{textdomain}}' ),
-				'get_value_callback' => array( $this, 'get_binding_value' ),
-				'uses_context'       => array( 'postId', 'postType' ),
+				'label'              => __( 'Example Plugin Post Meta', 'example-plugin' ),
+				'get_value_callback' => array( $this, 'get_post_meta_value' ),
+				'uses_context'       => array( 'postId' ),
 			)
 		);
 	}
 
 	/**
-	 * Get binding value callback.
+	 * Example binding: fetch a scalar post meta value.
 	 *
-	 * @param array    $source_args    Source arguments.
-	 * @param WP_Block $block_instance Block instance.
-	 * @param string   $attribute_name Attribute name.
-	 *
+	 * @param array $args    Binding arguments (expects 'key').
+	 * @param array $context Binding context (expects 'postId').
 	 * @return string|null
 	 */
-	public function get_binding_value( $source_args, $block_instance, $attribute_name ) {
-		if ( empty( $source_args['key'] ) ) {
+	public function get_post_meta_value( $args, $context ) {
+		if ( empty( $args['key'] ) || empty( $context['postId'] ) ) {
 			return null;
 		}
 
-		$post_id = $block_instance->context['postId'] ?? get_the_ID();
-		$field   = $source_args['key'];
+		$meta = get_post_meta( (int) $context['postId'], $args['key'], true );
 
-		// Get ACF field value if available.
-		if ( function_exists( 'get_field' ) ) {
-			$value = get_field( $field, $post_id );
-
-			if ( is_array( $value ) ) {
-				return wp_json_encode( $value );
-			}
-
-			return $value;
+		if ( is_scalar( $meta ) ) {
+			return (string) $meta;
 		}
 
-		// Fallback to post meta.
-		return get_post_meta( $post_id, $field, true );
+		return null;
 	}
 }

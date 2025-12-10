@@ -1,9 +1,43 @@
 <?php
 /**
- * PHPUnit bootstrap file for {{name}}.
+ * PHPUnit bootstrap file for Example Plugin.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
+
+// Create logs directory.
+$logs_dir = __DIR__ . '/../logs';
+if ( ! is_dir( $logs_dir ) ) {
+	mkdir( $logs_dir, 0755, true );
+}
+
+// Create log file with timestamp.
+$timestamp = gmdate( 'Y-m-d\TH-i-s' );
+$log_file  = $logs_dir . "/test-phpunit-{$timestamp}.log";
+
+/**
+ * Log function for PHPUnit tests
+ *
+ * @param string $level Log level (ERROR, WARN, INFO, DEBUG, TRACE).
+ * @param string $message Log message.
+ */
+function test_log( $level, $message ) {
+	global $log_file;
+	$entry = sprintf(
+		"[%s] [%s] %s\n",
+		gmdate( 'c' ),
+		$level,
+		$message
+	);
+	file_put_contents( $log_file, $entry, FILE_APPEND );
+	echo $entry;
+}
+
+// Log bootstrap start.
+test_log( 'INFO', 'PHPUnit bootstrap starting' );
+test_log( 'INFO', 'PHP version: ' . PHP_VERSION );
+test_log( 'INFO', 'Working directory: ' . getcwd() );
+test_log( 'INFO', "Log file: {$log_file}" );
 
 // Composer autoloader.
 if ( file_exists( dirname( __DIR__ ) . '/vendor/autoload.php' ) ) {
@@ -48,7 +82,7 @@ function _manually_load_plugin() {
 		}
 	}
 
-	require dirname( __DIR__ ) . '/{{slug}}.php';
+	require dirname( __DIR__ ) . '/example-plugin.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

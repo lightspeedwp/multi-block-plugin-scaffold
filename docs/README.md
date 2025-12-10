@@ -16,28 +16,24 @@ Comprehensive documentation for the {{name}} single block plugin scaffold.
 flowchart TB
     subgraph Getting["Getting Started"]
         Generate["GENERATE-PLUGIN.md<br/>Plugin Generation"]
-        Setup["SETUP-SUMMARY.md<br/>Setup Overview"]
-        Validation["TEMPLATE-VALIDATION.md<br/>Template Validation"]
+        Validation["VALIDATION.md<br/>Template Validation"]
     end
 
     subgraph Development["Development"]
         Build["BUILD-PROCESS.md<br/>Build System"]
-        Source["SRC-FOLDER-STRUCTURE.md<br/>Source Files"]
+        Source["FOLDER-STRUCTURE.md<br/>Source Files"]
         I18n["INTERNATIONALIZATION.md<br/>Translations"]
     end
 
     subgraph Tools["Tools & Configuration"]
-        WPScripts["WP-SCRIPTS-*.md<br/>wp-scripts Docs"]
-        ToolConfigs["TOOL-CONFIGS.md<br/>Tool Overview"]
+        ToolConfigs["CONFIGS.md<br/>Tool Overview"]
         Config["config/<br/>Detailed Configs"]
     end
 
-    Generate --> Setup
-    Setup --> Validation
+    Generate --> Validation
     Validation --> Build
     Build --> Source
     Source --> I18n
-    WPScripts --> ToolConfigs
     ToolConfigs --> Config
 ```
 
@@ -47,9 +43,9 @@ New to this scaffold? Start here:
 
 1. 📖 [Plugin Generation Guide](./GENERATE-PLUGIN.md) - How to create a plugin from this scaffold
 2. 🎯 [Setup Summary](./SETUP-SUMMARY.md) - Overview of what's configured
-3. ✅ [Template Validation](./TEMPLATE-VALIDATION.md) - Valid mustache templates
+3. ✅ [Template Validation](./VALIDATION.md) - Valid mustache templates
 4. 🏗️ [Build Process](./BUILD-PROCESS.md) - Understanding the build system
-5. 📚 [API Reference](./API-REFERENCE.md) - Complete API documentation
+5. 📚 [API Reference](./API_REFERENCE.md) - Complete API documentation
 
 ## Documentation Structure
 
@@ -59,14 +55,14 @@ New to this scaffold? Start here:
 |----------|-------------|
 | [GENERATE-PLUGIN.md](./GENERATE-PLUGIN.md) | Complete guide to generating a plugin from this scaffold |
 | [SETUP-SUMMARY.md](./SETUP-SUMMARY.md) | Overview of completed setup tasks and configurations |
-| [TEMPLATE-VALIDATION.md](./TEMPLATE-VALIDATION.md) | Validation report for mustache templates used in the scaffold |
+| [VALIDATION.md](./VALIDATION.md) | Validation report for mustache templates used in the scaffold |
 
 ### Development Guides
 
 | Document | Description |
 |----------|-------------|
 | [BUILD-PROCESS.md](./BUILD-PROCESS.md) | Complete build process documentation with webpack, Babel, and asset compilation |
-| [SRC-FOLDER-STRUCTURE.md](./SRC-FOLDER-STRUCTURE.md) | Source directory structure and block file organization |
+| [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) | Source directory structure and block file organization |
 | [INTERNATIONALIZATION.md](./INTERNATIONALIZATION.md) | Translation and localization guide for blocks |
 
 ### wp-scripts Documentation
@@ -83,7 +79,7 @@ Detailed documentation for `@wordpress/scripts` build system:
 
 | Document | Description |
 |----------|-------------|
-| [TOOL-CONFIGS.md](./TOOL-CONFIGS.md) | Overview of all development tools and their purposes |
+| [CONFIGS.md](./CONFIGS.md) | Overview of all development tools and their purposes |
 | [config/](./config/) | Detailed configuration guides for individual tools |
 
 ### Security & Best Practices
@@ -100,7 +96,7 @@ Detailed documentation for `@wordpress/scripts` build system:
 | Document | Description |
 |----------|-------------|
 | [PERFORMANCE.md](./PERFORMANCE.md) | Performance monitoring with Lighthouse CI and bundle analysis |
-| [API-REFERENCE.md](./API-REFERENCE.md) | Complete API reference for PHP and JavaScript |
+| [API_REFERENCE.md](./API_REFERENCE.md) | Complete API reference for PHP and JavaScript |
 
 ## Configuration Files
 
@@ -382,7 +378,7 @@ This scaffold is licensed under {{license}}. Generated plugins inherit this lice
 
 ## Related Documentation
 
-- [Main README](../README.md) - Repository root documentation
-- [Source Directory](../src/README.md) - Source files documentation
-- [Tests Directory](../tests/README.md) - Testing documentation
-- [Build Scripts](../bin/README.md) - Build script documentation
+- **[inc/README.md](../inc/README.md)** - PHP class files documentation
+- **[src/README.md](../src/README.md)** - Source files documentation
+- **[tests/README.md](../tests/README.md)** - Testing documentation
+- **[bin/README.md](../bin/README.md)** - Build script documentation

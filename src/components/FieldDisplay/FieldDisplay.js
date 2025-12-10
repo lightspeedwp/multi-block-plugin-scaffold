@@ -3,7 +3,7 @@
  *
  * Display ACF/SCF field values in blocks.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
@@ -21,83 +21,93 @@ import { Spinner } from '@wordpress/components';
  *
  * @return {Element} FieldDisplay component.
  */
-export default function FieldDisplay( {
+export default function FieldDisplay({
 	postId,
 	fieldName,
 	fieldType = 'text',
 	className = '',
-} ) {
+}) {
 	const { fieldValue, isLoading } = useSelect(
-		( select ) => {
-			if ( ! postId || ! fieldName ) {
+		(select) => {
+			if (!postId || !fieldName) {
 				return { fieldValue: null, isLoading: false };
 			}
 
-			const post = select( 'core' ).getEntityRecord( 'postType', '{{slug}}', postId );
+			const post = select('core').getEntityRecord(
+				'postType',
+				'example-plugin',
+				postId
+			);
 
 			return {
-				fieldValue: post?.acf?.[ fieldName ] ?? post?.meta?.[ fieldName ] ?? null,
-				isLoading: ! post,
+				fieldValue:
+					post?.acf?.[fieldName] ?? post?.meta?.[fieldName] ?? null,
+				isLoading: !post,
 			};
 		},
-		[ postId, fieldName ]
+		[postId, fieldName]
 	);
 
-	if ( isLoading ) {
+	if (isLoading) {
 		return <Spinner />;
 	}
 
-	if ( fieldValue === null || fieldValue === undefined ) {
+	if (fieldValue === null || fieldValue === undefined) {
 		return null;
 	}
 
 	const renderValue = () => {
-		switch ( fieldType ) {
+		switch (fieldType) {
 			case 'image':
-				if ( typeof fieldValue === 'object' && fieldValue.url ) {
+				if (typeof fieldValue === 'object' && fieldValue.url) {
 					return (
 						<img
-							src={ fieldValue.url }
-							alt={ fieldValue.alt || '' }
-							className={ `${ className }__image` }
+							src={fieldValue.url}
+							alt={fieldValue.alt || ''}
+							className={`${className}__image`}
 						/>
 					);
 				}
 				return null;
 
 			case 'gallery':
-				if ( Array.isArray( fieldValue ) ) {
+				if (Array.isArray(fieldValue)) {
 					return (
-						<div className={ `${ className }__gallery` }>
-							{ fieldValue.map( ( image, index ) => (
+						<div className={`${className}__gallery`}>
+							{fieldValue.map((image, index) => (
 								<img
-									key={ image.id || index }
-									src={ image.url }
-									alt={ image.alt || '' }
+									key={image.id || index}
+									src={image.url}
+									alt={image.alt || ''}
 								/>
-							) ) }
+							))}
 						</div>
 					);
 				}
 				return null;
 
 			case 'link':
-				if ( typeof fieldValue === 'object' && fieldValue.url ) {
+				if (typeof fieldValue === 'object' && fieldValue.url) {
 					return (
-						<a href={ fieldValue.url } target={ fieldValue.target || '_self' }>
-							{ fieldValue.title || fieldValue.url }
+						<a
+							href={fieldValue.url}
+							target={fieldValue.target || '_self'}
+						>
+							{fieldValue.title || fieldValue.url}
 						</a>
 					);
 				}
 				return null;
 
 			case 'boolean':
-				return fieldValue ? __( 'Yes', '{{textdomain}}' ) : __( 'No', '{{textdomain}}' );
+				return fieldValue
+					? __('Yes', 'example-plugin')
+					: __('No', 'example-plugin');
 
 			default:
-				return String( fieldValue );
+				return String(fieldValue);
 		}
 	};
 
-	return <div className={ className }>{ renderValue() }</div>;
+	return <div className={className}>{renderValue()}</div>;
 }
