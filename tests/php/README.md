@@ -1,80 +1,54 @@
 ---
 title: PHP Unit Tests
-description: PHPUnit tests for PHP classes, functions, and WordPress integration
+description: PHPUnit tests for plugin services, SCF integration, and uninstall routines
 category: Testing
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # PHP Unit Tests
 
-PHPUnit-based unit tests for PHP classes, functions, and WordPress integration.
+PHPUnit suite validating PHP services, SCF integration, and uninstall behaviour using the WordPress test framework.
 
-## Overview
+## Suite map
 
-PHP tests validate server-side functionality using the WordPress test suite and PHPUnit framework.
+```mermaid
+flowchart TB
+    Bootstrap[bootstrap.php] --> Tests
+    Tests --> PostTypes[test-post-types.php]
+    Tests --> Taxonomies[test-taxonomies.php]
+    Tests --> Fields[test-fields.php]
+    Tests --> Repeater[test-scf-json-meta.php]
+    Tests --> Options[test-options.php]
+    Tests --> Bindings[test-block-registration.php]
+    Tests --> Patterns[test-plugin-main.php]
+    Tests --> SCFJSON[test-scf-json*.php]
+    Tests --> Uninstall[test-uninstall.php]
 
-## Directory Structure
-
+    classDef node fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20;
+    class Bootstrap,Tests,PostTypes,Taxonomies,Fields,Repeater,Options,Bindings,Patterns,SCFJSON,Uninstall node;
 ```
-php/
-├── README.md                # This file
-├── bootstrap.php            # Test bootstrap
-├── inc/                     # Tests for inc/ classes
-│   ├── test-class-*.php    # Class tests
-│   └── test-*.php          # Function tests
-└── fixtures/                # Test fixtures and data
-```
 
-## Running Tests
+## Current files
+
+- `test-post-types.php`, `test-taxonomies.php` – Registration assertions
+- `test-fields.php`, `test-scf-json-meta.php`, `test-scf-json.php` – Field group/meta handling
+- `test-scf-json-save-load.php`, `test-scf-json-schema-validation.php`, `test-scf-json-fixtures.php` – SCF JSON lifecycle and schema checks
+- `test-options.php` – Options page registration
+- `test-block-registration.php` – Block registration and bindings
+- `test-plugin-main.php` – Core bootstrap
+- `test-uninstall.php` – Uninstall cleanup
+
+## Running tests
 
 ```bash
-# Run all tests
-composer test
-
-# Run specific test
-composer test -- --filter test_my_function
-
-# Coverage report
-composer test -- --coverage-html coverage/php
+composer test             # Full PHPUnit suite
+npm run test:php          # Same via npm script
+npm run test:scf          # SCF-focused subset
+npm run test:scf:verbose  # Verbose SCF tests
 ```
 
-## Test Coverage
+## Guidelines
 
-- ✅ Custom post type registration
-- ✅ Taxonomy registration
-- ✅ SCF JSON validation
-- ✅ Block bindings
-- ✅ Options pages
-- ✅ Helper functions
-
-## Writing Tests
-
-```php
-class Test_My_Class extends WP_UnitTestCase {
-    public function setUp(): void {
-        parent::setUp();
-        // Setup code
-    }
-
-    public function test_my_method() {
-        $instance = new My_Class();
-        $result = $instance->my_method( 'input' );
-
-        $this->assertEquals( 'expected', $result );
-    }
-}
-```
-
-## Best Practices
-
-1. **Extend WP_UnitTestCase** - Use WordPress test case class
-2. **Clean up** - Delete test data in tearDown()
-3. **Use factories** - Create test posts, users efficiently
-4. **Test WordPress hooks** - Verify filters and actions
-5. **Mock external calls** - Don't make real API requests
-
-## References
-
-- [PHPUnit Documentation](https://phpunit.de/)
-- [WordPress Unit Tests](https://make.wordpress.org/core/handbook/testing/automated-testing/phpunit/)
-- [WP_UnitTestCase](https://make.wordpress.org/core/handbook/testing/automated-testing/writing-phpunit-tests/)
+- Extend `WP_UnitTestCase` and clean up created data in `tearDown()`.
+- Use factories for posts/users rather than manual inserts.
+- Keep assertions aligned with `inc/` services; update fixtures when field groups change.

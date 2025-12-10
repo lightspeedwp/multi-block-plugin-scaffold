@@ -1,106 +1,52 @@
 ---
 title: Block Modules
-description: Individual block implementations for the plugin
+description: Individual Gutenberg block implementations for the scaffold
 category: Development
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # Block Modules
 
-Individual block implementations, each in its own directory with editor, save, and style files.
+Self-contained block implementations for the scaffold. Each block ships with metadata, editor UI, save output, and styles.
 
-## Overview
+## Block lifecycle
 
-Each block is a self-contained module with all necessary files for registration, editing, rendering, and styling.
+```mermaid
+flowchart LR
+    BlockJSON[block.json] --> Index[index.js<br/>registerBlockType]
+    Index --> Edit[edit.js]
+    Index --> Save[save.js]
+    Edit --> Styles[editor.scss]
+    Save --> Styles
+    Styles --> Bundle[build/*]
 
-## Block Structure
+    classDef node fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20;
+    class BlockJSON,Index,Edit,Save,Styles,Bundle node;
+```
+
+## Current blocks
+
+- `{{slug}}-card` – Renders a single post card
+- `{{slug}}-collection` – Queryable collection with filters/pagination
+- `{{slug}}-featured` – Highlights featured entries
+- `{{slug}}-slider` – Carousel/slideshow presentation
+
+## File layout
 
 ```
 blocks/
-└── example-block/
-    ├── index.js       # Block registration and configuration
-    ├── edit.js        # Editor component (React)
-    ├── save.js        # Save component (static HTML output)
-    ├── style.scss     # Frontend + editor styles
-    ├── editor.scss    # Editor-only styles
-    └── block.json     # Block metadata
+└── {{slug}}-block-name/
+    ├── block.json      # Metadata
+    ├── index.js        # Registration and settings
+    ├── edit.js         # Editor component
+    ├── save.js         # Frontend markup
+    ├── style.scss      # Frontend + shared styles
+    └── editor.scss     # Editor-only styles
 ```
 
-## File Purposes
+## Guidelines
 
-### `index.js`
-
-Registers the block with WordPress:
-
-```javascript
-import { registerBlockType } from '@wordpress/blocks';
-import edit from './edit';
-import save from './save';
-import metadata from './block.json';
-
-registerBlockType( metadata.name, {
-    edit,
-    save,
-} );
-```
-
-### `edit.js`
-
-React component for the block editor interface:
-
-```javascript
-import { useBlockProps } from '@wordpress/block-editor';
-
-export default function Edit( { attributes, setAttributes } ) {
-    const blockProps = useBlockProps();
-
-    return (
-        <div { ...blockProps }>
-            {/* Editor UI */}
-        </div>
-    );
-}
-```
-
-### `save.js`
-
-Defines the static HTML saved to the database:
-
-```javascript
-import { useBlockProps } from '@wordpress/block-editor';
-
-export default function Save( { attributes } ) {
-    const blockProps = useBlockProps.save();
-
-    return (
-        <div { ...blockProps }>
-            {/* Saved HTML */}
-        </div>
-    );
-}
-```
-
-### `style.scss`
-
-Styles loaded on both frontend and editor.
-
-### `editor.scss`
-
-Styles loaded only in the block editor.
-
-### `block.json`
-
-Block metadata and configuration - the source of truth for block definition.
-
-## Best Practices
-
-1. **Use block.json** - Define all block config in block.json
-2. **Dynamic blocks** - Use `render_callback` for server-side rendering
-3. **Attributes** - Keep attributes minimal and semantic
-4. **InnerBlocks** - Use for nested block support
-5. **Accessibility** - Follow WCAG guidelines
-
-## References
-
-- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
-- [block.json Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/)
+- Keep `block.json` authoritative for titles, category, and supports.
+- Use shared hooks/components where possible; avoid duplicate logic between blocks.
+- Bind dynamic data via `{{namespace}}/fields` where appropriate instead of ad-hoc fetches.
+- Add tests to `tests/js/blocks.test.js` and E2E coverage in `tests/e2e/*.spec.js` when altering block behaviour.

@@ -1,51 +1,48 @@
 ---
 title: SCSS Styles
-description: Global SCSS variables, mixins, and functions
+description: Global and shared SCSS for frontend and editor styling
 category: Development
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # SCSS Styles
 
-Global SCSS files for variables, mixins, functions, and utility styles.
+Global and shared SCSS used by all blocks. Entry points are compiled by `@wordpress/scripts` into frontend and editor bundles.
 
-## Overview
+## Style layers
 
-This directory contains SCSS partials that provide reusable styles, variables, and utilities across all blocks.
+```mermaid
+flowchart TB
+    Global[style.scss<br/>frontend + shared] --> Bundle[build/style.css]
+    Editor[editor.scss<br/>editor-only] --> BundleEditor[build/editor.css]
+    Slider[_slider.scss<br/>shared slider partial] --> Global
+    Slider --> Editor
 
-## File Structure
-
+    classDef node fill:#f3e5f5,stroke:#8e24aa,color:#4a148c;
+    class Global,Editor,Slider,Bundle,BundleEditor node;
 ```
-scss/
-├── _variables.scss    # SCSS variables
-├── _mixins.scss       # Reusable mixins
-├── _functions.scss    # SCSS functions
-└── _utilities.scss    # Utility classes
-```
+
+## Files (current)
+
+- `style.scss` – Frontend and shared styles across blocks
+- `editor.scss` – Block editor-only styles
+- `_slider.scss` – Shared slider helpers imported where needed
 
 ## Usage
 
-Import in block SCSS files:
+Import the partials from block styles as needed:
 
 ```scss
-@import '../../scss/variables';
-@import '../../scss/mixins';
+@import '../../scss/slider';
 
-.my-block {
-    color: $primary-color;
-    @include responsive-spacing;
+.{{slug}}-slider {
+    @include slider-wrapper;
 }
 ```
 
-## Best Practices
+## Guidelines
 
-1. **Variables** - Define all colours, sizes, and breakpoints
-2. **Mixins** - Create reusable style patterns
-3. **Functions** - Calculate values programmatically
-4. **BEM naming** - Use Block Element Modifier methodology
-5. **Mobile-first** - Design for small screens, enhance for large
-
-## References
-
-- [Sass Documentation](https://sass-lang.com/documentation/)
-- [BEM Methodology](https://getbem.com/)
+- Keep variables and mixins within partials to avoid repetition in blocks.
+- Use BEM-inspired class naming and mobile-first breakpoints.
+- Scope editor-only styles to block selectors to avoid bleeding into wp-admin.
+- Update this README when adding new shared partials.

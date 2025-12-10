@@ -1,55 +1,36 @@
 # Plugin Block Templates
 
-This directory contains **plugin-registered block templates** using WordPress 6.7+ `register_block_template()` API.
+Plugin-registered block templates (HTML with block markup) loaded via PHP, not a block theme. Templates here are wired through `inc/class-block-templates.php` using `register_block_template()`.
 
-## Important: Plugin vs Theme Templates
+## Flow
 
-**This is a plugin**, not a block theme. Templates here are registered via PHP, not automatically loaded like theme templates.
+```mermaid
+flowchart LR
+    Templates[templates/*.html] --> PHP[inc/class-block-templates.php]
+    PHP --> Registry[register_block_template]
+    Registry --> WP[WordPress template selection]
+    WP --> Editor[Block Editor]
 
-- **Theme templates**: Automatically discovered from `themes/{theme}/templates/`
-- **Plugin templates**: Must be registered via `register_block_template()` in PHP
-
-## How It Works
-
-Templates in this directory are registered by `inc/class-block-templates.php`:
-
-```php
-register_block_template(
-    'example-plugin//example-archive',
-    array(
-        'title'       => __( 'Example Archive', 'example-plugin' ),
-        'description' => __( 'Archive template registered by plugin', 'example-plugin' ),
-        'post_types'  => array( 'post' ),
-        'content'     => file_get_contents( $template_file ),
-    )
-);
+    classDef node fill:#e3f2fd,stroke:#1565c0,color:#0d47a1;
+    class Templates,PHP,Registry,WP,Editor node;
 ```
 
-## File Format
+## Current files
 
-Templates are HTML files containing block markup:
+- `archive-{{slug}}.html`
+- `single-{{slug}}.html`
+- `example-archive.html`
 
-```html
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-    <!-- wp:heading {"level":1} -->
-    <h1>Archive Title</h1>
-    <!-- /wp:heading -->
+Each file is pure block HTML. Content is read and registered at runtime; file names become the template slug.
 
-    <!-- wp:post-template -->
-        <!-- wp:post-title {"isLink":true} /-->
-    <!-- /wp:post-template -->
-</div>
-<!-- /wp:group -->
-```
+## Creating a new template
 
-## Adding New Templates
+1. Add an `.html` file with block markup in this directory.
+2. Register it in `inc/class-block-templates.php` with a unique slug, title, description, and post type mapping.
+3. Keep all strings translatable with `{{textdomain}}`.
 
-1. Create an `.html` file in this directory with block markup
-2. Register it in `inc/class-block-templates.php` using `register_block_template()`
-3. Specify the template slug, title, and which post types it applies to
+## Tips
 
-## References
-
-- [WordPress 6.7+ Template Registration](https://make.wordpress.org/core/2024/10/01/plugin-template-registration/)
-- [Block Template Format](https://developer.wordpress.org/themes/templates/)
+- Treat templates as opinionated defaults; users can override via the editor.
+- Avoid hard-coded IDs or URLs; prefer dynamic blocks and query loops.
+- Keep accessibility in mind (headings, landmarks, meaningful alt text on media blocks).

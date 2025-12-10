@@ -1,62 +1,31 @@
 ---
 title: Agent Validation Tests
-description: Tests for AI agents, generators, and scaffold validation
+description: Placeholder area for AI agent and generator validation tests
 category: Testing
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # Agent Validation Tests
 
-Tests for validating AI agents, generator scripts, and scaffold integrity.
+Reserved for tests that exercise the generator agents and scaffold integrity. The directory currently contains only this README; add tests as agents mature.
 
-## Overview
+## Intended coverage
 
-This directory contains tests that validate:
+```mermaid
+flowchart TB
+    Generator[Generator inputs] --> Validation[Template & schema validation]
+    Validation --> Outputs[Generated plugin files]
+    Outputs --> Agents[Agent behaviour tests]
+    Agents --> CI[CI gate]
 
-- Generator script functionality
-- Scaffold template integrity
-- Mustache variable processing
-- JSON schema validation
-- Agent specifications
-
-## Test Files
-
-```
-agents/
-├── README.md                          # This file
-├── scaffold-generator.agent.test.js   # Generator tests
-└── template-validation.test.js        # Template validation
+    classDef node fill:#fff3e0,stroke:#ef6c00,color:#e65100;
+    class Generator,Validation,Outputs,Agents,CI node;
 ```
 
-## Running Tests
+## When adding tests
 
-```bash
-npm run test:agents
-```
-
-## Test Coverage
-
-- ✅ Generator input validation
-- ✅ Template variable replacement
-- ✅ File structure generation
-- ✅ JSON schema compliance
-- ✅ Block.json validation
-- ✅ Custom post type schemas
-- ✅ Taxonomy schemas
-- ✅ Field group schemas
-
-## Writing Agent Tests
-
-```javascript
-describe( 'Scaffold Generator', () => {
-    test( 'validates plugin slug', () => {
-        const result = validateSlug( 'valid-slug' );
-        expect( result.valid ).toBe( true );
-    } );
-} );
-```
-
-## References
-
-- [Generator Documentation](../../docs/GENERATOR-SYSTEM.md)
-- [Agent Specifications](../../.github/agents/)
+- Cover generator input validation (slugs, namespaces, required fields).
+- Assert mustache replacement and file renaming behave as expected.
+- Validate JSON schema outputs (SCF field groups, block.json files).
+- Keep tests idempotent so they can run safely in CI.
+- Update this README with new test files and commands once added.

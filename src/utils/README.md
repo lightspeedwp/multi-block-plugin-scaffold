@@ -1,50 +1,45 @@
 ---
 title: Utility Functions
-description: JavaScript utility functions and helpers
+description: Shared helpers for queries and SCF field handling
 category: Development
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # Utility Functions
 
-JavaScript utility functions and helper modules used across blocks.
+Shared utilities that support blocks, hooks, and components. Exported via `src/utils/index.js`.
 
-## Overview
+## Helper map
 
-This directory contains pure JavaScript utility functions for common operations like formatting, validation, and data transformation.
+```mermaid
+flowchart TB
+    Query[query.js<br/>query helpers] --> Hooks[Hooks]
+    Fields[fields.js<br/>SCF/meta helpers] --> Hooks
+    Hooks --> Blocks
+    Hooks --> Components
+
+    classDef node fill:#fff3e0,stroke:#ef6c00,color:#e65100;
+    class Query,Fields,Hooks,Blocks,Components node;
+```
+
+## Current files
+
+- `query.js` – Helpers for WP data queries (ordering, pagination, filtering)
+- `fields.js` – Helpers for safely reading SCF/meta fields
+- `index.js` – Barrel export for all utilities
 
 ## Usage
 
 ```javascript
-import { formatDate, sanitizeInput } from '../../utils';
+import { buildQueryArgs } from '../../utils/query';
+import { getFieldValue } from '../../utils/fields';
 
-const formatted = formatDate( new Date() );
-const clean = sanitizeInput( userInput );
+const args = buildQueryArgs( { perPage: 6 } );
+const subtitle = getFieldValue( fields, 'subtitle' );
 ```
 
-## Utility Guidelines
+## Guidelines
 
-1. **Pure functions** - No side effects
-2. **Single responsibility** - One function, one task
-3. **Type safety** - Document parameters and return types
-4. **Error handling** - Handle edge cases gracefully
-5. **Testing** - Write comprehensive unit tests
-
-## Example Utility
-
-```javascript
-/**
- * Formats a date string.
- *
- * @param {Date} date The date to format.
- * @return {string} Formatted date string.
- */
-export function formatDate( date ) {
-    return new Intl.DateTimeFormat( 'en-GB' ).format( date );
-}
-```
-
-## References
-
-- [JavaScript Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [Lodash](https://lodash.com/) - Utility library reference
+- Keep helpers pure and side-effect free.
+- Prefer small, testable functions; add coverage in `tests/js/` when introducing new helpers.
+- Avoid duplicating logic already available in WordPress data utilities.

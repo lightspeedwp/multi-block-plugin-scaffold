@@ -1,40 +1,32 @@
 ---
 title: Assets
-description: Static assets and media files
-category: Documentation
-type: Index
+description: Documentation and marketing assets (not shipped in plugin ZIP)
 audience: Developers
-date: 2025-12-01
+category: Documentation
+date: 2025-01-20
 ---
 
 # Plugin Assets
 
-This directory contains plugin assets for documentation and marketing purposes.
+Static assets used for documentation, demos, or marketing. These are **not bundled** into the distributed plugin.
 
-## Purpose
+## Flow
 
-- Documentation images
-- Marketing materials
-- Promotional graphics
-- Demo screenshots
+```mermaid
+flowchart LR
+    Assets[assets/*] --> Docs[Documentation & marketing]
+    Assets -.excluded.-> Zip[Plugin ZIP]
 
-## Note
-
-These assets are **not** included in the plugin ZIP distribution.
-
-For WordPress.org banners and icons, use the `.wordpress-org/` directory instead.
-
-## Recommended Assets
-
-- `logo.svg` - Plugin logo (vector)
-- `logo.png` - Plugin logo (raster)
-- `demo.gif` - Animated demo
-- `comparison.png` - Before/after comparison
-
-## Usage
-
-Reference assets in documentation:
-
-```markdown
-![Plugin Demo](assets/demo.gif)
+    classDef node fill:#f3e5f5,stroke:#8e24aa,color:#4a148c;
+    class Assets,Docs,Zip node;
 ```
+
+## Current contents
+
+- Placeholder directory only (no tracked assets yet).
+
+## Recommendations
+
+- Use optimised SVG/PNG for logos and diagrams; prefer web-friendly sizes.
+- Keep animated GIF/MP4 demos short and under version control if small; otherwise reference from external storage.
+- For WordPress.org banners/icons, use `.wordpress-org/` instead.

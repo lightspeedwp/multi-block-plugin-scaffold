@@ -1,121 +1,32 @@
 # Block Style Variations
 
-This directory can contain theme.json-like style fragments for use with `register_block_style()`.
+Optional block style variations registered by the plugin (via `inc/class-block-styles.php`). Useful for surfacing predefined visual treatments without shipping a full theme.
 
-## Overview
+## Flow
 
-WordPress allows plugins to register block style variations using the `register_block_style()` function with a `style_data` parameter. This directory provides a place to store JSON files with style definitions.
+```mermaid
+flowchart LR
+    Styles[styles/*.json (optional)] --> PHP[inc/class-block-styles.php]
+    PHP --> Register[register_block_style]
+    Register --> Editor[Block Editor style picker]
 
-## How It Works
-
-Block style variations are registered in `inc/class-block-styles.php`:
-
-```php
-register_block_style(
-    array( 'core/group', 'core/columns' ),
-    array(
-        'name'       => 'my-plugin-highlight',
-        'label'      => __( 'Highlight Section', 'my-plugin' ),
-        'style_data' => array(
-            'color' => array(
-                'background' => 'var:preset|color|contrast',
-                'text'       => 'var:preset|color|base',
-            ),
-            'spacing' => array(
-                'padding' => array(
-                    'top'    => '2rem',
-                    'bottom' => '2rem',
-                ),
-            ),
-        ),
-    )
-);
+    classDef node fill:#fff3e0,stroke:#ef6c00,color:#e65100;
+    class Styles,PHP,Register,Editor node;
 ```
 
-## Using JSON Files (Optional)
+## Current state
 
-You can optionally store style definitions in JSON files and load them:
+- Placeholder directory only; no JSON style fragments are tracked yet.
+- Registration logic exists in `inc/class-block-styles.php` and can consume inline arrays or JSON loaded from this directory.
 
-### Example: `styles/section-highlight.json`
+## Adding a style variation
 
-```json
-{
-    "version": 2,
-    "styles": {
-        "color": {
-            "background": "var:preset|color|contrast",
-            "text": "var:preset|color|base"
-        },
-        "spacing": {
-            "padding": {
-                "top": "2rem",
-                "bottom": "2rem"
-            }
-        }
-    }
-}
-```
-
-### Loading JSON in PHP
-
-```php
-public function register_block_styles() {
-    if ( ! function_exists( 'register_block_style' ) ) {
-        return;
-    }
-
-    $styles_dir = EXAMPLE_PLUGIN_PLUGIN_DIR . 'styles/';
-    $style_file = $styles_dir . 'section-highlight.json';
-
-    if ( file_exists( $style_file ) ) {
-        $style_json = json_decode( file_get_contents( $style_file ), true );
-
-        if ( isset( $style_json['styles'] ) ) {
-            register_block_style(
-                array( 'core/group', 'core/columns' ),
-                array(
-                    'name'       => 'my-plugin-section-highlight',
-                    'label'      => __( 'Section Highlight', 'my-plugin' ),
-                    'style_data' => $style_json['styles'],
-                )
-            );
-        }
-    }
-}
-```
-
-## Style Data Format
-
-The `style_data` array follows the same structure as `theme.json`:
-
-```php
-array(
-    'color' => array(
-        'background' => 'var:preset|color|primary',
-        'text'       => 'var:preset|color|contrast',
-    ),
-    'typography' => array(
-        'fontSize'   => 'var:preset|font-size|large',
-        'lineHeight' => '1.6',
-    ),
-    'spacing' => array(
-        'padding' => array(
-            'top'    => '1.5rem',
-            'right'  => '1.5rem',
-            'bottom' => '1.5rem',
-            'left'   => '1.5rem',
-        ),
-    ),
-    'border' => array(
-        'radius' => '8px',
-        'width'  => '1px',
-        'color'  => 'var:preset|color|primary',
-    ),
-)
-```
+1. Create a JSON fragment (e.g. `section-highlight.json`) following the `theme.json` style structure.
+2. Load and register it in `inc/class-block-styles.php` using `register_block_style()` with the `style_data` parameter.
+3. Keep namespaced style names (e.g. `{{slug}}-section-highlight`).
+4. Test in the block editor and document the new style here.
 
 ## References
 
 - [Block Style Variations](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-styles/)
 - [Theme.json Styles Reference](https://developer.wordpress.org/themes/global-settings-and-styles/)
-- [WP 6.6+ Style Data Parameter](https://make.wordpress.org/core/2024/06/18/introducing-style-variations-in-wordpress-6-6/)

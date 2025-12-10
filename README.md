@@ -1,27 +1,45 @@
 ---
 title: Project Overview
-description: WordPress multi-block plugin scaffold with comprehensive documentation
+description: WordPress multi-block plugin scaffold with generator, tests, and documentation
 category: Project
 type: Index
 audience: Developers, Users
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # {{name}}
 
 {{description}}
 
-## Key Features
+A production-ready scaffold for a multi-block WordPress plugin. It ships with generation scripts, opinionated defaults, and documentation so you can quickly create, validate, and ship blocks backed by Secure Custom Fields (SCF).
 
-A multi-block WordPress plugin scaffold with support for:
+## What this scaffold includes
 
-- **Multiple Gutenberg blocks** (Card, Collection, Slider, Featured)
-- **Custom Post Types** with block templates
-- **Custom Taxonomies**
-- **Custom Fields** via Secure Custom Fields (SCF) with repeater support
-- **Block Patterns** and Template Parts
-- **Block Bindings** for dynamic content
-- **Shared React components** (Slider, PostSelector, Gallery, etc.)
+- **Multiple blocks** out of the box: Card, Collection, Slider, and Featured layouts
+- **Registered data structures**: custom post type, taxonomies, options page, and SCF field groups (with repeater support)
+- **Presentation assets**: block patterns, templates, template parts (for theme hand-off), and optional block styles
+- **Tooling**: webpack via `@wordpress/scripts`, Jest, PHPUnit, Playwright, linting, Lighthouse/size-limit
+- **Generators**: mustache-driven plugin generator with config and dry-run helpers
+
+## How it works
+
+```mermaid
+flowchart LR
+    Developer[Define plugin metadata<br/>{{slug}}, {{name}}, {{namespace}}] --> Mode{Generation mode}
+    Mode -->|Template mode| InPlace[Process scaffold in-place]
+    Mode -->|Generator mode| OutputDir[Generate to generated-plugins/<slug>]
+    InPlace --> Customise[Replace mustache variables]
+    OutputDir --> Customise
+    Customise --> Build[Install deps & build assets]
+    Build --> Test[Lint + JS/PHP/E2E tests]
+    Test --> Deploy[Copy to wp-content/plugins]
+    Deploy --> WordPress[Activate & iterate]
+
+    classDef step fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20;
+    classDef branch fill:#e3f2fd,stroke:#1e88e5,color:#0d47a1;
+    class Mode branch;
+    class Developer,Build,Test,Deploy,WordPress step;
+```
 
 ## Requirements
 
@@ -30,28 +48,18 @@ A multi-block WordPress plugin scaffold with support for:
 - Node.js 18+
 - [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) plugin
 
-## Using This Scaffold
+## Using this scaffold
 
-This scaffold can be used in two ways:
+### Option 1: Template mode (process in place)
 
-### Option 1: Template Mode (Modify Scaffold Directly)
-
-Use the scaffold as a template repository and process it in-place:
-
-1. **Create from template** on GitHub or clone the repository
-2. **Process the scaffold** with your plugin details:
+1. Create the repo from this template or clone it fresh.
+2. Replace placeholders with your plugin details:
 
    ```bash
    node scripts/generate-plugin.js --in-place
    ```
 
-   This will:
-   - Prompt for confirmation (to prevent accidental overwrites)
-   - Replace all `{{mustache}}` variables in files
-   - Update file and directory names with your slug
-   - Process the scaffold directory directly (no separate output)
-
-3. **Install dependencies and build**:
+3. Install and build:
 
    ```bash
    npm install
@@ -59,185 +67,108 @@ Use the scaffold as a template repository and process it in-place:
    npm run build
    ```
 
-4. **Commit your customized plugin** to your repository
+4. Commit your customised plugin.
 
-**⚠️ Important**: Template mode modifies files in-place. Always use on a fresh clone or when you're certain you want to replace the scaffold content.
+### Option 2: Generator mode (output to a new directory)
 
-### Option 2: Generator Mode (Create New Plugin)
-
-Generate a new plugin in a separate output directory:
-
-1. **Clone or download** this scaffold repository
-2. **Run the generator** to create a new plugin:
+1. Clone/download this scaffold.
+2. Generate a new plugin:
 
    ```bash
    node scripts/generate-plugin.js
-   ```
-
-   Or with a configuration file:
-
-   ```bash
+   # or
    node scripts/generate-plugin.js --config my-plugin-config.json
    ```
 
-3. **Find your generated plugin** in:
-   - `generated-plugins/<your-slug>/` - Complete plugin ready to use
-
-4. **Move to WordPress plugins directory**:
+3. Find the output in `generated-plugins/<your-slug>/` and move it into `wp-content/plugins/`.
+4. Install dependencies and build in the generated plugin directory:
 
    ```bash
-   mv generated-plugins/my-plugin/ /path/to/wordpress/wp-content/plugins/
-   cd /path/to/wordpress/wp-content/plugins/my-plugin/
    npm install
    composer install
    npm run build
    ```
 
-**Benefits**: Keeps the scaffold repository clean and can generate multiple plugins.
+See `docs/GENERATE-PLUGIN.md` for full options and examples.
 
-See [docs/GENERATE-PLUGIN.md](docs/GENERATE-PLUGIN.md) for detailed usage instructions, configuration options, and examples.
-
-## Installation (For Already-Generated Plugins)
-
-If you've already processed the scaffold or received a generated plugin:
-
-1. Ensure you're in your WordPress plugins directory:
-
-   ```bash
-   cd wp-content/plugins/your-plugin-name
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   composer install
-   ```
-
-3. Build the plugin:
-
-   ```bash
-   npm run build
-   ```
-
-4. Activate the plugin in WordPress admin.
-
-## Development
-
-### Start development server
+## Development workflow
 
 ```bash
+# Install deps
+npm install
+composer install
+
+# Start development (watch)
 npm start
-```
 
-### Build for production
-
-```bash
+# Production build
 npm run build
-```
 
-### Linting
-
-```bash
+# Lint
 npm run lint:js
 npm run lint:css
 composer phpcs
-```
 
-### Testing
-
-```bash
-# JavaScript tests
+# Tests
 npm run test:unit
-
-# PHP tests
-composer test
-
-# E2E tests (requires wp-env)
 npm run test:e2e
+composer test
 ```
 
-### Local development with wp-env
-
-```bash
-npx @wordpress/env start
-```
-
-## Structure
+## Repository structure (current)
 
 ```
 {{slug}}/
-├── {{slug}}.php          # Main plugin file
-├── uninstall.php         # Cleanup on uninstall
-├── inc/                  # PHP classes
-│   ├── class-post-types.php
-│   ├── class-taxonomies.php
-│   ├── class-fields.php
-│   ├── class-repeater-fields.php
-│   ├── class-block-bindings.php
-│   ├── class-block-templates.php
-│   └── class-patterns.php
-├── src/                  # Source files
-│   ├── blocks/           # Block source
-│   │   ├── {{slug}}-card/
-│   │   ├── {{slug}}-collection/
-│   │   ├── {{slug}}-slider/
-│   │   └── {{slug}}-featured/
-│   ├── components/       # Shared components
-│   ├── hooks/            # Custom hooks
-│   └── utils/            # Utilities
-├── patterns/             # Block patterns
-├── templates/            # Block templates
-├── parts/                # Template parts
-└── tests/                # Test files
+├── {{slug}}.php                 # Main plugin bootstrap
+├── uninstall.php                # Cleanup routine
+├── inc/                         # PHP services
+│   ├── class-core.php           # Loader and service wiring
+│   ├── class-post-types.php     # CPT registration
+│   ├── class-taxonomies.php     # Taxonomy registration
+│   ├── class-fields.php         # Base SCF field groups
+│   ├── class-repeater-fields.php # Repeater/section field groups
+│   ├── class-options.php        # Options page
+│   ├── class-block-bindings.php # Block bindings sources
+│   ├── class-block-templates.php # Template registration
+│   ├── class-block-styles.php   # Optional block styles
+│   ├── class-patterns.php       # Block patterns
+│   ├── class-scf-json.php       # SCF local JSON integration
+│   └── class-scf-json-validator.php # SCF JSON validation
+├── src/                         # Block/editor source
+│   ├── blocks/{{slug}}-{card,collection,slider,featured}/
+│   ├── components/              # Shared React components
+│   ├── hooks/                   # Custom hooks (data fetching, UI state)
+│   ├── utils/                   # Shared utilities
+│   └── scss/                    # Global/editor styles
+├── patterns/                    # Registered block patterns
+├── templates/                   # Plugin-registered templates
+├── template-parts/              # Theme-facing template parts
+├── styles/                      # Optional block style variations
+├── scf-json/                    # SCF field group exports and schema
+├── languages/                   # Translation templates
+├── scripts/                     # Node.js automation scripts
+├── bin/                         # Shell helpers
+├── tests/                       # JS, PHP, and E2E tests
+└── docs/                        # Documentation index
 ```
 
 ## Blocks
 
-### {{name}} Card
+- **{{name}} Card** – Single post/card layout.
+- **{{name}} Collection** – Queryable list/grid with filtering and pagination.
+- **{{name}} Slider** – Carousel with autoplay, navigation, and touch support.
+- **Featured {{name_plural}}** – Highlighted entries in grid/hero layouts.
 
-Display a single post in a card layout.
+## Custom fields (SCF)
 
-### {{name}} Collection
+- Subtitle (text)
+- Featured (toggle)
+- Gallery (image gallery)
+- Related Posts (relationship)
+- Slides (repeater for slider content)
+- Sections (flexible page sections)
 
-Display a collection of posts with:
-
-- Grid, list, or slider layout
-- Taxonomy filtering
-- Featured posts filter
-- Pagination support
-
-### {{name}} Slider
-
-Display posts or custom slides in a carousel with:
-
-- Autoplay
-- Navigation dots and arrows
-- Touch/swipe support
-- Keyboard navigation
-
-### Featured {{name_plural}}
-
-Highlight featured posts with:
-
-- Grid layout
-- Featured-first layout
-- Hero layout
-
-## Custom Fields (SCF)
-
-The plugin registers the following custom fields:
-
-- **Subtitle** - Text field
-- **Featured** - True/False toggle
-- **Gallery** - Image gallery
-- **Related Posts** - Post relationship
-- **Slides** - Repeater field for slider content
-- **Sections** - Flexible content for page sections
-
-## Block Bindings
-
-Use the `{{namespace}}/fields` binding source to display field values:
+Bindings are exposed via `{{namespace}}/fields` for block metadata:
 
 ```html
 <!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"{{namespace}}/fields","args":{"key":"{{slug}}_subtitle"}}}}} -->
@@ -245,9 +176,7 @@ Use the `{{namespace}}/fields` binding source to display field values:
 <!-- /wp:paragraph -->
 ```
 
-## Mustache Variables
-
-This scaffold uses Mustache-style variables for customization:
+## Mustache variables
 
 | Variable | Description |
 |----------|-------------|
@@ -258,14 +187,11 @@ This scaffold uses Mustache-style variables for customization:
 
 ## Documentation
 
-Comprehensive documentation is available in the **[docs/](docs/)** directory. See **[docs/README.md](docs/README.md)** for complete navigation and documentation index.
-
-### Quick Links
-
-- **[Contributing](CONTRIBUTING.md)** - Contribution guidelines
-- **[Code of Conduct](CODE_OF_CONDUCT.md)** - Community standards
-- **[Support](SUPPORT.md)** - Getting help
-- **[Security](SECURITY.md)** - Security policy
+- `docs/README.md` – Documentation index
+- `docs/GENERATE-PLUGIN.md` – Generator usage
+- `docs/ARCHITECTURE.md` – High-level design and service wiring
+- `docs/BUILD-PROCESS.md` – Build stack
+- `docs/TESTING.md` – Test strategy and commands
 
 ## License
 

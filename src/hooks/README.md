@@ -1,60 +1,58 @@
 ---
 title: Custom React Hooks
-description: Reusable React hooks for state and logic management
+description: Reusable React hooks for data fetching and UI logic
 category: Development
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # Custom React Hooks
 
-Custom React hooks for reusable stateful logic across components.
+Hooks that wrap common data lookups and behaviours for the blocks (queries, taxonomies, SCF fields, sliders, repeaters).
 
-## Overview
+## Data flow
 
-This directory contains custom hooks that encapsulate reusable logic, side effects, and state management.
+```mermaid
+flowchart LR
+    Block[Block edit/save] --> Hooks
+    Hooks --> WPData[@wordpress/data selectors]
+    Hooks --> SCF[SCF/meta fields]
+    WPData --> Hooks
+    SCF --> Hooks
+    Hooks --> UI[Components]
+
+    classDef node fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20;
+    class Hooks,WPData,SCF,UI,Block node;
+```
+
+## Current hooks
+
+Exported via `src/hooks/index.js`:
+
+- `usePostType` – Loads post type records
+- `useTaxonomies` – Fetches taxonomies for the CPT
+- `useFields` – Retrieves SCF/meta fields for a post
+- `useRepeater` – Manages repeater field state
+- `useSlider` – Slider autoplay/navigation helpers
+- `useCollection` – Query + filter logic for collection listings
 
 ## Usage
 
 ```javascript
-import { useCustomHook } from '../../hooks/useCustomHook';
+import { useCollection, useFields } from '../../hooks';
 
-export default function Edit() {
-    const { value, setValue } = useCustomHook();
+export default function Edit( { context } ) {
+    const { items, isLoading } = useCollection( context?.postId );
+    const { fields } = useFields( context?.postId );
 
-    return <div>{value}</div>;
+    if ( isLoading ) return <p>Loading…</p>;
+
+    return <pre>{ JSON.stringify( { items, fields }, null, 2 ) }</pre>;
 }
 ```
 
-## Hook Guidelines
+## Guidelines
 
-1. **Prefix with "use"** - All hooks must start with `use`
-2. **Pure functions** - No side effects outside the hook
-3. **Return values** - Return values or objects, not arrays unless tuple-like
-4. **Dependencies** - Properly declare useEffect dependencies
-5. **Testing** - Test hooks with @testing-library/react-hooks
-
-## Example Hook
-
-```javascript
-import { useState, useEffect } from '@wordpress/element';
-
-/**
- * Custom hook for managing example state.
- *
- * @return {Object} Hook return value.
- */
-export function useExampleHook() {
-    const [ value, setValue ] = useState( '' );
-
-    useEffect( () => {
-        // Effect logic
-    }, [ value ] );
-
-    return { value, setValue };
-}
-```
-
-## References
-
-- [React Hooks Documentation](https://react.dev/reference/react)
-- [@wordpress/element](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-element/)
+- Prefix with `use` and follow hook rules; keep side effects contained.
+- Memoise expensive selectors and declare hook dependencies explicitly.
+- Return objects (not arrays) for clarity when there are multiple values.
+- Add unit coverage in `tests/js/hooks.test.js` when adding new hooks.

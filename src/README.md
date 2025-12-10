@@ -1,143 +1,84 @@
 ---
 title: Source Files
-description: JavaScript, CSS, and SCSS source files for blocks and components
+description: JavaScript and SCSS source for blocks, components, hooks, and utilities
 category: Development
-date: 2025-12-01
+date: 2025-01-20
 ---
 
 # Source Files
 
-This directory contains all source JavaScript, CSS, and SCSS files that are compiled into the plugin's frontend and editor assets.
+Authoring area for all JavaScript and SCSS that powers the blocks and editor UI. Bundling is handled by `@wordpress/scripts` (webpack + Babel + PostCSS) and outputs to `build/`.
 
-## Overview
-
-The `src/` directory organises source code by blocks, components, utilities, and styles. Files are compiled using [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/).
-
-## Directory Structure
-
-```
-src/
-├── README.md              # This file
-├── blocks/                # Block-specific code
-│   └── {block-name}/     # Individual block files
-├── components/            # Shared React components
-├── hooks/                 # Custom React hooks
-├── scss/                  # Global SCSS styles
-└── utils/                 # Utility functions
-```
-
-## Sub-directories
-
-### `blocks/`
-
-Each block has its own directory with editor and frontend files:
-
-```
-blocks/
-└── example-block/
-    ├── index.js          # Block registration
-    ├── edit.js           # Editor component
-    ├── save.js           # Save component
-    ├── style.scss        # Frontend & editor styles
-    └── editor.scss       # Editor-only styles
-```
-
-### `components/`
-
-Shared React components used across multiple blocks:
-
-```javascript
-import { MyComponent } from '../../components/MyComponent';
-```
-
-### `hooks/`
-
-Custom React hooks for reusable logic:
-
-```javascript
-import { useCustomHook } from '../../hooks/useCustomHook';
-```
-
-### `scss/`
-
-Global SCSS files for theme-wide styles:
-
-- `_variables.scss` - SCSS variables
-- `_mixins.scss` - Reusable mixins
-- `_functions.scss` - SCSS functions
-
-### `utils/`
-
-JavaScript utility functions:
-
-```javascript
-import { formatDate } from '../../utils/formatters';
-```
-
-## Build Process
+## Build pipeline
 
 ```mermaid
 flowchart LR
-    subgraph Source["Source Files"]
-        Blocks[blocks/**/*.js]
-        Comp[components/**/*.js]
-        SCSS[scss/**/*.scss]
-        Utils[utils/**/*.js]
-    end
-
-    subgraph Build["Build Pipeline"]
-        Webpack[Webpack]
-        Babel[Babel]
-        PostCSS[PostCSS]
-        Terser[Terser]
-    end
-
-    subgraph Output["Build Output"]
-        JS[build/**/*.js]
-        CSS[build/**/*.css]
-        Assets[build/**/*.asset.php]
-    end
-
-    Blocks --> Webpack
-    Comp --> Webpack
-    SCSS --> Webpack
-    Utils --> Webpack
+    Blocks[blocks/**/*.js] --> Webpack
+    Components[components/**/*.js] --> Webpack
+    Hooks[hooks/**/*.js] --> Webpack
+    Utils[utils/**/*.js] --> Webpack
+    Styles[scss/style.scss\nscss/editor.scss] --> Webpack
 
     Webpack --> Babel
     Webpack --> PostCSS
-    Webpack --> Terser
+    Webpack --> Assets[*.asset.php]
 
-    Babel --> JS
-    PostCSS --> CSS
-    Terser --> JS
-    Webpack --> Assets
+    Babel --> JS[build/*.js]
+    PostCSS --> CSS[build/*.css]
 
-    style Source fill:#e3f2fd
-    style Build fill:#fff3e0
-    style Output fill:#e8f5e9
+    classDef node fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20;
+    class Blocks,Components,Hooks,Utils,Styles node;
 ```
 
-Source files are compiled using webpack via @wordpress/scripts:
+## Structure (current)
+
+```
+src/
+├── blocks/                 # Individual block implementations
+│   ├── {{slug}}-card/
+│   ├── {{slug}}-collection/
+│   ├── {{slug}}-featured/
+│   └── {{slug}}-slider/
+├── components/             # Shared React components (exported via index.js)
+├── hooks/                  # Custom hooks for data fetching and UI state
+├── scss/                   # Global/editor styles (style.scss, editor.scss, _slider.scss)
+└── utils/                  # Shared utilities (fields.js, query.js)
+```
+
+### Blocks
+
+Each block folder contains `block.json`, `index.js`, `edit.js`, `save.js`, and SCSS files scoped to the block. Registration happens in `index.js` and uses the metadata from `block.json`.
+
+### Components
+
+Shared UI primitives and controls (e.g. `Slider`, `PostSelector`, `Gallery`, `TaxonomyFilter`, `FieldDisplay`, `RepeaterField`, `QueryControls`, `ScrollToTop`, `ScrollDownArrow`). Imported via `src/components/index.js`.
+
+### Hooks
+
+Data and behaviour hooks exported via `src/hooks/index.js`, including `usePostType`, `useTaxonomies`, `useFields`, `useRepeater`, `useSlider`, and `useCollection`.
+
+### SCSS
+
+- `style.scss` – Frontend + shared styles
+- `editor.scss` – Editor-only styles
+- `_slider.scss` – Slider-specific shared styles for reuse
+
+### Utilities
+
+`fields.js` and `query.js` provide helpers for SCF field access and WordPress data queries. Exported through `src/utils/index.js`.
+
+## Commands
 
 ```bash
-# Development (watch mode)
-npm run start
-
-# Production build
-npm run build
+npm start          # Watch mode for JS/CSS
+npm run build      # Production build
+npm run lint:js    # JS linting
+npm run lint:css   # CSS linting
 ```
 
-**Output:** Compiled files go to `build/` directory
+## Guidelines
 
-## Best Practices
-
-1. **Modular code** - Keep files small and focused
-2. **Component reuse** - Extract shared components
-3. **Proper imports** - Use ES6 modules
-4. **Type safety** - Add JSDoc comments or TypeScript
-5. **Code splitting** - Lazy load heavy components
-
-## References
-
-- [@wordpress/scripts Documentation](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
-- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
+- Keep blocks, components, and hooks self-contained and reusable.
+- Prefer composition over inheritance; lift shared behaviour into hooks or utilities.
+- Keep SCSS mobile-first and use shared partials rather than duplicating styles.
+- Add unit tests for new utilities/components where practical.
