@@ -30,19 +30,86 @@ A multi-block WordPress plugin scaffold with support for:
 - Node.js 18+
 - [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) plugin
 
-## Installation
+## Using This Scaffold
 
-1. Clone this repository to your WordPress plugins directory:
+This scaffold can be used in two ways:
+
+### Option 1: Template Mode (Modify Scaffold Directly)
+
+Use the scaffold as a template repository and process it in-place:
+
+1. **Create from template** on GitHub or clone the repository
+2. **Process the scaffold** with your plugin details:
 
    ```bash
-   cd wp-content/plugins/
-   git clone https://github.com/{{author}}/{{slug}}.git
+   node scripts/generate-plugin.js --in-place
+   ```
+
+   This will:
+   - Prompt for confirmation (to prevent accidental overwrites)
+   - Replace all `{{mustache}}` variables in files
+   - Update file and directory names with your slug
+   - Process the scaffold directory directly (no separate output)
+
+3. **Install dependencies and build**:
+
+   ```bash
+   npm install
+   composer install
+   npm run build
+   ```
+
+4. **Commit your customized plugin** to your repository
+
+**⚠️ Important**: Template mode modifies files in-place. Always use on a fresh clone or when you're certain you want to replace the scaffold content.
+
+### Option 2: Generator Mode (Create New Plugin)
+
+Generate a new plugin in a separate output directory:
+
+1. **Clone or download** this scaffold repository
+2. **Run the generator** to create a new plugin:
+
+   ```bash
+   node scripts/generate-plugin.js
+   ```
+
+   Or with a configuration file:
+
+   ```bash
+   node scripts/generate-plugin.js --config my-plugin-config.json
+   ```
+
+3. **Find your generated plugin** in:
+   - `generated-plugins/<your-slug>/` - Complete plugin ready to use
+
+4. **Move to WordPress plugins directory**:
+
+   ```bash
+   mv generated-plugins/my-plugin/ /path/to/wordpress/wp-content/plugins/
+   cd /path/to/wordpress/wp-content/plugins/my-plugin/
+   npm install
+   composer install
+   npm run build
+   ```
+
+**Benefits**: Keeps the scaffold repository clean and can generate multiple plugins.
+
+See [docs/GENERATE-PLUGIN.md](docs/GENERATE-PLUGIN.md) for detailed usage instructions, configuration options, and examples.
+
+## Installation (For Already-Generated Plugins)
+
+If you've already processed the scaffold or received a generated plugin:
+
+1. Ensure you're in your WordPress plugins directory:
+
+   ```bash
+   cd wp-content/plugins/your-plugin-name
    ```
 
 2. Install dependencies:
 
    ```bash
-   cd {{slug}}
    npm install
    composer install
    ```

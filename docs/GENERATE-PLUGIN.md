@@ -162,9 +162,147 @@ JSON configuration files (`package.json`, `composer.json`, `block.json`) use pla
 }
 ```
 
+## Operational Modes
+
+### Template Mode vs Generator Mode
+
+The scaffold supports two operational modes:
+
+#### Template Mode (`--in-place`)
+
+**Use when**: You want to use the scaffold as a starting point for your plugin.
+
+- Processes files directly in the scaffold directory
+- Replaces all mustache variables in-place
+- Renames files and directories to match your slug
+- **⚠️ Destructive**: Modifies the scaffold permanently
+- Includes confirmation prompt to prevent accidents
+- Best for GitHub template repositories
+
+**Command:**
+
+```bash
+node scripts/generate-plugin.js --in-place
+```
+
+**Workflow:**
+
+1. Clone/fork the scaffold repository
+2. Run generator with `--in-place` flag
+3. Confirm the operation (y/N prompt)
+4. Scaffold is processed in-place
+5. Install dependencies and build
+6. Commit your customized plugin
+
+#### Generator Mode (Default)
+
+**Use when**: You want to create multiple plugins or keep the scaffold clean.
+
+- Creates new plugin in `generated-plugins/<slug>/`
+- Leaves scaffold directory unchanged
+- Can generate multiple plugins
+- Safe for repeated use
+- Best for maintaining the scaffold as a tool
+
+**Command:**
+
+```bash
+node scripts/generate-plugin.js
+```
+
+**Workflow:**
+
+1. Clone the scaffold repository once
+2. Run generator (no `--in-place` flag)
+3. Generated plugin appears in `generated-plugins/<slug>/`
+4. Move to WordPress plugins directory
+5. Install dependencies and build
+6. Generate another plugin anytime
+
 ## Generation Methods
 
-### Method 1: AI-Assisted Generation (Recommended)
+### Method 1: Template Mode (In-Place Processing)
+
+Use the scaffold as a GitHub template and process it directly:
+
+```bash
+# Interactive mode with confirmation
+node scripts/generate-plugin.js --in-place
+
+# With configuration file
+node scripts/generate-plugin.js --in-place --config plugin-config.json
+
+# Skip confirmation (automation only - use with caution)
+node scripts/generate-plugin.js --in-place --yes
+```
+
+**Process:**
+
+1. Prompts for plugin configuration (or reads from config file)
+2. **Displays confirmation warning** about in-place modification
+3. Waits for user confirmation (y/N)
+4. Processes all files in the scaffold directory
+5. Replaces mustache variables throughout
+6. Renames files/directories to match your slug
+7. Reports completion with next steps
+
+**⚠️ Important Notes:**
+
+- Always use on a fresh clone or template repository
+- Cannot be undone without version control
+- Confirmation prompt defaults to "No" for safety
+- Use `--yes` flag only in automated workflows you trust
+
+### Method 2: Generator Mode (Default)
+
+Create a new plugin in a separate output directory:
+
+```bash
+# Interactive mode - prompts for all configuration
+node scripts/generate-plugin.js
+
+# With configuration file
+node scripts/generate-plugin.js --config plugin-config.json
+
+# With inline arguments
+node scripts/generate-plugin.js \
+  --slug tour-operator \
+  --name "Tour Operator" \
+  --description "Tour booking and display plugin" \
+  --author "LightSpeed" \
+  --author-uri "https://developer.lsdev.biz"
+```
+
+**Process:**
+
+1. Reads configuration from prompts, file, or arguments
+2. Validates configuration against schema
+3. Creates `generated-plugins/<slug>/` directory
+4. Copies and processes all scaffold files
+5. Replaces mustache variables
+6. Renames files/directories
+7. Leaves scaffold directory unchanged
+
+**Output Location:**
+
+```bash
+generated-plugins/
+└── tour-operator/        # Your generated plugin
+    ├── tour-operator.php
+    ├── package.json
+    ├── composer.json
+    └── ... (complete plugin structure)
+```
+
+**Best for:**
+
+- Creating multiple plugins from the same scaffold
+- Keeping scaffold repository clean
+- Testing different configurations
+- CI/CD pipelines
+- Advanced users comfortable with CLI tools
+
+### Method 3: AI-Assisted Generation (Recommended)
 
 Use the workspace prompt for an interactive, guided experience:
 
@@ -179,7 +317,7 @@ Use the workspace prompt for an interactive, guided experience:
 3. Collects all required information interactively
 4. Validates input at each stage
 5. Confirms configuration before generation
-6. Generates the complete plugin structure
+6. Generates the complete plugin structure (uses generator mode by default)
 7. Provides post-generation setup instructions
 
 **Benefits:**
@@ -189,6 +327,7 @@ Use the workspace prompt for an interactive, guided experience:
 - Validation at each step
 - Smart defaults for common configurations
 - Best for first-time users
+- Can use either template or generator mode
 
 **Stages:**
 
@@ -200,7 +339,21 @@ Use the workspace prompt for an interactive, guided experience:
 6. **Templates & Patterns** - Template and pattern selection
 7. **Version & Compatibility** - WordPress/PHP requirements
 
-### Method 2: Agent-Based Generation
+### Method 4: Agent-Based Generation
+
+Request the scaffold generator agent directly:
+
+```text
+Generate a new multi-block plugin from scaffold
+```
+
+Or be more specific:
+
+```text
+Create a tour operator plugin with tours CPT, destination taxonomy, and booking fields
+```
+
+### Method 4: Agent-Based Generation
 
 Request the scaffold generator agent directly:
 
@@ -219,55 +372,9 @@ Create a tour operator plugin with tours CPT, destination taxonomy, and booking 
 - Conversational interface
 - Can infer requirements from description
 - Validates configuration automatically
-- Follows agent specification in `.github/agents/scaffold-generator.agent.md`
+- Follows agent specification in `.github/agents/generate-plugin.agent.md`
 - Best for experienced users who know their requirements
-
-### Method 3: CLI Script
-
-Run the generator script directly from the command line:
-
-```bash
-node bin/generate-plugin.js
-```
-
-**Interactive Mode:**
-
-```bash
-# Prompts for all required information
-node bin/generate-plugin.js
-```
-
-**Direct Mode:**
-
-```bash
-# Provide all values via arguments
-node bin/generate-plugin.js \
-  --slug tour-operator \
-  --name "Tour Operator" \
-  --description "Tour booking and display plugin" \
-  --author "LightSpeed" \
-  --author-uri "https://developer.lsdev.biz"
-```
-
-**Configuration File Mode:**
-
-```bash
-# Use a JSON configuration file
-echo '{
-  "slug": "tour-operator",
-  "name": "Tour Operator",
-  "description": "Tour booking plugin",
-  "author": "LightSpeed"
-}' > plugin-config.json
-
-node bin/generate-plugin.js --config plugin-config.json
-```
-
-**Best for:**
-
-- Automation and CI/CD pipelines
-- Batch plugin generation
-- Advanced users comfortable with CLI tools
+- Can use either template or generator mode
 
 ## Post-Generation Workflow
 
@@ -280,7 +387,7 @@ tree -L 2
 
 Expected structure:
 
-```
+```text
 tour-operator/
 ├── tour-operator.php         # Main plugin file (slug-based name)
 ├── package.json              # Node dependencies
@@ -293,7 +400,7 @@ tour-operator/
 │   └── scss/                 # Stylesheets
 ├── templates/                # Block templates
 ├── patterns/                 # Block patterns
-├── parts/                    # Template parts
+├── template-parts/           # Template parts
 └── scf-json/                 # SCF field groups
 ```
 
@@ -485,7 +592,7 @@ Updates: `package.json`, `composer.json`, main plugin file, all `block.json` fil
 ## Related Documentation
 
 - [Generator Instructions](.github/instructions/generate-plugin.instructions.md) - Rules for using mustache values
-- [Scaffold Generator Agent](.github/agents/scaffold-generator.agent.md) - Agent specification
+- [Plugin Generator Agent](.github/agents/generate-plugin.agent.md) - Agent specification
 - [Generation Prompt](.github/prompts/generate-plugin.prompt.md) - Interactive prompt template
 - [SCF Fields Reference](.github/instructions/scf-fields.instructions.md) - Field types and usage
 - [Build Process](BUILD-PROCESS.md) - Detailed build documentation
