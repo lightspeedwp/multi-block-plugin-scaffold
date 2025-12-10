@@ -36,7 +36,7 @@ switch ( $source ) {
 	case 'posts':
 		$posts_query = new WP_Query(
 			array(
-				'post_type'      => 'example-plugin',
+				'post_type'      => '{{textdomain}}',
 				'posts_per_page' => 10,
 				'post_status'    => 'publish',
 			)
@@ -150,16 +150,16 @@ $slide_width = 100 / $slides_to_show;
 	</div>
 
 	<?php if ( $show_arrows && count( $slider_slides ) > $slides_to_show ) : ?>
-		<button class="wp-block-example_plugin-example-plugin-slider__arrow wp-block-example_plugin-example-plugin-slider__arrow--prev" aria-label="<?php esc_attr_e( 'Previous slide', 'example-plugin' ); ?>">
+		<button class="wp-block-example_plugin-example-plugin-slider__arrow wp-block-example_plugin-example-plugin-slider__arrow--prev" aria-label="<?php esc_attr_e( 'Previous slide', '{{textdomain}}' ); ?>">
 			<span aria-hidden="true">&lsaquo;</span>
 		</button>
-		<button class="wp-block-example_plugin-example-plugin-slider__arrow wp-block-example_plugin-example-plugin-slider__arrow--next" aria-label="<?php esc_attr_e( 'Next slide', 'example-plugin' ); ?>">
+		<button class="wp-block-example_plugin-example-plugin-slider__arrow wp-block-example_plugin-example-plugin-slider__arrow--next" aria-label="<?php esc_attr_e( 'Next slide', '{{textdomain}}' ); ?>">
 			<span aria-hidden="true">&rsaquo;</span>
 		</button>
 	<?php endif; ?>
 
 	<?php if ( $show_dots && count( $slider_slides ) > $slides_to_show ) : ?>
-		<div class="wp-block-example_plugin-example-plugin-slider__dots" role="tablist" aria-label="<?php esc_attr_e( 'Slider navigation', 'example-plugin' ); ?>">
+		<div class="wp-block-example_plugin-example-plugin-slider__dots" role="tablist" aria-label="<?php esc_attr_e( 'Slider navigation', '{{textdomain}}' ); ?>">
 			<?php
 			$total_dots = ceil( ( count( $slider_slides ) - $slides_to_show ) / $slides_to_scroll ) + 1;
 			for ( $i = 0; $i < $total_dots; $i++ ) :
@@ -168,7 +168,7 @@ $slide_width = 100 / $slides_to_show;
 					class="wp-block-example_plugin-example-plugin-slider__dot<?php echo 0 === $i ? ' is-active' : ''; ?>"
 					role="tab"
 					aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>"
-					aria-label="<?php printf( esc_attr__( 'Go to slide %d', 'example-plugin' ), $i + 1 ); ?>"
+					aria-label="<?php printf( esc_attr__( 'Go to slide %d', '{{textdomain}}' ), $i + 1 ); ?>"
 					data-index="<?php echo esc_attr( $i ); ?>"
 				></button>
 			<?php endfor; ?>

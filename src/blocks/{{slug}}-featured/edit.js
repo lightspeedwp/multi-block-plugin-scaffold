@@ -41,7 +41,7 @@ export default function Edit({ attributes, setAttributes }) {
 		(select) => {
 			return select('core').getEntityRecords(
 				'postType',
-				'example-plugin',
+				'{{textdomain}}',
 				{
 					per_page: count,
 					meta_key: 'example-plugin_featured',
@@ -60,28 +60,28 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Settings', 'example-plugin')}>
+				<PanelBody title={__('Settings', '{{textdomain}}')}>
 					<RangeControl
-						label={__('Number of Items', 'example-plugin')}
+						label={__('Number of Items', '{{textdomain}}')}
 						value={count}
 						onChange={(value) => setAttributes({ count: value })}
 						min={1}
 						max={6}
 					/>
 					<SelectControl
-						label={__('Layout', 'example-plugin')}
+						label={__('Layout', '{{textdomain}}')}
 						value={layout}
 						options={[
 							{
-								label: __('Grid', 'example-plugin'),
+								label: __('Grid', '{{textdomain}}'),
 								value: 'grid',
 							},
 							{
-								label: __('Featured First', 'example-plugin'),
+								label: __('Featured First', '{{textdomain}}'),
 								value: 'featured-first',
 							},
 							{
-								label: __('Hero', 'example-plugin'),
+								label: __('Hero', '{{textdomain}}'),
 								value: 'hero',
 							},
 						]}
@@ -89,44 +89,44 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Display Settings', 'example-plugin')}>
+				<PanelBody title={__('Display Settings', '{{textdomain}}')}>
 					<ToggleControl
-						label={__('Display Featured Image', 'example-plugin')}
+						label={__('Display Featured Image', '{{textdomain}}')}
 						checked={displayFeaturedImage}
 						onChange={(value) =>
 							setAttributes({ displayFeaturedImage: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Title', 'example-plugin')}
+						label={__('Display Title', '{{textdomain}}')}
 						checked={displayTitle}
 						onChange={(value) =>
 							setAttributes({ displayTitle: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Subtitle', 'example-plugin')}
+						label={__('Display Subtitle', '{{textdomain}}')}
 						checked={displaySubtitle}
 						onChange={(value) =>
 							setAttributes({ displaySubtitle: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Excerpt', 'example-plugin')}
+						label={__('Display Excerpt', '{{textdomain}}')}
 						checked={displayExcerpt}
 						onChange={(value) =>
 							setAttributes({ displayExcerpt: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Meta', 'example-plugin')}
+						label={__('Display Meta', '{{textdomain}}')}
 						checked={displayMeta}
 						onChange={(value) =>
 							setAttributes({ displayMeta: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Read More', 'example-plugin')}
+						label={__('Display Read More', '{{textdomain}}')}
 						checked={displayReadMore}
 						onChange={(value) =>
 							setAttributes({ displayReadMore: value })
@@ -134,7 +134,7 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 					{displayReadMore && (
 						<TextControl
-							label={__('Read More Text', 'example-plugin')}
+							label={__('Read More Text', '{{textdomain}}')}
 							value={readMoreText}
 							onChange={(value) =>
 								setAttributes({ readMoreText: value })
@@ -147,7 +147,7 @@ export default function Edit({ attributes, setAttributes }) {
 			<div {...blockProps}>
 				{posts === null && (
 					<p className="wp-block-example_plugin-example-plugin-featured__loading">
-						{__('Loading…', 'example-plugin')}
+						{__('Loading…', '{{textdomain}}')}
 					</p>
 				)}
 
@@ -155,7 +155,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<p className="wp-block-example_plugin-example-plugin-featured__empty">
 						{__(
 							'No featured items found. Mark some as featured in the post editor.',
-							'example-plugin'
+							'{{textdomain}}'
 						)}
 					</p>
 				)}
@@ -200,7 +200,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 									{displaySubtitle && (
 										<p className="wp-block-example_plugin-example-plugin-featured__subtitle">
-											{__('Subtitle', 'example-plugin')}
+											{__('Subtitle', '{{textdomain}}')}
 										</p>
 									)}
 

@@ -9,8 +9,8 @@ import { __ } from '@wordpress/i18n';
 const variations = [
 	{
 		name: 'grid',
-		title: __('Example Plugin Grid', 'example-plugin'),
-		description: __('Display items in a grid layout.', 'example-plugin'),
+		title: __('Example Plugin Grid', '{{textdomain}}'),
+		description: __('Display items in a grid layout.', '{{textdomain}}'),
 		icon: 'grid-view',
 		attributes: {
 			layout: 'grid',
@@ -21,8 +21,8 @@ const variations = [
 	},
 	{
 		name: 'list',
-		title: __('Example Plugin List', 'example-plugin'),
-		description: __('Display items in a list layout.', 'example-plugin'),
+		title: __('Example Plugin List', '{{textdomain}}'),
+		description: __('Display items in a list layout.', '{{textdomain}}'),
 		icon: 'list-view',
 		attributes: {
 			layout: 'list',
@@ -31,10 +31,10 @@ const variations = [
 	},
 	{
 		name: 'slider',
-		title: __('Example Plugin Slider', 'example-plugin'),
+		title: __('Example Plugin Slider', '{{textdomain}}'),
 		description: __(
 			'Display items in a slider/carousel layout.',
-			'example-plugin'
+			'{{textdomain}}'
 		),
 		icon: 'slides',
 		attributes: {
@@ -44,14 +44,14 @@ const variations = [
 	},
 	{
 		name: 'featured',
-		title: __('Featured Items', 'example-plugin'),
-		description: __('Display only featured items.', 'example-plugin'),
+		title: __('Featured Items', '{{textdomain}}'),
+		description: __('Display only featured items.', '{{textdomain}}'),
 		icon: 'star-filled',
 		attributes: {
 			layout: 'grid',
 			columns: 3,
 			query: {
-				postType: 'example-plugin',
+				postType: '{{textdomain}}',
 				perPage: 3,
 				order: 'desc',
 				orderBy: 'date',

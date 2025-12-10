@@ -46,7 +46,7 @@ class Block_Bindings {
 		register_block_bindings_source(
 			'example-plugin/post-meta',
 			array(
-				'label'              => __( 'Example Plugin Post Meta', 'example-plugin' ),
+				'label'              => __( 'Example Plugin Post Meta', '{{textdomain}}' ),
 				'get_value_callback' => array( $this, 'get_post_meta_value' ),
 				'uses_context'       => array( 'postId' ),
 			)

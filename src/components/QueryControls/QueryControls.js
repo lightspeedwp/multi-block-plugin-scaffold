@@ -40,62 +40,62 @@ export default function QueryControls({ query, onChange }) {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={__('Query Settings', 'example-plugin')}>
+			<PanelBody title={__('Query Settings', '{{textdomain}}')}>
 				<RangeControl
-					label={__('Number of Items', 'example-plugin')}
+					label={__('Number of Items', '{{textdomain}}')}
 					value={perPage}
 					onChange={(value) => updateQuery({ perPage: value })}
 					min={1}
 					max={24}
 				/>
 				<SelectControl
-					label={__('Order By', 'example-plugin')}
+					label={__('Order By', '{{textdomain}}')}
 					value={orderBy}
 					options={[
-						{ label: __('Date', 'example-plugin'), value: 'date' },
+						{ label: __('Date', '{{textdomain}}'), value: 'date' },
 						{
-							label: __('Title', 'example-plugin'),
+							label: __('Title', '{{textdomain}}'),
 							value: 'title',
 						},
 						{
-							label: __('Modified', 'example-plugin'),
+							label: __('Modified', '{{textdomain}}'),
 							value: 'modified',
 						},
 						{
-							label: __('Random', 'example-plugin'),
+							label: __('Random', '{{textdomain}}'),
 							value: 'rand',
 						},
 						{
-							label: __('Menu Order', 'example-plugin'),
+							label: __('Menu Order', '{{textdomain}}'),
 							value: 'menu_order',
 						},
 					]}
 					onChange={(value) => updateQuery({ orderBy: value })}
 				/>
 				<SelectControl
-					label={__('Order', 'example-plugin')}
+					label={__('Order', '{{textdomain}}')}
 					value={order}
 					options={[
 						{
-							label: __('Descending', 'example-plugin'),
+							label: __('Descending', '{{textdomain}}'),
 							value: 'desc',
 						},
 						{
-							label: __('Ascending', 'example-plugin'),
+							label: __('Ascending', '{{textdomain}}'),
 							value: 'asc',
 						},
 					]}
 					onChange={(value) => updateQuery({ order: value })}
 				/>
 				<ToggleControl
-					label={__('Featured Only', 'example-plugin')}
+					label={__('Featured Only', '{{textdomain}}')}
 					checked={featured}
 					onChange={(value) => updateQuery({ featured: value })}
 				/>
 			</PanelBody>
 
 			<PanelBody
-				title={__('Filter by Taxonomy', 'example-plugin')}
+				title={__('Filter by Taxonomy', '{{textdomain}}')}
 				initialOpen={false}
 			>
 				<TaxonomyFilter
@@ -108,7 +108,7 @@ export default function QueryControls({ query, onChange }) {
 								: null,
 						})
 					}
-					label={__('Categories', 'example-plugin')}
+					label={__('Categories', '{{textdomain}}')}
 				/>
 			</PanelBody>
 		</InspectorControls>

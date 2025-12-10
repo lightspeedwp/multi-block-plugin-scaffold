@@ -38,7 +38,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 			}
 			return select('core').getEntityRecord(
 				'postType',
-				context.postType || 'example-plugin',
+				context.postType || '{{textdomain}}',
 				postId
 			);
 		},
@@ -62,44 +62,44 @@ export default function Edit({ attributes, setAttributes, context }) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Display Settings', 'example-plugin')}>
+				<PanelBody title={__('Display Settings', '{{textdomain}}')}>
 					<ToggleControl
-						label={__('Display Featured Image', 'example-plugin')}
+						label={__('Display Featured Image', '{{textdomain}}')}
 						checked={displayFeaturedImage}
 						onChange={(value) =>
 							setAttributes({ displayFeaturedImage: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Title', 'example-plugin')}
+						label={__('Display Title', '{{textdomain}}')}
 						checked={displayTitle}
 						onChange={(value) =>
 							setAttributes({ displayTitle: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Subtitle', 'example-plugin')}
+						label={__('Display Subtitle', '{{textdomain}}')}
 						checked={displaySubtitle}
 						onChange={(value) =>
 							setAttributes({ displaySubtitle: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Excerpt', 'example-plugin')}
+						label={__('Display Excerpt', '{{textdomain}}')}
 						checked={displayExcerpt}
 						onChange={(value) =>
 							setAttributes({ displayExcerpt: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Display Meta', 'example-plugin')}
+						label={__('Display Meta', '{{textdomain}}')}
 						checked={displayMeta}
 						onChange={(value) =>
 							setAttributes({ displayMeta: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Link to Post', 'example-plugin')}
+						label={__('Link to Post', '{{textdomain}}')}
 						checked={linkToPost}
 						onChange={(value) =>
 							setAttributes({ linkToPost: value })
@@ -122,13 +122,13 @@ export default function Edit({ attributes, setAttributes, context }) {
 					{displayTitle && post && (
 						<h3 className="wp-block-example_plugin-example-plugin-card__title">
 							{post.title?.rendered ||
-								__('Untitled', 'example-plugin')}
+								__('Untitled', '{{textdomain}}')}
 						</h3>
 					)}
 
 					{displaySubtitle && (
 						<p className="wp-block-example_plugin-example-plugin-card__subtitle">
-							{__('Subtitle placeholder', 'example-plugin')}
+							{__('Subtitle placeholder', '{{textdomain}}')}
 						</p>
 					)}
 
@@ -152,7 +152,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 
 				{!post && (
 					<p className="wp-block-example_plugin-example-plugin-card__placeholder">
-						{__('Select a post to display.', 'example-plugin')}
+						{__('Select a post to display.', '{{textdomain}}')}
 					</p>
 				)}
 			</div>

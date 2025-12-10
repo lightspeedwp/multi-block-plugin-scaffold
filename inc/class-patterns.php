@@ -33,9 +33,9 @@ class Patterns {
 	 */
 	public function register_pattern_category() {
 		register_block_pattern_category(
-			'example-plugin',
+			'{{textdomain}}',
 			array(
-				'label' => __( 'Example Plugin', 'example-plugin' ),
+				'label' => __( 'Example Plugin', '{{textdomain}}' ),
 			)
 		);
 	}

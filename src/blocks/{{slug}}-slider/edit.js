@@ -82,21 +82,21 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Slider Source', 'example-plugin')}>
+				<PanelBody title={__('Slider Source', '{{textdomain}}')}>
 					<SelectControl
-						label={__('Slide Source', 'example-plugin')}
+						label={__('Slide Source', '{{textdomain}}')}
 						value={source}
 						options={[
 							{
-								label: __('Custom Slides', 'example-plugin'),
+								label: __('Custom Slides', '{{textdomain}}'),
 								value: 'custom',
 							},
 							{
-								label: __('Posts', 'example-plugin'),
+								label: __('Posts', '{{textdomain}}'),
 								value: 'posts',
 							},
 							{
-								label: __('Repeater Field', 'example-plugin'),
+								label: __('Repeater Field', '{{textdomain}}'),
 								value: 'repeater',
 							},
 						]}
@@ -104,15 +104,15 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Slider Settings', 'example-plugin')}>
+				<PanelBody title={__('Slider Settings', '{{textdomain}}')}>
 					<ToggleControl
-						label={__('Autoplay', 'example-plugin')}
+						label={__('Autoplay', '{{textdomain}}')}
 						checked={autoplay}
 						onChange={(value) => setAttributes({ autoplay: value })}
 					/>
 					{autoplay && (
 						<RangeControl
-							label={__('Autoplay Speed (ms)', 'example-plugin')}
+							label={__('Autoplay Speed (ms)', '{{textdomain}}')}
 							value={autoplaySpeed}
 							onChange={(value) =>
 								setAttributes({ autoplaySpeed: value })
@@ -123,24 +123,24 @@ export default function Edit({ attributes, setAttributes }) {
 						/>
 					)}
 					<ToggleControl
-						label={__('Show Dots', 'example-plugin')}
+						label={__('Show Dots', '{{textdomain}}')}
 						checked={showDots}
 						onChange={(value) => setAttributes({ showDots: value })}
 					/>
 					<ToggleControl
-						label={__('Show Arrows', 'example-plugin')}
+						label={__('Show Arrows', '{{textdomain}}')}
 						checked={showArrows}
 						onChange={(value) =>
 							setAttributes({ showArrows: value })
 						}
 					/>
 					<ToggleControl
-						label={__('Infinite Loop', 'example-plugin')}
+						label={__('Infinite Loop', '{{textdomain}}')}
 						checked={infinite}
 						onChange={(value) => setAttributes({ infinite: value })}
 					/>
 					<RangeControl
-						label={__('Slides to Show', 'example-plugin')}
+						label={__('Slides to Show', '{{textdomain}}')}
 						value={slidesToShow}
 						onChange={(value) =>
 							setAttributes({ slidesToShow: value })
@@ -149,7 +149,7 @@ export default function Edit({ attributes, setAttributes }) {
 						max={5}
 					/>
 					<RangeControl
-						label={__('Slides to Scroll', 'example-plugin')}
+						label={__('Slides to Scroll', '{{textdomain}}')}
 						value={slidesToScroll}
 						onChange={(value) =>
 							setAttributes({ slidesToScroll: value })
@@ -224,7 +224,7 @@ export default function Edit({ attributes, setAttributes }) {
 																<div className="wp-block-example_plugin-example-plugin-slider__placeholder">
 																	{__(
 																		'Click to select image',
-																		'example-plugin'
+																		'{{textdomain}}'
 																	)}
 																</div>
 															)}
@@ -237,7 +237,7 @@ export default function Edit({ attributes, setAttributes }) {
 												<TextControl
 													label={__(
 														'Title',
-														'example-plugin'
+														'{{textdomain}}'
 													)}
 													value={slide.title}
 													onChange={(value) =>
@@ -249,7 +249,7 @@ export default function Edit({ attributes, setAttributes }) {
 												<TextareaControl
 													label={__(
 														'Caption',
-														'example-plugin'
+														'{{textdomain}}'
 													)}
 													value={slide.caption}
 													onChange={(value) =>
@@ -261,7 +261,7 @@ export default function Edit({ attributes, setAttributes }) {
 												<TextControl
 													label={__(
 														'Link URL',
-														'example-plugin'
+														'{{textdomain}}'
 													)}
 													value={slide.link}
 													onChange={(value) =>
@@ -282,7 +282,7 @@ export default function Edit({ attributes, setAttributes }) {
 											>
 												{__(
 													'Remove Slide',
-													'example-plugin'
+													'{{textdomain}}'
 												)}
 											</Button>
 										</div>
@@ -292,7 +292,7 @@ export default function Edit({ attributes, setAttributes }) {
 								<div className="wp-block-example_plugin-example-plugin-slider__empty">
 									{__(
 										'No slides added yet. Click the button below to add slides.',
-										'example-plugin'
+										'{{textdomain}}'
 									)}
 								</div>
 							)}
@@ -320,7 +320,7 @@ export default function Edit({ attributes, setAttributes }) {
 							onClick={addSlide}
 							className="wp-block-example_plugin-example-plugin-slider__add-slide"
 						>
-							{__('Add Slide', 'example-plugin')}
+							{__('Add Slide', '{{textdomain}}')}
 						</Button>
 					</>
 				)}
@@ -329,7 +329,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<div className="wp-block-example_plugin-example-plugin-slider__posts-notice">
 						{__(
 							'Slider will display posts from the Example Plugin post type.',
-							'example-plugin'
+							'{{textdomain}}'
 						)}
 					</div>
 				)}
@@ -338,7 +338,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<div className="wp-block-example_plugin-example-plugin-slider__repeater-notice">
 						{__(
 							'Slider will display slides from the repeater field.',
-							'example-plugin'
+							'{{textdomain}}'
 						)}
 					</div>
 				)}

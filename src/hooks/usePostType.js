@@ -16,7 +16,7 @@ import { useSelect } from '@wordpress/data';
  *
  * @return {Object} Post data and loading state.
  */
-export default function usePostType(postId, postType = 'example-plugin') {
+export default function usePostType(postId, postType = '{{slug}}') {
 	return useSelect(
 		(select) => {
 			if (!postId) {

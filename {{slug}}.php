@@ -43,7 +43,7 @@ if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		'admin_notices',
 		function () {
 			echo '<div class="error"><p>' .
-				esc_html__( 'Example Plugin requires Secure Custom Fields to be active.', 'example-plugin' ) .
+				esc_html__( 'Example Plugin requires Secure Custom Fields to be active.', '{{textdomain}}' ) .
 				'</p></div>';
 		}
 	);
@@ -130,8 +130,8 @@ class ExamplePlugin_Plugin {
 		return array_merge(
 			array(
 				array(
-					'slug'  => 'example-plugin',
-					'title' => __( 'Example Plugin', 'example-plugin' ),
+					'slug'  => '{{textdomain}}',
+					'title' => __( 'Example Plugin', '{{textdomain}}' ),
 					'icon'  => 'admin-generic',
 				),
 			),
@@ -146,7 +146,7 @@ class ExamplePlugin_Plugin {
 	 */
 	public function load_textdomain() {
 		load_plugin_textdomain(
-			'example-plugin',
+			'{{textdomain}}',
 			false,
 			dirname( EXAMPLE_PLUGIN_PLUGIN_BASENAME ) . '/languages'
 		);

@@ -17,7 +17,7 @@ export function buildQueryArgs(attributes) {
 	const { query = {} } = attributes;
 
 	const args = {
-		post_type: query.postType || 'example-plugin',
+		post_type: query.postType || '{{textdomain}}',
 		posts_per_page: query.perPage || 6,
 		order: query.order || 'desc',
 		orderby: query.orderBy || 'date',

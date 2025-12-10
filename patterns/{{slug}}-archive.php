@@ -23,7 +23,7 @@
 
 	<!-- wp:query-no-results -->
 		<!-- wp:paragraph {"align":"center"} -->
-		<p class="has-text-align-center"><?php esc_html_e( 'No items found.', 'example-plugin' ); ?></p>
+		<p class="has-text-align-center"><?php esc_html_e( 'No items found.', '{{textdomain}}' ); ?></p>
 		<!-- /wp:paragraph -->
 	<!-- /wp:query-no-results -->
 </div>

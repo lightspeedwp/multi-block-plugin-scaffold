@@ -57,6 +57,8 @@
 		"validate:schemas": "node scripts/validate-plugin-config.js --schema-only && node scripts/validate-plugin-config.js .github/schemas/plugin-config.example.json",
 		"validate:config": "node scripts/validate-plugin-config.js",
 		"test": "npm run test:unit && npm run test:e2e",
+		"release:validate": "node scripts/release.agent.js validate",
+		"release:status": "node scripts/release.agent.js status",
 		"lighthouse": "lhci autorun",
 		"size-limit": "size-limit",
 		"analyze-bundle": "webpack-bundle-analyzer build/stats.json build",

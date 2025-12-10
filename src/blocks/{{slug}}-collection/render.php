@@ -25,7 +25,7 @@ $display_pagination     = $attributes['displayPagination'] ?? true;
 
 // Build WP_Query args.
 $args = array(
-	'post_type'      => 'example-plugin',
+	'post_type'      => '{{textdomain}}',
 	'posts_per_page' => $query_args['perPage'] ?? 6,
 	'order'          => $query_args['order'] ?? 'desc',
 	'orderby'        => $query_args['orderBy'] ?? 'date',
@@ -124,8 +124,8 @@ if ( 'grid' === $layout ) {
 					array(
 						'total'     => $collection_query->max_num_pages,
 						'current'   => max( 1, get_query_var( 'paged' ) ),
-						'prev_text' => __( '&laquo; Previous', 'example-plugin' ),
-						'next_text' => __( 'Next &raquo;', 'example-plugin' ),
+						'prev_text' => __( '&laquo; Previous', '{{textdomain}}' ),
+						'next_text' => __( 'Next &raquo;', '{{textdomain}}' ),
 					)
 				);
 				?>
@@ -136,7 +136,7 @@ if ( 'grid' === $layout ) {
 
 	<?php else : ?>
 		<p class="wp-block-example_plugin-example-plugin-collection__no-results">
-			<?php esc_html_e( 'No items found.', 'example-plugin' ); ?>
+			<?php esc_html_e( 'No items found.', '{{textdomain}}' ); ?>
 		</p>
 	<?php endif; ?>
 </div>

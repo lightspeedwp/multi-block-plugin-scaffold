@@ -466,6 +466,7 @@ node scripts/generate-plugin.js
 # Prompts for all required information
 node scripts/generate-plugin.js
 ```
+
 ### Method 4: Agent-Based Generation
 
 Request the scaffold generator agent directly:

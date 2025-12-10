@@ -90,7 +90,7 @@ export default function Gallery({
 					}
 					role="dialog"
 					aria-modal="true"
-					aria-label={__('Image lightbox', 'example-plugin')}
+					aria-label={__('Image lightbox', '{{textdomain}}')}
 					tabIndex={-1}
 					ref={(el) => el && el.focus()}
 					style={{
@@ -116,7 +116,7 @@ export default function Gallery({
 					<button
 						className="example_plugin-gallery__lightbox-close"
 						onClick={() => setActiveImage(null)}
-						aria-label={__('Close lightbox', 'example-plugin')}
+						aria-label={__('Close lightbox', '{{textdomain}}')}
 						style={{
 							position: 'absolute',
 							top: '1rem',
@@ -128,7 +128,7 @@ export default function Gallery({
 							borderRadius: '4px',
 						}}
 					>
-						{__('Close', 'example-plugin')}
+						{__('Close', '{{textdomain}}')}
 					</button>
 				</div>
 			)}

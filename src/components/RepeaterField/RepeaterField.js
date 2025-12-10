@@ -34,7 +34,7 @@ export default function RepeaterField({
 
 			const post = select('core').getEntityRecord(
 				'postType',
-				'example-plugin',
+				'{{textdomain}}',
 				postId
 			);
 			const fieldValue =

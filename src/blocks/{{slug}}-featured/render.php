@@ -21,11 +21,11 @@ $display_excerpt        = $attributes['displayExcerpt'] ?? true;
 $display_subtitle       = $attributes['displaySubtitle'] ?? true;
 $display_meta           = $attributes['displayMeta'] ?? false;
 $display_read_more      = $attributes['displayReadMore'] ?? true;
-$read_more_text         = $attributes['readMoreText'] ?? __( 'Read More', 'example-plugin' );
+$read_more_text         = $attributes['readMoreText'] ?? __( 'Read More', '{{textdomain}}' );
 
 // Query for featured posts.
 $args = array(
-	'post_type'      => 'example-plugin',
+	'post_type'      => '{{textdomain}}',
 	'posts_per_page' => $count,
 	'post_status'    => 'publish',
 );

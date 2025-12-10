@@ -56,7 +56,7 @@ class Fields {
 					<?php
 					printf(
 						/* translators: %s: Plugin name */
-						esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', 'example-plugin' ),
+						esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', '{{textdomain}}' ),
 						'<strong>Example Plugin</strong>'
 					);
 					?>
@@ -79,42 +79,42 @@ class Fields {
 		acf_add_local_field_group(
 			array(
 				'key'             => self::FIELD_GROUP,
-				'title'           => __( 'Item Details', 'example-plugin' ),
+				'title'           => __( 'Item Details', '{{textdomain}}' ),
 				'fields'          => array(
 					array(
 						'key'          => 'field_example-plugin_subtitle',
-						'label'        => __( 'Subtitle', 'example-plugin' ),
+						'label'        => __( 'Subtitle', '{{textdomain}}' ),
 						'name'         => 'example-plugin_subtitle',
 						'type'         => 'text',
-						'instructions' => __( 'Enter a subtitle for this item.', 'example-plugin' ),
+						'instructions' => __( 'Enter a subtitle for this item.', '{{textdomain}}' ),
 					),
 					array(
 						'key'          => 'field_example-plugin_featured',
-						'label'        => __( 'Featured', 'example-plugin' ),
+						'label'        => __( 'Featured', '{{textdomain}}' ),
 						'name'         => 'example-plugin_featured',
 						'type'         => 'true_false',
 						'ui'           => 1,
-						'instructions' => __( 'Mark this item as featured.', 'example-plugin' ),
+						'instructions' => __( 'Mark this item as featured.', '{{textdomain}}' ),
 					),
 					array(
 						'key'           => 'field_example-plugin_gallery',
-						'label'         => __( 'Gallery', 'example-plugin' ),
+						'label'         => __( 'Gallery', '{{textdomain}}' ),
 						'name'          => 'example-plugin_gallery',
 						'type'          => 'gallery',
-						'instructions'  => __( 'Add images to the gallery.', 'example-plugin' ),
+						'instructions'  => __( 'Add images to the gallery.', '{{textdomain}}' ),
 						'return_format' => 'array',
 						'preview_size'  => 'medium',
 						'library'       => 'all',
 					),
 					array(
 						'key'           => 'field_example-plugin_related',
-						'label'         => __( 'Related Items', 'example-plugin' ),
+						'label'         => __( 'Related Items', '{{textdomain}}' ),
 						'name'          => 'example-plugin_related',
 						'type'          => 'relationship',
 						'post_type'     => array( Post_Types::POST_TYPE ),
 						'filters'       => array( 'search', 'taxonomy' ),
 						'return_format' => 'object',
-						'instructions'  => __( 'Select related items.', 'example-plugin' ),
+						'instructions'  => __( 'Select related items.', '{{textdomain}}' ),
 					),
 				),
 				'location'        => array(

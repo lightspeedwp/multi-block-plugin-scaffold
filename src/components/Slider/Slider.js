@@ -124,7 +124,7 @@ export default function Slider({
 			onMouseLeave={handleMouseLeave}
 			onKeyDown={handleKeyDown}
 			role="region"
-			aria-label={__('Slider', 'example-plugin')}
+			aria-label={__('Slider', '{{textdomain}}')}
 			aria-roledescription="carousel"
 			tabIndex="0"
 		>
@@ -183,14 +183,14 @@ export default function Slider({
 						className="example_plugin-slider__arrow example_plugin-slider__arrow--prev"
 						onClick={prevSlide}
 						icon={chevronLeft}
-						label={__('Previous slide', 'example-plugin')}
+						label={__('Previous slide', '{{textdomain}}')}
 						disabled={!infinite && currentIndex === 0}
 					/>
 					<Button
 						className="example_plugin-slider__arrow example_plugin-slider__arrow--next"
 						onClick={nextSlide}
 						icon={chevronRight}
-						label={__('Next slide', 'example-plugin')}
+						label={__('Next slide', '{{textdomain}}')}
 						disabled={!infinite && currentIndex >= maxIndex}
 					/>
 				</>
@@ -200,7 +200,7 @@ export default function Slider({
 				<div
 					className="example_plugin-slider__dots"
 					role="tablist"
-					aria-label={__('Slider navigation', 'example-plugin')}
+					aria-label={__('Slider navigation', '{{textdomain}}')}
 				>
 					{Array.from({
 						length:

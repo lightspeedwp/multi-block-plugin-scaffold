@@ -35,7 +35,7 @@ export default function FieldDisplay({
 
 			const post = select('core').getEntityRecord(
 				'postType',
-				'example-plugin',
+				'{{textdomain}}',
 				postId
 			);
 
@@ -101,8 +101,8 @@ export default function FieldDisplay({
 
 			case 'boolean':
 				return fieldValue
-					? __('Yes', 'example-plugin')
-					: __('No', 'example-plugin');
+					? __('Yes', '{{textdomain}}')
+					: __('No', '{{textdomain}}');
 
 			default:
 				return String(fieldValue);
