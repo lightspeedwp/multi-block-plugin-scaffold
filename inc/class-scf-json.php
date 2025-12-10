@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * SCF Local JSON Configuration.
  *
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Manages Local JSON save and load paths for SCF field groups.
  */
-class {{namespace|pascalCase}}_SCF_JSON {
+class SCF_JSON {
 
 	/**
 	 * Local JSON directory path.

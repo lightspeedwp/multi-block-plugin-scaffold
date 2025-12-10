@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Custom Post Type Registration.
  *
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Post Types class.
  */
-class {{namespace|pascalCase}}_Post_Types {
+class Post_Types {
 
 	/**
 	 * Post type slug.

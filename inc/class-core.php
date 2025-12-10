@@ -1,0 +1,118 @@
+<?php
+namespace {{namespace|lowerCase}}\classes;
+
+/**
+ * Core Class intiating the rest of the classes.
+ *
+ * @package {{namespace}}
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Main plugin class.
+ */
+class Core {
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		$this->load_classes();
+
+		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'init', array( $this, 'register_blocks' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+
+		// Initialize components.
+		new Post_Types();
+		new Taxonomies();
+		new Fields();
+		new Repeater_Fields();
+		new Options();
+		new SCF_JSON();
+		new Block_Templates();
+		new Block_Bindings();
+		new Patterns();
+	}
+
+	/**
+	 * Load the plugin classes.
+	 *
+	 * @return void
+	 */
+	public function load_classes() {
+		// Include core classes.
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-post-types.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-taxonomies.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-fields.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-repeater-fields.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-options.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-scf-json.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-block-templates.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-block-bindings.php';
+		require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-patterns.php';
+	}
+
+	/**
+	 * Initialize the plugin.
+	 *
+	 * @return void
+	 */
+	public function init() {
+		// Register block category.
+		add_filter( 'block_categories_all', array( $this, 'register_block_category' ) );
+	}
+
+	/**
+	 * Register blocks from the blocks directory.
+	 *
+	 * @return void
+	 */
+	public function register_blocks() {
+		// Auto-register all blocks in src/blocks/.
+		$blocks_dir = {{namespace|upper}}_PLUGIN_DIR . 'build/blocks/';
+
+		if ( is_dir( $blocks_dir ) ) {
+			$blocks = glob( $blocks_dir . '*/block.json' );
+
+			foreach ( $blocks as $block_json ) {
+				register_block_type( dirname( $block_json ) );
+			}
+		}
+	}
+
+	/**
+	 * Register custom block category.
+	 *
+	 * @param array $categories Existing block categories.
+	 * @return array Modified block categories.
+	 */
+	public function register_block_category( $categories ) {
+		return array_merge(
+			array(
+				array(
+					'slug'  => '{{slug}}',
+					'title' => __( '{{name}}', '{{textdomain}}' ),
+					'icon'  => 'admin-generic',
+				),
+			),
+			$categories
+		);
+	}
+
+	/**
+	 * Load plugin text domain for translations.
+	 *
+	 * @return void
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain(
+			'{{textdomain}}',
+			false,
+			dirname( {{namespace|upper}}_PLUGIN_BASENAME ) . '/languages'
+		);
+	}
+}

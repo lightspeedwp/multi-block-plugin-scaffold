@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Custom Taxonomy Registration.
  *
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Taxonomies class.
  */
-class {{namespace|pascalCase}}_Taxonomies {
+class Taxonomies {
 
 	/**
 	 * Taxonomy slug.

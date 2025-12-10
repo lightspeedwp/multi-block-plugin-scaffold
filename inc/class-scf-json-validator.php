@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * SCF JSON Schema Validator.
  *
@@ -18,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Validates SCF field group JSON files against the schema.
  */
-class {{namespace|pascalCase}}_SCF_JSON_Validator {
+class SCF_JSON_Validator {
 
 	/**
 	 * Path to the JSON schema file.
