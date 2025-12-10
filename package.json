@@ -1,31 +1,31 @@
 {
-	"name": "{{slug}}",
-	"version": "{{version}}",
-	"description": "{{description}}",
-	"author": "{{author}}",
-	"license": "{{license}}",
+	"name": "example-plugin",
+	"version": "1.0.0",
+	"description": "A multi-block WordPress plugin scaffold example",
+	"author": "Example Author",
+	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"keywords": [
 		"wordpress",
 		"gutenberg",
 		"block",
-		"{{slug}}",
-		"{{namespace}}"
+		"example-plugin",
+		"example_plugin"
 	],
-	"homepage": "https://github.com/{{author}}/{{slug}}",
+	"homepage": "https://github.com/Example Author/example-plugin",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/{{author}}/{{slug}}.git"
+		"url": "https://github.com/Example Author/example-plugin.git"
 	},
 	"bugs": {
-		"url": "https://github.com/{{author}}/{{slug}}/issues"
+		"url": "https://github.com/Example Author/example-plugin/issues"
 	},
 	"engines": {
 		"node": ">=18.0.0",
 		"npm": ">=8.0.0"
 	},
 	"scripts": {
-		"build": "node bin/build.js",
+		"build": "node scripts/build.js",
 		"build:quick": "wp-scripts build",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
@@ -37,28 +37,32 @@
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"lint": "npm run lint:js && npm run lint:css && npm run lint:pkg-json",
-		"lint:dry-run": "node bin/dry-run-test.js lint:js lint:css lint:pkg-json",
-		"dry-run": "node bin/dry-run-test.js",
-		"dry-run:lint": "node bin/dry-run-test.js lint:js lint:css",
-		"dry-run:test": "node bin/dry-run-test.js test:unit",
-		"dry-run:all": "node bin/dry-run-test.js lint:js lint:css test:unit",
+		"lint:dry-run": "node scripts/dry-run-test.js lint:js lint:css lint:pkg-json",
+		"dry-run": "node scripts/dry-run-test.js",
+		"dry-run:lint": "node scripts/dry-run-test.js lint:js lint:css",
+		"dry-run:test": "node scripts/dry-run-test.js test:unit",
+		"dry-run:all": "node scripts/dry-run-test.js lint:js lint:css test:unit",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:e2e:a11y": "wp-scripts test-e2e tests/e2e/accessibility.spec.js",
 		"test:unit": "wp-scripts test-unit-js",
+		"test:dry-run": "node scripts/test-dry-run.js",
+		"test:dry-run:coverage": "node scripts/test-dry-run.js --coverage",
 		"test:php": "phpunit",
 		"test:scf": "phpunit tests/php/test-scf-json*.php",
 		"test:scf:verbose": "phpunit tests/php/test-scf-json*.php --verbose",
 		"validate:scf": "npm run test:scf -- --coverage-html coverage/scf/",
+		"validate:schemas": "node scripts/validate-plugin-config.js --schema-only && node scripts/validate-plugin-config.js .github/schemas/plugin-config.example.json",
+		"validate:config": "node scripts/validate-plugin-config.js",
 		"test": "npm run test:unit && npm run test:e2e",
 		"lighthouse": "lhci autorun",
 		"size-limit": "size-limit",
 		"analyze-bundle": "webpack-bundle-analyzer build/stats.json build",
 		"performance": "npm run lighthouse && npm run size-limit",
-		"makepot": "wp i18n make-pot . languages/{{slug}}.pot --slug={{slug}} --domain={{textdomain}} --exclude=node_modules,vendor,build,tests",
-		"makepot:php": "wp i18n make-pot . languages/{{slug}}.pot --slug={{slug}} --domain={{textdomain}} --exclude=node_modules,vendor,build,tests,src",
+		"makepot": "wp i18n make-pot . languages/example-plugin.pot --slug=example-plugin --domain=example-plugin --exclude=node_modules,vendor,build,tests",
+		"makepot:php": "wp i18n make-pot . languages/example-plugin.pot --slug=example-plugin --domain=example-plugin --exclude=node_modules,vendor,build,tests,src",
 		"makejson": "wp i18n make-json languages --no-purge",
 		"i18n": "npm run makepot && npm run makejson",
 		"env": "wp-env",
@@ -68,7 +72,7 @@
 		"env:destroy": "wp-env destroy",
 		"env:logs": "wp-env logs",
 		"env:cli": "wp-env run cli wp",
-		"update-version": "node bin/update-version.js"
+		"update-version": "node scripts/update-version.js"
 	},
 	"devDependencies": {
 		"@lhci/cli": "^0.13.0",
@@ -83,6 +87,8 @@
 		"@wordpress/prettier-config": "^4.35.0",
 		"@wordpress/scripts": "^31.0.0",
 		"@wordpress/stylelint-config": "^23.27.0",
+		"ajv": "8.17.1",
+		"ajv-formats": "3.0.1",
 		"axe-core": "^4.10.2",
 		"axe-playwright": "^2.0.3",
 		"husky": "^9.1.7",
@@ -140,15 +146,15 @@
 		]
 	},
 	"projectMeta": {
-		"displayName": "{{displayName}}",
-		"namespace": "{{namespace}}",
-		"website": "{{website}}",
-		"docs": "{{docsUrl}}",
-		"support": "{{supportUrl}}",
-		"changelog": "{{changelogUrl}}",
+		"displayName": "Example Plugin",
+		"namespace": "example_plugin",
+		"website": "https://example.com",
+		"docs": "https://example.com/docs",
+		"support": "https://example.com/support",
+		"changelog": "https://example.com/changelog",
 		"repositoryType": "git",
-		"repositoryUrl": "https://github.com/{{author}}/{{slug}}.git",
-		"created": "{{createdDate}}",
-		"updated": "{{updatedDate}}"
+		"repositoryUrl": "https://github.com/Example Author/example-plugin.git",
+		"created": "2025-01-01",
+		"updated": "2025-12-07"
 	}
 }

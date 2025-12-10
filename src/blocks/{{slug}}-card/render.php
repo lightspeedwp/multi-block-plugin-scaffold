@@ -1,8 +1,8 @@
 <?php
 /**
- * {{name}} Card Block - Server-side Render
+ * Example Plugin Card Block - Server-side Render
  *
- * @package {{namespace}}
+ * @package example_plugin
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block content.
@@ -34,12 +34,12 @@ $link_to_post           = $attributes['linkToPost'] ?? true;
 
 $subtitle = '';
 if ( function_exists( 'get_field' ) ) {
-	$subtitle = get_field( '{{slug}}_subtitle', $post_id );
+	$subtitle = get_field( 'example-plugin_subtitle', $post_id );
 }
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
-		'class' => 'wp-block-{{namespace}}-{{slug}}-card',
+		'class' => 'wp-block-example_plugin-example-plugin-card',
 	)
 );
 
@@ -48,7 +48,7 @@ $permalink = get_permalink( $post );
 
 <article <?php echo $wrapper_attributes; ?>>
 	<?php if ( $display_featured_image && has_post_thumbnail( $post_id ) ) : ?>
-		<div class="wp-block-{{namespace}}-{{slug}}-card__image">
+		<div class="wp-block-example_plugin-example-plugin-card__image">
 			<?php if ( $link_to_post ) : ?>
 				<a href="<?php echo esc_url( $permalink ); ?>">
 					<?php echo get_the_post_thumbnail( $post_id, 'medium_large' ); ?>
@@ -59,9 +59,9 @@ $permalink = get_permalink( $post );
 		</div>
 	<?php endif; ?>
 
-	<div class="wp-block-{{namespace}}-{{slug}}-card__content">
+	<div class="wp-block-example_plugin-example-plugin-card__content">
 		<?php if ( $display_title ) : ?>
-			<h3 class="wp-block-{{namespace}}-{{slug}}-card__title">
+			<h3 class="wp-block-example_plugin-example-plugin-card__title">
 				<?php if ( $link_to_post ) : ?>
 					<a href="<?php echo esc_url( $permalink ); ?>">
 						<?php echo esc_html( get_the_title( $post ) ); ?>
@@ -73,20 +73,20 @@ $permalink = get_permalink( $post );
 		<?php endif; ?>
 
 		<?php if ( $display_subtitle && $subtitle ) : ?>
-			<p class="wp-block-{{namespace}}-{{slug}}-card__subtitle">
+			<p class="wp-block-example_plugin-example-plugin-card__subtitle">
 				<?php echo esc_html( $subtitle ); ?>
 			</p>
 		<?php endif; ?>
 
 		<?php if ( $display_excerpt ) : ?>
-			<div class="wp-block-{{namespace}}-{{slug}}-card__excerpt">
+			<div class="wp-block-example_plugin-example-plugin-card__excerpt">
 				<?php echo wp_kses_post( get_the_excerpt( $post ) ); ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if ( $display_meta ) : ?>
-			<div class="wp-block-{{namespace}}-{{slug}}-card__meta">
-				<time class="wp-block-{{namespace}}-{{slug}}-card__date" datetime="<?php echo esc_attr( get_the_date( 'c', $post ) ); ?>">
+			<div class="wp-block-example_plugin-example-plugin-card__meta">
+				<time class="wp-block-example_plugin-example-plugin-card__date" datetime="<?php echo esc_attr( get_the_date( 'c', $post ) ); ?>">
 					<?php echo esc_html( get_the_date( '', $post ) ); ?>
 				</time>
 			</div>

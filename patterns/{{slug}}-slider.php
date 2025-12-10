@@ -1,11 +1,11 @@
 <?php
 /**
- * Title: {{name_singular}} Slider
- * Slug: {{namespace}}/{{slug}}-slider-pattern
- * Categories: {{slug}}
- * Keywords: slider, {{slug}}, carousel
- * Description: A slider/carousel of {{name_plural_lower}}.
+ * Title: Item Slider
+ * Slug: example_plugin/example-plugin-slider-pattern
+ * Categories: example-plugin
+ * Keywords: slider, example-plugin, carousel
+ * Description: A slider/carousel of items.
  * Viewport Width: 1200
  */
 ?>
-<!-- wp:{{namespace}}/{{slug}}-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->
+<!-- wp:example_plugin/example-plugin-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->

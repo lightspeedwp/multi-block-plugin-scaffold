@@ -22,6 +22,7 @@ module.exports = {
 		'/vendor/',
 		'/build/',
 		'/tests/e2e/',
+		'/.dry-run-backup/',
 	],
 
 	// Setup files

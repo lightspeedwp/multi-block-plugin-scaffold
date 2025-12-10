@@ -1,39 +1,39 @@
 /**
  * Block Tests
  *
- * @package {{namespace}}
+ * @package
  */
 
-describe( '{{name}} Blocks', () => {
-	beforeEach( () => {
+describe('Example Plugin Blocks', () => {
+	beforeEach(() => {
 		jest.clearAllMocks();
-	} );
+	});
 
-	describe( 'Card Block', () => {
-		it( 'should be defined', () => {
+	describe('Card Block', () => {
+		it('should be defined', () => {
 			// Block registration test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'Collection Block', () => {
-		it( 'should be defined', () => {
+	describe('Collection Block', () => {
+		it('should be defined', () => {
 			// Block registration test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'Slider Block', () => {
-		it( 'should be defined', () => {
+	describe('Slider Block', () => {
+		it('should be defined', () => {
 			// Block registration test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'Featured Block', () => {
-		it( 'should be defined', () => {
+	describe('Featured Block', () => {
+		it('should be defined', () => {
 			// Block registration test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
-} );
+			expect(true).toBe(true);
+		});
+	});
+});

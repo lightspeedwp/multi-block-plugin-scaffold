@@ -256,7 +256,17 @@ npm run test:a11y      # Accessibility tests
 
 ## Registration
 
-Patterns are automatically registered via `inc/class-patterns.php`. No manual registration required.
+Patterns are automatically registered via `inc/class-patterns.php`:
+
+1. **Pattern Category**: Registered as `{{slug}}` in the block inserter
+2. **Auto-Discovery**: All `.php` files in `patterns/` are loaded on `init`
+3. **Slug Generation**: Derived from filename (e.g., `{{slug}}-card.php` → `{{slug}}/card`)
+4. **No Manual Registration**: Just create a file returning an array - it's automatically registered
+
+The `Patterns` class (namespaced as `example_plugin\classes\Patterns`):
+- Registers the pattern category
+- Loads all pattern files from this directory
+- Registers each pattern using `register_block_pattern()`
 
 ## References
 

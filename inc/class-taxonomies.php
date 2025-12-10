@@ -2,8 +2,10 @@
 /**
  * Custom Taxonomy Registration.
  *
- * @package {{namespace}}
+ * @package {{namespace|lowerCase}}
  */
+
+namespace {{namespace|lowerCase}}\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Taxonomies class.
  */
-class {{namespace|pascalCase}}_Taxonomies {
+class Taxonomies {
 
 	/**
 	 * Taxonomy slug.
@@ -64,7 +66,7 @@ class {{namespace|pascalCase}}_Taxonomies {
 
 		register_taxonomy(
 			self::TAXONOMY,
-			{{namespace|pascalCase}}_Post_Types::POST_TYPE,
+			Post_Types::POST_TYPE,
 			$args
 		);
 	}

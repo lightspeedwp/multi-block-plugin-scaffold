@@ -1,7 +1,7 @@
 /**
- * {{name}} Collection Block - Variations
+ * Example Plugin Collection Block - Variations
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
@@ -9,53 +9,56 @@ import { __ } from '@wordpress/i18n';
 const variations = [
 	{
 		name: 'grid',
-		title: __( '{{name}} Grid', '{{textdomain}}' ),
-		description: __( 'Display {{name_plural_lower}} in a grid layout.', '{{textdomain}}' ),
+		title: __('Example Plugin Grid', 'example-plugin'),
+		description: __('Display items in a grid layout.', 'example-plugin'),
 		icon: 'grid-view',
 		attributes: {
 			layout: 'grid',
 			columns: 3,
 		},
-		scope: [ 'inserter', 'transform' ],
+		scope: ['inserter', 'transform'],
 		isDefault: true,
 	},
 	{
 		name: 'list',
-		title: __( '{{name}} List', '{{textdomain}}' ),
-		description: __( 'Display {{name_plural_lower}} in a list layout.', '{{textdomain}}' ),
+		title: __('Example Plugin List', 'example-plugin'),
+		description: __('Display items in a list layout.', 'example-plugin'),
 		icon: 'list-view',
 		attributes: {
 			layout: 'list',
 		},
-		scope: [ 'inserter', 'transform' ],
+		scope: ['inserter', 'transform'],
 	},
 	{
 		name: 'slider',
-		title: __( '{{name}} Slider', '{{textdomain}}' ),
-		description: __( 'Display {{name_plural_lower}} in a slider/carousel layout.', '{{textdomain}}' ),
+		title: __('Example Plugin Slider', 'example-plugin'),
+		description: __(
+			'Display items in a slider/carousel layout.',
+			'example-plugin'
+		),
 		icon: 'slides',
 		attributes: {
 			layout: 'slider',
 		},
-		scope: [ 'inserter', 'transform' ],
+		scope: ['inserter', 'transform'],
 	},
 	{
 		name: 'featured',
-		title: __( 'Featured {{name_plural}}', '{{textdomain}}' ),
-		description: __( 'Display only featured {{name_plural_lower}}.', '{{textdomain}}' ),
+		title: __('Featured Items', 'example-plugin'),
+		description: __('Display only featured items.', 'example-plugin'),
 		icon: 'star-filled',
 		attributes: {
 			layout: 'grid',
 			columns: 3,
 			query: {
-				postType: '{{slug}}',
+				postType: 'example-plugin',
 				perPage: 3,
 				order: 'desc',
 				orderBy: 'date',
 				featured: true,
 			},
 		},
-		scope: [ 'inserter' ],
+		scope: ['inserter'],
 	},
 ];
 

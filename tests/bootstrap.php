@@ -1,8 +1,8 @@
 <?php
 /**
- * PHPUnit bootstrap file for {{name}}.
+ * PHPUnit bootstrap file for Example Plugin.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 // Create logs directory.
@@ -82,7 +82,7 @@ function _manually_load_plugin() {
 		}
 	}
 
-	require dirname( __DIR__ ) . '/{{slug}}.php';
+	require dirname( __DIR__ ) . '/example-plugin.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

@@ -1,7 +1,7 @@
 /**
  * Gallery Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './Gallery';

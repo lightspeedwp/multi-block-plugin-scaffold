@@ -38,11 +38,22 @@ All agents follow the specifications in `.github/agents/` and integrate with the
 
 ### 1. Scaffold Generator Agent
 
-**Spec**: `.github/agents/scaffold-generator.agent.md`
-**Implementation**: `.github/agents/scaffold-generator.agent.js`
+**Spec**: `.github/agents/generate-plugin.agent.md`
+**Implementation**: `scripts/generate-plugin.agent.js`
+**Core Engine**: `scripts/generate-plugin.js`
 **Type**: Generator Agent
+**Status**: ✅ Fully Implemented (100% test coverage, 104 tests passing)
 
 **Purpose**: Comprehensive interactive agent that collects requirements and generates WordPress multi-block plugins with custom post types, taxonomies, and SCF fields.
+
+**Recent Updates (2025-12-10)**:
+
+- ✅ Migrated to Ajv2020 for JSON Schema validation
+- ✅ Removed circular dependencies between agent and core
+- ✅ Achieved 100% test pass rate (72 core tests + 32 agent tests)
+- ✅ Simplified agent to CLI wrapper with shared schema imports
+- ✅ Fixed all 45 implementation bugs in core generator
+- ✅ Comprehensive filter support (pascalCase, camelCase, kebabCase, snakeCase, upper, lower)
 
 **Discovery Process**:
 

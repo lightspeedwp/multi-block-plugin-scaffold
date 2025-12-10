@@ -1,150 +1,239 @@
 ---
-title: Build Scripts & Utilities
-description: Development scripts for plugin generation, building, testing, and version management
+title: Shell Scripts & System Utilities
+description: Bash/Shell scripts for system operations, environment setup, and CI/CD integration
 category: Development
-date: 2025-12-01
+type: Directory Index
+audience: Developers
+date: 2025-12-09
 ---
 
-# Build Scripts & Utilities
+# Shell Scripts & System Utilities
 
-This directory contains build scripts and utility tools for the multi-block plugin scaffold.
+This directory contains all **shell scripts** (`.sh` files) for system-level operations, environment setup, and CI/CD integration.
 
-## Overview
+## Directory Purpose
 
-The `bin/` directory provides command-line tools for:
+**`bin/`** - Shell scripts (`.sh`) for:
 
-- **Plugin generation** - Create new plugins from the scaffold template
-- **Build automation** - Compile and bundle plugin assets
-- **Version management** - Update version numbers across all files
-- **Testing setup** - Install WordPress test environment
-- **Quality assurance** - Lint and validate code
+- WordPress test environment setup
+- System-level operations
+- Package installation
+- Database operations
+- Deployment automation
+- CI/CD integration
 
-## Scripts
+**Contrast with `scripts/`**:
 
-### `dry-run-config.js`
+- **`bin/`** → Shell scripts (`.sh`) - Bash/shell scripts
+- **`scripts/`** → JavaScript files (`.js`) - Node.js scripts
 
-Configuration for dry-run testing with mustache variable substitution.
+---
 
-**Usage:**
+## Scripts Overview
 
-```bash
-# Get full configuration
-node bin/dry-run-config.js config
+### `install-wp-tests.sh`
 
-# Get specific value
-node bin/dry-run-config.js value slug
+Shell script to set up the WordPress PHPUnit test environment.
 
-# List files with mustache variables
-node bin/dry-run-config.js files
+### `install-wp-tests.sh`
 
-# Replace variables in a file
-node bin/dry-run-config.js replace src/index.js
-```
-
-**Features:**
-
-- Provides test values for all mustache variables
-- Replace `{{slug}}`, `{{namespace}}`, etc. with valid values
-- Find files containing mustache variables
-- Enable testing on scaffold templates
-
-**See also:** [DRY-RUN-TESTING.md](../docs/DRY-RUN-TESTING.md)
-
-### `dry-run-test.js`
-
-Test runner that temporarily substitutes mustache variables.
+Shell script to set up the WordPress PHPUnit test environment.
 
 **Usage:**
 
 ```bash
-# Run with default commands (lint:js, lint:css, test:unit)
-node bin/dry-run-test.js
-
-# Run specific commands
-node bin/dry-run-test.js lint:js test:unit
-
-# Via npm scripts
-npm run dry-run:lint
-npm run dry-run:test
-npm run dry-run:all
-```
-
-**Features:**
-
-- Automatic backup and restore of files
-- Replaces mustache variables with test values
-- Runs linting and tests
-- Safe cleanup on interrupt
-- Colored output for easy debugging
-
-**See also:** [DRY-RUN-TESTING.md](../docs/DRY-RUN-TESTING.md)
-
-### `generate-plugin.js`
-
-Interactive plugin generator that creates a new multi-block plugin from the scaffold.
-
-**Usage:**
-
-```bash
-node bin/generate-plugin.js
-```
-
-**Features:**
-
-- Interactive prompts for plugin metadata
-- Custom post type configuration
-- Taxonomy setup
-- SCF field group generation
-- Block configuration for multiple blocks
-- Mustache template processing
-- Validation and error handling
-
-**See also:** [GENERATOR-SYSTEM.md](../docs/GENERATOR-SYSTEM.md)
-
-### `build.js`
-
-Build automation script for plugin compilation.
-
-**Usage:**
-
-```bash
-node bin/build.js
-```
-
-**Features:**
-
-- Installs npm and Composer dependencies
-- Compiles JavaScript and CSS assets
-- Runs linting and code quality checks
-- Executes test suite
-- Generates build summary
-
-### `update-version.js`
-
-Updates plugin version across all relevant files.
-
-**Usage:**
-
-```bash
-node bin/update-version.js <version>
+bash bin/install-wp-tests.sh <db-name> <db-user> <db-pass> [db-host] [wp-version]
 ```
 
 **Example:**
 
 ```bash
-node bin/update-version.js 1.2.0
+bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
 ```
 
-**Updates:**
+**Features:**
 
-- `package.json`
-- `composer.json`
-- Main plugin PHP file
-- `block.json` files
-- `README.md`
-- `VERSION` file
+- Downloads WordPress test suite
+- Sets up test database
+- Configures PHPUnit environment
+- Used by CI/CD workflows
+- Supports multiple WordPress versions
+- Database cleanup and recreation
 
-### `install-wp-tests.sh`
+**Purpose:**
+Essential for running PHPUnit tests in WordPress plugin development. Creates the necessary test environment with WordPress core files and test database.
+
+---
+
+## Creating New Shell Scripts
+
+### Standards
+
+1. **Location**: Always create in `bin/` directory
+2. **Extension**: Use `.sh` extension
+3. **Shebang**: Include `#!/usr/bin/env bash` at top
+4. **Executable**: Make executable with `chmod +x bin/script-name.sh`
+5. **Comments**: Add usage comments and documentation
+6. **Error Handling**: Include error checking with `set -e`
+7. **Documentation**: Update this README with script details
+
+### Template
+
+```bash
+#!/usr/bin/env bash
+#
+# Script Name: script-name.sh
+# Description: Brief description of what the script does
+#
+# Usage: bash bin/script-name.sh [options]
+# Example: bash bin/script-name.sh --verbose
+#
+
+# Exit on error
+set -e
+
+# Script variables
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+
+# Functions
+usage() {
+    echo "Usage: $0 [options]"
+    echo ""
+    echo "Options:"
+    echo "  --help     Show this help message"
+    exit 1
+}
+
+# Main script logic
+main() {
+    echo "Script starting..."
+    # Script logic here
+    echo "Script completed successfully"
+}
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --help)
+            usage
+            ;;
+        *)
+            echo "Unknown option: $1"
+            usage
+            ;;
+    esac
+    shift
+done
+
+# Run main function
+main
+```
+
+---
+
+## AI Agent Guidelines
+
+### When Creating Shell Scripts
+
+**Shell Scripts (.sh)**:
+
+- ✅ **DO**: Create in `bin/` directory
+- ✅ **DO**: Include `#!/usr/bin/env bash` shebang
+- ✅ **DO**: Add usage comments at top of file
+- ✅ **DO**: Implement error handling with `set -e`
+- ✅ **DO**: Make executable: `chmod +x bin/script-name.sh`
+- ✅ **DO**: Update this README with documentation
+- ✅ **DO**: Add example usage in comments
+- ✅ **DO**: Include help/usage function
+
+**JavaScript Files (.js)**:
+
+- ✅ **DO**: Create in `scripts/` directory (NOT here)
+- ✅ **DO**: See [scripts/README.md](../scripts/README.md) for JavaScript guidelines
+
+### Never Do This
+
+- ❌ Create `.js` files in `bin/` directory (use `scripts/` instead)
+- ❌ Create `.sh` files in `scripts/` directory (use `bin/` instead)
+- ❌ Forget to make shell scripts executable
+- ❌ Skip adding shebang line
+- ❌ Omit error handling
+- ❌ Skip documentation updates
+
+---
+
+## Contrast: bin/ vs scripts/
+
+### `bin/` Directory (This Directory)
+
+**Contains:** Shell scripts (`.sh`)
+
+**Purpose:**
+
+- System-level operations
+- Environment setup
+- Package installation
+- Database operations
+- Deployment automation
+- CI/CD integration
+
+**Technology:** Bash, Shell
+
+**Testing:** Manual testing or shell test frameworks
+
+**Examples:**
+
+- `install-wp-tests.sh` - WordPress test environment setup
+- `deploy.sh` - Deployment automation
+- `backup.sh` - Database backup
+
+### `scripts/` Directory
+
+**Contains:** JavaScript/Node.js files (`.js`)
+
+**Purpose:**
+
+- Build automation
+- Development utilities
+- Testing tools
+- Version management
+- Code generation
+
+**Technology:** Node.js, JavaScript
+
+**Testing:** Jest unit tests in `scripts/__tests__/`
+
+**Examples:**
+
+- `build.js` - Webpack build automation
+- `update-version.js` - Version management
+- `dry-run-test.js` - Template testing
+
+**See:** [scripts/README.md](../scripts/README.md)
+
+---
+
+## Related Documentation
+
+- **[scripts/README.md](../scripts/README.md)** - JavaScript scripts directory
+- **[docs/TESTING.md](../docs/TESTING.md)** - Testing guidelines
+- **[.github/workflows/](../.github/workflows/)** - CI/CD workflows that use these scripts
+- **[.github/instructions/folder-structure.instructions.md](../.github/instructions/folder-structure.instructions.md)** - Repository organization
+
+---
+
+## Summary
+
+✅ **Shell scripts (.sh)** → `bin/` directory
+✅ **JavaScript files (.js)** → `scripts/` directory
+✅ **All shell scripts** → Must be executable (`chmod +x`)
+✅ **All shell scripts** → Must have shebang (`#!/usr/bin/env bash`)
+✅ **Documentation** → Keep this README updated
+
+**Last Updated:** 2025-12-09
+**Scripts Count:** 1 shell script (`install-wp-tests.sh`)
+**Location Rule:** System operations go here, Node.js scripts go to `scripts/`
 
 Shell script to set up the WordPress PHPUnit test environment.
 

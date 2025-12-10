@@ -53,6 +53,65 @@ Executable implementation that:
 - Generates complete plugin structure
 - Creates SCF field groups and block files
 
+## Configuration Schema System
+
+The plugin generator uses a JSON Schema-based configuration system to ensure valid, consistent plugin configurations.
+
+### Schema Files
+
+All schema files are stored in `.github/schemas/` directory:
+
+- **`plugin-config.schema.json`** - JSON Schema defining all configuration options
+- **`plugin-config.example.json`** - Example configuration with realistic values
+
+### Schema Structure
+
+The plugin configuration schema (`plugin-config.schema.json`) defines:
+
+1. **Required Fields** - Mandatory configuration options (slug, name, author)
+2. **Optional Fields** - Additional customization options
+3. **Validation Rules** - Patterns, constraints, and formats
+4. **Field Descriptions** - Documentation for each property
+5. **Default Values** - Sensible defaults for optional fields
+6. **Examples** - Sample values for guidance
+
+### Using Configuration Files
+
+You can provide configuration via JSON file:
+
+```bash
+# Create your configuration file
+cp .github/schemas/plugin-config.example.json my-plugin-config.json
+
+# Edit with your values
+nano my-plugin-config.json
+
+# Generate plugin
+node scripts/generate-plugin.js --config my-plugin-config.json
+```
+
+### Validating Configuration
+
+Validate your configuration before generation:
+
+```bash
+# Validate configuration file
+node scripts/validate-plugin-config.js my-plugin-config.json
+
+# Validate schema only
+node scripts/validate-plugin-config.js --schema-only
+```
+
+The validator checks:
+
+- ✅ JSON syntax validity
+- ✅ Schema compliance
+- ✅ Field type validation
+- ✅ WordPress compatibility
+- ✅ Best practices
+- ⚠️ Warnings for potential issues
+- ℹ️ Suggestions for improvements
+
 ## Mustache Template System
 
 ### What are Mustache Templates?
@@ -259,21 +318,21 @@ Create a tour operator plugin with tours CPT, destination taxonomy, and booking 
 Run the generator script directly from the command line:
 
 ```bash
-node bin/generate-plugin.js
+node scripts/generate-plugin.js
 ```
 
 **Interactive Mode:**
 
 ```bash
 # Prompts for all required information
-node bin/generate-plugin.js
+node scripts/generate-plugin.js
 ```
 
 **Direct Mode:**
 
 ```bash
 # Provide all values via arguments
-node bin/generate-plugin.js \
+node scripts/generate-plugin.js \
   --slug tour-operator \
   --name "Tour Operator" \
   --description "Tour booking and display plugin" \
@@ -281,18 +340,20 @@ node bin/generate-plugin.js \
   --author-uri "https://developer.lsdev.biz"
 ```
 
-**Configuration File Mode:**
+**Configuration File Mode** (Recommended):
 
-```bash
-# Use a JSON configuration file
-echo '{
-  "slug": "tour-operator",
-  "name": "Tour Operator",
-  "description": "Tour booking plugin",
-  "author": "LightSpeed"
-}' > plugin-config.json
+```bashbash
+# Start with example configuration
+cp .github/schemas/plugin-config.example.json my-plugin.json
 
-node bin/generate-plugin.js --config plugin-config.json
+# Edit your configuration
+nano my-plugin.json
+
+# Validate configuration
+node scripts/validate-plugin-config.js my-plugin.json
+
+# Generate plugin
+node scripts/generate-plugin.js --config my-plugin.json
 ```
 
 **Best for:**
@@ -417,7 +478,7 @@ npm run build
 Updates version across all files:
 
 ```bash
-node bin/update-version.js 1.2.0
+node scripts/update-version.js 1.2.0
 ```
 
 Updates: `package.json`, `composer.json`, main plugin file, all `block.json` files, README.md
@@ -539,7 +600,7 @@ The scaffold includes full SCF support for all field types:
 Generate example field groups demonstrating all field types:
 
 ```bash
-node bin/generate-plugin.js --with-example-fields
+node scripts/generate-plugin.js --with-example-fields
 ```
 
 See [SCF Fields Reference](.github/instructions/scf-fields.instructions.md) for complete documentation.
@@ -711,10 +772,89 @@ npm run lint
 npm run test
 ```
 
+## Configuration Schema Reference
+
+The complete schema documentation is available in `.github/schemas/plugin-config.schema.json`. Key configuration sections:
+
+### Core Configuration
+
+```json
+{
+  "slug": "plugin-name",              // Required: URL-safe identifier
+  "name": "Plugin Name",              // Required: Display name
+  "author": "Your Name",              // Required: Author name
+  "description": "Plugin description", // Optional: Brief description
+  "version": "1.0.0",                 // Optional: Starting version
+  "namespace": "plugin_name",         // Auto-generated from slug
+  "textdomain": "plugin-name"         // Auto-generated from slug
+}
+```
+
+### Custom Post Type Configuration
+
+```json
+{
+  "cpt_slug": "item",                 // Max 20 chars
+  "cpt_supports": [                    // CPT features
+    "title",
+    "editor",
+    "thumbnail"
+  ],
+  "cpt_has_archive": true,             // Enable archive page
+  "cpt_menu_icon": "dashicons-admin-post"
+}
+```
+
+### Taxonomies Configuration
+
+```json
+{
+  "taxonomies": [
+    {
+      "slug": "category",
+      "singular": "Category",
+      "plural": "Categories",
+      "hierarchical": true            // Categories vs tags
+    }
+  ]
+}
+```
+
+### Fields Configuration (SCF)
+
+```json
+{
+  "fields": [
+    {
+      "name": "price",
+      "label": "Price",
+      "type": "number",
+      "required": false,
+      "instructions": "Enter the price"
+    }
+  ]
+}
+```
+
+### Blocks Configuration
+
+```json
+{
+  "blocks": ["card", "collection", "slider"],
+  "templates": ["single", "archive"]
+}
+```
+
+For complete schema details, see:
+
+- `.github/schemas/plugin-config.schema.json` - Full schema definition
+- `.github/schemas/plugin-config.example.json` - Working example
+
 ## Related Documentation
 
 - **[README.md](./README.md)** - Documentation index
 - **[../.github/instructions/generate-plugin.instructions.md](../.github/instructions/generate-plugin.instructions.md)** - Mustache template rules
+- **[../.github/instructions/schema-files.instructions.md](../.github/instructions/schema-files.instructions.md)** - Schema file standards
 - **[../.github/instructions/scf-fields.instructions.md](../.github/instructions/scf-fields.instructions.md)** - SCF field types
 
 ## Support

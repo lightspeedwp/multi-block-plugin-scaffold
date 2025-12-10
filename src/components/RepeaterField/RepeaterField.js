@@ -3,7 +3,7 @@
  *
  * Display ACF/SCF repeater field data in blocks.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { useSelect } from '@wordpress/data';
@@ -12,60 +12,71 @@ import { Spinner } from '@wordpress/components';
 /**
  * RepeaterField component.
  *
- * @param {Object}   props            Component props.
- * @param {number}   props.postId     Post ID.
- * @param {string}   props.fieldName  Repeater field name.
- * @param {Function} props.renderRow  Function to render each row.
- * @param {string}   props.className  Additional CSS class.
+ * @param {Object}   props           Component props.
+ * @param {number}   props.postId    Post ID.
+ * @param {string}   props.fieldName Repeater field name.
+ * @param {Function} props.renderRow Function to render each row.
+ * @param {string}   props.className Additional CSS class.
  *
  * @return {Element} RepeaterField component.
  */
-export default function RepeaterField( {
+export default function RepeaterField({
 	postId,
 	fieldName,
 	renderRow,
 	className = '',
-} ) {
+}) {
 	const { rows, isLoading } = useSelect(
-		( select ) => {
-			if ( ! postId || ! fieldName ) {
+		(select) => {
+			if (!postId || !fieldName) {
 				return { rows: [], isLoading: false };
 			}
 
-			const post = select( 'core' ).getEntityRecord( 'postType', '{{slug}}', postId );
-			const fieldValue = post?.acf?.[ fieldName ] ?? post?.meta?.[ fieldName ] ?? null;
+			const post = select('core').getEntityRecord(
+				'postType',
+				'example-plugin',
+				postId
+			);
+			const fieldValue =
+				post?.acf?.[fieldName] ?? post?.meta?.[fieldName] ?? null;
 
 			return {
-				rows: Array.isArray( fieldValue ) ? fieldValue : [],
-				isLoading: ! post,
+				rows: Array.isArray(fieldValue) ? fieldValue : [],
+				isLoading: !post,
 			};
 		},
-		[ postId, fieldName ]
+		[postId, fieldName]
 	);
 
-	if ( isLoading ) {
+	if (isLoading) {
 		return <Spinner />;
 	}
 
-	if ( rows.length === 0 ) {
+	if (rows.length === 0) {
 		return null;
 	}
 
 	return (
-		<div className={ `{{namespace}}-repeater-field ${ className }` }>
-			{ rows.map( ( row, index ) =>
+		<div className={`example_plugin-repeater-field ${className}`}>
+			{rows.map((row, index) =>
 				renderRow ? (
-					renderRow( row, index )
+					renderRow(row, index)
 				) : (
-					<div key={ index } className="{{namespace}}-repeater-field__row">
-						{ Object.entries( row ).map( ( [ key, value ] ) => (
-							<div key={ key } className="{{namespace}}-repeater-field__field">
-								<strong>{ key }:</strong> { String( value ) }
+					<div
+						key={index}
+						className="example_plugin-repeater-field__row"
+					>
+						{Object.entries(row).map(([key, value]) => (
+							<div
+								key={key}
+								className="example_plugin-repeater-field__field"
+							>
+								<strong>{key}:</strong> {String(value)}
 							</div>
-						) ) }
+						))}
 					</div>
 				)
-			) }
+			)}
 		</div>
 	);
 }

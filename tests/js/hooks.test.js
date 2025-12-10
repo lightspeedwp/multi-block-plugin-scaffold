@@ -1,39 +1,39 @@
 /**
  * Hooks Tests
  *
- * @package {{namespace}}
+ * @package
  */
 
-describe( '{{name}} Hooks', () => {
-	beforeEach( () => {
+describe('Example Plugin Hooks', () => {
+	beforeEach(() => {
 		jest.clearAllMocks();
-	} );
+	});
 
-	describe( 'usePostType', () => {
-		it( 'should be defined', () => {
+	describe('usePostType', () => {
+		it('should be defined', () => {
 			// Hook test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'useTaxonomies', () => {
-		it( 'should be defined', () => {
+	describe('useTaxonomies', () => {
+		it('should be defined', () => {
 			// Hook test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'useSlider', () => {
-		it( 'should be defined', () => {
+	describe('useSlider', () => {
+		it('should be defined', () => {
 			// Hook test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
+			expect(true).toBe(true);
+		});
+	});
 
-	describe( 'useCollection', () => {
-		it( 'should be defined', () => {
+	describe('useCollection', () => {
+		it('should be defined', () => {
 			// Hook test placeholder.
-			expect( true ).toBe( true );
-		} );
-	} );
-} );
+			expect(true).toBe(true);
+		});
+	});
+});

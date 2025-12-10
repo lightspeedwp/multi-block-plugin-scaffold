@@ -5,7 +5,7 @@
  * Tests using valid and invalid field group fixtures
  * to verify validator functionality with real-world examples.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Test SCF JSON fixtures with validator.
  */
-class {{namespace|pascalCase}}_SCF_JSON_Fixtures_Test extends WP_UnitTestCase {
+class ExamplePlugin_SCF_JSON_Fixtures_Test extends WP_UnitTestCase {
 
 	/**
 	 * SCF JSON validator instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON_Validator
+	 * @var ExamplePlugin_SCF_JSON_Validator
 	 */
 	private $validator;
 
@@ -38,12 +38,12 @@ class {{namespace|pascalCase}}_SCF_JSON_Fixtures_Test extends WP_UnitTestCase {
 		parent::set_up();
 
 		// Initialize validator if available.
-		if ( class_exists( '{{namespace|pascalCase}}_SCF_JSON_Validator' ) ) {
-			$this->validator = new {{namespace|pascalCase}}_SCF_JSON_Validator();
+		if ( class_exists( 'ExamplePlugin_SCF_JSON_Validator' ) ) {
+			$this->validator = new ExamplePlugin_SCF_JSON_Validator();
 		}
 
 		// Set fixtures directory.
-		$this->fixtures_dir = {{namespace|upper}}_PLUGIN_DIR . 'tests/fixtures';
+		$this->fixtures_dir = EXAMPLE_PLUGIN_PLUGIN_DIR . 'tests/fixtures';
 	}
 
 	/**
@@ -295,7 +295,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Fixtures_Test extends WP_UnitTestCase {
 	 * Skip test if validator not available.
 	 */
 	private function skip_if_validator_not_available() {
-		if ( ! class_exists( '{{namespace|pascalCase}}_SCF_JSON_Validator' ) || ! $this->validator ) {
+		if ( ! class_exists( 'ExamplePlugin_SCF_JSON_Validator' ) || ! $this->validator ) {
 			$this->markTestSkipped( 'SCF JSON Validator not available' );
 		}
 	}

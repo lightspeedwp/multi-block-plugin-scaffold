@@ -1,37 +1,49 @@
 /**
- * {{name}} Slider Block - Frontend View Script
+ * Example Plugin Slider Block - Frontend View Script
  *
- * @package {{namespace}}
+ * @package
  */
 
-( function () {
+(function () {
 	'use strict';
 
-	document.addEventListener( 'DOMContentLoaded', function () {
-		const sliders = document.querySelectorAll( '.wp-block-{{namespace}}-{{slug}}-slider' );
+	document.addEventListener('DOMContentLoaded', function () {
+		const sliders = document.querySelectorAll(
+			'.wp-block-example_plugin-example-plugin-slider'
+		);
 
-		sliders.forEach( function ( slider ) {
-			initSlider( slider );
-		} );
-	} );
+		sliders.forEach(function (slider) {
+			initSlider(slider);
+		});
+	});
 
 	/**
 	 * Initialize a slider instance.
 	 *
 	 * @param {HTMLElement} slider Slider container element.
 	 */
-	function initSlider( slider ) {
-		if ( ! slider ) {
+	function initSlider(slider) {
+		if (!slider) {
 			return;
 		}
 
-		const track = slider.querySelector( '.wp-block-{{namespace}}-{{slug}}-slider__track' );
-		const slides = slider.querySelectorAll( '.wp-block-{{namespace}}-{{slug}}-slider__slide' );
-		const prevBtn = slider.querySelector( '.wp-block-{{namespace}}-{{slug}}-slider__arrow--prev' );
-		const nextBtn = slider.querySelector( '.wp-block-{{namespace}}-{{slug}}-slider__arrow--next' );
-		const dots = slider.querySelectorAll( '.wp-block-{{namespace}}-{{slug}}-slider__dot' );
+		const track = slider.querySelector(
+			'.wp-block-example_plugin-example-plugin-slider__track'
+		);
+		const slides = slider.querySelectorAll(
+			'.wp-block-example_plugin-example-plugin-slider__slide'
+		);
+		const prevBtn = slider.querySelector(
+			'.wp-block-example_plugin-example-plugin-slider__arrow--prev'
+		);
+		const nextBtn = slider.querySelector(
+			'.wp-block-example_plugin-example-plugin-slider__arrow--next'
+		);
+		const dots = slider.querySelectorAll(
+			'.wp-block-example_plugin-example-plugin-slider__dot'
+		);
 
-		if ( ! track || slides.length === 0 ) {
+		if (!track || slides.length === 0) {
 			return;
 		}
 
@@ -47,18 +59,18 @@
 		};
 
 		try {
-			const dataSettings = slider.getAttribute( 'data-slider' );
-			if ( dataSettings ) {
-				settings = { ...settings, ...JSON.parse( dataSettings ) };
+			const dataSettings = slider.getAttribute('data-slider');
+			if (dataSettings) {
+				settings = { ...settings, ...JSON.parse(dataSettings) };
 			}
-		} catch ( e ) {
+		} catch (e) {
 			// eslint-disable-next-line no-console
-			console.error( 'Error parsing slider settings:', e );
+			console.error('Error parsing slider settings:', e);
 		}
 
 		let currentIndex = 0;
 		const totalSlides = slides.length;
-		const maxIndex = Math.max( 0, totalSlides - settings.slidesToShow );
+		const maxIndex = Math.max(0, totalSlides - settings.slidesToShow);
 		let autoplayInterval = null;
 		let isPlaying = settings.autoplay;
 
@@ -67,20 +79,20 @@
 		 *
 		 * @param {number} index Slide index.
 		 */
-		function goToSlide( index ) {
-			if ( settings.infinite ) {
-				if ( index < 0 ) {
+		function goToSlide(index) {
+			if (settings.infinite) {
+				if (index < 0) {
 					index = maxIndex;
-				} else if ( index > maxIndex ) {
+				} else if (index > maxIndex) {
 					index = 0;
 				}
 			} else {
-				index = Math.max( 0, Math.min( index, maxIndex ) );
+				index = Math.max(0, Math.min(index, maxIndex));
 			}
 
 			currentIndex = index;
-			const translateX = -currentIndex * ( 100 / settings.slidesToShow );
-			track.style.transform = `translateX(${ translateX }%)`;
+			const translateX = -currentIndex * (100 / settings.slidesToShow);
+			track.style.transform = `translateX(${translateX}%)`;
 
 			updateDots();
 			updateArrows();
@@ -90,43 +102,45 @@
 		 * Go to next slide.
 		 */
 		function nextSlide() {
-			goToSlide( currentIndex + settings.slidesToScroll );
+			goToSlide(currentIndex + settings.slidesToScroll);
 		}
 
 		/**
 		 * Go to previous slide.
 		 */
 		function prevSlide() {
-			goToSlide( currentIndex - settings.slidesToScroll );
+			goToSlide(currentIndex - settings.slidesToScroll);
 		}
 
 		/**
 		 * Update dot active states.
 		 */
 		function updateDots() {
-			if ( ! dots.length ) {
+			if (!dots.length) {
 				return;
 			}
 
-			dots.forEach( function ( dot, index ) {
-				const isActive = index === Math.floor( currentIndex / settings.slidesToScroll );
-				dot.classList.toggle( 'is-active', isActive );
-				dot.setAttribute( 'aria-selected', isActive.toString() );
-			} );
+			dots.forEach(function (dot, index) {
+				const isActive =
+					index ===
+					Math.floor(currentIndex / settings.slidesToScroll);
+				dot.classList.toggle('is-active', isActive);
+				dot.setAttribute('aria-selected', isActive.toString());
+			});
 		}
 
 		/**
 		 * Update arrow disabled states.
 		 */
 		function updateArrows() {
-			if ( settings.infinite ) {
+			if (settings.infinite) {
 				return;
 			}
 
-			if ( prevBtn ) {
+			if (prevBtn) {
 				prevBtn.disabled = currentIndex === 0;
 			}
-			if ( nextBtn ) {
+			if (nextBtn) {
 				nextBtn.disabled = currentIndex >= maxIndex;
 			}
 		}
@@ -135,12 +149,12 @@
 		 * Start autoplay.
 		 */
 		function startAutoplay() {
-			if ( ! settings.autoplay || totalSlides <= settings.slidesToShow ) {
+			if (!settings.autoplay || totalSlides <= settings.slidesToShow) {
 				return;
 			}
 
 			stopAutoplay();
-			autoplayInterval = setInterval( nextSlide, settings.autoplaySpeed );
+			autoplayInterval = setInterval(nextSlide, settings.autoplaySpeed);
 			isPlaying = true;
 		}
 
@@ -148,72 +162,80 @@
 		 * Stop autoplay.
 		 */
 		function stopAutoplay() {
-			if ( autoplayInterval ) {
-				clearInterval( autoplayInterval );
+			if (autoplayInterval) {
+				clearInterval(autoplayInterval);
 				autoplayInterval = null;
 			}
 			isPlaying = false;
 		}
 
 		// Event listeners.
-		if ( prevBtn ) {
-			prevBtn.addEventListener( 'click', function () {
+		if (prevBtn) {
+			prevBtn.addEventListener('click', function () {
 				prevSlide();
 				stopAutoplay();
-			} );
+			});
 		}
 
-		if ( nextBtn ) {
-			nextBtn.addEventListener( 'click', function () {
+		if (nextBtn) {
+			nextBtn.addEventListener('click', function () {
 				nextSlide();
 				stopAutoplay();
-			} );
+			});
 		}
 
-		dots.forEach( function ( dot ) {
-			dot.addEventListener( 'click', function () {
-				const index = parseInt( dot.getAttribute( 'data-index' ), 10 ) || 0;
-				goToSlide( index * settings.slidesToScroll );
+		dots.forEach(function (dot) {
+			dot.addEventListener('click', function () {
+				const index = parseInt(dot.getAttribute('data-index'), 10) || 0;
+				goToSlide(index * settings.slidesToScroll);
 				stopAutoplay();
-			} );
-		} );
+			});
+		});
 
 		// Pause on hover.
-		slider.addEventListener( 'mouseenter', function () {
-			if ( isPlaying ) {
+		slider.addEventListener('mouseenter', function () {
+			if (isPlaying) {
 				stopAutoplay();
 			}
-		} );
+		});
 
-		slider.addEventListener( 'mouseleave', function () {
-			if ( settings.autoplay ) {
+		slider.addEventListener('mouseleave', function () {
+			if (settings.autoplay) {
 				startAutoplay();
 			}
-		} );
+		});
 
 		// Keyboard navigation.
-		slider.addEventListener( 'keydown', function ( event ) {
-			if ( event.key === 'ArrowLeft' ) {
+		slider.addEventListener('keydown', function (event) {
+			if (event.key === 'ArrowLeft') {
 				prevSlide();
 				stopAutoplay();
-			} else if ( event.key === 'ArrowRight' ) {
+			} else if (event.key === 'ArrowRight') {
 				nextSlide();
 				stopAutoplay();
 			}
-		} );
+		});
 
 		// Touch/swipe support.
 		let touchStartX = 0;
 		let touchEndX = 0;
 
-		slider.addEventListener( 'touchstart', function ( event ) {
-			touchStartX = event.changedTouches[ 0 ].screenX;
-		}, { passive: true } );
+		slider.addEventListener(
+			'touchstart',
+			function (event) {
+				touchStartX = event.changedTouches[0].screenX;
+			},
+			{ passive: true }
+		);
 
-		slider.addEventListener( 'touchend', function ( event ) {
-			touchEndX = event.changedTouches[ 0 ].screenX;
-			handleSwipe();
-		}, { passive: true } );
+		slider.addEventListener(
+			'touchend',
+			function (event) {
+				touchEndX = event.changedTouches[0].screenX;
+				handleSwipe();
+			},
+			{ passive: true }
+		);
 
 		/**
 		 * Handle swipe gesture.
@@ -222,8 +244,8 @@
 			const swipeThreshold = 50;
 			const diff = touchStartX - touchEndX;
 
-			if ( Math.abs( diff ) > swipeThreshold ) {
-				if ( diff > 0 ) {
+			if (Math.abs(diff) > swipeThreshold) {
+				if (diff > 0) {
 					nextSlide();
 				} else {
 					prevSlide();
@@ -238,6 +260,6 @@
 		startAutoplay();
 
 		// Make slider focusable for keyboard navigation.
-		slider.setAttribute( 'tabindex', '0' );
+		slider.setAttribute('tabindex', '0');
 	}
-} )();
+})();

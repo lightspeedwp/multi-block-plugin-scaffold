@@ -1,11 +1,11 @@
 <?php
 /**
- * Title: Featured {{name_plural}}
- * Slug: {{namespace}}/{{slug}}-featured-pattern
- * Categories: {{slug}}
- * Keywords: featured, {{slug}}, highlight
- * Description: Display featured {{name_plural_lower}}.
+ * Title: Featured Items
+ * Slug: example_plugin/example-plugin-featured-pattern
+ * Categories: example-plugin
+ * Keywords: featured, example-plugin, highlight
+ * Description: Display featured items.
  * Viewport Width: 1200
  */
 ?>
-<!-- wp:{{namespace}}/{{slug}}-featured {"count":3,"layout":"featured-first"} /-->
+<!-- wp:example_plugin/example-plugin-featured {"count":3,"layout":"featured-first"} /-->

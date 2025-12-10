@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://{{plugin_uri}}/scf-json/schema/scf-field-group.schema.json",
+    "$id": "https://https://example.com/plugins/example-plugin/scf-json/schema/scf-field-group.schema.json",
     "title": "SCF Field Group",
     "description": "JSON Schema for Secure Custom Fields field group exports",
     "type": "object",

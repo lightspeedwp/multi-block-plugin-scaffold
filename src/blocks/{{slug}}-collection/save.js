@@ -1,9 +1,9 @@
 /**
- * {{name}} Collection Block - Save Component
+ * Example Plugin Collection Block - Save Component
  *
  * This block uses server-side rendering via render.php.
  *
- * @package {{namespace}}
+ * @package
  */
 
 export default function save() {

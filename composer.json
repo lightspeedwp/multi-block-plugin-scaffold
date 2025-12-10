@@ -1,8 +1,8 @@
 {
-	"name": "{{namespace}}/{{slug}}",
-	"description": "{{description}}",
+	"name": "example_plugin/example-plugin",
+	"description": "A multi-block WordPress plugin scaffold example",
 	"type": "wordpress-plugin",
-	"license": "{{license}}",
+	"license": "GPL-2.0-or-later",
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"require": {
@@ -17,7 +17,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"{{namespace|pascalCase}}\\": "inc/"
+			"ExamplePlugin\\": "inc/"
 		}
 	},
 	"scripts": {

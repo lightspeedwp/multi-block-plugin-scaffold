@@ -18,6 +18,11 @@ tmp/
 # Logs directory
 logs/
 
+# Generated plugins output (when using generator mode)
+generated-plugins/
+output-plugin/
+output/
+
 # Dry-run backup files
 .dry-run-backup/
 

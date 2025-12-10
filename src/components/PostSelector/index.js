@@ -1,7 +1,7 @@
 /**
  * Post Selector Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './PostSelector';

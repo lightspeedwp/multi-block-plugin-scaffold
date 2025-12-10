@@ -2,7 +2,7 @@
 /**
  * Fields Tests.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
@@ -22,14 +22,14 @@ class Test_Fields extends WP_UnitTestCase {
 	 * Test that fields class can be instantiated.
 	 */
 	public function test_fields_class_exists() {
-		$this->assertTrue( class_exists( '{{namespace|pascalCase}}_Fields' ) );
+		$this->assertTrue( class_exists( 'ExamplePlugin_Fields' ) );
 	}
 
 	/**
 	 * Test is_scf_active method returns correct value.
 	 */
 	public function test_is_scf_active() {
-		$fields = new {{namespace|pascalCase}}_Fields();
+		$fields = new ExamplePlugin_Fields();
 		$this->assertTrue( $fields->is_scf_active() );
 	}
 
@@ -39,12 +39,12 @@ class Test_Fields extends WP_UnitTestCase {
 	public function test_can_set_and_get_post_meta() {
 		$post_id = $this->factory->post->create(
 			array(
-				'post_type' => '{{slug}}',
+				'post_type' => 'example-plugin',
 			)
 		);
 
-		update_post_meta( $post_id, '{{slug}}_subtitle', 'Test Subtitle' );
-		$value = get_post_meta( $post_id, '{{slug}}_subtitle', true );
+		update_post_meta( $post_id, 'example-plugin_subtitle', 'Test Subtitle' );
+		$value = get_post_meta( $post_id, 'example-plugin_subtitle', true );
 
 		$this->assertEquals( 'Test Subtitle', $value );
 	}
@@ -55,12 +55,12 @@ class Test_Fields extends WP_UnitTestCase {
 	public function test_can_set_featured_field() {
 		$post_id = $this->factory->post->create(
 			array(
-				'post_type' => '{{slug}}',
+				'post_type' => 'example-plugin',
 			)
 		);
 
-		update_post_meta( $post_id, '{{slug}}_featured', '1' );
-		$value = get_post_meta( $post_id, '{{slug}}_featured', true );
+		update_post_meta( $post_id, 'example-plugin_featured', '1' );
+		$value = get_post_meta( $post_id, 'example-plugin_featured', true );
 
 		$this->assertEquals( '1', $value );
 	}

@@ -6,9 +6,11 @@
  * storage and loading. This enables version control of field groups
  * and improves performance by reducing database queries.
  *
- * @package {{namespace}}
+ * @package example_plugin
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/local-json.md
  */
+
+namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Manages Local JSON save and load paths for SCF field groups.
  */
-class {{namespace|pascalCase}}_SCF_JSON {
+class SCF_JSON {
 
 	/**
 	 * Local JSON directory path.
@@ -32,7 +34,7 @@ class {{namespace|pascalCase}}_SCF_JSON {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->json_path = {{namespace|upper}}_PLUGIN_DIR . 'scf-json';
+		$this->json_path = EXAMPLE_PLUGIN_PLUGIN_DIR . 'scf-json';
 
 		// Set JSON save location.
 		add_filter( 'acf/settings/save_json', array( $this, 'set_save_path' ) );

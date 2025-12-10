@@ -5,7 +5,7 @@
  * Tests for SCF Local JSON saving and loading functionality,
  * including file creation, directory setup, and ACF filter integration.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Test SCF Local JSON save and load operations.
  */
-class {{namespace|pascalCase}}_SCF_JSON_Save_Load_Test extends WP_UnitTestCase {
+class ExamplePlugin_SCF_JSON_Save_Load_Test extends WP_UnitTestCase {
 
 	/**
 	 * SCF JSON handler instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON
+	 * @var ExamplePlugin_SCF_JSON
 	 */
 	private $scf_json;
 
@@ -42,8 +42,8 @@ class {{namespace|pascalCase}}_SCF_JSON_Save_Load_Test extends WP_UnitTestCase {
 		wp_mkdir_p( $this->test_json_dir );
 
 		// Initialize SCF JSON handler.
-		if ( class_exists( '{{namespace|pascalCase}}_SCF_JSON' ) ) {
-			$this->scf_json = new {{namespace|pascalCase}}_SCF_JSON();
+		if ( class_exists( 'ExamplePlugin_SCF_JSON' ) ) {
+			$this->scf_json = new ExamplePlugin_SCF_JSON();
 		}
 	}
 
@@ -91,7 +91,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Save_Load_Test extends WP_UnitTestCase {
 	 */
 	public function test_scf_json_handler_available() {
 		$this->assertTrue(
-			class_exists( '{{namespace|pascalCase}}_SCF_JSON' ),
+			class_exists( 'ExamplePlugin_SCF_JSON' ),
 			'SCF JSON handler class should exist'
 		);
 	}
@@ -354,7 +354,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Save_Load_Test extends WP_UnitTestCase {
 	 * Skip test if SCF JSON handler not available.
 	 */
 	private function skip_if_scf_json_not_available() {
-		if ( ! class_exists( '{{namespace|pascalCase}}_SCF_JSON' ) || ! $this->scf_json ) {
+		if ( ! class_exists( 'ExamplePlugin_SCF_JSON' ) || ! $this->scf_json ) {
 			$this->markTestSkipped( 'SCF JSON handler class not available' );
 		}
 	}

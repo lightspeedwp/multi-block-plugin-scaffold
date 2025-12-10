@@ -3,7 +3,7 @@
  *
  * A reusable component for selecting posts in the block editor.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { useState } from '@wordpress/element';
@@ -14,26 +14,26 @@ import { ComboboxControl, Spinner } from '@wordpress/components';
 /**
  * PostSelector component.
  *
- * @param {Object}   props              Component props.
- * @param {string}   props.postType     Post type to query.
- * @param {number}   props.value        Selected post ID.
- * @param {Function} props.onChange     Callback when selection changes.
- * @param {string}   props.label        Control label.
- * @param {string}   props.placeholder  Placeholder text.
+ * @param {Object}   props             Component props.
+ * @param {string}   props.postType    Post type to query.
+ * @param {number}   props.value       Selected post ID.
+ * @param {Function} props.onChange    Callback when selection changes.
+ * @param {string}   props.label       Control label.
+ * @param {string}   props.placeholder Placeholder text.
  *
  * @return {Element} PostSelector component.
  */
-export default function PostSelector( {
-	postType = '{{slug}}',
+export default function PostSelector({
+	postType = 'example-plugin',
 	value,
 	onChange,
-	label = __( 'Select Post', '{{textdomain}}' ),
-	placeholder = __( 'Search posts...', '{{textdomain}}' ),
-} ) {
-	const [ search, setSearch ] = useState( '' );
+	label = __('Select Post', 'example-plugin'),
+	placeholder = __('Search posts…', 'example-plugin'),
+}) {
+	const [search, setSearch] = useState('');
 
 	const { posts, isLoading } = useSelect(
-		( select ) => {
+		(select) => {
 			const queryArgs = {
 				per_page: 20,
 				search: search || undefined,
@@ -41,33 +41,37 @@ export default function PostSelector( {
 			};
 
 			return {
-				posts: select( 'core' ).getEntityRecords( 'postType', postType, queryArgs ),
-				isLoading: select( 'core/data' ).isResolving( 'core', 'getEntityRecords', [
+				posts: select('core').getEntityRecords(
 					'postType',
 					postType,
-					queryArgs,
-				] ),
+					queryArgs
+				),
+				isLoading: select('core/data').isResolving(
+					'core',
+					'getEntityRecords',
+					['postType', postType, queryArgs]
+				),
 			};
 		},
-		[ postType, search ]
+		[postType, search]
 	);
 
 	const options =
-		posts?.map( ( post ) => ( {
+		posts?.map((post) => ({
 			value: post.id,
-			label: post.title.rendered || __( '(No title)', '{{textdomain}}' ),
-		} ) ) || [];
+			label: post.title.rendered || __('(No title)', 'example-plugin'),
+		})) || [];
 
 	return (
-		<div className="{{namespace}}-post-selector">
-			{ isLoading && <Spinner /> }
+		<div className="example_plugin-post-selector">
+			{isLoading && <Spinner />}
 			<ComboboxControl
-				label={ label }
-				value={ value }
-				onChange={ onChange }
-				options={ options }
-				onFilterValueChange={ ( inputValue ) => setSearch( inputValue ) }
-				placeholder={ placeholder }
+				label={label}
+				value={value}
+				onChange={onChange}
+				options={options}
+				onFilterValueChange={(inputValue) => setSearch(inputValue)}
+				placeholder={placeholder}
 			/>
 		</div>
 	);

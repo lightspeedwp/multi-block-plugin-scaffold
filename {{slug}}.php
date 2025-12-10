@@ -1,20 +1,20 @@
 <?php
 /**
- * Plugin Name:       {{name}}
- * Plugin URI:        {{plugin_uri}}
- * Description:       {{description}}
- * Version:           {{version}}
- * Requires at least: {{requires_wp}}
- * Requires PHP:      {{requires_php}}
+ * Plugin Name:       Example Plugin
+ * Plugin URI:        https://example.com/plugins/example-plugin
+ * Description:       A multi-block WordPress plugin scaffold example
+ * Version:           1.0.0
+ * Requires at least: 6.5
+ * Requires PHP:      8.0
  * Requires Plugins:  secure-custom-fields
- * Author:            {{author}}
- * Author URI:        {{author_uri}}
- * License:           {{license}}
- * License URI:       {{license_uri}}
- * Text Domain:       {{textdomain}}
+ * Author:            Example Author
+ * Author URI:        https://example.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       example-plugin
  * Domain Path:       /languages
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( '{{namespace|upper}}_VERSION', '{{version}}' );
-define( '{{namespace|upper}}_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( '{{namespace|upper}}_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( '{{namespace|upper}}_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'EXAMPLE_PLUGIN_VERSION', '1.0.0' );
+define( 'EXAMPLE_PLUGIN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'EXAMPLE_PLUGIN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'EXAMPLE_PLUGIN_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Defensive coding: Check for SCF/ACF functions before using them.
@@ -43,7 +43,7 @@ if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		'admin_notices',
 		function () {
 			echo '<div class="error"><p>' .
-				esc_html__( '{{name}} requires Secure Custom Fields to be active.', '{{textdomain}}' ) .
+				esc_html__( 'Example Plugin requires Secure Custom Fields to be active.', 'example-plugin' ) .
 				'</p></div>';
 		}
 	);
@@ -51,20 +51,22 @@ if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 }
 
 // Include core classes.
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-post-types.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-taxonomies.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-fields.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-repeater-fields.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-options.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-scf-json.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-block-templates.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-block-bindings.php';
-require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-patterns.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-post-types.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-taxonomies.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-fields.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-repeater-fields.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-options.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-scf-json.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-scf-json-validator.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-block-templates.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-block-bindings.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-block-styles.php';
+require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-patterns.php';
 
 /**
  * Main plugin class.
  */
-class {{namespace|pascalCase}}_Plugin {
+class ExamplePlugin_Plugin {
 
 	/**
 	 * Constructor.
@@ -75,15 +77,17 @@ class {{namespace|pascalCase}}_Plugin {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
 		// Initialize components.
-		new {{namespace|pascalCase}}_Post_Types();
-		new {{namespace|pascalCase}}_Taxonomies();
-		new {{namespace|pascalCase}}_Fields();
-		new {{namespace|pascalCase}}_Repeater_Fields();
-		new {{namespace|pascalCase}}_Options();
-		new {{namespace|pascalCase}}_SCF_JSON();
-		new {{namespace|pascalCase}}_Block_Templates();
-		new {{namespace|pascalCase}}_Block_Bindings();
-		new {{namespace|pascalCase}}_Patterns();
+		new \example_plugin\classes\Post_Types();
+		new \example_plugin\classes\Taxonomies();
+		new \example_plugin\classes\Fields();
+		new \example_plugin\classes\Repeater_Fields();
+		new \example_plugin\classes\Options();
+		new \example_plugin\classes\SCF_JSON();
+		new \example_plugin\classes\SCF_JSON_Validator();
+		new \example_plugin\classes\Block_Templates();
+		new \example_plugin\classes\Block_Bindings();
+		new \example_plugin\classes\Block_Styles();
+		new \example_plugin\classes\Patterns();
 	}
 
 	/**
@@ -103,7 +107,7 @@ class {{namespace|pascalCase}}_Plugin {
 	 */
 	public function register_blocks() {
 		// Auto-register all blocks in src/blocks/.
-		$blocks_dir = {{namespace|upper}}_PLUGIN_DIR . 'build/blocks/';
+		$blocks_dir = EXAMPLE_PLUGIN_PLUGIN_DIR . 'build/blocks/';
 
 		if ( is_dir( $blocks_dir ) ) {
 			$blocks = glob( $blocks_dir . '*/block.json' );
@@ -124,8 +128,8 @@ class {{namespace|pascalCase}}_Plugin {
 		return array_merge(
 			array(
 				array(
-					'slug'  => '{{slug}}',
-					'title' => __( '{{name}}', '{{textdomain}}' ),
+					'slug'  => 'example-plugin',
+					'title' => __( 'Example Plugin', 'example-plugin' ),
 					'icon'  => 'admin-generic',
 				),
 			),
@@ -140,11 +144,11 @@ class {{namespace|pascalCase}}_Plugin {
 	 */
 	public function load_textdomain() {
 		load_plugin_textdomain(
-			'{{textdomain}}',
+			'example-plugin',
 			false,
-			dirname( {{namespace|upper}}_PLUGIN_BASENAME ) . '/languages'
+			dirname( EXAMPLE_PLUGIN_PLUGIN_BASENAME ) . '/languages'
 		);
 	}
 }
 
-new {{namespace|pascalCase}}_Plugin();
+new ExamplePlugin_Plugin();

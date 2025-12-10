@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-slider",
-	"title": "{{name}} Slider",
-	"category": "{{slug}}",
+	"name": "example_plugin/example-plugin-slider",
+	"title": "Example Plugin Slider",
+	"category": "example-plugin",
 	"icon": "slides",
-	"description": "Display {{name_plural_lower}} or custom slides in a slider/carousel.",
-	"version": "{{version}}",
-	"textdomain": "{{textdomain}}",
-	"keywords": [ "slider", "carousel", "{{slug}}" ],
+	"description": "Display items or custom slides in a slider/carousel.",
+	"version": "1.0.0",
+	"textdomain": "example-plugin",
+	"keywords": [ "slider", "carousel", "example-plugin" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -81,16 +81,16 @@
 		}
 	},
 	"selectors": {
-		"root": ".{{namespace}}-{{slug}}-slider",
+		"root": ".example_plugin-example-plugin-slider",
 		"color": {
-			"text": ".{{namespace}}-{{slug}}-slider__caption",
-			"background": ".{{namespace}}-{{slug}}-slider"
+			"text": ".example_plugin-example-plugin-slider__caption",
+			"background": ".example_plugin-example-plugin-slider"
 		},
 		"typography": {
-			"fontSize": ".{{namespace}}-{{slug}}-slider__caption"
+			"fontSize": ".example_plugin-example-plugin-slider__caption"
 		},
 		"dimensions": {
-			"aspectRatio": ".{{namespace}}-{{slug}}-slider__slide"
+			"aspectRatio": ".example_plugin-example-plugin-slider__slide"
 		}
 	},
 	"editorScript": "file:./index.js",

@@ -1,7 +1,7 @@
 /**
  * Query Controls Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './QueryControls';

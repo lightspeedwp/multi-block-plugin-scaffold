@@ -1,7 +1,7 @@
 /**
  * Field Display Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 export { default } from './FieldDisplay';

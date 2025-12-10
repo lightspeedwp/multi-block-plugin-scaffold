@@ -10,12 +10,12 @@ These instructions define standards for creating, storing, and managing reports 
 
 ## Core Principles
 
-1. **Single Location**: All reports MUST be stored in `reports/` directory
-2. **Never Root**: Reports NEVER go in the repository root
-3. **Proper Naming**: Follow consistent naming conventions with dates
-4. **Metadata**: All reports MUST include frontmatter with context
-5. **Point-in-Time**: Reports are historical records, not evolving documentation
-6. **Integration**: Reports integrate with `logs/` and `tmp/` for supporting data
+1. **Single Location**: All reports MUST be stored in `.github/reports/` directory
+2. **Categorized Subdirectories**: Reports MUST be placed in a subdirectory within `.github/reports/` that matches their category (e.g., `analysis/`, `migration/`).
+3. **No Root Reports**: Reports are NEVER stored directly in `.github/reports/` or the repository root.
+4. **Proper Naming**: Follow consistent naming conventions with dates.
+5. **Metadata**: All reports MUST include frontmatter with context.
+6. **Point-in-Time**: Reports are historical records, not evolving documentation.
 
 ## Report Types
 
@@ -30,7 +30,7 @@ These instructions define standards for creating, storing, and managing reports 
 - Dependency analysis
 - Migration feasibility studies
 
-**Location**: `reports/ANALYSIS-{name}-{date}.md`
+**Location**: `.github/reports/analysis/ANALYSIS-{name}-{date}.md`
 
 **Structure**:
 ```markdown
@@ -72,12 +72,12 @@ Suggested actions
 - WordPress version compatibility
 - Node.js/PHP version updates
 
-**Location**: `reports/{TOOL}-MIGRATION-{from}-{to}.md`
+**Location**: `.github/reports/migration/{TOOL}-MIGRATION-{from}-{to}.md`
 
 **Examples**:
-- `reports/STYLELINT-MIGRATION-13-16.md`
-- `reports/ESLINT-MIGRATION-8-9.md`
-- `reports/WEBPACK-MIGRATION-5-6.md`
+- `.github/reports/migration/STYLELINT-MIGRATION-13-16.md`
+- `.github/reports/migration/ESLINT-MIGRATION-8-9.md`
+- `.github/reports/migration/WEBPACK-MIGRATION-5-6.md`
 
 **Structure**:
 ```markdown
@@ -114,20 +114,20 @@ How to verify migration success
 
 ### Performance Reports
 
-**Purpose**: Benchmark results, performance testing, optimization opportunities
+**Purpose**: Benchmark results, performance testing, optimization opportunities.
 
-**Location**: `reports/PERFORMANCE-{focus}-{date}.md`
+**Location**: `.github/reports/performance/PERFORMANCE-{focus}-{date}.md`
 
 **Examples**:
-- `reports/PERFORMANCE-BUILD-SIZE-2025-12-07.md`
-- `reports/PERFORMANCE-TEST-SPEED-2025-12-07.md`
-- `reports/PERFORMANCE-BUNDLE-ANALYSIS-2025-12-07.md`
+- `.github/reports/performance/PERFORMANCE-BUILD-SIZE-2025-12-07.md`
+- `.github/reports/performance/PERFORMANCE-TEST-SPEED-2025-12-07.md`
+- `.github/reports/performance/PERFORMANCE-BUNDLE-ANALYSIS-2025-12-07.md`
 
 ### Consolidation & Audit Reports
 
-**Purpose**: Documentation of major organizational changes, cleanup operations
+**Purpose**: Documentation of major organizational changes, cleanup operations.
 
-**Location**: `reports/{OPERATION}-REPORT-{date}.md`
+**Location**: `.github/reports/{audit|consolidation}/{OPERATION}-REPORT-{date}.md`
 
 **Examples**:
 - `reports/CONSOLIDATION-SUMMARY.md`
@@ -173,17 +173,17 @@ Or for specific types:
 ### Examples
 
 ✅ **Good naming**:
-- `reports/STYLELINT-MIGRATION-13-16.md`
-- `reports/PERFORMANCE-BUILD-SIZE-2025-12-07.md`
-- `reports/CONSOLIDATION-SUMMARY.md`
-- `reports/LINK-VALIDATION-REPORT.md`
-- `reports/SECURITY-AUDIT-2025-12-07.md`
+- `.github/reports/migration/STYLELINT-MIGRATION-13-16.md`
+- `.github/reports/performance/PERFORMANCE-BUILD-SIZE-2025-12-07.md`
+- `.github/reports/consolidation/CONSOLIDATION-SUMMARY.md`
+- `.github/reports/validation/LINK-VALIDATION-REPORT.md`
+- `.github/reports/audit/SECURITY-AUDIT-2025-12-07.md`
 
 ❌ **Bad naming**:
 - `REPORT.md` (too generic)
 - `root/REPORT.md` (wrong location)
-- `reports/report_stylelint_update` (no extension, unclear)
-- `docs/MIGRATION-REPORT.md` (wrong folder - should be reports/)
+- `.github/reports/report_stylelint_update` (wrong folder, should be in subfolder)
+- `docs/MIGRATION-REPORT.md` (wrong folder)
 
 ## Frontmatter Requirements
 
@@ -323,11 +323,12 @@ fs.rmSync(tmpDir, { recursive: true, force: true });
 ### By Developers
 
 1. **Create report** in `reports/` with proper naming
-2. **Include frontmatter** with all required fields
-3. **Follow structure** outlined above
-4. **Reference logs** if applicable
-5. **Version control**: Commit to Git
-6. **Date field**: Use current date in ISO format
+2. **Determine category** (e.g., `analysis`, `migration`).
+3. **Place in subdirectory**: Move the file to `.github/reports/{category}/`.
+4. **Include frontmatter** with all required fields.
+5. **Follow structure** outlined above.
+6. **Reference logs** if applicable.
+7. **Version control**: Commit to Git.
 
 ### By Scripts/Agents
 
@@ -335,13 +336,13 @@ fs.rmSync(tmpDir, { recursive: true, force: true });
 2. **Create subdirectory** if needed (e.g., `tmp/reports/analysis/`)
 3. **Log execution** to `logs/` directory
 4. **Generate report** file with timestamp
-5. **Include metadata**: Frontmatter with context
-6. **Clean up temp files** after completion
-7. **Return path**: Script should return report path
+5. **Determine category** from report type.
+6. **Save to correct subdirectory**: `.github/reports/{category}/{filename}`.
+7. **Include metadata**: Frontmatter with context.
+8. **Clean up temp files** after completion.
 
 **Example Script**:
 ```javascript
-const fs = require('fs');
 const path = require('path');
 
 // Create logs directory
@@ -363,10 +364,9 @@ function log(level, message) {
 }
 
 // Create report
-const reportsDir = path.join(__dirname, '../reports');
-if (!fs.existsSync(reportsDir)) {
-  fs.mkdirSync(reportsDir, { recursive: true });
-}
+const reportCategory = 'analysis';
+const reportsDir = path.join(__dirname, '../.github/reports', reportCategory);
+fs.mkdirSync(reportsDir, { recursive: true });
 
 log('INFO', 'Report generation starting');
 
@@ -387,7 +387,7 @@ Report findings here...
 `;
 
 // Write report
-const reportFile = path.join(reportsDir, `ANALYSIS-EXAMPLE-${timestamp}.md`);
+const reportFile = path.join(reportsDir, `ANALYSIS-EXAMPLE-${new Date().toISOString().split('T')[0]}.md`);
 fs.writeFileSync(reportFile, reportContent);
 log('INFO', `Report saved: ${reportFile}`);
 logStream.end();
@@ -398,12 +398,11 @@ logStream.end();
 Agents MUST:
 
 1. **Always use `reports/` location**: Never create reports in root
-2. **Check date**: Use current date in frontmatter
-3. **Follow naming**: Use proper naming convention
-4. **Include context**: Explain why report is being created
-5. **Reference sources**: Link to logs, PRs, related files
-6. **Document assumptions**: Note any limitations or caveats
-7. **Provide recommendations**: Include actionable suggestions
+2. **Determine category**: Identify the report category (e.g., `analysis`).
+3. **Save to subdirectory**: Save the report in `.github/reports/{category}/`.
+4. **Follow naming**: Use proper naming convention.
+5. **Include context**: Explain why report is being created in frontmatter.
+6. **Reference sources**: Link to logs, PRs, related files.
 
 **Agent Prompt Template**:
 
@@ -425,19 +424,23 @@ When generating reports:
 
 ### Location Validation
 
-```bash
-# ✅ CORRECT locations
-reports/STYLELINT-MIGRATION-13-16.md
-reports/CONSOLIDATION-SUMMARY.md
-reports/LINK-VALIDATION-REPORT.md
+✅ **MUST use a subdirectory inside `.github/reports/`**:
 
-# ❌ INCORRECT locations (will be rejected)
-CONSOLIDATION-SUMMARY.md           # Root - WRONG
-docs/REPORT.md                     # docs/ folder - WRONG
-tmp/REPORT.md                      # tmp/ folder - WRONG
-logs/REPORT.md                     # logs/ folder - WRONG
-reports/missing-frontmatter.md     # No frontmatter - WRONG
+```bash
+# ✅ ABSOLUTELY CORRECT locations (ONLY these are acceptable)
+.github/reports/migration/STYLELINT-MIGRATION-13-16.md
+.github/reports/consolidation/CONSOLIDATION-SUMMARY.md
+.github/reports/validation/LINK-VALIDATION-REPORT.md
+
+# ❌ INCORRECT locations
+.github/reports/REPORT.md          # WRONG - Must be in a subdirectory
+reports/REPORT.md                  # WRONG - Do NOT create a root reports/
+CONSOLIDATION-SUMMARY.md           # WRONG - Must be in .github/reports/consolidation/
+docs/REPORT.md                     # WRONG - Wrong folder
+tmp/REPORT.md                      # WRONG - Wrong folder
 ```
+
+**CRITICAL**: If you find reports in root `reports/` directory, move them to `.github/reports/` immediately.
 
 ### Frontmatter Validation
 
@@ -510,43 +513,59 @@ Archive
 
 ### For Copilot/Claude/Gemini
 
-When asked to create or document reports:
+**CRITICAL REQUIREMENT**: When asked to create or document reports:
 
-**ALWAYS**:
-1. Save to `reports/` directory ONLY
-2. Use proper naming: `{TYPE}-{SUBJECT}-{TIMESTAMP}.md`
-3. Include complete YAML frontmatter
-4. Add Executive Summary section
-5. Include Related Files section
-6. Keep reports in root directory mentions OUT
-7. Reference logs/ and tmp/ appropriately
+**ABSOLUTELY ALWAYS (NON-NEGOTIABLE)**:
+1. Save to **`.github/reports/`** directory ONLY - this is the ONLY acceptable location
+2. **Determine the `category`** (e.g., `analysis`, `migration`).
+3. **Save the report in the correct subdirectory**: `.github/reports/{category}/`.
+4. NEVER create reports in a root `reports/` directory.
+5. NEVER create reports in the repository root.
+6. Use proper naming: `{TYPE}-{SUBJECT}-{TIMESTAMP}.md`.
+7. Include complete YAML frontmatter with all required fields.
 
-**NEVER**:
-1. Create reports in repository root
-2. Create reports in other directories
-3. Skip frontmatter metadata
-4. Use generic names like "REPORT.md"
-5. Put analysis/audit files in docs/
-6. Forget date field in frontmatter
+**NEVER (CRITICAL VIOLATIONS)**:
+1. ❌ Save a report directly in `.github/reports/`. It MUST be in a subdirectory.
+2. ❌ Create a `reports/` directory in the root of the repository.
+3. ❌ Save to repository root (e.g., `REPORT.md`).
+4. ❌ Save to other directories (`docs/`, `tmp/`, `logs/`).
+5. ❌ Skip frontmatter metadata
+6. ❌ Use generic names like "REPORT.md"
+7. ❌ Forget date field in frontmatter
+8. ❌ Use relative paths without `.github/` prefix
+
+**Before Saving**: Verify the full path contains `.github/reports/` - if it doesn't, stop and correct immediately
 
 ### Confirmation Check
 
-Before saving any report, verify:
+**CRITICAL**: Before saving ANY report, verify EVERY item:
 
 ```
-✓ Location: reports/ (not root, not docs/, not tmp/)
-✓ Filename: {TYPE}-{SUBJECT}-{TIMESTAMP}.md pattern
-✓ Frontmatter: title, description, category, type, audience, date
-✓ Content: Executive Summary, Findings, Recommendations, Related Files
-✓ Language: Professional, UK English, clear and concise
-✓ Links: All references to logs/ and tmp/ are correct
+✅ LOCATION PATH: Does the full path contain `.github/reports/`?
+   → If NOT, STOP and correct immediately
+   → Example correct: /path/to/.github/reports/REPORT.md
+   → Example WRONG: /path/to/reports/REPORT.md
+   ❌ NEVER create root reports/ directory
+
+✅ Filename: {TYPE}-{SUBJECT}-{TIMESTAMP}.md pattern
+✅ Frontmatter: title, description, category, type, audience, date
+✅ Content: Executive Summary, Context, Findings, Recommendations, Related Files
+✅ Language: Professional, UK English, clear and concise
+✅ Links: All references use relative paths (../logs/, ../tmp/)
+✅ Report exists in `.github/reports/` before commit
 ```
+
+**Path Validation**:
+- **Must contain**: `.github/reports/`
+- **Must NOT contain**: root `reports/` directory
+- **Must NOT be**: Repository root
+- **If path is wrong**: Delete report and recreate in correct location
 
 ## Examples
 
 ### Good Report
 
-**File**: `reports/STYLELINT-MIGRATION-13-16.md`
+**File**: `.github/reports/migration/STYLELINT-MIGRATION-13-16.md`
 
 ```markdown
 ---
@@ -603,12 +622,13 @@ Some analysis findings...
 ```
 
 Problems:
-- ❌ Location: Root instead of reports/
+- ❌ Location: Root instead of `.github/reports/`
 - ❌ Naming: Generic "REPORT" instead of specific type
 - ❌ No frontmatter
 - ❌ No structure
 - ❌ No related files
 - ❌ Missing date
+- ❌ CRITICAL: NOT in `.github/reports/` directory
 
 ## Related Documentation
 
@@ -622,7 +642,7 @@ Problems:
 
 Before committing any report:
 
-- ✅ File is in `reports/` directory
+- ✅ File is in a subdirectory of `.github/reports/` (e.g., `.github/reports/analysis/`)
 - ✅ Filename follows `{TYPE}-{SUBJECT}-{TIMESTAMP}.md` pattern
 - ✅ YAML frontmatter present with all required fields
 - ✅ Content organized with required sections
@@ -634,7 +654,7 @@ Before committing any report:
 
 ## Summary
 
-✅ **Single Location** - All reports stored in `reports/`
+✅ **Single Location** - All reports stored in categorized subdirectories within `.github/reports/`
 
 ✅ **Proper Naming** - Consistent format with type, subject, timestamp
 

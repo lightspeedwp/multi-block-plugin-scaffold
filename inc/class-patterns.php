@@ -2,8 +2,10 @@
 /**
  * Block Patterns Registration.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
+
+namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Patterns class.
  */
-class {{namespace|pascalCase}}_Patterns {
+class Patterns {
 
 	/**
 	 * Constructor.
@@ -29,9 +31,9 @@ class {{namespace|pascalCase}}_Patterns {
 	 */
 	public function register_pattern_category() {
 		register_block_pattern_category(
-			'{{slug}}',
+			'example-plugin',
 			array(
-				'label' => __( '{{name}}', '{{textdomain}}' ),
+				'label' => __( 'Example Plugin', 'example-plugin' ),
 			)
 		);
 	}
@@ -53,7 +55,7 @@ class {{namespace|pascalCase}}_Patterns {
 	 * @return void
 	 */
 	public function register_patterns() {
-		$patterns_dir = {{namespace|upper}}_PLUGIN_DIR . 'patterns/';
+		$patterns_dir = EXAMPLE_PLUGIN_PLUGIN_DIR . 'patterns/';
 
 		if ( ! is_dir( $patterns_dir ) ) {
 			return;
@@ -85,7 +87,7 @@ class {{namespace|pascalCase}}_Patterns {
 	/**
 	 * Derive pattern slug from filename.
 	 *
-	 * Converts 'patterns/{{slug}}-card.php' to '{{namespace}}/card'
+	 * Converts 'patterns/example-plugin-card.php' to 'example-plugin/card'
 	 *
 	 * @param string $pattern_file Full path to pattern file.
 	 * @return string Pattern slug.
@@ -93,10 +95,10 @@ class {{namespace|pascalCase}}_Patterns {
 	private function get_pattern_slug_from_file( $pattern_file ) {
 		$filename = basename( $pattern_file, '.php' );
 
-		// Remove {{slug}}- prefix if present.
-		$pattern_name = str_replace( '{{slug}}-', '', $filename );
+		// Remove example-plugin- prefix if present.
+		$pattern_name = str_replace( 'example-plugin-', '', $filename );
 
 		// Return namespaced slug.
-		return '{{namespace}}/' . $pattern_name;
+		return 'example-plugin/' . $pattern_name;
 	}
 }

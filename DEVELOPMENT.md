@@ -342,7 +342,7 @@ Use the version update script:
 
 ```bash
 # Update to new version
-node bin/update-version.js 1.2.0
+node scripts/update-version.js 1.2.0
 ```
 
 This updates version numbers in:

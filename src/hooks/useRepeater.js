@@ -3,7 +3,7 @@
  *
  * Custom hook for accessing ACF/SCF repeater field data.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { useSelect } from '@wordpress/data';
@@ -17,25 +17,34 @@ import { useSelect } from '@wordpress/data';
  *
  * @return {Object} Repeater rows and loading state.
  */
-export default function useRepeater( postId, fieldName, postType = '{{slug}}' ) {
+export default function useRepeater(
+	postId,
+	fieldName,
+	postType = 'example-plugin'
+) {
 	return useSelect(
-		( select ) => {
-			if ( ! postId || ! fieldName ) {
+		(select) => {
+			if (!postId || !fieldName) {
 				return { rows: [], isLoading: false };
 			}
 
-			const post = select( 'core' ).getEntityRecord( 'postType', postType, postId );
-			const isLoading = select( 'core/data' ).isResolving( 'core', 'getEntityRecord', [
+			const post = select('core').getEntityRecord(
 				'postType',
 				postType,
-				postId,
-			] );
+				postId
+			);
+			const isLoading = select('core/data').isResolving(
+				'core',
+				'getEntityRecord',
+				['postType', postType, postId]
+			);
 
-			const fieldValue = post?.acf?.[ fieldName ] ?? post?.meta?.[ fieldName ] ?? null;
-			const rows = Array.isArray( fieldValue ) ? fieldValue : [];
+			const fieldValue =
+				post?.acf?.[fieldName] ?? post?.meta?.[fieldName] ?? null;
+			const rows = Array.isArray(fieldValue) ? fieldValue : [];
 
 			return { rows, isLoading };
 		},
-		[ postId, fieldName, postType ]
+		[postId, fieldName, postType]
 	);
 }

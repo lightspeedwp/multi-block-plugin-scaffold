@@ -64,12 +64,21 @@ Rules for organizing files and folders in the Multi-Block Plugin Scaffold reposi
 
 ### Build & Development
 
-**`bin/`** - Build scripts
+**`bin/`** - Shell scripts and entry points
 
-- Node.js scripts
-- Shell scripts
+- Shell scripts (`.sh` files only)
+- WordPress test environment setup
 - **Shipped**: No
 - **Executable**: Yes (`chmod +x`)
+- **Note**: JavaScript build scripts go in `scripts/`, not here
+
+**`scripts/`** - Node.js build and utility scripts
+
+- JavaScript build and automation scripts
+- Configuration and validation scripts
+- **Examples**: `build.js`, `update-version.js`, `validate-plugin-config.js`, `dry-run-config.js`
+- **Shipped**: No
+- **Executable**: Yes (`chmod +x` for scripts meant to run directly)
 
 **`tests/`** - Test files
 

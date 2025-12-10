@@ -5,9 +5,11 @@
  * Comprehensive JSON Schema validation for SCF field groups using
  * JSON Schema Draft 7 validation.
  *
- * @package {{namespace}}
+ * @package example_plugin
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/local-json.md
  */
+
+namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Validates SCF field group JSON files against the schema.
  */
-class {{namespace|pascalCase}}_SCF_JSON_Validator {
+class SCF_JSON_Validator {
 
 	/**
 	 * Path to the JSON schema file.
@@ -37,7 +39,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	/**
 	 * SCF JSON handler instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON
+	 * @var SCF_JSON
 	 */
 	private $scf_json;
 
@@ -78,10 +80,10 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->schema_path = {{namespace|upper}}_PLUGIN_DIR . 'scf-json/schema/scf-field-group.schema.json';
+		$this->schema_path = EXAMPLE_PLUGIN_PLUGIN_DIR . 'scf-json/schema/scf-field-group.schema.json';
 
-		if ( class_exists( '{{namespace|pascalCase}}_SCF_JSON' ) ) {
-			$this->scf_json = new {{namespace|pascalCase}}_SCF_JSON();
+		if ( class_exists( 'example_plugin\classes\SCF_JSON' ) ) {
+			$this->scf_json = new SCF_JSON();
 		}
 
 		$this->load_schema();

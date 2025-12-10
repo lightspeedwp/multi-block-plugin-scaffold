@@ -1,31 +1,25 @@
 /**
- * {{name}} Card Block - Editor Component
+ * Example Plugin Card Block - Editor Component
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	InspectorControls,
-} from '@wordpress/block-editor';
-import {
-	PanelBody,
-	ToggleControl,
-} from '@wordpress/components';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 
 /**
  * Card block edit component.
  *
- * @param {Object} props               Block props.
- * @param {Object} props.attributes    Block attributes.
+ * @param {Object}   props               Block props.
+ * @param {Object}   props.attributes    Block attributes.
  * @param {Function} props.setAttributes Function to update attributes.
- * @param {Object} props.context       Block context.
+ * @param {Object}   props.context       Block context.
  *
  * @return {Element} Block editor component.
  */
-export default function Edit( { attributes, setAttributes, context } ) {
+export default function Edit({ attributes, setAttributes, context }) {
 	const {
 		displayFeaturedImage,
 		displayTitle,
@@ -38,112 +32,129 @@ export default function Edit( { attributes, setAttributes, context } ) {
 	const postId = context.postId;
 
 	const post = useSelect(
-		( select ) => {
-			if ( ! postId ) {
+		(select) => {
+			if (!postId) {
 				return null;
 			}
-			return select( 'core' ).getEntityRecord( 'postType', context.postType || '{{slug}}', postId );
+			return select('core').getEntityRecord(
+				'postType',
+				context.postType || 'example-plugin',
+				postId
+			);
 		},
-		[ postId, context.postType ]
+		[postId, context.postType]
 	);
 
 	const featuredMedia = useSelect(
-		( select ) => {
-			if ( ! post?.featured_media ) {
+		(select) => {
+			if (!post?.featured_media) {
 				return null;
 			}
-			return select( 'core' ).getMedia( post.featured_media );
+			return select('core').getMedia(post.featured_media);
 		},
-		[ post?.featured_media ]
+		[post?.featured_media]
 	);
 
-	const blockProps = useBlockProps( {
-		className: 'wp-block-{{namespace}}-{{slug}}-card',
-	} );
+	const blockProps = useBlockProps({
+		className: 'wp-block-example_plugin-example-plugin-card',
+	});
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Display Settings', '{{textdomain}}' ) }>
+				<PanelBody title={__('Display Settings', 'example-plugin')}>
 					<ToggleControl
-						label={ __( 'Display Featured Image', '{{textdomain}}' ) }
-						checked={ displayFeaturedImage }
-						onChange={ ( value ) => setAttributes( { displayFeaturedImage: value } ) }
+						label={__('Display Featured Image', 'example-plugin')}
+						checked={displayFeaturedImage}
+						onChange={(value) =>
+							setAttributes({ displayFeaturedImage: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Title', '{{textdomain}}' ) }
-						checked={ displayTitle }
-						onChange={ ( value ) => setAttributes( { displayTitle: value } ) }
+						label={__('Display Title', 'example-plugin')}
+						checked={displayTitle}
+						onChange={(value) =>
+							setAttributes({ displayTitle: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Subtitle', '{{textdomain}}' ) }
-						checked={ displaySubtitle }
-						onChange={ ( value ) => setAttributes( { displaySubtitle: value } ) }
+						label={__('Display Subtitle', 'example-plugin')}
+						checked={displaySubtitle}
+						onChange={(value) =>
+							setAttributes({ displaySubtitle: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Excerpt', '{{textdomain}}' ) }
-						checked={ displayExcerpt }
-						onChange={ ( value ) => setAttributes( { displayExcerpt: value } ) }
+						label={__('Display Excerpt', 'example-plugin')}
+						checked={displayExcerpt}
+						onChange={(value) =>
+							setAttributes({ displayExcerpt: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Display Meta', '{{textdomain}}' ) }
-						checked={ displayMeta }
-						onChange={ ( value ) => setAttributes( { displayMeta: value } ) }
+						label={__('Display Meta', 'example-plugin')}
+						checked={displayMeta}
+						onChange={(value) =>
+							setAttributes({ displayMeta: value })
+						}
 					/>
 					<ToggleControl
-						label={ __( 'Link to Post', '{{textdomain}}' ) }
-						checked={ linkToPost }
-						onChange={ ( value ) => setAttributes( { linkToPost: value } ) }
+						label={__('Link to Post', 'example-plugin')}
+						checked={linkToPost}
+						onChange={(value) =>
+							setAttributes({ linkToPost: value })
+						}
 					/>
 				</PanelBody>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ displayFeaturedImage && featuredMedia && (
-					<div className="wp-block-{{namespace}}-{{slug}}-card__image">
+			<div {...blockProps}>
+				{displayFeaturedImage && featuredMedia && (
+					<div className="wp-block-example_plugin-example-plugin-card__image">
 						<img
-							src={ featuredMedia.source_url }
-							alt={ featuredMedia.alt_text || '' }
+							src={featuredMedia.source_url}
+							alt={featuredMedia.alt_text || ''}
 						/>
 					</div>
-				) }
+				)}
 
-				<div className="wp-block-{{namespace}}-{{slug}}-card__content">
-					{ displayTitle && post && (
-						<h3 className="wp-block-{{namespace}}-{{slug}}-card__title">
-							{ post.title?.rendered || __( 'Untitled', '{{textdomain}}' ) }
+				<div className="wp-block-example_plugin-example-plugin-card__content">
+					{displayTitle && post && (
+						<h3 className="wp-block-example_plugin-example-plugin-card__title">
+							{post.title?.rendered ||
+								__('Untitled', 'example-plugin')}
 						</h3>
-					) }
+					)}
 
-					{ displaySubtitle && (
-						<p className="wp-block-{{namespace}}-{{slug}}-card__subtitle">
-							{ __( 'Subtitle placeholder', '{{textdomain}}' ) }
+					{displaySubtitle && (
+						<p className="wp-block-example_plugin-example-plugin-card__subtitle">
+							{__('Subtitle placeholder', 'example-plugin')}
 						</p>
-					) }
+					)}
 
-					{ displayExcerpt && post && (
+					{displayExcerpt && post && (
 						<div
-							className="wp-block-{{namespace}}-{{slug}}-card__excerpt"
-							dangerouslySetInnerHTML={ {
+							className="wp-block-example_plugin-example-plugin-card__excerpt"
+							dangerouslySetInnerHTML={{
 								__html: post.excerpt?.rendered || '',
-							} }
+							}}
 						/>
-					) }
+					)}
 
-					{ displayMeta && post && (
-						<div className="wp-block-{{namespace}}-{{slug}}-card__meta">
-							<span className="wp-block-{{namespace}}-{{slug}}-card__date">
-								{ new Date( post.date ).toLocaleDateString() }
+					{displayMeta && post && (
+						<div className="wp-block-example_plugin-example-plugin-card__meta">
+							<span className="wp-block-example_plugin-example-plugin-card__date">
+								{new Date(post.date).toLocaleDateString()}
 							</span>
 						</div>
-					) }
+					)}
 				</div>
 
-				{ ! post && (
-					<p className="wp-block-{{namespace}}-{{slug}}-card__placeholder">
-						{ __( 'Select a post to display.', '{{textdomain}}' ) }
+				{!post && (
+					<p className="wp-block-example_plugin-example-plugin-card__placeholder">
+						{__('Select a post to display.', 'example-plugin')}
 					</p>
-				) }
+				)}
 			</div>
 		</>
 	);

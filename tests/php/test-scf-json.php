@@ -2,7 +2,7 @@
 /**
  * Test SCF JSON validation.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
@@ -13,7 +13,7 @@ class Test_SCF_JSON extends WP_UnitTestCase {
 	/**
 	 * SCF JSON handler instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON
+	 * @var ExamplePlugin_SCF_JSON
 	 */
 	private $scf_json;
 
@@ -24,11 +24,11 @@ class Test_SCF_JSON extends WP_UnitTestCase {
 		parent::set_up();
 
 		// Include the class if not already loaded.
-		if ( ! class_exists( '{{namespace|pascalCase}}_SCF_JSON' ) ) {
+		if ( ! class_exists( 'ExamplePlugin_SCF_JSON' ) ) {
 			require_once dirname( dirname( __DIR__ ) ) . '/inc/class-scf-json.php';
 		}
 
-		$this->scf_json = new {{namespace|pascalCase}}_SCF_JSON();
+		$this->scf_json = new ExamplePlugin_SCF_JSON();
 	}
 
 	/**

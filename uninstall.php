@@ -1,10 +1,10 @@
 <?php
 /**
- * {{name}} Uninstall
+ * Example Plugin Uninstall
  *
  * Fired when the plugin is uninstalled to clean up all plugin data.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 // If uninstall not called from WordPress, exit.
@@ -14,9 +14,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-$slug      = '{{slug}}';
-$post_type = '{{slug}}';
-$taxonomy  = '{{slug}}_category';
+$slug      = 'example-plugin';
+$post_type = 'example-plugin';
+$taxonomy  = 'example-plugin_category';
 
 /**
  * Delete all posts of the custom post type.

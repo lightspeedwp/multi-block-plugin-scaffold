@@ -12,7 +12,7 @@
  * - CSS variables should have absolute fallbacks
  * - Use semantic HTML and ARIA attributes for accessibility
  *
- * @package    {{namespace}}
+ * @package    example_plugin
  * @subpackage Patterns
  * @since      1.0.0
  * @version    1.0.0
@@ -32,21 +32,21 @@ return array(
 	 * Human-readable pattern name shown in the block inserter.
 	 * Must be internationalized.
 	 */
-	'title'         => __( 'Example Card', '{{textdomain}}' ),
+	'title'         => __( 'Example Card', 'example-plugin' ),
 
 	/**
 	 * Description (Optional but Recommended)
 	 * Hidden text used for searching patterns in the inserter.
 	 * Should explain the pattern's purpose and use case.
 	 */
-	'description'   => __( 'A card layout for displaying content in grids and queries. Includes image, title, excerpt, and metadata.', '{{textdomain}}' ),
+	'description'   => __( 'A card layout for displaying content in grids and queries. Includes image, title, excerpt, and metadata.', 'example-plugin' ),
 
 	/**
 	 * Categories (Optional but Recommended)
 	 * Array of category slugs. Use plugin slug as primary category.
 	 * Additional categories can be registered in inc/class-patterns.php
 	 */
-	'categories'    => array( '{{slug}}' ),
+	'categories'    => array( 'example-plugin' ),
 
 	/**
 	 * Keywords (Optional)
@@ -54,10 +54,10 @@ return array(
 	 * All keywords should be internationalized.
 	 */
 	'keywords'      => array(
-		__( 'card', '{{textdomain}}' ),
-		__( 'grid', '{{textdomain}}' ),
-		__( 'post', '{{textdomain}}' ),
-		__( 'layout', '{{textdomain}}' ),
+		__( 'card', 'example-plugin' ),
+		__( 'grid', 'example-plugin' ),
+		__( 'post', 'example-plugin' ),
+		__( 'layout', 'example-plugin' ),
 	),
 
 	/**
@@ -78,9 +78,9 @@ return array(
 	 * Restrict pattern visibility to specific post types.
 	 * Use for patterns designed for custom post types.
 	 *
-	 * Examples: array( '{{slug}}', 'post', 'page' )
+	 * Examples: array( 'example-plugin', 'post', 'page' )
 	 */
-	'postTypes'     => array( '{{slug}}' ),
+	'postTypes'     => array( 'example-plugin' ),
 
 	/**
 	 * Template Types (Optional)
@@ -92,10 +92,10 @@ return array(
 	 * - 'archive' (archive templates)
 	 * - 'home' (homepage template)
 	 * - 'search' (search results template)
-	 * - 'single-{{slug}}' (specific CPT template)
-	 * - 'archive-{{slug}}' (specific archive template)
+	 * - 'single-example-plugin' (specific CPT template)
+	 * - 'archive-example-plugin' (specific archive template)
 	 */
-	'templateTypes' => array( 'single', 'archive', 'single-{{slug}}', 'archive-{{slug}}' ),
+	'templateTypes' => array( 'single', 'archive', 'single-example-plugin', 'archive-example-plugin' ),
 
 	/**
 	 * Viewport Width (Optional)
@@ -144,24 +144,24 @@ return array(
 	 * - Include alt text for images
 	 * - Ensure color contrast meets WCAG AA standards
 	 */
-	'content'       => '<!-- wp:group {"metadata":{"name":"' . esc_attr__( 'Example Card', '{{textdomain}}' ) . '","categories":["{{slug}}"],"patternName":"{{namespace}}/example-card"},"className":"{{slug}}-card overflow-hidden is-style-shadow-sm","style":{"spacing":{"blockGap":"var(--wp--preset--spacing--20, 1rem)"},"border":{"radius":"0.5rem"}},"layout":{"type":"default"},"ariaLabel":"' . esc_attr__( 'Example Card', '{{textdomain}}' ) . '"} -->
-<div aria-label="' . esc_attr__( 'Example Card', '{{textdomain}}' ) . '" class="wp-block-group {{slug}}-card overflow-hidden is-style-shadow-sm" style="border-radius:0.5rem">
+	'content'       => '<!-- wp:group {"metadata":{"name":"' . esc_attr__( 'Example Card', 'example-plugin' ) . '","categories":["example-plugin"],"patternName":"example_plugin/example-card"},"className":"example-plugin-card overflow-hidden is-style-shadow-sm","style":{"spacing":{"blockGap":"var(--wp--preset--spacing--20, 1rem)"},"border":{"radius":"0.5rem"}},"layout":{"type":"default"},"ariaLabel":"' . esc_attr__( 'Example Card', 'example-plugin' ) . '"} -->
+<div aria-label="' . esc_attr__( 'Example Card', 'example-plugin' ) . '" class="wp-block-group example-plugin-card overflow-hidden is-style-shadow-sm" style="border-radius:0.5rem">
 
 	<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"3/2","linkTarget":"_blank"} /-->
 
-	<!-- wp:group {"metadata":{"name":"' . esc_attr__( 'Card Content', '{{textdomain}}' ) . '"},"style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--30, 1.5rem)","bottom":"var(--wp--preset--spacing--30, 1.5rem)","left":"var(--wp--preset--spacing--30, 1.5rem)","right":"var(--wp--preset--spacing--30, 1.5rem)"},"blockGap":"var(--wp--preset--spacing--20, 1rem)"}},"layout":{"type":"default"}} -->
+	<!-- wp:group {"metadata":{"name":"' . esc_attr__( 'Card Content', 'example-plugin' ) . '"},"style":{"spacing":{"padding":{"top":"var(--wp--preset--spacing--30, 1.5rem)","bottom":"var(--wp--preset--spacing--30, 1.5rem)","left":"var(--wp--preset--spacing--30, 1.5rem)","right":"var(--wp--preset--spacing--30, 1.5rem)"},"blockGap":"var(--wp--preset--spacing--20, 1rem)"}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--30, 1.5rem);padding-right:var(--wp--preset--spacing--30, 1.5rem);padding-bottom:var(--wp--preset--spacing--30, 1.5rem);padding-left:var(--wp--preset--spacing--30, 1.5rem)">
 
-		<!-- wp:post-title {"level":3,"isLink":true,"style":{"elements":{"link":{":hover":{"color":{"text":"var(--wp--preset--color--primary, #0073aa)"}}}},"typography":{"fontSize":"1.25rem","lineHeight":"1.4"}},"className":"{{slug}}-card__title"} /-->
+		<!-- wp:post-title {"level":3,"isLink":true,"style":{"elements":{"link":{":hover":{"color":{"text":"var(--wp--preset--color--primary, #0073aa)"}}}},"typography":{"fontSize":"1.25rem","lineHeight":"1.4"}},"className":"example-plugin-card__title"} /-->
 
-		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"{{namespace}}/fields","args":{"key":"{{slug}}_subtitle"}}}},"style":{"typography":{"fontStyle":"italic","fontSize":"1rem"},"color":{"text":"var(--wp--preset--color--contrast-2, #666666)"}},"className":"{{slug}}-card__subtitle"} -->
-		<p class="{{slug}}-card__subtitle has-text-color" style="color:var(--wp--preset--color--contrast-2, #666666);font-size:1rem;font-style:italic"></p>
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"example_plugin/fields","args":{"key":"example-plugin_subtitle"}}}},"style":{"typography":{"fontStyle":"italic","fontSize":"1rem"},"color":{"text":"var(--wp--preset--color--contrast-2, #666666)"}},"className":"example-plugin-card__subtitle"} -->
+		<p class="example-plugin-card__subtitle has-text-color" style="color:var(--wp--preset--color--contrast-2, #666666);font-size:1rem;font-style:italic"></p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:post-excerpt {"moreText":"","excerptLength":20,"style":{"typography":{"fontSize":"0.875rem"}}} /-->
 
-		<!-- wp:group {"metadata":{"name":"' . esc_attr__( 'Card Meta', '{{textdomain}}' ) . '"},"className":"{{slug}}-card__meta","style":{"spacing":{"blockGap":"var(--wp--preset--spacing--10, 0.5rem)","margin":{"top":"var(--wp--preset--spacing--20, 1rem)"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"fontSize":"small"} -->
-		<div class="wp-block-group {{slug}}-card__meta has-small-font-size" style="margin-top:var(--wp--preset--spacing--20, 1rem)">
+		<!-- wp:group {"metadata":{"name":"' . esc_attr__( 'Card Meta', 'example-plugin' ) . '"},"className":"example-plugin-card__meta","style":{"spacing":{"blockGap":"var(--wp--preset--spacing--10, 0.5rem)","margin":{"top":"var(--wp--preset--spacing--20, 1rem)"}}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"fontSize":"small"} -->
+		<div class="wp-block-group example-plugin-card__meta has-small-font-size" style="margin-top:var(--wp--preset--spacing--20, 1rem)">
 			<!-- wp:post-date {"style":{"color":{"text":"var(--wp--preset--color--contrast-3, #888888)"}}} /-->
 
 			<!-- wp:paragraph {"style":{"color":{"text":"var(--wp--preset--color--contrast-3, #888888)"}}} -->

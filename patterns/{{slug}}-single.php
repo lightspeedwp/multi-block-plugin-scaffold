@@ -1,10 +1,10 @@
 <?php
 /**
- * Title: {{name_singular}} Single
- * Slug: {{namespace}}/{{slug}}-single
- * Categories: {{slug}}
- * Keywords: single, {{slug}}, post
- * Description: Single {{name_singular_lower}} content layout.
+ * Title: Item Single
+ * Slug: example_plugin/example-plugin-single
+ * Categories: example-plugin
+ * Keywords: single, example-plugin, post
+ * Description: Single item content layout.
  * Viewport Width: 1200
  */
 ?>
@@ -16,7 +16,7 @@
 	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40)">
 		<!-- wp:post-title {"level":1} /-->
 
-		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"{{namespace}}/fields","args":{"key":"{{slug}}_subtitle"}}}},"style":{"typography":{"fontSize":"1.25rem","fontStyle":"italic"},"color":{"text":"#666666"}}} -->
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"example_plugin/fields","args":{"key":"example-plugin_subtitle"}}}},"style":{"typography":{"fontSize":"1.25rem","fontStyle":"italic"},"color":{"text":"#666666"}}} -->
 		<p class="has-text-color" style="color:#666666;font-size:1.25rem;font-style:italic"></p>
 		<!-- /wp:paragraph -->
 
@@ -31,6 +31,6 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:pattern {"slug":"{{namespace}}/{{slug}}-meta"} /-->
+	<!-- wp:pattern {"slug":"example_plugin/example-plugin-meta"} /-->
 </div>
 <!-- /wp:group -->

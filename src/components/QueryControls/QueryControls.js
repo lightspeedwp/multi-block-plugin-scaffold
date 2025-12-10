@@ -3,7 +3,7 @@
  *
  * Reusable query configuration controls for collection blocks.
  *
- * @package {{namespace}}
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
@@ -25,7 +25,7 @@ import TaxonomyFilter from '../TaxonomyFilter';
  *
  * @return {Element} QueryControls component.
  */
-export default function QueryControls( { query, onChange } ) {
+export default function QueryControls({ query, onChange }) {
 	const {
 		perPage = 6,
 		order = 'desc',
@@ -34,60 +34,81 @@ export default function QueryControls( { query, onChange } ) {
 		taxQuery = null,
 	} = query;
 
-	const updateQuery = ( updates ) => {
-		onChange( { ...query, ...updates } );
+	const updateQuery = (updates) => {
+		onChange({ ...query, ...updates });
 	};
 
 	return (
 		<InspectorControls>
-			<PanelBody title={ __( 'Query Settings', '{{textdomain}}' ) }>
+			<PanelBody title={__('Query Settings', 'example-plugin')}>
 				<RangeControl
-					label={ __( 'Number of Items', '{{textdomain}}' ) }
-					value={ perPage }
-					onChange={ ( value ) => updateQuery( { perPage: value } ) }
-					min={ 1 }
-					max={ 24 }
+					label={__('Number of Items', 'example-plugin')}
+					value={perPage}
+					onChange={(value) => updateQuery({ perPage: value })}
+					min={1}
+					max={24}
 				/>
 				<SelectControl
-					label={ __( 'Order By', '{{textdomain}}' ) }
-					value={ orderBy }
-					options={ [
-						{ label: __( 'Date', '{{textdomain}}' ), value: 'date' },
-						{ label: __( 'Title', '{{textdomain}}' ), value: 'title' },
-						{ label: __( 'Modified', '{{textdomain}}' ), value: 'modified' },
-						{ label: __( 'Random', '{{textdomain}}' ), value: 'rand' },
-						{ label: __( 'Menu Order', '{{textdomain}}' ), value: 'menu_order' },
-					] }
-					onChange={ ( value ) => updateQuery( { orderBy: value } ) }
+					label={__('Order By', 'example-plugin')}
+					value={orderBy}
+					options={[
+						{ label: __('Date', 'example-plugin'), value: 'date' },
+						{
+							label: __('Title', 'example-plugin'),
+							value: 'title',
+						},
+						{
+							label: __('Modified', 'example-plugin'),
+							value: 'modified',
+						},
+						{
+							label: __('Random', 'example-plugin'),
+							value: 'rand',
+						},
+						{
+							label: __('Menu Order', 'example-plugin'),
+							value: 'menu_order',
+						},
+					]}
+					onChange={(value) => updateQuery({ orderBy: value })}
 				/>
 				<SelectControl
-					label={ __( 'Order', '{{textdomain}}' ) }
-					value={ order }
-					options={ [
-						{ label: __( 'Descending', '{{textdomain}}' ), value: 'desc' },
-						{ label: __( 'Ascending', '{{textdomain}}' ), value: 'asc' },
-					] }
-					onChange={ ( value ) => updateQuery( { order: value } ) }
+					label={__('Order', 'example-plugin')}
+					value={order}
+					options={[
+						{
+							label: __('Descending', 'example-plugin'),
+							value: 'desc',
+						},
+						{
+							label: __('Ascending', 'example-plugin'),
+							value: 'asc',
+						},
+					]}
+					onChange={(value) => updateQuery({ order: value })}
 				/>
 				<ToggleControl
-					label={ __( 'Featured Only', '{{textdomain}}' ) }
-					checked={ featured }
-					onChange={ ( value ) => updateQuery( { featured: value } ) }
+					label={__('Featured Only', 'example-plugin')}
+					checked={featured}
+					onChange={(value) => updateQuery({ featured: value })}
 				/>
 			</PanelBody>
 
-			<PanelBody title={ __( 'Filter by Taxonomy', '{{textdomain}}' ) } initialOpen={ false }>
+			<PanelBody
+				title={__('Filter by Taxonomy', 'example-plugin')}
+				initialOpen={false}
+			>
 				<TaxonomyFilter
-					taxonomy="{{slug}}_category"
-					value={ taxQuery?.['{{slug}}_category'] || [] }
-					onChange={ ( termIds ) =>
-						updateQuery( {
+					taxonomy="example-plugin_category"
+					value={taxQuery?.['example-plugin_category'] || []}
+					onChange={(termIds) =>
+						updateQuery({
 							taxQuery: termIds.length
-								? { '{{slug}}_category': termIds }
+								? { 'example-plugin_category': termIds }
 								: null,
-						} )
+						})
 					}
-					label={ __( 'Categories', '{{textdomain}}' ) }
+					label={__('Categories', 'example-plugin')}
 				/>
 			</PanelBody>
 		</InspectorControls>
