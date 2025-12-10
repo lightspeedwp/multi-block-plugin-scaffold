@@ -17,6 +17,8 @@ This guide covers the release process for the **Multi-Block Plugin Scaffold**, f
 - [Version Numbering](#version-numbering)
 - [Release Agent](#release-agent)
 - [Manual Release Process](#manual-release-process)
+- [GitHub Repository Setup](#github-repository-setup)
+- [Release Notes Template](#release-notes-template)
 - [Pre-Release Checklist](#pre-release-checklist)
 - [Post-Release Tasks](#post-release-tasks)
 
@@ -248,6 +250,92 @@ gh release create v1.0.0 \
 5. Attach any assets if needed
 6. Click "Publish release"
 
+## GitHub Repository Setup
+
+These are typically one-time tasks to complete before the first public release. Verify them when preparing v1.0.0 and whenever the repository settings change.
+
+### Enable Template Repository
+
+1. Go to repository **Settings** → **Template repository**
+2. Check **Template repository**
+3. Confirm the **Use this template** button appears on the repo home page
+
+Notes: requires public visibility and admin/owner permissions.
+
+### Add GitHub Topics and Description
+
+1. On the repo home page, click the **About** gear icon
+2. Set description:
+   ```
+   WordPress plugin scaffold with multi-block architecture, dual-mode generator, and comprehensive development tools
+   ```
+3. Add topics (comma-separated):
+   ```
+   wordpress, wordpress-plugin, gutenberg, blocks, block-plugin, scaffold, generator, plugin-template, gutenberg-blocks, wordpress-blocks, wordpress-development, block-editor, mustache-templates, plugin-scaffold, lightspeed
+   ```
+4. (Optional) Website URL: `https://github.com/lightspeedwp/multi-block-plugin-scaffold`
+
+Expected: topics show as badges; description and URL appear in the About panel.
+
+## Release Notes Template
+
+Use or adapt this Markdown when drafting the GitHub release entry in Step 8. Replace block lists with the current set if needed.
+
+```markdown
+## 🎉 Initial Release: Multi-Block Plugin Scaffold
+
+A comprehensive WordPress plugin scaffold with dual-mode generation, mustache templating, and complete development infrastructure.
+
+### ✨ Key Features
+
+#### Core Generator System
+- Dual-mode generator: template mode (`--in-place`) or output folder mode
+- Mustache templating with transformation filters
+- JSON Schema validation for plugin configuration
+- CLI interface with JSON mode for automation
+
+#### Example Blocks
+- Card Block - Single item display with custom fields
+- Collection Block - Grid/list with pagination and filtering
+- Slider Block - Responsive carousel with autoplay
+- Featured Block - Highlighted items with custom layouts
+
+#### Development Tools
+- Unit tests across multiple suites
+- Comprehensive linting: ESLint, Stylelint, PHPCS, PHPStan
+- Build system: Webpack 5, Babel, PostCSS
+- Local environment: wp-env integration
+- Pre-commit hooks: Husky for code quality
+
+#### Architecture
+- Custom post type and taxonomy scaffolding
+- Secure Custom Fields integration with local JSON
+- Block patterns and templates with automatic assignment
+- Repeater fields with nested data
+- Block bindings API (WordPress 6.5+)
+
+### 📚 Documentation
+- [GENERATE-PLUGIN.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/GENERATE-PLUGIN.md)
+- [ARCHITECTURE.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/ARCHITECTURE.md)
+- [TESTING.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/TESTING.md)
+- [Documentation index](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/README.md)
+
+### 🚀 Getting Started
+- Use as template: click **Use this template**, then `npm install && composer install`, run `node scripts/generate-plugin.js --in-place`
+- Generate plugin: clone repo, run `node scripts/generate-plugin.js`
+
+### 📋 Requirements
+- WordPress 6.5+
+- PHP 8.0+
+- Node.js 18+
+
+### 📝 Full Changelog
+See [CHANGELOG.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/CHANGELOG.md) for details.
+
+### 🙏 Credits
+Developed by [LightSpeed](https://lightspeedwp.agency) for the WordPress community.
+```
+
 ## Pre-Release Checklist
 
 Before tagging a release, verify:
@@ -310,6 +398,8 @@ After releasing:
 - [ ] Release note links work
 - [ ] Release notes complete
 - [ ] Assets attached (if any)
+- [ ] "Use this template" button visible on repo home
+- [ ] Topics/description present in About panel
 
 ### 2. Communications
 

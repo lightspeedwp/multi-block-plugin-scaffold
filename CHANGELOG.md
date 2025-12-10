@@ -12,6 +12,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 ### Added
 
 #### Core Generator System
+
 - Dual-mode generator supporting both template mode (`--in-place`) and output folder mode (default `generated-plugins/`)
 - Interactive confirmation prompt for template mode with safe default "No" to prevent accidental scaffold destruction
 - Mustache template system with 6 transformation filters: `upper`, `lower`, `pascalCase`, `camelCase`, `kebabCase`, `snakeCase`
@@ -20,12 +21,14 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - Template variable validation system ensuring correct mustache usage throughout
 
 #### Example Blocks
+
 - **Card Block** - Display single items with featured image, title, excerpt, and custom fields
 - **Collection Block** - Grid/list layouts with pagination, filtering, and query controls
 - **Slider Block** - Carousel with autoplay, navigation, and responsive controls
 - **Featured Block** - Highlight selected items with custom layouts
 
 #### Architecture & Infrastructure
+
 - Custom post type and taxonomy scaffolding with full WordPress registration
 - Secure Custom Fields (SCF) integration with local JSON sync
 - Block patterns system with 7 pre-built patterns
@@ -36,6 +39,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - Options pages with settings API integration
 
 #### Development Tools
+
 - Comprehensive unit test suite: 130 tests across 7 suites (Jest + @wordpress/scripts)
 - Linting infrastructure: ESLint (JS), Stylelint (CSS), PHPCS (PHP), PHPStan (static analysis)
 - Build system with webpack 5, Babel, and PostCSS
@@ -44,6 +48,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - wp-env integration for local WordPress development environment
 
 #### Documentation
+
 - 15 comprehensive documentation files covering all aspects:
   - ARCHITECTURE.md - Repository structure and organization
   - GENERATE-PLUGIN.md - Complete plugin generation guide
@@ -57,6 +62,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 ### Changed
 
 #### Repository Organization
+
 - Reorganized directory structure:
   - `bin/` → `scripts/` for better clarity
   - `parts/` → `template-parts/` for WordPress standard naming
@@ -66,6 +72,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - Consolidated GENERATE-PLUGIN.md from 4 methods to 2 operational modes
 
 #### Code Quality
+
 - Standardized all text domains to `{{textdomain}}` mustache template (474 instances)
 - Corrected POST_TYPE constants to use `{{slug}}` instead of text domain
 - Fixed default postType parameters in hooks to use `{{slug}}`
@@ -82,6 +89,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 ### Documentation
 
 #### New Documentation Files
+
 - `docs/ARCHITECTURE.md` - Complete repository structure guide
 - `docs/BUILD-PROCESS.md` - Build system detailed documentation
 - `docs/GENERATE-PLUGIN.md` - Plugin generation comprehensive guide
@@ -90,6 +98,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - `generated-plugins/README.md` - Output directory usage instructions
 
 #### Enhanced Documentation
+
 - README.md: Added "Using This Scaffold" section with workflow examples
 - GENERATE-PLUGIN.md: Consolidated to 2 clear operational modes
 - All docs include frontmatter metadata for better organization
@@ -97,6 +106,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 ### Technical Details
 
 #### Supported Features
+
 - WordPress 6.5+ (Block Bindings API, Plugin Dependencies)
 - PHP 8.0+ requirement
 - Node.js 18+ for build system
@@ -110,6 +120,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - Options pages with settings API
 
 #### Build System
+
 - Webpack 5 with optimized production builds
 - Babel transpilation for modern JavaScript
 - PostCSS with autoprefixer and cssnano
@@ -118,6 +129,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - Asset extraction and optimization
 
 #### Testing Infrastructure
+
 - Jest unit tests for JavaScript
 - PHPUnit for PHP
 - Playwright for E2E tests
@@ -160,21 +172,27 @@ Developed by [LightSpeed](https://lightspeedwp.agency) for the WordPress communi
 ## [Unreleased]
 
 ### Added
+
 - Nothing yet
 
 ### Changed
+
 - Nothing yet
 
 ### Fixed
+
 - Nothing yet
 
 ### Deprecated
+
 - Nothing yet
 
 ### Removed
+
 - Nothing yet
 
 ### Security
+
 - Nothing yet
 
 ---
