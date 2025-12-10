@@ -24,7 +24,7 @@ import { ComboboxControl, Spinner } from '@wordpress/components';
  * @return {Element} PostSelector component.
  */
 export default function PostSelector({
-	postType = '{{slug}}',
+	postType = '{{cpt_slug}}',
 	value,
 	onChange,
 	label = __('Select Post', '{{textdomain}}'),

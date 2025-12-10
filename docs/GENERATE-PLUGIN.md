@@ -218,7 +218,7 @@ Block registration and components use namespace and textdomain:
 /**
  * @package {{namespace}}
  */
-export default function PostSelector( { postType = '{{slug}}' } ) {
+export default function PostSelector( { postType = '{{cpt_slug}}' } ) {
     return (
         <div className="{{namespace}}-post-selector">
             {__( 'Select Post', '{{textdomain}}' )}

@@ -20,7 +20,7 @@ import { useSelect } from '@wordpress/data';
 export default function useRepeater(
 	postId,
 	fieldName,
-	postType = '{{slug}}'
+	postType = '{{cpt_slug}}'
 ) {
 	return useSelect(
 		(select) => {

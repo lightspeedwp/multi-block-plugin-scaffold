@@ -23,7 +23,7 @@ class Post_Types {
 	 *
 	 * @var string
 	 */
-	const POST_TYPE = '{{slug}}';
+	const POST_TYPE = '{{cpt_slug}}';
 
 	/**
 	 * Constructor.
