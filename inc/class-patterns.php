@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Block Patterns Registration.
  *

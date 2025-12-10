@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Custom Fields Registration using Secure Custom Fields.
  *

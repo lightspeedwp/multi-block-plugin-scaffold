@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Block Bindings Registration.
  *
@@ -16,6 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Block Bindings class.
  */
 class Block_Bindings {
+
+	/**
+	 * Binding source name.
+	 *
+	 * @var string
+	 */
+	const SOURCE = '{{namespace}}/fields';
 
 	/**
 	 * Constructor.

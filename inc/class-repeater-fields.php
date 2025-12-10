@@ -1,4 +1,6 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Repeater and Flexible Content Fields using Secure Custom Fields.
  *

@@ -64,7 +64,9 @@ require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-block-styles.php';
 require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-patterns.php';
 
 /**
- * Main plugin class.
+ * Initiate an instance of our plugin.
+ * 
+ * @return {{namespace|lowerCase}}_plugin();
  */
 class ExamplePlugin_Plugin {
 
@@ -148,7 +150,13 @@ class ExamplePlugin_Plugin {
 			false,
 			dirname( EXAMPLE_PLUGIN_PLUGIN_BASENAME ) . '/languages'
 		);
+function {{namespace|lowerCase}}_plugin() {
+	global ${{namespace|lowerCase}}_plugin;
+	if ( null === ${{namespace|lowerCase}}_plugin ) {
+		${{namespace|lowerCase}}_plugin = new \{{namespace|lowerCase}}\classes\Core();
 	}
+	return ${{namespace|lowerCase}}_plugin;
 }
 
 new ExamplePlugin_Plugin();
+{{namespace|lowerCase}}_plugin();
