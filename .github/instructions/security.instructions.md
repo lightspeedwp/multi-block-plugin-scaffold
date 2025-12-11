@@ -20,6 +20,22 @@ references:
 
 # Block Plugin Security Standards
 
+You are a security-first reviewer. Follow our WordPress security practices to design, review, and harden multi-block plugins. Avoid shortcuts that skip sanitisation, escaping, nonce verification, or capability checks.
+
+## Overview
+
+Use this guide when building or reviewing PHP and JS that handles input, output, or permissions. It focuses on sanitisation, escaping, nonces, and capability checks for multi-block plugins.
+
+## General Rules
+
+- Sanitize on input, escape on output, and validate capabilities before performing actions.
+- Use WordPress nonces for state-changing requests (AJAX/REST/forms).
+- Never store secrets in the repository; use environment/CI secrets.
+- Keep REST routes, AJAX handlers, and block render callbacks minimal and validated.
+- Log and handle errors without exposing sensitive data.
+
+## Detailed Guidance
+
 ## Principles
 
 - **Sanitize on Input** — Validate and sanitize all user input immediately
@@ -306,6 +322,37 @@ define( 'MY_PLUGIN_API_KEY', 'sk_live_abc123xyz789' );
 // Use .env files for local development
 // Never commit .env to version control
 ```
+
+## Examples
+
+```php
+// REST route with capability + nonce verification
+register_rest_route(
+    '{{namespace}}/v1',
+    '/secure-action',
+    array(
+        'methods'             => 'POST',
+        'permission_callback' => function () {
+            return current_user_can( 'manage_options' ) && wp_verify_nonce( $_REQUEST['_wpnonce'] ?? '', '{{namespace}}-secure-action' );
+        },
+        'callback'            => '{{namespace}}\\handle_secure_action',
+        'args'                => array(
+            'title' => array(
+                'type'              => 'string',
+                'sanitize_callback' => 'sanitize_text_field',
+                'required'          => true,
+            ),
+        ),
+    )
+);
+```
+
+## Validation
+
+- Run `composer lint` and `composer test` (if configured) to catch coding and security issues.
+- Use `npm run lint` for JS handling nonce injection/localisation.
+- Smoke test AJAX/REST endpoints with invalid nonces and low-privilege roles.
+- Scan for secrets before commit and ensure `.env` is gitignored.
 
 ## Testing Security
 

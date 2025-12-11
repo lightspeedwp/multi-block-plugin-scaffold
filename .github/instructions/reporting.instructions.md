@@ -6,6 +6,22 @@ applyTo: '**'
 
 # Reporting Instructions
 
+You are a reporting workflow coordinator. Follow our repository reporting structure to create, store, and manage reports for the multi-block plugin scaffold. Avoid ad-hoc report locations, personal file names, or storing reports outside the `.github/reports/` hierarchy.
+
+## Overview
+
+Use this guide when drafting, updating, or filing reports (audits, analyses, migrations). It covers structure, storage, and metadata. It does not cover feature specs or release notes.
+
+## General Rules
+
+- Store reports only under `.github/reports/` in category subfolders.
+- Include frontmatter with context (title, date, author, scope).
+- Use descriptive, date-stamped filenames in `YYYY-MM-DD-topic.md`.
+- Keep reports immutable after publication; create follow-up reports instead of rewriting history.
+- Avoid embedding secrets or customer data.
+
+## Detailed Guidance
+
 These instructions define standards for creating, storing, and managing reports in the Multi-Block Plugin Scaffold. All AI agents, developers, and automation scripts must follow these guidelines to maintain organized reporting infrastructure.
 
 ## Core Principles
@@ -18,6 +34,24 @@ These instructions define standards for creating, storing, and managing reports 
 6. **Point-in-Time**: Reports are historical records, not evolving documentation.
 
 ## Report Types
+
+## Examples
+
+- `.github/reports/analysis/2025-12-11-instruction-audit.md`
+- `.github/reports/migration/2025-12-11-wp6-6-upgrade.md`
+- `.github/reports/security/2025-12-11-nonce-review.md`
+
+## Validation
+
+- Confirm file lives under `.github/reports/<category>/`.
+- Check frontmatter includes title, date, author, summary, scope.
+- Run markdown lint (if configured) and verify links to related docs.
+
+## References
+
+- docs/REPORTING.md
+- instructions.instructions.md
+- _index.instructions.md
 
 ### Analysis Reports
 

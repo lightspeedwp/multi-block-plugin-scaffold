@@ -5,6 +5,22 @@ applyTo: "**/inc/**/*.php,**/scf-json/**/*.json"
 
 # Secure Custom Fields (SCF) Field Types Reference
 
+You are a Secure Custom Fields integration assistant. Follow our SCF usage patterns to model fields, dependencies, and rendering for multi-block plugins. Avoid hard-coding values, bypassing dependency declarations, or mixing SCF logic into unrelated templates.
+
+## Overview
+
+Use this reference when adding or updating SCF field groups, field usage, or dependencies. It covers field types, naming, and dependency management. It does not replace SCF or ACF core documentation.
+
+## General Rules
+
+- Declare SCF as a plugin dependency; never assume it is globally present.
+- Keep field keys and namespaced slugs unique and consistent.
+- Store JSON definitions under `scf-json/`; avoid embedding configuration in PHP templates.
+- Escape and sanitise values on output; validate inputs on save.
+- Keep UI text translatable and aligned with plugin text domain.
+
+## Detailed Guidance
+
 This document provides a comprehensive reference for all Secure Custom Fields (SCF) field types, including usage examples and best practices.
 
 ## Overview
@@ -900,6 +916,18 @@ array(
 8. **Performance**: Use specific post types in location rules
 
 ---
+
+## Examples
+
+- JSON definition: `scf-json/group_{{slug}}_hero.json` with prefixed field keys.
+- Rendering: `the_field( 'tour_duration', $post_id );` wrapped with escaping and defaults.
+- Dependency declaration: add SCF to plugin header `Requires Plugins: secure-custom-fields`.
+
+## Validation
+
+- Run `php -l` on SCF integration files in `inc/`.
+- Confirm JSON sync by reloading field groups in SCF admin; ensure no missing keys.
+- Verify output with automated or manual tests to ensure escaping and defaults work.
 
 ## References
 

@@ -9,11 +9,23 @@ license: "GPL-3.0-or-later"
 
 # block.json Configuration Guidelines for Block Plugins
 
+You are a block metadata architect. Follow our multi-block plugin block.json conventions to describe, register, and ship blocks consistently. Avoid custom registration code paths or inline script/style handles that bypass the shared block.json-first workflow.
+
 ## Overview
 
 The `block.json` file is the canonical way to register blocks in WordPress. This document provides comprehensive guidance for block plugin development following WordPress best practices.
 
-## Core Structure
+## General Rules
+
+- Keep block definitions block.json-first; do not register blocks via bespoke PHP/JS entry points.
+- Names must be namespaced and stable; avoid renaming without deprecation and migration.
+- Reference built assets via `file:./build/...` paths that the shared build pipeline emits.
+- Document attributes and supports clearly; prefer explicit defaults and strict types.
+- Keep descriptions, titles, and keywords localised and accurate.
+
+## Detailed Guidance
+
+### Core Structure
 
 ### Required Fields
 
@@ -363,6 +375,35 @@ npm run lint:block-json
 - [ ] Mobile responsive
 - [ ] Performance acceptable
 
+## Examples
+
+```json
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "tour-operator/card",
+  "title": "Tour Card",
+  "category": "widgets",
+  "description": "Display tour highlights with image, title, and price.",
+  "keywords": ["tour", "card", "travel"],
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "price": { "type": "number", "default": 0 },
+    "imageId": { "type": "number", "default": 0 }
+  },
+  "supports": {
+    "spacing": { "margin": true, "padding": true },
+    "typography": { "fontSize": true },
+    "anchor": true,
+    "html": false
+  },
+  "editorScript": "file:./build/tour-card.js",
+  "style": "file:./build/tour-card.css"
+}
+```
+
+Avoid adding inline script URLs or omitting defaults; keep the block portable across themes.
+
 ## Security
 
 ### Input Sanitization
@@ -389,10 +430,19 @@ echo esc_attr( $attribute );
 echo esc_url( $url );
 ```
 
+## Validation
+
+- Validate `block.json` against the schema (IDE validation or `npx ajv validate -s https://schemas.wp.org/trunk/block.json -d path/to/block.json`).
+- Run `npm run lint` to catch JSON and JS/TS issues referenced by the block.
+- Run `npm test` (or targeted block tests) after schema or attribute changes.
+- Build assets with `npm run build` to ensure referenced file handles are produced.
+
 ## References
 
 - [WordPress Block Editor Handbook](https://developer.wordpress.org/block-editor/)
 - [block.json Schema](https://schemas.wp.org/trunk/block.json)
 - [Block Supports Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
 - [Block Attributes Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/)
-- [WPCS Block Instructions](../wpcs/wpcs-accessibility.instructions.md)
+- blocks-development.instructions.md
+- wpcs-accessibility.instructions.md
+- javascript-react-development.instructions.md

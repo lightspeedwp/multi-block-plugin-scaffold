@@ -9,6 +9,22 @@ owners: ["LightSpeed Engineering"]
 
 # WordPress Accessibility Coding Standards
 
+You are an accessibility coding standards enforcer. Follow WordPress WCAG 2.2 AA guidance to review styles and markup in this multi-block plugin scaffold. Avoid one-off overrides that weaken accessibility or conflict with core patterns.
+
+## Overview
+
+Use this guide when reviewing or writing CSS/SCSS for accessibility compliance. It aligns styling with WCAG 2.2 AA and WordPress guidance. It does not replace component-level accessibility patterns covered elsewhere.
+
+## General Rules
+
+- Maintain sufficient colour contrast; respect prefers-reduced-motion.
+- Ensure focus indicators are visible and consistent across components.
+- Avoid removing outlines without providing equal or better replacements.
+- Use semantic HTML and ARIA judiciously; style should not break semantics.
+- Test keyboard navigation and focus order after CSS changes.
+
+## Detailed Guidance
+
 Code integrated into the WordPress ecosystem - including WordPress core, WordPress.org websites, and official plugins, is expected to conform to the Web Content Accessibility Guidelines (WCAG), version 2.2, at level AA.
 
 New or updated interfaces are encouraged to incorporate the Authoring Tool Accessibility Guidelines (ATAG) 2.0. The most significant way that ATAG 2.0 guidelines can be incorporated is by emphasizing choices that help people make more accessible content: encouraging alternative text, captions, and semantic structures, for example.
@@ -136,3 +152,21 @@ For more information on techniques, visit [Understanding Techniques for WCAG Suc
 - [ARIA Landmarks Example: General Principles](https://www.w3.org/TR/wai-aria-practices/examples/landmarks/)
 - [ARIA Landmarks Example: HTML Sectioning Elements](https://www.w3.org/TR/wai-aria-practices/examples/landmarks/HTML5.html)
 - [Mozilla Developer Docs - Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
+
+## Examples
+
+- Provide `:focus-visible` outlines with 3:1 contrast on buttons and links.
+- Respect `prefers-reduced-motion` by reducing transitions/animations when enabled.
+- Ensure headings and landmarks remain visible and readable in both light and dark modes.
+
+## Validation
+
+- Run style linting (`npm run lint:style` or `npm run lint`) to catch common issues.
+- Manually tab through UI to verify focus order and visibility.
+- Use axe/Lighthouse to check contrast and ARIA violations after CSS changes.
+
+## References
+
+- a11y.instructions.md
+- wpcs-css.instructions.md
+- blocks-development.instructions.md

@@ -6,6 +6,21 @@ applyTo: 'tmp/**'
 
 # Instruction: Temporary File Management
 
+You are a temporary artefact gatekeeper. Follow our repository rules to manage `tmp/` content safely. Avoid committing temporary files, storing long-lived assets here, or adding build outputs outside reproducible processes.
+
+## Overview
+
+Use this guide when creating or handling files under `tmp/`. It defines what belongs there, how to name items, and how to keep the directory disposable. It does not cover build outputs stored elsewhere.
+
+## General Rules
+
+- Never commit files from `tmp/`; the directory is ignored and disposable.
+- Store only reproducible, short-lived artefacts; avoid long-term assets.
+- Organise by purpose (e.g. `tmp/reports`, `tmp/build`, `tmp/logs`).
+- Keep scripts that write here idempotent and documented.
+
+## Detailed Guidance
+
 These instructions define the rules for managing the `tmp/` directory. This directory is strictly for temporary, auto-generated, or disposable files that should NEVER be committed to version control.
 
 ## Core Principles
@@ -18,6 +33,23 @@ These instructions define the rules for managing the `tmp/` directory. This dire
 ## Directory Structure
 
 The `tmp/` directory should be organized by the type of content it holds.
+
+## Examples
+
+- Test logs: `tmp/logs/e2e-2025-12-11.log`
+- Build artefacts: `tmp/build/plugin.zip` (deleted after verification)
+- Reports: `tmp/reports/audit.json` (derived, not committed)
+
+## Validation
+
+- Confirm `tmp/` remains in `.gitignore` and `git status` is clean after runs.
+- Ensure scripts that write to `tmp/` clean up after completion.
+- Verify no pipeline copies `tmp/` content into release artefacts.
+
+## References
+
+- .gitignore
+- folder-structure.instructions.md
 
 ```plaintext
 tmp/

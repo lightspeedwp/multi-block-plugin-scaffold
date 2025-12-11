@@ -34,7 +34,7 @@ Structured prompt template for AI-assisted plugin generation with:
 - Generation command templates
 - Comprehensive workflow guidance
 
-### 2. Scaffold Generator Agent (`.github/agents/scaffold-generator.agent.md`)
+### 2. Plugin Generator Agent (`.github/agents/generate-plugin.agent.md`)
 
 Interactive agent specification defining:
 
@@ -43,7 +43,7 @@ Interactive agent specification defining:
 - Error handling and edge cases
 - Integration with generator scripts
 
-### 3. Generator Script (`.github/agents/scaffold-generator.agent.js`)
+### 3. Generator Script (`.github/agents/generate-plugin.agent.js`)
 
 Executable implementation that:
 
@@ -149,7 +149,7 @@ All files in the scaffold use consistent mustache placeholder syntax:
 | `{{version}}` | Version number | `1.0.0` | Plugin header, package.json |
 | `{{author}}` | Author name | `LightSpeed` | Plugin header, credits |
 | `{{description}}` | Plugin description | `Tour booking plugin` | Plugin header, README |
-| `{{license}}` | License type | `GPL-2.0-or-later` | Plugin header, composer.json |
+| `{{license}}` | License type | `GPL-3.0-or-later` | Plugin header, composer.json |
 
 #### Extended Placeholders
 
@@ -255,60 +255,128 @@ JSON configuration files (`package.json`, `composer.json`, `block.json`) use pla
 
 ## Operational Modes
 
-### Template Mode vs Generator Mode
+### 🔍 CRITICAL: Choose the Right Mode
 
-The scaffold supports two operational modes:
+The scaffold supports two operational modes depending on **where you're running it**:
 
-#### Template Mode (`--in-place`)
+#### Generator Mode (Default) - For Scaffold Repository
 
-**Use when**: You want to use the scaffold as a starting point for your plugin.
+**Use when**: You are working in the `lightspeedwp/multi-block-plugin-scaffold` repository itself.
 
-- Processes files directly in the scaffold directory
-- Replaces all mustache variables in-place
-- Renames files and directories to match your slug
-- **⚠️ Destructive**: Modifies the scaffold permanently
-- Includes confirmation prompt to prevent accidents
-- Best for GitHub template repositories
+**Scenario:**
+- You cloned or are contributing to the scaffold repository
+- You want to test plugin generation
+- You want to create multiple different plugins
+- You're experimenting with configurations
 
-**Command:**
-
-```bash
-node scripts/generate-plugin.js --in-place
-```
-
-**Workflow:**
-
-1. Clone/fork the scaffold repository
-2. Run generator with `--in-place` flag
-3. Confirm the operation (y/N prompt)
-4. Scaffold is processed in-place
-5. Install dependencies and build
-6. Commit your customized plugin
-
-#### Generator Mode (Default)
-
-**Use when**: You want to create multiple plugins or keep the scaffold clean.
-
-- Creates new plugin in `generated-plugins/<slug>/`
-- Leaves scaffold directory unchanged
-- Can generate multiple plugins
-- Safe for repeated use
-- Best for maintaining the scaffold as a tool
+**Behavior:**
+- Creates new plugin in `output-plugin/` or `generated-plugins/<slug>/`
+- Leaves scaffold directory completely unchanged
+- Output folders are excluded via `.gitignore`
+- Can generate multiple plugins safely
+- No confirmation needed (non-destructive)
 
 **Command:**
 
 ```bash
-node scripts/generate-plugin.js
+node scripts/generate-plugin.js --config my-config.json
 ```
 
 **Workflow:**
 
-1. Clone the scaffold repository once
-2. Run generator (no `--in-place` flag)
-3. Generated plugin appears in `generated-plugins/<slug>/`
-4. Move to WordPress plugins directory
-5. Install dependencies and build
-6. Generate another plugin anytime
+1. Clone the scaffold repository
+2. Create your plugin configuration file
+3. Run generator (default mode, no flags)
+4. Find generated plugin in `output-plugin/` or `generated-plugins/<slug>/`
+5. Manually move/copy the plugin to your WordPress installation
+6. Scaffold remains pristine for next generation
+
+**Output Location:**
+```
+multi-block-plugin-scaffold/
+├── ... (scaffold files unchanged)
+└── output-plugin/              ← Generated plugin here (gitignored)
+    ├── tour-operator.php
+    ├── package.json
+    └── ...
+```
+
+---
+
+#### Template Mode (`--in-place`) - For New Repository
+
+**Use when**: You created a NEW repository from the scaffold template.
+
+**Scenario:**
+- You used "Use this template" on GitHub to create `yourname/my-plugin`
+- You cloned your new repository
+- You want to transform the scaffold INTO your actual plugin
+- You're creating ONE plugin from the template
+
+**Behavior:**
+- Processes files IN-PLACE in current directory
+- Replaces ALL `{{mustache}}` variables throughout codebase
+- Renames files and folders to match your slug
+- **⚠️ PERMANENT CHANGE**: Cannot be undone without Git
+- Requires user confirmation (y/N prompt)
+- Transforms scaffold into your plugin
+
+**Command:**
+
+```bash
+node scripts/generate-plugin.js --config my-config.json --in-place
+```
+
+**Workflow:**
+
+1. Create new repository from scaffold template on GitHub
+2. Clone YOUR new repository
+3. Create your plugin configuration file
+4. Run generator with `--in-place` flag
+5. Confirm the destructive operation (y/N)
+6. Scaffold is transformed into your plugin
+7. Commit and push to YOUR repository
+
+**Before:**
+```
+my-awesome-plugin/              ← Your new repo
+├── {{slug}}.php                ← Mustache variables everywhere
+├── inc/
+│   └── class-{{namespace}}.php
+└── ...
+```
+
+**After:**
+```
+my-awesome-plugin/              ← Same repo, transformed
+├── my-awesome-plugin.php       ← All variables replaced
+├── inc/
+│   └── class-my-awesome-plugin.php
+└── ...
+```
+
+---
+
+### How to Choose the Right Mode
+
+**Ask yourself:**
+
+1. **What repository am I in?**
+   ```bash
+   git remote get-url origin
+   ```
+
+   - If shows `lightspeedwp/multi-block-plugin-scaffold` → Use **Generator Mode** (default)
+   - If shows your own repo (e.g., `yourname/my-plugin`) → Use **Template Mode** (`--in-place`)
+
+2. **What's my goal?**
+   - Test/experiment with scaffold → **Generator Mode**
+   - Create ONE plugin for production → **Template Mode**
+   - Create multiple different plugins → **Generator Mode**
+
+3. **Can I commit the output?**
+   - Output folder in `.gitignore` → **Generator Mode**
+   - Want to commit transformed plugin → **Template Mode**
 
 ## Generation Methods
 
@@ -449,7 +517,7 @@ Create a tour operator plugin with tours CPT, destination taxonomy, and booking 
 - Conversational interface
 - Can infer requirements from description
 - Validates configuration automatically
-- Follows agent specification in `.github/agents/scaffold-generator.agent.md`
+- Follows agent specification in `.github/agents/generate-plugin.agent.md`
 - Best for experienced users who know their requirements
 
 ### Method 3: CLI Script

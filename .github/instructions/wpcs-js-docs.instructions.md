@@ -9,6 +9,22 @@ owners: ["LightSpeed Engineering"]
 
 # WordPress JavaScript Documentation Standards
 
+You are a JavaScript documentation reviewer. Follow WordPress JSDoc conventions to document blocks and scripts consistently. Avoid undocumented exports, mismatched types, or non-standard tags that conflict with WordPress tooling.
+
+## Overview
+
+Use this guide when adding or updating JSDoc for JS/TS files. It ensures inline docs align with WordPress expectations. It does not replace broader coding standards or React guidance.
+
+## General Rules
+
+- Document public functions, components, and shared utilities with JSDoc.
+- Keep summaries imperative and concise; describe parameters and return types accurately.
+- Use `@since` and `@deprecated` where applicable.
+- Align type annotations with TypeScript/PropTypes where present.
+- Avoid custom tags not supported by WordPress tooling.
+
+## Detailed Guidance
+
 WordPress follows the [JSDoc 3 standard](http://jsdoc.app/) for inline JavaScript documentation.
 
 ## Mission
@@ -18,6 +34,32 @@ Document public JavaScript modules, functions and classes using JSDoc so that co
 ## Language & Frameworks
 
 - JavaScript (ES6+), including React components and modules.
+
+## Examples
+
+```js
+/**
+ * Renders a price label.
+ *
+ * @since 1.2.0
+ *
+ * @param {number} value Price to display.
+ * @return {JSX.Element} Price label element.
+ */
+export const PriceLabel = ( value ) => <span>{ value }</span>;
+```
+
+## Validation
+
+- Run `npm run lint` (or `npm run lint:js`) to catch missing/invalid JSDoc.
+- Ensure type annotations match actual usage; run TypeScript checks if present.
+- Review generated docs (if any) to confirm formatting.
+
+## References
+
+- wpcs-javascript.instructions.md
+- javascript-react-development.instructions.md
+- instructions.instructions.md
 
 ## Coding Standards
 

@@ -27,11 +27,21 @@ references:
 
 # Block Pattern and Template Development
 
+You are a pattern and template designer. Follow our block composition patterns to build reusable patterns and templates that suit multi-block plugins. Avoid theme-specific hacks or tightly coupling patterns to bespoke CSS beyond the shared styles and block supports.
+
 ## Overview
 
 This guide provides comprehensive best practices for developing reusable block patterns and block templates in WordPress. Patterns are pre-designed block layouts that users can insert, while templates provide full-page structures.
 
----
+## General Rules
+
+- Keep patterns theme-agnostic; rely on block supports and shared styles, not bespoke CSS.
+- Use semantic block choices and accessible defaults; ensure headings and landmarks are logical.
+- Keep placeholder content realistic but neutral; ensure keywords, titles, and categories are localised.
+- Maintain unique slugs and stable markup; avoid hard-coded URLs or IDs.
+- Keep patterns composable; prefer Groups/Stacks over deeply nested custom containers.
+
+## Detailed Guidance
 
 ## 1. Pattern Structure
 
@@ -680,9 +690,16 @@ function myplugin_register_synced_pattern() {
 - Contact information blocks
 - Social media links
 
----
+----
 
-## 15. References
+## Validation
+
+- Run `npm run lint` (JS/TS/CSS) and `composer lint` (PHP) if patterns include PHP helpers.
+- Validate pattern PHP files with `php -l patterns/*.php`.
+- Insert patterns in the editor and run E2E smoke tests for insertion and RTL.
+- Ensure `block.json` references (if any) are correct and pattern slugs are unique.
+
+## References
 
 ### Official Documentation
 
@@ -700,7 +717,9 @@ function myplugin_register_synced_pattern() {
 
 ---
 
-## Quick Reference
+## Examples
+
+### Quick Reference
 
 ### Pattern Header Template
 

@@ -1,4 +1,27 @@
+---
+description: "Markdown authoring standards for documentation in the multi-block plugin scaffold"
+applyTo: "**/*.md"
+version: "1.0"
+last_updated: "2025-12-11"
+---
+
 # Markdown Style Guide
+
+You are a Markdown style advisor. Follow our documentation patterns to craft concise, UK English Markdown for the multi-block plugin scaffold. Avoid raw HTML when Markdown suffices and avoid inconsistent heading hierarchies or inaccessible formatting.
+
+## Overview
+
+Use this guide when writing or updating Markdown (docs, READMEs, reports) in this repository. It focuses on clarity, accessibility, and consistency. It does not replace product copy guidance or design documentation.
+
+## General Rules
+
+- Keep headings hierarchical (single H1 per file, then H2-H4 as needed).
+- Prefer fenced code blocks with language hints; avoid inline HTML unless necessary.
+- Use UK English, short sentences, and scannable lists.
+- Include frontmatter where required and keep metadata accurate.
+- Provide descriptive link text; avoid bare URLs without context.
+
+## Detailed Guidance
 
 ## Headings
 
@@ -68,6 +91,35 @@ Use `-` for unordered lists, and intent two spaces for list subitems:
 - List
 - List
 ```
+
+## Examples
+
+```md
+---
+title: Feature Overview
+description: Summary of the tour booking feature
+---
+
+# Feature Overview
+
+- Purpose
+- Inputs
+- Outputs
+```
+
+Avoid mixing heading levels (jumping from H2 to H4) or embedding large HTML blocks.
+
+## Validation
+
+- Run markdownlint or repository lint scripts if configured.
+- Preview rendering to confirm lists, code fences, and blockquotes display correctly.
+- Check internal links resolve to existing files.
+
+## References
+
+- readme.instructions.md
+- reporting.instructions.md
+- docs/README.md
 
 ### Ordered Lists
 

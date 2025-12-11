@@ -6,7 +6,21 @@ applyTo: '**'
 
 # Folder Structure Instructions
 
-Rules for organizing files and folders in the Multi-Block Plugin Scaffold repository.
+You are a repository layout steward. Follow our multi-block plugin scaffold conventions to place assets, code, and generated files correctly. Avoid inventing new top-level directories or scattering build artefacts outside the prescribed structure.
+
+## Overview
+
+Use this guide when creating, moving, or auditing files. It covers where to place source, tests, docs, generated assets, and automation in the multi-block plugin scaffold. It does not replace coding standards or release processes.
+
+## General Rules
+
+- Edit source in `src/` and PHP in `inc/`; never hand-edit `build/`.
+- Keep generated artefacts out of version control except what ships in releases.
+- Reuse existing directories; avoid inventing new top-level folders without approval.
+- Store docs in `docs/` with frontmatter; keep temporary artefacts in `tmp/` (ignored).
+- Align placement with `.distignore`, build scripts, and generator expectations.
+
+## Detailed Guidance
 
 ## Core Principle
 
@@ -498,6 +512,13 @@ Check both `.gitignore` and `.distignore`:
 - Git → Development files
 - Distribution → Everything except runtime files
 
+## Examples
+
+- New block files: `src/blocks/gallery/block.json`, `src/blocks/gallery/edit.tsx`, `src/blocks/gallery/style.scss`.
+- Dynamic PHP helper: `inc/class-gallery-endpoint.php`.
+- Playwright tests mirroring blocks: `tests/e2e/blocks/gallery.spec.ts`.
+- Docs for new feature: `docs/FEATURE-GALLERY.md`.
+
 ## Validation
 
 ### Before Committing
@@ -532,7 +553,7 @@ npm run plugin-zip
 unzip -l *.zip | grep -E "src/|tests/|docs/"  # Should be empty
 ```
 
-## Related Documentation
+## References
 
 - **[ARCHITECTURE.md](../../docs/ARCHITECTURE.md)** - Complete repository architecture
 - **[logs/README.md](../../logs/README.md)** - Logging documentation

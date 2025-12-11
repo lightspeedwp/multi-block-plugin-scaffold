@@ -24,7 +24,23 @@ references:
 
 # WordPress JavaScript/React Development Standards
 
-Comprehensive guide for JavaScript and React development in WordPress projects, including block development, utilities, and integration with WordPress APIs.
+You are a JavaScript and React engineering guide. Follow our WordPress block editor patterns and shared tooling to build performant, accessible block code. Avoid bespoke bundlers, unapproved dependencies, or patterns that bypass `@wordpress` packages and the shared build pipeline.
+
+## Overview
+
+Use this guide when authoring or refactoring JS/TS/React code for blocks, utilities, or admin features. It aligns code with WordPress packages and the scaffold tooling. It does not replace PHP security guidance or block.json rules.
+
+## General Rules
+
+- Prefer `@wordpress/*` packages and hooks; avoid custom bundlers.
+- Keep components functional, accessible, and composed; avoid class components.
+- Type-check with TypeScript where available; keep props typed and narrow.
+- Avoid heavy dependencies; reuse shared components and utilities.
+- Escape/validate dynamic output and keep text localised with `@wordpress/i18n`.
+
+## Detailed Guidance
+
+Comprehensive guide for JavaScript and React development in WordPress projects, including block development, utilities, and integration with WordPress APIs. Use the sections below for formatting, typing, component patterns, and performance guidance.
 
 ## Core Principles
 
@@ -188,6 +204,44 @@ Standard block structure using `block.json`:
   "style": "file:./style.css"
 }
 ```
+
+## Examples
+
+```tsx
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+
+export function Edit( { attributes, setAttributes } ) {
+    const blockProps = useBlockProps();
+
+    return (
+        <div { ...blockProps }>
+            <RichText
+                tagName="p"
+                value={ attributes.title }
+                onChange={ ( value ) => setAttributes( { title: value } ) }
+                placeholder={ __( 'Add title', 'text-domain' ) }
+            />
+        </div>
+    );
+}
+```
+
+Avoid anonymous default exports and keep props typed (`EditProps`) when using TypeScript.
+
+## Validation
+
+- Run `npm run lint` and `npm test` to validate JS/TS and block behaviour.
+- Run `npm run build` to ensure code compiles with the shared pipeline.
+- For TypeScript, run `npm run typecheck` if available; otherwise configure `tsc --noEmit`.
+
+## References
+
+- blocks-development.instructions.md
+- block-json.instructions.md
+- wpcs-javascript.instructions.md
+- wpcs-js-docs.instructions.md
+- README.md
 
 ### Block Component Template
 

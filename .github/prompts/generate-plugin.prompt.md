@@ -6,6 +6,74 @@ description: Interactive WordPress multi-block plugin generator with CPT, taxono
 
 I'll help you generate a new WordPress multi-block plugin with custom post types, taxonomies, and Secure Custom Fields integration. This is a comprehensive scaffold for complex WordPress applications.
 
+## 🔍 Repository Context Detection
+
+**First, I need to understand your setup:**
+
+Are you running this generator:
+
+1. **In the `lightspeedwp/multi-block-plugin-scaffold` repository?**
+   - If YES → The plugin will be generated in an `output-plugin/` folder (excluded from git)
+   - This folder is for testing and development only
+   - You'll manually move the generated plugin to where you need it
+
+2. **In a NEW repository (created from the scaffold template)?**
+   - If YES → The generator will replace all mustache variables IN-PLACE in your current repository
+   - This will transform the scaffold INTO your actual plugin
+   - This action modifies your repository permanently (use `--in-place` mode)
+
+**Please indicate which scenario applies to you before we proceed.**
+
+## Quick Start Options
+
+### Option 1: Use Configuration File (Fastest)
+
+If you already have a configuration file that follows the schema (`.github/schemas/plugin-config.schema.json`), you can bypass the wizard entirely:
+
+```bash
+node scripts/generate-plugin.js --config path/to/your-config.json
+```
+
+**Example configuration file:**
+```json
+{
+  "slug": "tour-operator",
+  "name": "Tour Operator",
+  "description": "A comprehensive tour booking and display plugin",
+  "author": "LightSpeed",
+  "author_uri": "https://developer.lsdev.biz",
+  "version": "1.0.0",
+  "name_singular": "Tour",
+  "name_plural": "Tours",
+  "cpt_icon": "dashicons-palmtree",
+  "cpt_supports": ["title", "editor", "thumbnail", "custom-fields"],
+  "cpt_has_archive": true,
+  "taxonomies": [
+    {
+      "slug": "destination",
+      "singular": "Destination",
+      "plural": "Destinations",
+      "hierarchical": true
+    }
+  ],
+  "fields": [
+    {
+      "name": "price",
+      "label": "Price",
+      "type": "number"
+    }
+  ]
+}
+```
+
+See `.github/schemas/plugin-config.example.json` for a complete example.
+
+### Option 2: Interactive Wizard (Guided)
+
+If you prefer step-by-step guidance, continue with the information gathering process below.
+
+---
+
 ## Information Gathering Process
 
 This scaffold requires more detailed planning due to its complexity. I'll gather information in multiple stages to ensure your plugin is properly configured.
@@ -303,6 +371,6 @@ The plugin will automatically declare SCF as a dependency using the WordPress 6.
 ## Related Resources
 
 - [Multi-Block Plugin Scaffold Reference](multi-block-plugin-scaffold.prompt.md)
-- [Scaffold Generator Agent](../agents/scaffold-generator.agent.md)
+- [Plugin Generator Agent](../agents/generate-plugin.agent.md)
 - [Development Assistant](../agents/development-assistant.agent.md)
 - [SCF Fields Reference](../instructions/scf-fields.instructions.md)

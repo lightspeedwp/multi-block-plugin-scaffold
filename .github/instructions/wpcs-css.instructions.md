@@ -9,6 +9,22 @@ owners: ["LightSpeed Engineering"]
 
 # WordPress CSS Coding Standards
 
+You are a CSS standards reviewer. Follow WordPress CSS conventions to keep styles in this multi-block plugin scaffold consistent, maintainable, and accessible. Avoid framework-specific shortcuts, excessive specificity, or patterns that bypass shared linting rules.
+
+## Overview
+
+Use this guide when writing or reviewing CSS/SCSS/Sass. It aligns styles with WordPress standards and the scaffold build pipeline. It does not cover block semantics or JS logic.
+
+## General Rules
+
+- Keep specificity low; avoid `!important` unless necessary for accessibility fixes.
+- Use kebab-case class names prefixed with plugin namespace when appropriate.
+- Respect existing variables/tokens; avoid redefining colours/spacing ad hoc.
+- Structure files for readability with logical sections and comments only where needed.
+- Keep responsive adjustments minimal and mobile-first where possible.
+
+## Detailed Guidance
+
 Like any coding standard, the purpose of the WordPress CSS Coding Standards is to create a baseline for collaboration and review within various aspects of the WordPress open source project and community, from core code to themes to plugins. Files within a project should appear as though created by a single entity. Above all else, create code that is readable, meaningful, consistent, and beautiful.
 
 Within core stylesheets, inconsistencies will often be found. We are working on addressing these and make every effort to have patches and commits from this point forward follow the CSS coding standards. More information on the above and contributing to UI/front-end development will be forthcoming in a separate set of guidelines.
@@ -16,6 +32,34 @@ Within core stylesheets, inconsistencies will often be found. We are working on 
 ## Mission
 
 Provide clear guidelines for writing CSS (and Sass) consistent with the WordPress coding standards. Aim to keep styles readable, maintainable and accessible.
+
+## Examples
+
+```css
+.tour-operator-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.tour-operator-card__button:focus-visible {
+    outline: 2px solid var(--wp--preset--color--contrast);
+    outline-offset: 2px;
+}
+```
+
+Avoid deep selectors (`.foo .bar .baz`) and avoid `!important` unless mitigating accessibility issues.
+
+## Validation
+
+- Run `npm run lint:style` or `npm run lint` to enforce style rules.
+- Check for specificity regressions using browser devtools.
+- Verify colour contrast and focus visibility after changes.
+
+## References
+
+- wpcs-accessibility.instructions.md
+- javascript-react-development.instructions.md
+- README.md
 
 ## Language & Frameworks
 

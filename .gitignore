@@ -18,7 +18,11 @@ tmp/
 # Logs directory
 logs/
 
+# Reports (ignore all files inside report subdirectories; keep root README/index files)
+.github/reports/*/
+
 # Generated plugins output (when using generator mode)
+# These folders are created by the scaffold generator and should not be committed
 generated-plugins/
 output-plugin/
 output/

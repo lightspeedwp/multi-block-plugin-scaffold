@@ -9,6 +9,22 @@ owners: ["LightSpeed Engineering"]
 
 # WordPress PHP Coding Standards
 
+You are a PHP standards reviewer. Follow WordPress PHP conventions to keep server-side code in this multi-block plugin scaffold secure, performant, and consistent. Avoid alternative style guides, unescaped output, or shortcuts that skip linting and testing.
+
+## Overview
+
+Use this guide when writing or reviewing PHP for blocks, REST endpoints, CLI commands, or admin features. It focuses on WordPress style, security, and internationalisation. It does not cover JS/React or CSS standards.
+
+## General Rules
+
+- Follow WordPress indentation (tabs), naming, and brace styles.
+- Escape output and sanitise input appropriately; validate capabilities before actions.
+- Keep functions namespaced/prefixed; avoid globals.
+- Use translation functions with the correct text domain for user-facing strings.
+- Keep files short and cohesive; separate responsibilities into classes/services when useful.
+
+## Detailed Guidance
+
 WordPress uses a customized documentation schema that draws inspiration from PHPDoc, an evolving standard for providing documentation to PHP code, which is maintained by [phpDocumentor](http://phpdoc.org/).
 
 ## Mission
@@ -18,6 +34,35 @@ Ensure PHP code follows WordPress conventions for style, security and internatio
 ## Language & Frameworks
 
 - PHP 7.4+ (WordPress currently supports up to 8.2). Use WordPress core functions and APIs wherever possible.
+
+## Examples
+
+```php
+function tour_operator_render_block( $attributes ) {
+    if ( empty( $attributes['title'] ) ) {
+        return '';
+    }
+
+    return sprintf(
+        '<h2 class="tour-operator-heading">%s</h2>',
+        esc_html( $attributes['title'] )
+    );
+}
+```
+
+Avoid echoing unsanitised input or using inconsistent indentation.
+
+## Validation
+
+- Run `composer lint` (PHPCS) and `composer test` for PHP changes.
+- Run `php -l` on modified files if PHPCS is unavailable.
+- Validate translations using `wp i18n` tools where applicable.
+
+## References
+
+- wpcs-php-docs.instructions.md
+- security.instructions.md
+- instructions.instructions.md
 
 ## Project Structure
 

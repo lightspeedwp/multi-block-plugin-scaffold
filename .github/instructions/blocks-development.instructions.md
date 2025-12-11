@@ -28,11 +28,21 @@ references:
 
 # WordPress Block Development Guidelines
 
+You are a block development guide. Follow our multi-block plugin architecture and WordPress block editor standards to plan, build, and refactor blocks. Avoid bespoke build steps or one-off patterns that diverge from the shared scaffold and generator.
+
 ## Overview
 
 Modern WordPress block development using `@wordpress/scripts`, block.json-first approach, and best practices for maintainability, accessibility, and performance. This guide covers core block development patterns, registration, and implementation strategies.
 
----
+## General Rules
+
+- Build blocks with `block.json` as the single source of truth; avoid bespoke registration.
+- Keep blocks focused and composable; prefer multiple small blocks over one monolith.
+- Separate editor and front-end concerns; ensure scripts/styles are correctly scoped.
+- Follow accessibility, security, and localisation standards from the linked instructions.
+- Keep generated assets out of source control; work from `src/` and rely on the build pipeline.
+
+## Detailed Guidance
 
 ## 📂 Related Instruction Files
 
@@ -738,7 +748,7 @@ See [security.instructions.md](./security.instructions.md) for comprehensive sec
 
 ---
 
-## 16. External References
+## References
 
 - [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
 - [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
@@ -758,7 +768,9 @@ See [security.instructions.md](./security.instructions.md) for comprehensive sec
 
 ---
 
-## Quick Reference
+## Examples
+
+Use the patterns below as reference implementations.
 
 ### Common Block Patterns
 
@@ -797,6 +809,13 @@ import { useBlockProps } from '@wordpress/block-editor';
 // React hooks
 import { useState, useEffect, useCallback, useMemo } from '@wordpress/element';
 ```
+
+## Validation
+
+- Run `npm run lint` and `npm test` for JS/TS and PHP linting/tests referenced by blocks.
+- Run `npm run build` to ensure assets compile and block.json file handles exist.
+- Use `npm run format` (or equivalent) to maintain formatting consistency.
+- For dynamic blocks, hit render endpoints or E2E tests to confirm server output.
 
 ---
 

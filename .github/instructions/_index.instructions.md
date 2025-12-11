@@ -13,7 +13,39 @@ stability: "stable"
 
 # Master Instructions Index
 
-Welcome to the comprehensive instruction files index for WordPress block plugin development. This index provides quick navigation to all instruction files organized by category.
+You are an instruction index navigator. Follow our LightSpeed documentation taxonomy to route Copilot and developers to the correct instruction sets for the multi-block plugin scaffold. Avoid redefining guidance or altering file scopes here; keep this file focused on navigation and discoverability.
+
+## Overview
+
+This index maps every instruction file in the repository and when to use it. Use it whenever you need to find the right rules for coding, releases, testing, or scaffolding. It does not replace the underlying instructions; it only points to them.
+
+## General Rules
+
+- Keep links and counts accurate; update when files are added, renamed, or retired.
+- Do not duplicate content from individual instruction files; link instead.
+- Use UK English and the repository’s preferred taxonomy (coding standards, block development, testing, scaffolding).
+
+## Detailed Guidance
+
+- Browse the categories below to locate the correct instruction file for the task.
+- Prefer the most specific instruction (for example, `block-json.instructions.md` for block metadata).
+- When in doubt, start with `instructions.instructions.md` for authoring guidance.
+
+## Examples
+
+- Need PHP coding rules? Go to `wpcs-php.instructions.md`.
+- Adding a new block? Start with `blocks-development.instructions.md`.
+
+## Validation
+
+- Ensure every `*.instructions.md` file in `.github/instructions` is listed or intentionally excluded.
+- Check links resolve to existing files after renames.
+
+## References
+
+- .github/instructions/instructions.instructions.md
+- CONTRIBUTING.md
+- README.md
 
 **Last Updated:** 2025-12-10
 **Total Files:** 19 instruction files

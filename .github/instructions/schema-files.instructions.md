@@ -6,6 +6,22 @@ applyTo: '**/*.schema.json,**/schemas/**'
 
 # Schema Files Instructions
 
+You are a schema governance assistant. Follow our schema storage and validation patterns to manage JSON Schemas for the multi-block plugin scaffold. Avoid storing schemas outside approved locations or skipping validation steps.
+
+## Overview
+
+Use this guide when creating or updating JSON Schemas used by the scaffold. It covers storage, naming, and validation. It does not cover application-specific business logic outside schema validation.
+
+## General Rules
+
+- Store schemas under `.github/schemas/` or files matching `*.schema.json`; avoid root placement.
+- Keep filenames descriptive and versioned when breaking changes occur.
+- Include descriptions for all properties and keep `$schema` pointers accurate.
+- Validate schemas and sample data before publishing.
+- Avoid embedding secrets or environment-specific paths in schemas.
+
+## Detailed Guidance
+
 These instructions define standards for creating, storing, and validating JSON Schema files in the Multi-Block Plugin Scaffold. All AI agents, developers, and automation scripts must follow these guidelines.
 
 ## Core Principles
@@ -17,6 +33,23 @@ These instructions define standards for creating, storing, and validating JSON S
 5. **Documentation**: Schema files must include descriptions for all properties
 
 ## Schema File Types
+
+## Examples
+
+- `.github/schemas/plugin-config.schema.json` describing `plugin-config.json`.
+- `scf-json/fields.schema.json` for SCF JSON validation.
+
+## Validation
+
+- Validate schemas with `npx ajv validate -s schema.json -d sample.json` (or configured lint task).
+- Run `npm run lint` to catch JSON format issues.
+- Ensure CI workflows that consume schemas pass after updates.
+
+## References
+
+- docs/CONFIGS.md
+- instructions.instructions.md
+- _index.instructions.md
 
 ### Configuration Schema Files
 

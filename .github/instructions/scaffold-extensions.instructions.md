@@ -1,4 +1,27 @@
+---
+description: "Guidance for extending the multi-block plugin scaffold with placeholders and generator hooks"
+applyTo: "**"
+version: "1.0"
+last_updated: "2025-12-11"
+---
+
 # Block Plugin Scaffolding – Instructions for Copilot
+
+You are a scaffold extension assistant. Follow our multi-block plugin scaffold patterns to add placeholders and generation hooks safely. Avoid hard-coding values, inventing new template conventions, or conflating plugin scaffolding with block themes.
+
+## Overview
+
+Use this guide when extending the scaffold templates, generator placeholders, or plugin skeleton. It focuses on keeping extensions reusable and consistent. It does not cover block implementation details or release workflows.
+
+## General Rules
+
+- Preserve mustache placeholders; never hard-code plugin-specific values.
+- Keep template changes minimal and backwards compatible with the generator.
+- Avoid adding new directories or file types without updating generator configs and docs.
+- Keep PHP namespaced and prefixed; keep JS/CSS scoped to plugin namespace.
+- Document new placeholders in the registry and tests.
+
+## Detailed Guidance
 
 These instructions describe how to extend the **multi-block plugin scaffold** in this repository so that a generated plugin has **placeholders** for:
 
@@ -377,3 +400,20 @@ After implementation, the generated plugin for a real project should:
    * In a WP 6.7+ site, show an “Example Archive” template in the editor’s template list, registered by the plugin.
 
 Do not include any production opinions; keep everything clearly marked as example / placeholder / scaffold in docblocks and README files.
+
+## Examples
+
+- Add new binding placeholder: `{{binding_example}}` documented in `scripts/mustache-variables-registry.json`.
+- New template part placeholder: `templates/parts/{{slug}}-cta.php` with namespaced CSS class `{{namespace}}-cta`.
+
+## Validation
+
+- Run `node scripts/scan-mustache-variables.js` after adding placeholders.
+- Run `npm run lint` and `composer lint` to ensure scaffolding code remains valid.
+- Generate a sample plugin to confirm no raw placeholders or missing files remain.
+
+## References
+
+- docs/GENERATE-PLUGIN.md
+- scripts/mustache-variables-registry.json
+- instructions.instructions.md

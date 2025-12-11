@@ -1,19 +1,16 @@
 ---
 file_type: "instructions"
 applyTo: ['**/*.html', '**/*.htm', '**/*.php']
-description: "Guidelines for HTML template parts and block templates in any LightSpeed WordPress project."
-author: "LightSpeedWP Team. Enforce WordPress HTML standards and semantic markup."
+title: "[Instructions] HTML Coding Standards"
+description: "Guidelines for HTML template parts and block templates in LightSpeed WordPress projects."
 last_updated: "2025-10-19"
 version: "v1.0"
 owners: ["LightSpeed Engineering"]
-title: "[Instructions] HTML Coding Standards"
 contributors:
   - name: "Ash Shaw"
     github: "ashleyshaw"
   - name: "LightSpeedWP"
     github: "lightspeedwp"
-version: "1.0.0"
-permalink: "/instructions/html-template"
 license: "MIT"
 tags:
   - html
@@ -22,18 +19,25 @@ tags:
   - accessibility
   - responsive
   - performance
-categories:
-  - documentation
-  - instructions
-  - guides
-version: "1.0.0"
-permalink: "/instructions/html-template"
-license: "GPL-3.0"
-file_type: "instructions"
-mode: "agent"
 ---
 
 # WordPress HTML Coding Standards
+
+You are an HTML standards reviewer. Follow WordPress and LightSpeed semantic HTML conventions to keep templates accessible and performant. Avoid inline styling, non-semantic wrappers, or bypassing WordPress templating and escaping practices.
+
+## Overview
+
+Use this guide when writing or reviewing HTML or PHP templates. It focuses on semantic markup, accessibility, and WordPress compatibility. It does not cover CSS/JS specifics beyond semantic structure.
+
+## General Rules
+
+- Prefer semantic elements and valid HTML5; avoid unnecessary `<div>` wrappers.
+- Keep headings hierarchical; ensure forms have labels and inputs paired.
+- Escape dynamic data with context-appropriate functions in PHP.
+- Avoid inline styles and scripts; separate structure, presentation, and behaviour.
+- Respect WordPress templating conventions for templates, parts, and block markup.
+
+## Detailed Guidance
 
 ## Mission
 
@@ -77,6 +81,31 @@ related_links: - "<https://developer.wordpress.org/themes/block-themes/templates
 - Test templates with both light and dark color schemes.
 
 ## Template Parts
+
+## Examples
+
+```php
+<main id="primary" class="site-main">
+    <h1><?php esc_html_e( 'Tours', 'text-domain' ); ?></h1>
+    <section class="tour-list">
+        <?php echo wp_kses_post( $content ); ?>
+    </section>
+</main>
+```
+
+Avoid nesting headings out of order or injecting unescaped content.
+
+## Validation
+
+- Run `npm run lint` / `composer lint` with HTML/PHPCS rules enabled.
+- Validate markup via W3C validator or IDE tools for template files.
+- Check accessibility (axe/Lighthouse) for rendered templates.
+
+## References
+
+- wpcs-accessibility.instructions.md
+- wpcs-php.instructions.md
+- blocks-development.instructions.md
 
 - Store reusable components in the `parts/` directory.
 - Use descriptive filenames that reflect the component's purpose.

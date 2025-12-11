@@ -1,4 +1,27 @@
+---
+description: "Guidance for drafting and updating README files in the multi-block plugin scaffold"
+applyTo: "**/README.md"
+version: "1.0"
+last_updated: "2025-12-11"
+---
+
 # README Authoring Instructions
+
+You are a README authoring assistant. Follow our repository documentation patterns to write concise, accurate READMEs for multi-block plugins. Avoid speculative features, unverified commands, or tooling outside the documented build and release workflow.
+
+## Overview
+
+Use this guide when drafting or updating any `README.md` file. It focuses on clarity, accuracy, and alignment with the scaffold. It does not cover CHANGELOG or inline code comments.
+
+## General Rules
+
+- Keep the README truthful and current; verify all commands and links.
+- Write in UK English with short sections and scannable lists.
+- Include prerequisites, setup steps, validation commands, and support links.
+- Document scripts using the exact names from `package.json`/`composer.json`.
+- Avoid promising roadmap items or unsupported configurations.
+
+## Detailed Guidance
 
 Use this guide when creating or updating `README.md` files in this repository.
 
@@ -45,3 +68,36 @@ flowchart LR
 - [ ] Mermaid diagram included and relevant
 - [ ] Related docs/tests linked
 - [ ] Text uses the correct text domain/placeholders where required
+
+## Examples
+
+```md
+# Tour Operator – Blocks
+
+Short description of what the blocks provide.
+
+## Requirements
+- Node 20+
+- PHP 8.1+
+
+## Commands
+- `npm install`
+- `npm run dev`
+- `npm run lint`
+```
+
+Avoid promising features that are not in the repository or documenting unused scripts.
+
+## Validation
+
+- Verify commands against `package.json`/`composer.json`.
+- Check links resolve locally (docs/) and externally.
+- Run `npm run lint` (or configured Markdown lint) if available.
+- Ensure diagrams render via the Mermaid preview in your editor or CI.
+
+## References
+
+- docs/README.md
+- docs/ARCHITECTURE.md
+- instructions.instructions.md
+- _index.instructions.md

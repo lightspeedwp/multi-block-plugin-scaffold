@@ -6,7 +6,54 @@ applyTo: '**'
 
 # Plugin Generator Instructions
 
-These instructions define how mustache template placeholders should be used throughout the Multi-Block Plugin Scaffold. All AI agents, generators, and build scripts must follow these standards.
+You are a scaffold generation assistant. Follow our mustache-driven plugin generator patterns to produce multi-block plugins that align with LightSpeed conventions. Avoid hard-coding values or bypassing the generator workflows unless explicitly requested.
+
+## Overview
+
+Use this guide when running or updating the plugin generator. It explains how to use mustache placeholders, detect repository mode, and keep generated plugins aligned with the scaffold. It does not cover block development or release workflows.
+
+## General Rules
+
+- Always detect whether you are in scaffold mode or template mode before generation.
+- Use only mustache `{{variable}}` placeholders; never hard-code values.
+- Keep output paths confined to the documented `generated-plugins/` or in-place mode.
+- Respect `.gitignore`/`.distignore`; never commit generated artefacts from the scaffold repo.
+- Keep variables localised, namespaced, and consistent across all file types.
+
+## Detailed Guidance
+
+## Repository Context Detection (CRITICAL)
+
+**Before generating any plugin, you MUST determine the repository context:**
+
+### Scenario 1: Scaffold Repository (Generator Mode)
+- **Repository:** `lightspeedwp/multi-block-plugin-scaffold`
+- **Detection:** Check git remote or ask user
+- **Output Location:** `output-plugin/` or `generated-plugins/<slug>/`
+- **Command:** `node scripts/generate-plugin.js --config plugin-config.json`
+- **Behavior:** Creates new folder, leaves scaffold untouched
+- **Git Ignore:** Output folders are excluded via `.gitignore`
+
+### Scenario 2: New Repository (Template Mode)
+- **Repository:** User's own repository (created from scaffold template)
+- **Detection:** Check git remote or ask user
+- **Output Location:** Current directory (in-place replacement)
+- **Command:** `node scripts/generate-plugin.js --config plugin-config.json --in-place`
+- **Behavior:** Replaces all `{{mustache}}` variables in current directory
+- **Confirmation:** Requires user confirmation before proceeding (destructive operation)
+
+### How to Detect Repository Context
+
+**Ask the user explicitly:**
+> "Are you running this generator in the `lightspeedwp/multi-block-plugin-scaffold` repository, or in a new repository created from the template?"
+
+**Or check git remote:**
+```bash
+git remote get-url origin
+```
+
+- If contains `lightspeedwp/multi-block-plugin-scaffold` → Use Generator Mode
+- Otherwise → Ask user which mode they want, recommend Template Mode
 
 ## Core Principles
 
@@ -14,6 +61,7 @@ These instructions define how mustache template placeholders should be used thro
 2. **No Alternatives**: Never use `${variable}`, `%variable%`, `CONSTANT_NAME`, or other formats
 3. **Namespace Everything**: All classes, functions, constants, and CSS must use namespace prefixes
 4. **Universal Application**: Apply mustache values to ALL file types (PHP, JS, JSON, SCSS, HTML, templates)
+5. **Repository Awareness**: Always detect and use the correct generation mode
 
 ## Required Mustache Variables
 
@@ -470,6 +518,24 @@ When generated identifiers might conflict:
 3. **Suggest Alternatives**: Provide alternative identifier suggestions
 4. **Validate Length**: CPT slugs must be max 20 characters
 
+## Examples
+
+```md
+Plugin Name: {{name}}
+Description: {{description}}
+Text Domain: {{textdomain}}
+Version: {{version}}
+```
+
+```php
+// Namespaced function
+function {{namespace}}_register_routes() {
+    register_rest_route( '{{namespace}}/v1', '/tours', array( 'methods' => 'GET', 'callback' => '...' ) );
+}
+```
+
+Avoid interpolating values manually (e.g. `Tour Operator`) where a placeholder should be used.
+
 ## Testing Requirements
 
 ### Template Validation
@@ -487,7 +553,14 @@ When generated identifiers might conflict:
 4. **Consistent Namespacing**: Verify all identifiers use namespace prefix
 5. **Translation Functions**: Check all `__()` calls use correct textdomain
 
-## Related Documentation
+## Validation
+
+- Run `node scripts/scan-mustache-variables.js` to ensure placeholders are registered.
+- Generate a sample plugin via `node scripts/generate-plugin.js --config plugin-config.json --dry-run` and inspect for remaining `{{`.
+- Run `npm test` / `npm run lint` to validate syntax after generation.
+- Validate JSON files with `npm run lint` or schema tools; run `php -l` on generated PHP files.
+
+## References
 
 - [Plugin Generation Guide](../../docs/GENERATE-PLUGIN.md) - Complete generation workflow
 - [Scaffold Generator Agent](../agents/scaffold-generator.agent.md) - Agent specification

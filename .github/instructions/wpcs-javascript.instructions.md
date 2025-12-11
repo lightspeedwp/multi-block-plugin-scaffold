@@ -7,6 +7,22 @@ applyTo: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
 
 # WordPress JavaScript Coding Standards
 
+You are a JavaScript standards reviewer. Follow WordPress JavaScript conventions to keep block and plugin scripts consistent with the scaffold. Avoid alternative style guides, unlinted patterns, or deviations from the prescribed formatting and documentation rules.
+
+## Overview
+
+Use this guide when writing or reviewing JavaScript/TypeScript for blocks, admin screens, or tooling. It focuses on WordPress style, formatting, and structure. It does not replace React-specific guidance.
+
+## General Rules
+
+- Follow WordPress JavaScript coding standards (spacing, quoting, naming).
+- Use single quotes and 2-space indentation; keep line lengths reasonable.
+- Prefer ES modules and `@wordpress/*` packages.
+- Keep code lint-clean; avoid disabling lint rules without justification.
+- Document functions/components with JSDoc when public or shared.
+
+## Detailed Guidance
+
 JavaScript has become a critical component in developing WordPress-based applications (themes and plugins) as well as WordPress core. Standards are needed for formatting and styling JavaScript code to maintain the same code consistency as the WordPress standards provide for core PHP, HTML, and CSS code.
 
 > All code in any code-base should look like a single person typed it, no matter how many people contributed. - [Principles of Writing Consistent, Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js/)
@@ -18,6 +34,30 @@ The WordPress JavaScript Coding Standards are adapted from the [jQuery JavaScrip
 - Function contents are consistently indented, including full-file closure wrappers.
 - Some whitespace rules differ, for consistency with the WordPress PHP coding standards.
 - jQuery’s 100-character hard line limit is encouraged, but not strictly enforced.
+
+## Examples
+
+```js
+const TourCard = ( { title } ) => (
+    <div className="tour-operator-card">
+        <h3>{ title }</h3>
+    </div>
+);
+```
+
+Avoid trailing whitespace, double quotes, and inconsistent indentation.
+
+## Validation
+
+- Run `npm run lint` (or `npm run lint:js`) to enforce standards.
+- Ensure Prettier or formatter configs align with WordPress settings; avoid conflicting overrides.
+- Review diffs for unintended formatting changes.
+
+## References
+
+- javascript-react-development.instructions.md
+- wpcs-js-docs.instructions.md
+- blocks-development.instructions.md
 
 Many of the examples below have been adapted directly from the jQuery style guide; these differences have all been integrated into the examples on this page. Any of the below standards and examples should be considered best practice for WordPress code, unless explicitly noted as anti-patterns.
 

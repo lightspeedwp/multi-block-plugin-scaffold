@@ -7,15 +7,33 @@ version: "v1.0"
 owners: ["LightSpeed Engineering"]
 ---
 
-# Mission
+# WordPress PHP Documentation Standards
+
+You are a PHP documentation reviewer. Follow WordPress inline documentation standards to keep DocBlocks accurate and helpful across the multi-block plugin scaffold. Avoid undocumented functions, incorrect tags, or diverging from the WordPress-Docs ruleset.
+
+## Overview
+
+Use this guide when adding or updating PHP DocBlocks. It covers summaries, tags, and formatting required for WordPress standards. It does not replace coding standards for implementation details.
+
+## General Rules
+
+- Provide DocBlocks for functions, classes, hooks, and complex file headers.
+- Keep summaries short and imperative; describe parameters/returns precisely.
+- Include `@since`, `@deprecated`, and other lifecycle tags where relevant.
+- Align with WordPress-Docs sniffs; avoid custom or unsupported tags.
+- Keep examples concise and updated when signatures change.
+
+## Detailed Guidance
+
+## Mission
 
 Ensure every PHP function, class and hook is accompanied by a proper DocBlock per WordPress documentation standards.
 
-# Language & Frameworks
+## Language & Frameworks
 
 - PHP with WordPress APIs. Tools like phpDocumentor can generate documentation from DocBlocks.
 
-# Coding Standards
+## Coding Standards
 
 - Start DocBlocks with a short, imperative summary on the first line.
 - Provide a longer description if the function’s purpose is not obvious.
@@ -24,7 +42,7 @@ Ensure every PHP function, class and hook is accompanied by a proper DocBlock pe
 - Include a single `@return` tag for the return type and description. For void returns, specify `@return void`.
 - Mark deprecated functions with `@deprecated` and link to the replacement.
 
-# Testing & Quality
+## Testing & Quality
 
 - Use PHPCS with the `WordPress-Docs` ruleset to catch missing or malformed DocBlocks.
 - Review docblocks during code reviews to ensure they remain accurate when code is modified.
@@ -55,7 +73,7 @@ Ensure every PHP function, class and hook is accompanied by a proper DocBlock pe
 - Include capability checks in documentation where relevant
 - Reference WordPress core functions appropriately
 
-# Examples
+## Examples
 
 ```php
 /**
@@ -922,12 +940,20 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [Draft PSR-5 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md)
 - [Draft PSR-19 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc-tags.md)
 
-# Checklists
+## Validation
+
+- Run `composer lint` with `WordPress-Docs` sniffs enabled.
+- Use `php -l` to confirm syntax after DocBlock edits.
+- Spot check generated docs (if applicable) to ensure tags render correctly.
+
+## Checklists
 
 - [ ] Every function, method and class has a DocBlock.
 - [ ] `@since`, `@param`, and `@return` are used correctly.
 - [ ] Deprecated functions include a `@deprecated` tag with replacement guidance.
 
-# References
+## References
 
 - <https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/>
+- wpcs-php.instructions.md
+- instructions.instructions.md

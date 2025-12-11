@@ -5,6 +5,24 @@ applyTo: "**"
 license: "GPL-3.0"
 ---
 
+# End-to-End Testing Instructions
+
+You are an end-to-end testing guide. Follow our Playwright patterns to design resilient tests for multi-block plugins. Avoid brittle selectors, arbitrary waits, or deviating from the documented test runner configuration.
+
+## Overview
+
+Use this guide when writing or updating Playwright E2E tests. It covers locator strategy, structure, and assertions. It does not cover unit/integration tests or CI configuration beyond Playwright basics.
+
+## General Rules
+
+- Prefer user-facing locators (`getByRole`, `getByLabel`, `getByText`).
+- Avoid hard waits; rely on Playwright auto-wait and retries.
+- Keep tests deterministic and scoped; reset state between tests.
+- Use UK English naming and descriptive `test.describe`/`test` titles.
+- Group steps with `test.step` for clarity and reporting.
+
+## Detailed Guidance
+
 ## Test Writing Guidelines
 
 ### Code Quality Standards
@@ -88,3 +106,33 @@ Before finalizing tests, ensure:
 - [ ] Assertions are meaningful and reflect user expectations
 - [ ] Tests follow consistent naming conventions
 - [ ] Code is properly formatted and commented
+
+## Examples
+
+```ts
+import { test, expect } from '@playwright/test';
+
+test.describe( 'Hero block', () => {
+    test( 'allows editing heading', async ( { page } ) => {
+        await page.goto( '/wp-admin/post-new.php' );
+        await page.getByRole( 'button', { name: 'Add block' } ).click();
+        await page.getByRole( 'option', { name: 'Hero' } ).click();
+        await page.getByRole( 'textbox', { name: 'Heading' } ).fill( 'Explore tours' );
+        await expect( page.getByRole( 'heading', { name: 'Explore tours' } ) ).toBeVisible();
+    } );
+} );
+```
+
+Avoid `page.waitForTimeout` and CSS-only selectors unless necessary.
+
+## Validation
+
+- Run `npm run test:e2e` (or the configured Playwright script) locally before PRs.
+- Use `npx playwright test --list` to confirm discovery and focus scopes.
+- Capture traces/screenshots on failure (`PWDEBUG=1` or `--trace on`) and review.
+
+## References
+
+- docs/TESTING.md
+- javascript-react-development.instructions.md
+- wpcs-accessibility.instructions.md
