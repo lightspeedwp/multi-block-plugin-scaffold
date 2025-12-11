@@ -1,5 +1,5 @@
 ---
-name: "Multi-Block Plugin Release Agent"
+name: "Release Agent"
 description: "Automated release preparation and validation for the WordPress multi-block plugin scaffold"
 target: "github-copilot"
 version: "v1.0"

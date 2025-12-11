@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(php -l:*)",
+      "FileSystem(read:*.php)",
+      "FileSystem(read:*.json)",
+      "FileSystem(write:*.php)",
+      "FileSystem(write:*.json)",
+      "FileSystem(read:.github/agents/generate-plugin.agent.md)",
+      "FileSystem(write:.github/agents/generate-plugin.agent.md)",
+      "Bash(mkdir:*)"
+    ]
+  }
+}

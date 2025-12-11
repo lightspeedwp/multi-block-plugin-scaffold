@@ -8,6 +8,9 @@ tools:
   - file_search
   - run_in_terminal
   - create_file
+  - update_file
+  - delete_file
+  - move_file
 ---
 
 # Multi-Block Plugin Scaffold Generator
