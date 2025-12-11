@@ -21,6 +21,103 @@ The scaffold includes three complementary generation methods:
 
 All methods use the same **mustache template system** under the hood.
 
+## Quick Start Guide
+
+### Config-First Approach
+
+The recommended workflow follows a config-first approach:
+
+### Step 1: Repository Context
+
+Determine which mode you need:
+
+- **Scaffold Repository** → Generator Mode (default)
+- **New Repository** → Template Mode (`--in-place` flag)
+
+### Step 2: Configuration File
+
+Do you have a `plugin-config.json` file?
+
+#### ✅ YES - I Have a Config File
+
+1. **Validate** your configuration:
+
+   ```bash
+   node scripts/generate-plugin.js --validate plugin-config.json
+   ```
+
+2. **Review** validation results:
+
+   - ✅ Valid → Proceed to generation
+   - ❌ Invalid → Fix errors or use wizard
+
+3. **Generate** your plugin:
+
+   ```bash
+   # Generator mode (creates generated-plugins/<slug>/)
+   node scripts/generate-plugin.js --config plugin-config.json
+
+   # Template mode (modifies current directory)
+   node scripts/generate-plugin.js --config plugin-config.json --in-place
+   ```
+
+**Configuration File Example:**
+
+```json
+{
+  "slug": "tour-operator",
+  "name": "Tour Operator",
+  "description": "A comprehensive tour booking and display plugin",
+  "author": "LightSpeed",
+  "author_uri": "https://developer.lsdev.biz",
+  "version": "1.0.0",
+  "name_singular": "Tour",
+  "name_plural": "Tours",
+  "cpt_slug": "tour",
+  "cpt_icon": "dashicons-palmtree",
+  "cpt_supports": ["title", "editor", "thumbnail", "custom-fields"],
+  "cpt_has_archive": true,
+  "taxonomies": [
+    {
+      "slug": "destination",
+      "singular": "Destination",
+      "plural": "Destinations",
+      "hierarchical": true
+    }
+  ],
+  "fields": [
+    {
+      "name": "price",
+      "label": "Price",
+      "type": "number"
+    }
+  ]
+}
+```
+
+See `.github/schemas/examples/plugin-config.example.json` for a complete example.
+
+#### ❌ NO - I Don't Have a Config File
+
+Use one of the interactive wizards:
+
+**Simple Wizard** (Recommended)
+
+- Covers essential configuration
+- Uses smart defaults
+- Faster and easier
+
+**Advanced Wizard** (Complete Configuration)
+
+- Covers all 100+ mustache variables
+- Maximum customization
+- Takes longer but comprehensive
+
+To use wizards, run the generator prompt or agent:
+
+- Prompt: `.github/prompts/generate-plugin.prompt.md`
+- Agent: `.github/agents/generate-plugin.agent.md`
+
 ## Generator Components
 
 The generator system consists of three main components that work together:
@@ -270,9 +367,10 @@ The scaffold supports two operational modes depending on **where you're running 
 - You're experimenting with configurations
 
 **Behavior:**
-- Creates new plugin in `output-plugin/` or `generated-plugins/<slug>/`
+
+- Creates new plugin in `generated-plugins/<slug>/`
 - Leaves scaffold directory completely unchanged
-- Output folders are excluded via `.gitignore`
+- Output folder is excluded via `.gitignore`
 - Can generate multiple plugins safely
 - No confirmation needed (non-destructive)
 
@@ -287,7 +385,7 @@ node scripts/generate-plugin.js --config my-config.json
 1. Clone the scaffold repository
 2. Create your plugin configuration file
 3. Run generator (default mode, no flags)
-4. Find generated plugin in `output-plugin/` or `generated-plugins/<slug>/`
+4. Find generated plugin in `generated-plugins/<slug>/`
 5. Manually move/copy the plugin to your WordPress installation
 6. Scaffold remains pristine for next generation
 
@@ -295,10 +393,11 @@ node scripts/generate-plugin.js --config my-config.json
 ```
 multi-block-plugin-scaffold/
 ├── ... (scaffold files unchanged)
-└── output-plugin/              ← Generated plugin here (gitignored)
-    ├── tour-operator.php
-    ├── package.json
-    └── ...
+└── generated-plugins/          ← Output folder (gitignored)
+    └── tour-operator/          ← Your generated plugin
+        ├── tour-operator.php
+        ├── package.json
+        └── ...
 ```
 
 ---

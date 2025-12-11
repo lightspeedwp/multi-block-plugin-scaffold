@@ -524,6 +524,132 @@
                 "type": "string",
                 "pattern": "^[a-z0-9-]+$"
             }
+        },
+        "short_description": {
+            "type": "string",
+            "description": "Short description for WordPress.org readme (max 150 chars)",
+            "maxLength": 150,
+            "examples": [
+                "Manage tours with custom blocks and fields"
+            ]
+        },
+        "contributors": {
+            "type": "array",
+            "description": "WordPress.org usernames of contributors",
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_-]+$"
+            },
+            "examples": [
+                ["username1", "username2"]
+            ]
+        },
+        "docs_url": {
+            "type": "string",
+            "description": "Documentation URL",
+            "format": "uri",
+            "pattern": "^https?://",
+            "examples": [
+                "https://docs.example.com/tour-operator"
+            ]
+        },
+        "support_url": {
+            "type": "string",
+            "description": "Support/forum URL",
+            "format": "uri",
+            "pattern": "^https?://",
+            "examples": [
+                "https://support.example.com"
+            ]
+        },
+        "github_url": {
+            "type": "string",
+            "description": "GitHub repository URL",
+            "format": "uri",
+            "pattern": "^https://github.com/",
+            "examples": [
+                "https://github.com/yourorg/tour-operator"
+            ]
+        },
+        "donate_url": {
+            "type": "string",
+            "description": "Donation URL",
+            "format": "uri",
+            "pattern": "^https?://",
+            "examples": [
+                "https://donate.example.com"
+            ]
+        },
+        "update_uri": {
+            "type": "string",
+            "description": "Custom update URI (WordPress 5.8+)",
+            "format": "uri",
+            "examples": [
+                "https://example.com/updates/tour-operator"
+            ]
+        },
+        "copyright_year": {
+            "type": "string",
+            "description": "Copyright year or range",
+            "pattern": "^\\d{4}(-\\d{4})?$",
+            "examples": [
+                "2025",
+                "2024-2025"
+            ]
+        },
+        "copyright_holder": {
+            "type": "string",
+            "description": "Copyright holder name",
+            "examples": [
+                "Your Company Name"
+            ]
+        },
+        "block_category": {
+            "type": "string",
+            "description": "Custom block category for generated blocks",
+            "default": "common",
+            "examples": [
+                "tour-operator",
+                "custom-blocks"
+            ]
+        },
+        "block_supports": {
+            "type": "object",
+            "description": "Block supports configuration (align, color, spacing, etc.)",
+            "properties": {
+                "align": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "color": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "spacing": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "typography": {
+                    "type": "boolean",
+                    "default": true
+                }
+            }
+        },
+        "release_date": {
+            "type": "string",
+            "description": "Initial release date (YYYY-MM-DD)",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": [
+                "2025-01-15"
+            ]
+        },
+        "upgrade_notice": {
+            "type": "string",
+            "description": "Upgrade notice for WordPress.org",
+            "maxLength": 300,
+            "examples": [
+                "This version includes security fixes. Please update immediately."
+            ]
         }
     },
     "additionalProperties": false

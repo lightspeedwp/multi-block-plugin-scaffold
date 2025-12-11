@@ -81,6 +81,56 @@ When creating project tracking files, task lists, or multi-week project plans:
 
 ---
 
+## Instruction File Index
+
+Reference the following instruction files based on your task. For a complete map, see the Master Instructions Index.
+
+### WordPress Coding Standards (WPCS)
+
+| File | Purpose |
+|------|---------|
+| wpcs-php.instructions.md | PHP coding standards, formatting, naming, security, i18n |
+| wpcs-javascript.instructions.md | JavaScript coding standards and patterns |
+| wpcs-php-docs.instructions.md | PHP inline documentation (DocBlocks) |
+| wpcs-js-docs.instructions.md | JavaScript inline documentation (JSDoc) |
+| wpcs-css.instructions.md | CSS/SCSS coding standards |
+| wpcs-html.instructions.md | HTML markup standards and semantics |
+| wpcs-accessibility.instructions.md | Accessibility standards (WCAG 2.2 AA) |
+
+### Block Development
+
+| File | Purpose |
+|------|---------|
+| blocks-development.instructions.md | Comprehensive block development guide |
+| block-json.instructions.md | Block.json schema reference |
+| patterns-and-templates.instructions.md | Pattern development, registration, and template usage |
+| javascript-react-development.instructions.md | React/JS development patterns for blocks |
+
+### Testing & Quality Assurance
+
+| File | Purpose |
+|------|---------|
+| testing-e2e.instructions.md | End-to-end testing with Playwright/TypeScript |
+| security.instructions.md | Block plugin security best practices |
+
+### Plugin Scaffolding & Organization
+
+| File | Purpose |
+|------|---------|
+| generate-plugin.instructions.md | Mustache template scaffolding standards |
+| scaffold-extensions.instructions.md | Extending the scaffold with new features |
+| folder-structure.instructions.md | Project organization and file structure standards |
+
+### Special Topics
+
+| File | Purpose |
+|------|---------|
+| a11y.instructions.md | Advanced accessibility standards for block plugins |
+| i18n.instructions.md | Internationalization guidelines |
+| scf-fields.instructions.md | Custom field development with SCF |
+
+---
+
 # {{name}} Multi-Block Plugin Instructions
 
 You are an expert WordPress multi-block plugin developer working on {{name}}, a modern WordPress multi-block plugin scaffold with custom post types, taxonomies, and SCF field integration.

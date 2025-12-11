@@ -9,7 +9,7 @@
  * Usage:
  *   node scripts/scan-mustache-variables.js
  *   node scripts/scan-mustache-variables.js --json > variables.json
- *   node scripts/scan-mustache-variables.js --validate theme-config.json
+ *   node scripts/scan-mustache-variables.js --validate plugin-config.json
  */
 
 const fs = require('fs');
@@ -18,13 +18,16 @@ const path = require('path');
 // Directories to scan
 const SCAN_DIRS = [
 	'.',
-	'patterns',
-	'parts',
-	'templates',
-	'styles',
+	'inc',
 	'src',
+	'templates',
+	'template-parts',
+	'patterns',
+	'styles',
+	'scf-json',
 	'.github',
 	'docs',
+	'tests',
 ];
 
 // Directories to exclude from scanning
@@ -33,11 +36,15 @@ const EXCLUDE_DIRS = [
 	'vendor',
 	'dist',
 	'build',
-	'output-theme',
+	'generated-plugins',
+	'output-plugin',
+	'output',
 	'.git',
 	'coverage',
 	'test-results',
 	'artifacts',
+	'logs',
+	'.dry-run-backup',
 ];
 
 // File extensions to scan
@@ -114,17 +121,17 @@ function categorizeVariable(varName) {
 	const cleanName = varName.split('|')[0];
 
 	// Core identity
-	if (['theme_slug', 'theme_name', 'namespace', 'description'].includes(cleanName)) {
+	if (['slug', 'name', 'namespace', 'textdomain', 'description'].includes(cleanName)) {
 		return 'core_identity';
 	}
 
 	// Author & contact
-	if (cleanName.includes('author') || cleanName.includes('email') || cleanName === 'year') {
+	if (cleanName.includes('author') || cleanName.includes('email') || cleanName === 'year' || cleanName === 'copyright') {
 		return 'author_contact';
 	}
 
 	// Versioning
-	if (cleanName.includes('version') || cleanName.includes('_wp_') || cleanName.includes('_php_')) {
+	if (cleanName.includes('version') || cleanName.includes('requires_') || cleanName.includes('tested_')) {
 		return 'versioning';
 	}
 
@@ -138,53 +145,51 @@ function categorizeVariable(varName) {
 		return 'license';
 	}
 
-	// Colors
-	if (cleanName.includes('color') || cleanName.includes('_colour')) {
-		return 'design_colors';
+	// Custom Post Type
+	if (
+		cleanName.includes('cpt_') ||
+		cleanName.includes('name_singular') ||
+		cleanName.includes('name_plural') ||
+		cleanName.includes('has_archive') ||
+		cleanName.includes('hierarchical') ||
+		cleanName.includes('menu_icon') ||
+		cleanName.includes('supports') ||
+		cleanName.includes('rewrite_slug')
+	) {
+		return 'custom_post_type';
 	}
 
-	// Typography
+	// Taxonomy
 	if (
-		cleanName.includes('font') ||
-		cleanName.includes('line_height') ||
-		cleanName.includes('weight')
+		cleanName.includes('taxonomy_') ||
+		cleanName.includes('tax_')
 	) {
-		return 'design_typography';
+		return 'taxonomy';
 	}
 
-	// Layout
-	if (
-		cleanName.includes('width') ||
-		cleanName.includes('spacing') ||
-		cleanName.includes('size')
-	) {
-		return 'design_layout';
+	// Blocks
+	if (cleanName.includes('block_')) {
+		return 'blocks';
+	}
+
+	// Fields (SCF/ACF)
+	if (cleanName.includes('field_') || cleanName.includes('scf_') || cleanName.includes('acf_')) {
+		return 'custom_fields';
 	}
 
 	// Content strings
 	if (
 		cleanName.includes('text') ||
 		cleanName.includes('title') ||
-		cleanName.includes('excerpt') ||
-		cleanName.includes('skip_link') ||
-		cleanName.includes('copyright')
+		cleanName.includes('description') ||
+		cleanName.includes('label')
 	) {
 		return 'content_strings';
 	}
 
-	// Images
-	if (cleanName.includes('image') || cleanName.includes('thumbnail')) {
-		return 'images';
-	}
-
-	// Theme tags and metadata
-	if (cleanName.includes('tags') || cleanName.includes('textdomain') || cleanName.includes('audience')) {
-		return 'theme_metadata';
-	}
-
-	// UI components
-	if (cleanName.includes('button') || cleanName.includes('border')) {
-		return 'ui_components';
+	// Plugin metadata
+	if (cleanName.includes('plugin_') || cleanName.includes('textdomain')) {
+		return 'plugin_metadata';
 	}
 
 	return 'other';
@@ -297,13 +302,12 @@ function displayResults(results, sortedVariables) {
 		'versioning',
 		'urls',
 		'license',
-		'design_colors',
-		'design_typography',
-		'design_layout',
+		'custom_post_type',
+		'taxonomy',
+		'custom_fields',
+		'blocks',
 		'content_strings',
-		'ui_components',
-		'images',
-		'theme_metadata',
+		'plugin_metadata',
 		'other',
 	];
 
@@ -412,17 +416,15 @@ function flattenConfig(config, prefix = '') {
  */
 function isDerivedVariable(varName) {
 	const derived = [
-		'namespace', // Derived from theme_slug
-		'support_url', // Derived from theme_slug
-		'support_email', // Derived from author_uri
-		'security_email', // Derived from author_uri
-		'business_email', // Derived from author_uri
-		'docs_url', // Derived from author + theme_slug
-		'docs_repo_url', // Derived from theme_repo_url
-		'content_width_px', // Derived from content_width
+		'namespace', // Derived from slug
+		'textdomain', // Derived from slug
+		'name_singular_lower', // Derived from name_singular
+		'name_plural_lower', // Derived from name_plural
+		'taxonomy_plural_lower', // Derived from taxonomy_plural
+		'license_uri', // Derived from license
 		'year', // Auto-generated
-		'created_date', // Auto-generated
-		'updated_date', // Auto-generated
+		'copyright_year', // Auto-generated
+		'copyright_holder', // Derived from author
 	];
 
 	return derived.includes(varName);

@@ -42,7 +42,7 @@ This index maps every instruction file in the repository and when to use it. Use
 - Check links resolve to existing files after renames.
 
 **Last Updated:** 2025-12-10
-**Total Files:** 19 instruction files
+**Total Files:** 22 instruction files
 
 ---
 
@@ -147,7 +147,7 @@ All `wpcs-*` files in the [WordPress Coding Standards](#wordpress-coding-standar
 | [a11y.instructions.md](./a11y.instructions.md) | 27.8KB | Accessibility standards for block plugins (WCAG 2.2 AA) | When developing block controls, editor UX, or block output |
 | [i18n.instructions.md](./i18n.instructions.md) | 550 bytes | Internationalization guidelines | When adding translatable strings |
 | [scf-fields.instructions.md](./scf-fields.instructions.md) | 19.8KB | Custom field development | When creating custom fields functionality |
-| [reporting.instructions.md](./reporting.instructions.md) | 19.0KB | Reporting and documentation standards | When creating reports or documentation |
+| [reporting.instructions.md](./reporting.instructions.md) | 19.0KB | Reporting and analysis documentation standards | When creating reports or documentation |
 
 **Total Special Topics:** 4 files (~67KB)
 
@@ -348,28 +348,28 @@ Found an issue with an instruction file?
 <summary>Click to expand full alphabetical listing</summary>
 
 1. [_index.instructions.md](./_index.instructions.md) — This file
-2. [a11y.instructions.md](./a11y.instructions.md) — Accessibility standards
-3. [block-json.instructions.md](./block-json.instructions.md) — Block.json reference
-4. [blocks-development.instructions.md](./blocks-development.instructions.md) — **NEW** Block development guide
-5. [folder-structure.instructions.md](./folder-structure.instructions.md) — Project organization
-6. [generate-plugin.instructions.md](./generate-plugin.instructions.md) — Plugin generator
-7. [i18n.instructions.md](./i18n.instructions.md) — Internationalization
-8. [javascript-react-development.instructions.md](./javascript-react-development.instructions.md) — **CONSOLIDATED** React/JS patterns
-9. [patterns-and-templates.instructions.md](./patterns-and-templates.instructions.md) — **NEW** Pattern development
-10. [reporting.instructions.md](./reporting.instructions.md) — Reporting standards
-11. [scaffold-extensions.instructions.md](./scaffold-extensions.instructions.md) — **RENAMED** Scaffold extensions
-12. [scf-fields.instructions.md](./scf-fields.instructions.md) — Custom fields
-13. [schema-files.instructions.md](./schema-files.instructions.md) — Schema organization
-14. [security.instructions.md](./security.instructions.md) — Security best practices
-15. [temp-files.instructions.md](./temp-files.instructions.md) — Temporary files
-16. [testing-e2e.instructions.md](./testing-e2e.instructions.md) — **RENAMED** E2E testing
-17. [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md) — WPCS Accessibility
-18. [wpcs-css.instructions.md](./wpcs-css.instructions.md) — WPCS CSS
-19. [wpcs-html.instructions.md](./wpcs-html.instructions.md) — WPCS HTML
-20. [wpcs-javascript.instructions.md](./wpcs-javascript.instructions.md) — WPCS JavaScript
-21. [wpcs-js-docs.instructions.md](./wpcs-js-docs.instructions.md) — WPCS JS Docs
-22. [wpcs-php.instructions.md](./wpcs-php.instructions.md) — WPCS PHP
-23. [wpcs-php-docs.instructions.md](./wpcs-php-docs.instructions.md) — WPCS PHP Docs
+2. [a11y.instructions.md](./a11y.instructions.md)
+3. [block-json.instructions.md](./block-json.instructions.md)
+4. [blocks-development.instructions.md](./blocks-development.instructions.md)
+5. [folder-structure.instructions.md](./folder-structure.instructions.md)
+6. [generate-plugin.instructions.md](./generate-plugin.instructions.md)
+7. [i18n.instructions.md](./i18n.instructions.md)
+8. [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+9. [patterns-and-templates.instructions.md](./patterns-and-templates.instructions.md)
+10. [reporting.instructions.md](./reporting.instructions.md)
+11. [scaffold-extensions.instructions.md](./scaffold-extensions.instructions.md)
+12. [scf-fields.instructions.md](./scf-fields.instructions.md)
+13. [schema-files.instructions.md](./schema-files.instructions.md)
+14. [security.instructions.md](./security.instructions.md)
+15. [temp-files.instructions.md](./temp-files.instructions.md)
+16. [testing-e2e.instructions.md](./testing-e2e.instructions.md)
+17. [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md)
+18. [wpcs-css.instructions.md](./wpcs-css.instructions.md)
+19. [wpcs-html.instructions.md](./wpcs-html.instructions.md)
+20. [wpcs-javascript.instructions.md](./wpcs-javascript.instructions.md)
+21. [wpcs-js-docs.instructions.md](./wpcs-js-docs.instructions.md)
+22. [wpcs-php.instructions.md](./wpcs-php.instructions.md)
+23. [wpcs-php-docs.instructions.md](./wpcs-php-docs.instructions.md)
 
 </details>
 

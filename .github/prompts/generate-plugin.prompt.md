@@ -6,35 +6,59 @@ description: Interactive WordPress multi-block plugin generator with CPT, taxono
 
 I'll help you generate a new WordPress multi-block plugin with custom post types, taxonomies, and Secure Custom Fields integration. This is a comprehensive scaffold for complex WordPress applications.
 
-## 🔍 Repository Context Detection
+## 🔍 Step 1: Repository Context Detection
 
 **First, I need to understand your setup:**
 
 Are you running this generator:
 
 1. **In the `lightspeedwp/multi-block-plugin-scaffold` repository?**
-   - If YES → The plugin will be generated in an `output-plugin/` folder (excluded from git)
+   - If YES → The plugin will be generated in `generated-plugins/<slug>/` folder (excluded from git)
    - This folder is for testing and development only
    - You'll manually move the generated plugin to where you need it
+   - Use **Generator Mode** (default)
 
 2. **In a NEW repository (created from the scaffold template)?**
    - If YES → The generator will replace all mustache variables IN-PLACE in your current repository
    - This will transform the scaffold INTO your actual plugin
-   - This action modifies your repository permanently (use `--in-place` mode)
+   - This action modifies your repository permanently
+   - Use **Template Mode** (`--in-place` flag)
 
 **Please indicate which scenario applies to you before we proceed.**
 
-## Quick Start Options
+---
 
-### Option 1: Use Configuration File (Fastest)
+## 📋 Step 2: Configuration File Check
 
-If you already have a configuration file that follows the schema (`.github/schemas/plugin-config.schema.json`), you can bypass the wizard entirely:
+**Do you have a plugin configuration file?**
 
+### ✅ YES - I Have a Config File
+
+If you have a `plugin-config.json` file (or similar), I'll help you validate and use it:
+
+1. **Provide the file path** to your configuration file
+2. **I will validate it** against the schema (`.github/schemas/plugin-config.schema.json`)
+3. **Review validation results:**
+   - ✅ If valid → Ask if you want to override any values → Generate plugin
+   - ❌ If invalid → Show errors → Offer to fix or use wizard
+
+**Would you like to override any configuration values?**
+- If YES → I'll ask which values you want to change
+- If NO → I'll generate using your config file as-is
+
+**Example validation workflow:**
 ```bash
-node scripts/generate-plugin.js --config path/to/your-config.json
+# Step 1: Validate your config
+node scripts/generate-plugin.js --validate plugin-config.json
+
+# Step 2: Generate (if validation passed)
+node scripts/generate-plugin.js --config plugin-config.json
+
+# Step 3: (Template mode only) Add --in-place flag
+node scripts/generate-plugin.js --config plugin-config.json --in-place
 ```
 
-**Example configuration file:**
+**Example configuration file structure:**
 ```json
 {
   "slug": "tour-operator",
@@ -45,6 +69,7 @@ node scripts/generate-plugin.js --config path/to/your-config.json
   "version": "1.0.0",
   "name_singular": "Tour",
   "name_plural": "Tours",
+  "cpt_slug": "tour",
   "cpt_icon": "dashicons-palmtree",
   "cpt_supports": ["title", "editor", "thumbnail", "custom-fields"],
   "cpt_has_archive": true,
@@ -66,17 +91,43 @@ node scripts/generate-plugin.js --config path/to/your-config.json
 }
 ```
 
-See `.github/schemas/plugin-config.example.json` for a complete example.
+**See complete example:** `.github/schemas/examples/plugin-config.example.json`
 
-### Option 2: Interactive Wizard (Guided)
-
-If you prefer step-by-step guidance, continue with the information gathering process below.
+**See schema reference:** `.github/schemas/plugin-config.schema.json`
 
 ---
 
-## Information Gathering Process
+### ❌ NO - I Don't Have a Config File
 
-This scaffold requires more detailed planning due to its complexity. I'll gather information in multiple stages to ensure your plugin is properly configured.
+No problem! I'll guide you through creating your plugin configuration using one of these wizards:
+
+#### Option A: Simple Wizard (Recommended for Most Users)
+- Asks **only required** questions
+- Uses **smart defaults** for optional values
+- **Faster** and easier to complete
+- Best for standard use cases
+
+#### Option B: Advanced Wizard (Complete Configuration)
+- Asks about **all 100+ mustache variables**
+- Full control over every aspect
+- Takes longer but offers maximum customization
+- Best for complex or highly customized plugins
+
+**Which wizard would you prefer?**
+- Type **"simple"** for Simple Wizard
+- Type **"advanced"** for Advanced Wizard
+
+---
+
+## 🧙 Interactive Wizard: Information Gathering
+
+*(This section applies when using the Simple or Advanced Wizard)*
+
+This scaffold requires detailed planning due to its complexity. I'll gather information in multiple stages to ensure your plugin is properly configured.
+
+**Wizard Types:**
+- **Simple Wizard**: Covers Stages 1-5 with smart defaults
+- **Advanced Wizard**: Covers all stages + additional variables (100+ total)
 
 ---
 
@@ -243,9 +294,21 @@ Which blocks should be created?
 
 ---
 
-## Let's Begin!
+## 🚀 Let's Begin!
 
-**Please provide your answers for Stage 1:**
+**First, answer these two questions:**
+
+1. **Repository Context**: Are you in the scaffold repo or a new repo?
+   - Type **"scaffold"** for Generator Mode (creates `generated-plugins/<slug>/`)
+   - Type **"new"** for Template Mode (modifies current directory with `--in-place`)
+
+2. **Configuration File**: Do you have a plugin-config.json file?
+   - Type **"yes"** and provide the file path
+   - Type **"no"** to use the wizard
+
+---
+
+**If using the wizard, provide your answers for Stage 1:**
 
 1. Plugin Name:
 2. Plugin Slug:
@@ -370,7 +433,6 @@ The plugin will automatically declare SCF as a dependency using the WordPress 6.
 
 ## Related Resources
 
-- [Multi-Block Plugin Scaffold Reference](multi-block-plugin-scaffold.prompt.md)
 - [Plugin Generator Agent](../agents/generate-plugin.agent.md)
-- [Development Assistant](../agents/development-assistant.agent.md)
+- [Plugin Generator Instructions](../instructions/generate-plugin.instructions.md)
 - [SCF Fields Reference](../instructions/scf-fields.instructions.md)

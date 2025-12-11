@@ -33,6 +33,20 @@ This file documents the primary automation agent(s) for this repository, their p
 - **Usage:** Say "Generate a new multi-block plugin" or "Create CPT plugin from scaffold"
 - **Related Prompt:** [generate-plugin.prompt.md](../prompts/generate-plugin.prompt.md)
 
+### WP Block Build Agent
+
+- **Agent Spec:** `.github/agents/wp-block-build.agent.md`
+- **Purpose:** Details the build process for the multi-block plugin agent, covering compilation, asset handling, and packaging.
+- **Usage:** Reference for understanding and troubleshooting the plugin build process.
+
+### Development Assistant Agent
+
+- **Agent Spec:** `.github/agents/development-assistant.agent.md`
+- **Purpose:** Provides context-specific assistance for development tasks, with different modes for various needs.
+- **Usage:** Invoke for help with coding, debugging, and adhering to project standards.
+
+---
+
 ### General Automation Agent
 
 - **Agent Script:** `.github/agents/agent-script.js`

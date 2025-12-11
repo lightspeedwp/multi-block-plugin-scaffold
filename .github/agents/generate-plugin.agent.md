@@ -520,7 +520,7 @@ Requires Plugins: secure-custom-fields
 
 ## Implementation
 
-This agent is implemented in [`scaffold-generator.agent.js`](./scaffold-generator.agent.js).
+This agent is implemented in [`generate-plugin.agent.js`](../../scripts/generate-plugin.agent.js).
 
 **Direct Usage:**
 ```bash
