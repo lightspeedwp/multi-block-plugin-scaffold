@@ -1,8 +1,8 @@
 ---
 description: "Release preparation and tagging guidance for the multi-block plugin scaffold and generated plugins"
 applyTo: "**/RELEASE*.md"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Release Instructions
@@ -58,7 +58,7 @@ Avoid tagging from a dirty worktree or before updating `readme.txt` stable tag.
 
 ## References
 
-- docs/RELEASE_PROCESS.md
-- release-scaffold.instructions.md
-- SECURITY.md
-- CHANGELOG.md
+- [docs/RELEASE_PROCESS.md](../../docs/RELEASE_PROCESS.md)
+- [release-scaffold.instructions.md](./release-scaffold.instructions.md)
+- [SECURITY.md](../../SECURITY.md)
+- [CHANGELOG.md](../../CHANGELOG.md)

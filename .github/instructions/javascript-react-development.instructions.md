@@ -2,8 +2,8 @@
 file_type: "instructions"
 title: "WordPress JavaScript/React Development Standards"
 description: "Comprehensive standards for WordPress JavaScript and React block development following WordPress and LightSpeed conventions."
-version: "v2.1"
-last_updated: "2025-11-27"
+version: 2.1
+lastUpdated: 2025-11-27
 author: "LightSpeedWP Team"
 maintainer: "Engineering Team"
 owners: ["lightspeedwp/maintainers"]
@@ -234,14 +234,6 @@ Avoid anonymous default exports and keep props typed (`EditProps`) when using Ty
 - Run `npm run lint` and `npm test` to validate JS/TS and block behaviour.
 - Run `npm run build` to ensure code compiles with the shared pipeline.
 - For TypeScript, run `npm run typecheck` if available; otherwise configure `tsc --noEmit`.
-
-## References
-
-- blocks-development.instructions.md
-- block-json.instructions.md
-- wpcs-javascript.instructions.md
-- wpcs-js-docs.instructions.md
-- README.md
 
 ### Block Component Template
 
@@ -793,7 +785,7 @@ const MyComponent = ({ isActive, isDisabled }) => {
 - Ignore performance optimization opportunities
 - Skip error handling in async operations
 
-## References
+## External resources
 
 - [WordPress JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/)
 - [WordPress JavaScript Documentation](https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/)
@@ -801,3 +793,11 @@ const MyComponent = ({ isActive, isDisabled }) => {
 - [React Hooks Documentation](https://react.dev/reference/react/hooks)
 - [ESLint Configuration](https://eslint.org/docs/latest/)
 - [Testing React Components](https://testing-library.com/docs/react-testing-library/intro/)
+
+## References
+
+- [blocks-development.instructions.md](./blocks-development.instructions.md)
+- [block-json.instructions.md](./block-json.instructions.md)
+- [wpcs-javascript.instructions.md](./wpcs-javascript.instructions.md)
+- [wpcs-js-docs.instructions.md](./wpcs-js-docs.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

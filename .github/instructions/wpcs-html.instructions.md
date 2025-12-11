@@ -3,8 +3,8 @@ file_type: "instructions"
 applyTo: ['**/*.html', '**/*.htm', '**/*.php']
 title: "[Instructions] HTML Coding Standards"
 description: "Guidelines for HTML template parts and block templates in LightSpeed WordPress projects."
-last_updated: "2025-10-19"
-version: "v1.0"
+lastUpdated: 2025-10-19
+version: 1.0
 owners: ["LightSpeed Engineering"]
 contributors:
   - name: "Ash Shaw"
@@ -101,11 +101,7 @@ Avoid nesting headings out of order or injecting unescaped content.
 - Validate markup via W3C validator or IDE tools for template files.
 - Check accessibility (axe/Lighthouse) for rendered templates.
 
-## References
-
-- wpcs-accessibility.instructions.md
-- wpcs-php.instructions.md
-- blocks-development.instructions.md
+### Template Part Tips
 
 - Store reusable components in the `parts/` directory.
 - Use descriptive filenames that reflect the component's purpose.
@@ -272,6 +268,13 @@ Incorrect:
 - [ ] All form controls have associated labels.
 - [ ] Dynamic content is properly escaped in PHP files.
 
-# References
+## External resources
 
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/html/>
+- [WordPress HTML Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/html/)
+
+## References
+
+- [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md)
+- [wpcs-php.instructions.md](./wpcs-php.instructions.md)
+- [blocks-development.instructions.md](./blocks-development.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

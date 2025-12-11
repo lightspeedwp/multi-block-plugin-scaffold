@@ -2,6 +2,8 @@
 name: Temporary File Management Instructions
 description: Rules and standards for using the tmp/ directory
 applyTo: 'tmp/**'
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Instruction: Temporary File Management
@@ -45,11 +47,6 @@ The `tmp/` directory should be organized by the type of content it holds.
 - Confirm `tmp/` remains in `.gitignore` and `git status` is clean after runs.
 - Ensure scripts that write to `tmp/` clean up after completion.
 - Verify no pipeline copies `tmp/` content into release artefacts.
-
-## References
-
-- .gitignore
-- folder-structure.instructions.md
 
 ```plaintext
 tmp/
@@ -154,7 +151,9 @@ The root `.gitignore` file contains entries to prevent the contents of `tmp/` fr
 - Store any important, permanent, or source-of-truth data in `tmp/`.
 - Rely on the contents of `tmp/` being present between script executions.
 
-## Related Documentation
+## References
 
--   Reporting Instructions - Describes how `tmp/reports/` is used to stage report artifacts.
--   Logging Instructions - Differentiates between permanent logs in `logs/` and temporary logs in `tmp/logs/`.
+- [reporting.instructions.md](./reporting.instructions.md) – `tmp/reports/` staging guidance
+- [logs/README.md](../../logs/README.md) – log vs temporary file handling
+- [.gitignore](../../.gitignore) – ignored paths
+- [folder-structure.instructions.md](./folder-structure.instructions.md)

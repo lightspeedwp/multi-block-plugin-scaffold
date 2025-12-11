@@ -1,6 +1,10 @@
 ---
 description: Secure Custom Fields (SCF) field types reference and best practices
-applyTo: "**/inc/**/*.php,**/scf-json/**/*.json"
+applyTo:
+  - "**/inc/**/*.php"
+  - "**/scf-json/**/*.json"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Secure Custom Fields (SCF) Field Types Reference
@@ -929,9 +933,16 @@ array(
 - Confirm JSON sync by reloading field groups in SCF admin; ensure no missing keys.
 - Verify output with automated or manual tests to ensure escaping and defaults work.
 
-## References
+## External resources
 
 - [SCF GitHub Repository](https://github.com/WordPress/secure-custom-fields)
 - [SCF API Reference](https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/code-reference/api/index.md)
 - [SCF Field Types](https://github.com/WordPress/secure-custom-fields/tree/trunk/docs/field-types)
 - [WordPress Plugin Dependencies](https://make.wordpress.org/core/2024/03/05/introducing-plugin-dependencies-in-wordpress-6-5/)
+
+## References
+
+- [generate-plugin.instructions.md](./generate-plugin.instructions.md)
+- [schema-files.instructions.md](./schema-files.instructions.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

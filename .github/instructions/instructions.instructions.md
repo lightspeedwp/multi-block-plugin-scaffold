@@ -25,6 +25,7 @@ The repository provides a WordPress plugin scaffold with multi-block architectur
 - Include frontmatter with `description` and `applyTo` at minimum; keep metadata accurate.
 - Start with an H1, then the role declaration sentence using the standard pattern.
 - Use the recommended section layout (Overview, General Rules, Detailed Guidance, Examples, Validation, References).
+- Always place the `## References` section at the end of the file and express each reference as a Markdown link with a repository-relative path.
 - Write in UK English and keep instructions scoped to the multi-block plugin scaffold.
 - Avoid duplicating organisation-wide standards that live in the shared `.github` repository.
 
@@ -171,17 +172,19 @@ Explain when to create a new block, when to extend an existing one, and how regi
 - Update examples when generator behaviour, build tooling, or deployment processes change.
 - Periodically audit instruction files to ensure they still match the repository’s structure and tooling.
 - Remove outdated guidance as the scaffold evolves and new patterns are introduced.
+- **Reference hygiene:** Verify existing references first; keep valid links, fix or remove broken ones, and add missing related docs. Ensure the `## References` section is a bulleted list placed at the very end of the file, and format each entry as a Markdown link using repository-relative paths (for example `- [CONTRIBUTING.md](../../CONTRIBUTING.md)`).
 
 ## Validation
 
 - Confirm each instruction file includes frontmatter with `description` and `applyTo`.
 - Check that the role declaration follows the standard pattern directly under the H1.
 - Ensure the recommended sections (Overview, General Rules, Detailed Guidance, Examples, Validation, References) are present.
+- Verify the `## References` section sits at the end of the document and each item is a valid Markdown link that resolves via repository-relative paths.
 - Validate internal links after renames or new files via `_index.instructions.md`.
 
 ## References
 
-- AGENTS.md
-- CONTRIBUTING.md
-- docs/ARCHITECTURE.md
-- .github/instructions/_index.instructions.md
+- [AGENTS.md](../../AGENTS.md)
+- [CONTRIBUTING.md](../../CONTRIBUTING.md)
+- [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)
+- [_index.instructions.md](./_index.instructions.md)

@@ -1,8 +1,8 @@
 ---
 description: "Markdown authoring standards for documentation in the multi-block plugin scaffold"
 applyTo: "**/*.md"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Markdown Style Guide
@@ -114,12 +114,6 @@ Avoid mixing heading levels (jumping from H2 to H4) or embedding large HTML bloc
 - Run markdownlint or repository lint scripts if configured.
 - Preview rendering to confirm lists, code fences, and blockquotes display correctly.
 - Check internal links resolve to existing files.
-
-## References
-
-- readme.instructions.md
-- reporting.instructions.md
-- docs/README.md
 
 ### Ordered Lists
 
@@ -260,3 +254,10 @@ $array = array(
 This is _italic text_. This is **bold text**.
 ```
 ````
+
+## References
+
+- [readme.instructions.md](./readme.instructions.md)
+- [reporting.instructions.md](./reporting.instructions.md)
+- [docs/README.md](../../docs/README.md)
+- [_index.instructions.md](./_index.instructions.md)

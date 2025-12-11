@@ -15,7 +15,7 @@ Use this file when creating or updating `*.agent.md` files inside `.github/agent
 
 ## General Rules
 
-- Start from `.github/agents/template.agent.md`; replace all placeholders and keep metadata accurate (`version`, `last_updated`, `status`, `owners`).
+- Start from `.github/agents/template.agent.md`; replace all placeholders and keep metadata accurate (`version`, `lastUpdated`, `status`, `owners`).
 - Keep scope explicit: define what the agent owns and what it must not touch across the scaffold, generators, and WordPress integrations.
 - Treat tools as permissions: if a tool, API scope, or script is not listed, the agent must not use it.
 - Front-load safety: guardrails for destructive actions, data handling, and confirmations are non-negotiable and must cite AGENTS.md and SECURITY.md where relevant.
@@ -32,7 +32,7 @@ Use this file when creating or updating `*.agent.md` files inside `.github/agent
 - **Safety guardrails:** Include confirmation rules, non-destructive defaults, rate limits, and escalation paths to humans. Align with OWASP practices and repository security expectations.
 - **Failure & rollback:** Document how to handle invalid input, tool failures, partial success, and any rollback or manual follow-up steps.
 - **Test tasks & observability:** Provide at least three validation tasks (normal, edge, failure). State logging expectations (timestamps, tool calls, external interactions) and privacy considerations.
-- **Changelog discipline:** Keep a changelog section in each spec. Update `version`, `last_updated`, and changelog entries whenever behaviour, tools, or guardrails change.
+- **Changelog discipline:** Keep a changelog section in each spec. Update `version`, `lastUpdated`, and changelog entries whenever behaviour, tools, or guardrails change.
 
 ## Examples
 
@@ -42,7 +42,7 @@ Use this file when creating or updating `*.agent.md` files inside `.github/agent
   title: "{{Agent Name}}"
   description: "Purpose of the agent in the multi-block plugin scaffold"
   version: "v1.0"
-  last_updated: "YYYY-MM-DD"
+  lastUpdated: "YYYY-MM-DD"
   owners: ["LightSpeedWP Engineering"]
   status: "draft"
   references:
@@ -66,12 +66,12 @@ Use this checklist before merging a new or updated agent spec:
 - [ ] **Failure/Rollback** – Behaviour for partial failure and recovery is documented.
 - [ ] **Testing** – Includes at least one normal task, one edge case, and one failure case.
 - [ ] **Observability** – Logging and audit expectations are stated.
-- [ ] **Changelog & metadata** – Version, `last_updated`, owners, and status fields are current; changelog updated.
+- [ ] **Changelog & metadata** – Version, `lastUpdated`, owners, and status fields are current; changelog updated.
 
 ## References
 
-- AGENTS.md
-- .github/agents/template.agent.md
-- .github/instructions/instructions.instructions.md
-- .github/instructions/coding-standards.instructions.md
-- SECURITY.md
+- [AGENTS.md](../../AGENTS.md)
+- [.github/agents/template.agent.md](../agents/template.agent.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [coding-standards.instructions.md](./coding-standards.instructions.md)
+- [SECURITY.md](../../SECURITY.md)

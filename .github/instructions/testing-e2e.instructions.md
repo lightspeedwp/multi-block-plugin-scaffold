@@ -3,6 +3,8 @@ file_type: "instructions"
 description: "Playwright test generation instructions"
 applyTo: "**"
 license: "GPL-3.0"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # End-to-End Testing Instructions
@@ -133,6 +135,6 @@ Avoid `page.waitForTimeout` and CSS-only selectors unless necessary.
 
 ## References
 
-- docs/TESTING.md
-- javascript-react-development.instructions.md
-- wpcs-accessibility.instructions.md
+- [docs/TESTING.md](../../docs/TESTING.md)
+- [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+- [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md)

@@ -3,13 +3,15 @@ file_type: "instructions"
 applyTo: "**/block.json"
 description: "Comprehensive block.json configuration standards for WordPress block plugins"
 license: "GPL-3.0-or-later"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
-
-> ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.
 
 # block.json Configuration Guidelines for Block Plugins
 
 You are a block metadata architect. Follow our multi-block plugin block.json conventions to describe, register, and ship blocks consistently. Avoid custom registration code paths or inline script/style handles that bypass the shared block.json-first workflow.
+
+> ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.
 
 ## Overview
 
@@ -437,12 +439,16 @@ echo esc_url( $url );
 - Run `npm test` (or targeted block tests) after schema or attribute changes.
 - Build assets with `npm run build` to ensure referenced file handles are produced.
 
-## References
+## External resources
 
 - [WordPress Block Editor Handbook](https://developer.wordpress.org/block-editor/)
 - [block.json Schema](https://schemas.wp.org/trunk/block.json)
 - [Block Supports Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
 - [Block Attributes Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/)
-- blocks-development.instructions.md
-- wpcs-accessibility.instructions.md
-- javascript-react-development.instructions.md
+
+## References
+
+- [blocks-development.instructions.md](./blocks-development.instructions.md)
+- [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md)
+- [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

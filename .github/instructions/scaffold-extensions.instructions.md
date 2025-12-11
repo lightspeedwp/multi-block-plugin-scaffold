@@ -1,8 +1,8 @@
 ---
 description: "Guidance for extending the multi-block plugin scaffold with placeholders and generator hooks"
 applyTo: "**"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Block Plugin Scaffolding – Instructions for Copilot
@@ -414,6 +414,6 @@ Do not include any production opinions; keep everything clearly marked as exampl
 
 ## References
 
-- docs/GENERATE-PLUGIN.md
-- scripts/mustache-variables-registry.json
-- instructions.instructions.md
+- [docs/GENERATE-PLUGIN.md](../../docs/GENERATE-PLUGIN.md)
+- [scripts/mustache-variables-registry.json](../../scripts/mustache-variables-registry.json)
+- [instructions.instructions.md](./instructions.instructions.md)

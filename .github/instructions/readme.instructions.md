@@ -1,8 +1,8 @@
 ---
 description: "Guidance for drafting and updating README files in the multi-block plugin scaffold"
 applyTo: "**/README.md"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # README Authoring Instructions
@@ -97,7 +97,7 @@ Avoid promising features that are not in the repository or documenting unused sc
 
 ## References
 
-- docs/README.md
-- docs/ARCHITECTURE.md
-- instructions.instructions.md
-- _index.instructions.md
+- [docs/README.md](../../docs/README.md)
+- [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

@@ -2,6 +2,8 @@
 name: Folder Structure Instructions
 description: Repository folder organization and file placement rules
 applyTo: '**'
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Folder Structure Instructions
@@ -553,14 +555,6 @@ npm run plugin-zip
 unzip -l *.zip | grep -E "src/|tests/|docs/"  # Should be empty
 ```
 
-## References
-
-- **[ARCHITECTURE.md](../../docs/ARCHITECTURE.md)** - Complete repository architecture
-- **[logs/README.md](../../logs/README.md)** - Logging documentation
-- **[tmp/README.md](../../tmp/README.md)** - Temporary files guide
-- **[reports/README.md](../../reports/README.md)** - Reports documentation
-- **[generate-plugin.instructions.md](./generate-plugin.instructions.md)** - Mustache template rules
-
 ## Summary
 
 ✅ **Designated Places** - Every file type has a specific location
@@ -578,3 +572,11 @@ unzip -l *.zip | grep -E "src/|tests/|docs/"  # Should be empty
 ✅ **Namespace Everything** - Consistent prefixing across all code
 
 Follow these rules to maintain a clean, organized, and maintainable repository structure.
+
+## References
+
+- [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)
+- [logs/README.md](../../logs/README.md)
+- [tmp/README.md](../../tmp/README.md)
+- [reports/README.md](../../reports/README.md)
+- [generate-plugin.instructions.md](./generate-plugin.instructions.md)

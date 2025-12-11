@@ -1,8 +1,8 @@
 ---
 description: "Research workflow guidance for gathering context in the multi-block plugin scaffold"
 applyTo: "**"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Task Researcher Instructions
@@ -44,6 +44,6 @@ Use these steps when asked to research a feature, bug, or process. Focus on evid
 
 ## References
 
-- instructions.instructions.md
-- _index.instructions.md
-- folder-structure.instructions.md
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)
+- [folder-structure.instructions.md](./folder-structure.instructions.md)

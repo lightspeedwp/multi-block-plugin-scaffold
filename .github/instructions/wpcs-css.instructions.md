@@ -2,8 +2,8 @@
 file_type: "instructions"
 applyTo: ["**/*.css", "**/*.scss", "**/*.sass"]
 description: "Enforce WordPress CSS coding standards, naming, specificity and formatting."
-last_updated: "2025-10-19"
-version: "v1.0"
+lastUpdated: 2025-10-19
+version: 1.0
 owners: ["LightSpeed Engineering"]
 ---
 
@@ -54,12 +54,6 @@ Avoid deep selectors (`.foo .bar .baz`) and avoid `!important` unless mitigating
 - Run `npm run lint:style` or `npm run lint` to enforce style rules.
 - Check for specificity regressions using browser devtools.
 - Verify colour contrast and focus visibility after changes.
-
-## References
-
-- wpcs-accessibility.instructions.md
-- javascript-react-development.instructions.md
-- README.md
 
 ## Language & Frameworks
 
@@ -412,6 +406,13 @@ Check out the [WP Admin CSS Audit](https://wordpress.github.io/css-audit/public/
 - [ ] Stylelint passes without errors.
 - [ ] Colours and spacing reference `theme.json` presets where available.
 
-# References
+## External resources
 
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/>
+- [WordPress CSS Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/)
+
+## References
+
+- [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md)
+- [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+- [README.md](../../README.md)
+- [_index.instructions.md](./_index.instructions.md)

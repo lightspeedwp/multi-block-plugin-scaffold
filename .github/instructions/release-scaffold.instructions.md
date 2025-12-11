@@ -1,8 +1,8 @@
 ---
 description: "Instructions for maintaining release workflow scaffolding for the multi-block plugin scaffold"
 applyTo: ".github/workflows/release-*.yml"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Release Scaffold Instructions
@@ -57,6 +57,6 @@ Avoid embedding secrets or skipping tests in workflow steps.
 
 ## References
 
-- .github/workflows/ (existing release workflows)
-- docs/RELEASE_PROCESS.md
-- instructions.instructions.md
+- [.github/workflows](../workflows/)
+- [docs/RELEASE_PROCESS.md](../../docs/RELEASE_PROCESS.md)
+- [instructions.instructions.md](./instructions.instructions.md)

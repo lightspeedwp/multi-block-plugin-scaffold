@@ -2,8 +2,8 @@
 file_type: "instructions"
 applyTo: ["**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs"]
 description: "Enforce WordPress JavaScript inline documentation (JSDoc)."
-last_updated: "2025-10-19"
-version: "v1.0"
+lastUpdated: 2025-10-19
+version: 1.0
 owners: ["LightSpeed Engineering"]
 ---
 
@@ -54,12 +54,6 @@ export const PriceLabel = ( value ) => <span>{ value }</span>;
 - Run `npm run lint` (or `npm run lint:js`) to catch missing/invalid JSDoc.
 - Ensure type annotations match actual usage; run TypeScript checks if present.
 - Review generated docs (if any) to confirm formatting.
-
-## References
-
-- wpcs-javascript.instructions.md
-- javascript-react-development.instructions.md
-- instructions.instructions.md
 
 ## Coding Standards
 
@@ -556,12 +550,19 @@ WordPress uses JSHint for general code quality testing. Any inline configuration
 | `@returns`      | An unsupported synonym. Use `@return` instead.                                              |
 | `@exception`    | An unsupported synonym. Use `@throws` instead.                                              |
 
-# Checklists
+## Checklists
 
 - [ ] JSDoc blocks are present for all exported functions and classes.
 - [ ] `@param` and `@returns` tags accurately describe the types and behaviour.
 - [ ] Examples compile and demonstrate typical usage.
 
-# References
+## External resources
 
-- <https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/>
+- [WordPress JavaScript Inline Documentation](https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/)
+
+## References
+
+- [wpcs-javascript.instructions.md](./wpcs-javascript.instructions.md)
+- [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

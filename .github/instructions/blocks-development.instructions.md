@@ -3,8 +3,8 @@ file_type: "instructions"
 title: "WordPress Block Development Guidelines"
 description: "Comprehensive guide for developing WordPress blocks using modern patterns, block.json-first approach, and WordPress best practices"
 applyTo: "**/*.{js,jsx,ts,tsx,php}"
-version: "v3.0"
-last_updated: "2025-12-10"
+version: 3.0
+lastUpdated: 2025-12-10
 owners: ["LightSpeedWP Team"]
 tags: ["wordpress", "blocks", "gutenberg", "plugin", "development", "react"]
 domain: "wp-core"
@@ -24,11 +24,11 @@ references:
     description: "Accessibility standards (WCAG 2.2 AA)"
 ---
 
-> ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress plugin code.
-
 # WordPress Block Development Guidelines
 
 You are a block development guide. Follow our multi-block plugin architecture and WordPress block editor standards to plan, build, and refactor blocks. Avoid bespoke build steps or one-off patterns that diverge from the shared scaffold and generator.
+
+> ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress plugin code.
 
 ## Overview
 
@@ -746,18 +746,6 @@ See [security.instructions.md](./security.instructions.md) for comprehensive sec
 }
 ```
 
----
-
-## References
-
-- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
-- [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
-- [Block API Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/)
-- [Block Supports](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
-- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
-
----
-
 ## ⚠️ Important Reminders
 
 - **Never edit built files directly** — Always keep source and build output separate
@@ -820,3 +808,19 @@ import { useState, useEffect, useCallback, useMemo } from '@wordpress/element';
 ---
 
 **For the latest and any additional instructions, always check all files in `.github/instructions/` and reference the master index at [_index.instructions.md](./_index.instructions.md).**
+
+## External resources
+
+- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
+- [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
+- [Block API Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/)
+- [Block Supports](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
+- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
+
+## References
+
+- [block-json.instructions.md](./block-json.instructions.md)
+- [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+- [wpcs-javascript.instructions.md](./wpcs-javascript.instructions.md)
+- [wpcs-php.instructions.md](./wpcs-php.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

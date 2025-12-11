@@ -2,8 +2,8 @@
 file_type: "instructions"
 applyTo: ["**/*.php"]
 description: "Apply WordPress PHP standards (formatting, naming, security, I18N)."
-last_updated: "2025-10-19"
-version: "v1.0"
+lastUpdated: 2025-10-19
+version: 1.0
 owners: ["LightSpeed Engineering"]
 ---
 
@@ -57,12 +57,6 @@ Avoid echoing unsanitised input or using inconsistent indentation.
 - Run `composer lint` (PHPCS) and `composer test` for PHP changes.
 - Run `php -l` on modified files if PHPCS is unavailable.
 - Validate translations using `wp i18n` tools where applicable.
-
-## References
-
-- wpcs-php-docs.instructions.md
-- security.instructions.md
-- instructions.instructions.md
 
 ## Project Structure
 
@@ -987,7 +981,7 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [ ] Data is sanitised on input and escaped on output.
 - [ ] Functions and classes include full DocBlocks.
 
-## Resources
+## External resources
 
 - [Wikipedia on PHPDoc](http://en.wikipedia.org/wiki/PHPDoc)
 - [PEAR Standards](http://pear.php.net/manual/en/standards.sample.php)
@@ -995,4 +989,11 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [phpDocumentor Tutorial Tags](http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.pkg.html)
 - [Draft PSR-5 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md)
 - [Draft PSR-19 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc-tags.md)
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/>
+- [WordPress PHP Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/)
+
+## References
+
+- [wpcs-php-docs.instructions.md](./wpcs-php-docs.instructions.md)
+- [security.instructions.md](./security.instructions.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

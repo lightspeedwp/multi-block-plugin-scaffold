@@ -41,12 +41,6 @@ This index maps every instruction file in the repository and when to use it. Use
 - Ensure every `*.instructions.md` file in `.github/instructions` is listed or intentionally excluded.
 - Check links resolve to existing files after renames.
 
-## References
-
-- .github/instructions/instructions.instructions.md
-- CONTRIBUTING.md
-- README.md
-
 **Last Updated:** 2025-12-10
 **Total Files:** 19 instruction files
 
@@ -384,3 +378,9 @@ Found an issue with an instruction file?
 **Last Updated:** 2025-12-10
 **Consolidation Report:** [.github/reports/instruction-consolidation-audit-2025-12-10.md](../reports/instruction-consolidation-audit-2025-12-10.md)
 **Implementation Tasks:** [.github/projects/active/2025-12-10-instruction-consolidation.md](../projects/active/2025-12-10-instruction-consolidation.md)
+
+## References
+
+- [instructions.instructions.md](./instructions.instructions.md)
+- [CONTRIBUTING.md](../../CONTRIBUTING.md)
+- [README.md](../../README.md)

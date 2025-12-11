@@ -2,6 +2,8 @@
 name: Plugin Generator Instructions
 description: Rules and standards for using mustache template values in scaffold plugin generation
 applyTo: '**'
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Plugin Generator Instructions
@@ -560,14 +562,15 @@ Avoid interpolating values manually (e.g. `Tour Operator`) where a placeholder s
 - Run `npm test` / `npm run lint` to validate syntax after generation.
 - Validate JSON files with `npm run lint` or schema tools; run `php -l` on generated PHP files.
 
-## References
-
-- [Plugin Generation Guide](../../docs/GENERATE-PLUGIN.md) - Complete generation workflow
-- [Scaffold Generator Agent](../agents/scaffold-generator.agent.md) - Agent specification
-- [SCF Fields Reference](scf-fields.instructions.md) - Field types and usage
-- [AGENTS.md](../../AGENTS.md) - Global agent rules and coding standards
-
 ## Changelog
 
 - **2025-12-05**: Initial comprehensive documentation of mustache template system
 - Previous: Implicit rules scattered across files
+
+## References
+
+- [docs/GENERATE-PLUGIN.md](../../docs/GENERATE-PLUGIN.md)
+- [Scaffold Generator Agent](../agents/scaffold-generator.agent.md)
+- [scf-fields.instructions.md](./scf-fields.instructions.md)
+- [AGENTS.md](../../AGENTS.md)
+- [_index.instructions.md](./_index.instructions.md)

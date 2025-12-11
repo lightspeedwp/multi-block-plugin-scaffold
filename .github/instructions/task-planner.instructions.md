@@ -1,8 +1,8 @@
 ---
 description: "Planning workflow guidance for breaking down work in the multi-block plugin scaffold"
 applyTo: "**"
-version: "1.0"
-last_updated: "2025-12-11"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Task Planner Instructions
@@ -44,5 +44,5 @@ Use these rules when outlining implementation plans or task lists for this repos
 
 ## References
 
-- instructions.instructions.md
-- _index.instructions.md
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

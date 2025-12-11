@@ -1,7 +1,11 @@
 ---
 name: Schema Files Instructions
 description: Rules and standards for JSON Schema files and validation in the multi-block plugin scaffold
-applyTo: '**/*.schema.json,**/schemas/**'
+applyTo:
+  - "**/*.schema.json"
+  - "**/schemas/**"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # Schema Files Instructions
@@ -44,12 +48,6 @@ These instructions define standards for creating, storing, and validating JSON S
 - Validate schemas with `npx ajv validate -s schema.json -d sample.json` (or configured lint task).
 - Run `npm run lint` to catch JSON format issues.
 - Ensure CI workflows that consume schemas pass after updates.
-
-## References
-
-- docs/CONFIGS.md
-- instructions.instructions.md
-- _index.instructions.md
 
 ### Configuration Schema Files
 
@@ -465,12 +463,6 @@ node scripts/validate-plugin-config.js --schema-only
 npm run validate:schemas
 ```
 
-## Related Documentation
-
-- **[GENERATE_PLUGIN.md](../../docs/GENERATE_PLUGIN.md)** - Plugin generation guide
-- **[folder-structure.instructions.md](./folder-structure.instructions.md)** - Directory organization
-- **[generate-plugin.instructions.md](./generate-plugin.instructions.md)** - Plugin generator rules
-
 ## Summary
 
 ✅ **Single Location** - All schemas in `.github/schemas/`
@@ -488,3 +480,12 @@ npm run validate:schemas
 ✅ **Enforced** - Rules apply to all developers and agents
 
 Follow these guidelines to maintain a robust, well-validated schema system for plugin configuration.
+
+## References
+
+- [docs/CONFIGS.md](../../docs/CONFIGS.md)
+- [docs/GENERATE-PLUGIN.md](../../docs/GENERATE-PLUGIN.md)
+- [folder-structure.instructions.md](./folder-structure.instructions.md)
+- [generate-plugin.instructions.md](./generate-plugin.instructions.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

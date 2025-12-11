@@ -2,8 +2,8 @@
 file_type: "instructions"
 applyTo: ["**/*.css", "**/*.scss", "**/*.sass"]
 description: "Enforce conforming to the Web Content Accessibility Guidelines (WCAG), version 2.2, at level AA."
-last_updated: "2025-10-19"
-version: "v1.0"
+lastUpdated: 2025-10-19
+version: 1.0
 owners: ["LightSpeed Engineering"]
 ---
 
@@ -167,6 +167,6 @@ For more information on techniques, visit [Understanding Techniques for WCAG Suc
 
 ## References
 
-- a11y.instructions.md
-- wpcs-css.instructions.md
-- blocks-development.instructions.md
+- [a11y.instructions.md](./a11y.instructions.md)
+- [wpcs-css.instructions.md](./wpcs-css.instructions.md)
+- [blocks-development.instructions.md](./blocks-development.instructions.md)

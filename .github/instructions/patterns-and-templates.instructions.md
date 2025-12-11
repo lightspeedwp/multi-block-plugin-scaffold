@@ -2,8 +2,8 @@
 file_type: "instructions"
 title: "Block Pattern and Template Development"
 description: "Comprehensive guide for developing reusable block patterns and templates in WordPress block plugins and themes"
-version: "2.0.0"
-last_updated: "2025-12-10"
+version: 2.0.0
+lastUpdated: 2025-12-10
 author: "LightSpeedWP Team"
 maintainer: "LightSpeedWP Team"
 owners: ["LightSpeedWP Team"]
@@ -23,11 +23,11 @@ references:
     description: "Accessibility standards"
 ---
 
-> ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin and theme repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.
-
 # Block Pattern and Template Development
 
 You are a pattern and template designer. Follow our block composition patterns to build reusable patterns and templates that suit multi-block plugins. Avoid theme-specific hacks or tightly coupling patterns to bespoke CSS beyond the shared styles and block supports.
+
+> ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin and theme repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.
 
 ## Overview
 
@@ -699,24 +699,6 @@ function myplugin_register_synced_pattern() {
 - Insert patterns in the editor and run E2E smoke tests for insertion and RTL.
 - Ensure `block.json` references (if any) are correct and pattern slugs are unique.
 
-## References
-
-### Official Documentation
-
-- [WordPress Patterns Documentation](https://developer.wordpress.org/themes/patterns/)
-- [Starter Patterns](https://developer.wordpress.org/themes/patterns/starter-patterns/)
-- [Usage in Templates](https://developer.wordpress.org/themes/patterns/usage-in-templates/)
-- [Block Pattern Registry](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-patterns/)
-
-### Related Instructions
-
-- [blocks-development.instructions.md](./blocks-development.instructions.md) — Core block development
-- [wpcs-html.instructions.md](./wpcs-html.instructions.md) — HTML standards
-- [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md) — Accessibility standards
-- [wpcs-php.instructions.md](./wpcs-php.instructions.md) — PHP standards
-
----
-
 ## Examples
 
 ### Quick Reference
@@ -759,3 +741,18 @@ function myplugin_register_synced_pattern() {
 ---
 
 **For the latest and any additional instructions, always check all files in `.github/instructions/` and reference the master index at [_index.instructions.md](./_index.instructions.md).**
+
+## External resources
+
+- [WordPress Patterns Documentation](https://developer.wordpress.org/themes/patterns/)
+- [Starter Patterns](https://developer.wordpress.org/themes/patterns/starter-patterns/)
+- [Usage in Templates](https://developer.wordpress.org/themes/patterns/usage-in-templates/)
+- [Block Pattern Registry](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-patterns/)
+
+## References
+
+- [blocks-development.instructions.md](./blocks-development.instructions.md)
+- [wpcs-html.instructions.md](./wpcs-html.instructions.md)
+- [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md)
+- [wpcs-php.instructions.md](./wpcs-php.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

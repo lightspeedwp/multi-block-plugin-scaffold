@@ -2,8 +2,8 @@
 file_type: "instructions"
 applyTo: ["**/*.php"]
 description: "Enforce WordPress PHP inline documentation (DocBlocks)."
-last_updated: "2025-10-19"
-version: "v1.0"
+lastUpdated: 2025-10-19
+version: 1.0
 owners: ["LightSpeed Engineering"]
 ---
 
@@ -939,6 +939,7 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [phpDocumentor Tutorial Tags](http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.pkg.html)
 - [Draft PSR-5 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md)
 - [Draft PSR-19 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc-tags.md)
+- [WordPress PHP Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/)
 
 ## Validation
 
@@ -954,6 +955,6 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 
 ## References
 
-- <https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/>
-- wpcs-php.instructions.md
-- instructions.instructions.md
+- [wpcs-php.instructions.md](./wpcs-php.instructions.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)

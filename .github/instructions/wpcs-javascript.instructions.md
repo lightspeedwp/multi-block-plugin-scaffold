@@ -3,6 +3,8 @@ file_type: "instructions"
 name: "WordPress JavaScript Coding Standards"
 description: "Apply WordPress JavaScript coding standards (formatting, naming, patterns) for block plugins and WordPress development."
 applyTo: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
+version: 1.0
+lastUpdated: 2025-12-11
 ---
 
 # WordPress JavaScript Coding Standards
@@ -52,12 +54,6 @@ Avoid trailing whitespace, double quotes, and inconsistent indentation.
 - Run `npm run lint` (or `npm run lint:js`) to enforce standards.
 - Ensure Prettier or formatter configs align with WordPress settings; avoid conflicting overrides.
 - Review diffs for unintended formatting changes.
-
-## References
-
-- javascript-react-development.instructions.md
-- wpcs-js-docs.instructions.md
-- blocks-development.instructions.md
 
 Many of the examples below have been adapted directly from the jQuery style guide; these differences have all been integrated into the examples on this page. Any of the below standards and examples should be considered best practice for WordPress code, unless explicitly noted as anti-patterns.
 
@@ -1195,12 +1191,20 @@ if ( typeof jQuery.fn.hoverIntent === 'undefined' ) {
 
 - The jQuery examples are adapted from the [jQuery JavaScript Style Guide](https://contribute.jquery.org/style-guide/js), which is made available under the MIT license.
 
-# Checklists
+## Checklists
 
 - [ ] ESLint passes without errors.
 - [ ] All exported functions/classes are documented with JSDoc.
 - [ ] Asynchronous code uses Promises or async/await instead of callbacks.
 
-# References
+## External resources
 
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/>
+- [WordPress JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/)
+
+## References
+
+- [javascript-react-development.instructions.md](./javascript-react-development.instructions.md)
+- [wpcs-js-docs.instructions.md](./wpcs-js-docs.instructions.md)
+- [blocks-development.instructions.md](./blocks-development.instructions.md)
+- [instructions.instructions.md](./instructions.instructions.md)
+- [_index.instructions.md](./_index.instructions.md)
