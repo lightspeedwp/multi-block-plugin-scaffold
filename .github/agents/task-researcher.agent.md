@@ -1,5 +1,5 @@
 ---
-name: "Block Plugin Task Researcher Agent"
+name: Task Researcher Agent"
 description: "Evidence-based research generator for WordPress block plugin development, ensuring complete context for the Block Plugin Planning Agent."
 target: "github-copilot"
 version: "v1.0"
