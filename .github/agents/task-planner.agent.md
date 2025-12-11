@@ -1,28 +1,7 @@
 ---
 description: "Planning agent for creating actionable task plans for WordPress block themes and design-system driven workflows."
 name: "WordPress Block Theme Planner"
-tools: [
-  "changes",
-  "search/codebase",
-  "edit/editFiles",
-  "extensions",
-  "fetch",
-  "problems",
-  "runCommands",
-  "runCommands/terminalLastCommand",
-  "runCommands/terminalSelection",
-  "usages",
-  "search",
-  "search/searchResults",
-  "vscodeAPI",
-  "new",
-  "wordpress_docs",
-  "wp_cli",
-  "php_cs",
-  "stylelint",
-  "eslint",
-  "context7"
-]
+tools: ['vscode/getProjectSetupInfo', 'vscode/installExtension', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/getTerminalOutput', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit/editFiles', 'search', 'web/fetch']
 ---
 
 # Block Theme Task Planner – Core Behaviour

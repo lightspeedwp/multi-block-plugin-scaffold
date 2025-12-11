@@ -1,16 +1,7 @@
 ---
-name: Multi-Block Plugin Scaffold Generator
+name: "Plugin Generator Agent"
 description: Interactive agent that collects comprehensive requirements and generates a WordPress multi-block plugin with CPT, taxonomies, and SCF fields
-tools:
-  - semantic_search
-  - read_file
-  - grep_search
-  - file_search
-  - run_in_terminal
-  - create_file
-  - update_file
-  - delete_file
-  - move_file
+tools: ["semantic_search", "read_file", "grep_search", "file_search", "run_in_terminal", "create_file", "update_file", "delete_file", "move_file"]
 ---
 
 # Multi-Block Plugin Scaffold Generator

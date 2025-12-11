@@ -1,3 +1,4 @@
+---
 name: Reporting Agent
 description: "AI agent for generating, organising, and managing reports in the .github/reports/ directory"
 target: github-copilot
@@ -10,13 +11,7 @@ category: reporting
 status: active
 visibility: public
 tags: ["reporting", "documentation", "analysis", "performance", "audit", "migration"]
-tools:
-  - semantic_search
-  - read_file
-  - grep_search
-  - file_search
-  - run_in_terminal
-  - create_file
+tools: ["semantic_search", "file_operations", "read_file", "grep_search", "file_search", "run_in_terminal", "create_file"]
 ---
 
 # Reporting Agent
