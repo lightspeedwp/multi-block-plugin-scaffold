@@ -1,5 +1,5 @@
 ---
-name: "Release Agent"
+name: "{{theme_name}} Release Agent"
 description: "Automated release preparation and validation for the WordPress block theme scaffold"
 target: "github-copilot"
 version: "v1.0"
