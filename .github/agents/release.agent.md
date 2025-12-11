@@ -12,6 +12,11 @@ status: "active"
 visibility: "public"
 tags: ["release", "automation", "validation", "wordpress", "block-theme"]
 owners: ["lightspeedwp/maintainers"]
+tools: ['search', 'edit', 'fetch']
+references:
+  - "../../AGENTS.md"
+  - "../instructions/agent-spec.instructions.md"
+  - "../instructions/coding-standards.instructions.md"
 metadata:
   guardrails: "Never skip validation steps. Always verify before making changes. Abort if critical checks fail. Log all actions for audit."
 ---
