@@ -23,6 +23,23 @@ Reports differ from documentation in `docs/`:
 - **Documentation** (`docs/`) - How to use, configure, and develop with the plugin
 - **Reports** (`reports/`) - What was done, when, and why (historical records)
 
+## Structure
+
+- Base path: `.github/reports/`
+- Categories: `analysis/`, `audits/`, `configuration/`, `consolidation/`, `implementation/`, `migration/`, `performance/`, `testing/`, `validation/`
+- Archived/legacy: `.github/reports/.archived/`
+- Keep the root of `.github/reports/` clean (README and explicitly required indexes only)
+
+## Naming
+
+Use `{CATEGORY}-{SUBJECT}-{YYYY-MM-DD}.md` (uppercase, hyphenated, date last) within the matching category directory.
+
+**Examples**:
+
+- `.github/reports/consolidation/CONSOLIDATION-SESSION-COMPLETION-2025-12-09.md`
+- `.github/reports/audits/AUDIT-INSTRUCTION-CONSOLIDATION-2025-12-10.md`
+- `.github/reports/migration/MIGRATION-TASKS-DIRECTORY-REMOVAL-2025-12-09.md`
+
 ## When to Add Reports
 
 Add reports here when:
