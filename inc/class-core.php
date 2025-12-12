@@ -2,9 +2,10 @@
 namespace {{namespace|lowerCase}}\classes;
 
 /**
- * Core Class intiating the rest of the classes.
+ * Core Class initiating the rest of the classes.
  *
  * @package {{namespace}}
+ * @since 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,6 +19,8 @@ class Core {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->load_classes();
@@ -43,6 +46,7 @@ class Core {
 	/**
 	 * Load the plugin classes.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function load_classes() {
@@ -63,6 +67,7 @@ class Core {
 	/**
 	 * Initialize the plugin.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function init() {
@@ -73,6 +78,7 @@ class Core {
 	/**
 	 * Register blocks from the blocks directory.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_blocks() {
@@ -91,6 +97,7 @@ class Core {
 	/**
 	 * Register custom block category.
 	 *
+	 * @since 1.0.0
 	 * @param array $categories Existing block categories.
 	 * @return array Modified block categories.
 	 */
@@ -110,6 +117,7 @@ class Core {
 	/**
 	 * Load plugin text domain for translations.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function load_textdomain() {

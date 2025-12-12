@@ -64,8 +64,7 @@
 				settings = { ...settings, ...JSON.parse(dataSettings) };
 			}
 		} catch (e) {
-			// eslint-disable-next-line no-console
-			console.error('Error parsing slider settings:', e);
+			// Silently fail if settings cannot be parsed
 		}
 
 		let currentIndex = 0;

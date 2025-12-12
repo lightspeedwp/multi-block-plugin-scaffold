@@ -4,10 +4,8 @@ namespace {{namespace|lowerCase}}\classes;
 /**
  * Block Templates Registration.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
-
-namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -15,11 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Plugin block templates registration.
+ *
+ * @since 1.0.0
  */
-class Block_Templates {
+class {{namespace|pascalCase}}_Block_Templates {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_block_templates' ) );
@@ -28,6 +30,7 @@ class Block_Templates {
 	/**
 	 * Register plugin block templates via the WP 6.7+ API.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_block_templates() {
@@ -35,15 +38,15 @@ class Block_Templates {
 			return; // Pre-6.7: no-op.
 		}
 
-		$templates_dir = EXAMPLE_PLUGIN_PLUGIN_DIR . 'templates/';
+		$templates_dir = {{namespace|upper}}_PLUGIN_DIR . 'templates/';
 
 		$template_file = $templates_dir . 'example-archive.html';
 
 		if ( file_exists( $template_file ) ) {
 			register_block_template(
-				'example-plugin//example-archive',
+				'{{namespace}}//example-archive',
 				array(
-					'title'       => __( 'Example Plugin Example Archive', '{{textdomain}}' ),
+					'title'       => __( '{{name}} Example Archive', '{{textdomain}}' ),
 					'description' => __( 'Example archive template registered by the plugin.', '{{textdomain}}' ),
 					'post_types'  => array( 'post' ),
 					'content'     => file_get_contents( $template_file ),

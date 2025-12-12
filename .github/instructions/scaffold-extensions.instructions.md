@@ -1,8 +1,12 @@
 ---
-description: "Guidance for extending the multi-block plugin scaffold with placeholders and generator hooks"
-applyTo: "**"
-version: "1.0"
-last_updated: "2025-12-11"
+description: >-
+  Guidance for extending the multi-block plugin scaffold with placeholders and
+  generator hooks
+applyTo: '**'
+version: '1.0'
+last_updated: '2025-12-11'
+references:
+  - ../custom-instructions.md
 ---
 
 # Block Plugin Scaffolding – Instructions for Copilot

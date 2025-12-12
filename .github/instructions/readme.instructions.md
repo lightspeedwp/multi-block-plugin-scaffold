@@ -1,9 +1,12 @@
 ---
-description: "Guidance for drafting and updating README files in the multi-block plugin scaffold"
-applyTo: "**/README.md"
-version: "1.0"
-last_updated: "2025-12-11"
+description: >-
+  Guidance for drafting and updating README files in the multi-block plugin
+  scaffold
+applyTo: '**/README.md'
+version: '1.0'
+last_updated: '2025-12-11'
 references:
+  - ../custom-instructions.md
 ---
 
 # README Authoring Instructions

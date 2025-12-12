@@ -1,6 +1,8 @@
 ---
 description: Secure Custom Fields (SCF) field types reference and best practices
-applyTo: "**/inc/**/*.php,**/scf-json/**/*.json"
+applyTo: '**/inc/**/*.php,**/scf-json/**/*.json'
+references:
+  - ../custom-instructions.md
 ---
 
 # Secure Custom Fields (SCF) Field Types Reference
@@ -18,6 +20,40 @@ Use this reference when adding or updating SCF field groups, field usage, or dep
 - Store JSON definitions under `scf-json/`; avoid embedding configuration in PHP templates.
 - Escape and sanitise values on output; validate inputs on save.
 - Keep UI text translatable and aligned with plugin text domain.
+
+## SCF Role in WordPress Development
+
+**Secure Custom Fields (SCF) is a secondary tool in WordPress development.** Core WordPress APIs should always be the first choice for functionality. SCF should only be used when core APIs are insufficient for the required user experience.
+
+### When to Use SCF
+
+Use SCF **only when** core WordPress APIs cannot provide the required functionality:
+
+- **Complex data relationships** that exceed post meta capabilities
+- **Advanced UI requirements** like repeaters, flexible content, or complex conditional logic
+- **Structured content** that needs more than simple key-value storage
+- **Editorial workflows** requiring sophisticated field layouts
+
+### When NOT to Use SCF
+
+Do **not** use SCF for functionality that can be achieved with core APIs:
+
+- ❌ Simple text, number, or boolean values → Use core post meta APIs
+- ❌ Basic content relationships → Use core taxonomy APIs
+- ❌ Simple media attachments → Use core featured image or attachment APIs
+- ❌ Basic settings → Use core options APIs
+
+### Core API Alternatives
+
+Before using SCF, consider these core WordPress alternatives:
+
+| Functionality | Core API Alternative | SCF Alternative |
+|---------------|---------------------|-----------------|
+| Custom metadata | `add_post_meta()`, `get_post_meta()` | Text/Number fields |
+| Content relationships | Taxonomies, post relationships | Relationship fields |
+| Settings storage | Settings API, options | Options page fields |
+| Media management | Media library, featured images | Image/File fields |
+| Content organization | Custom post types, taxonomies | Post Object fields |
 
 ## Detailed Guidance
 
@@ -929,7 +965,7 @@ array(
 - Confirm JSON sync by reloading field groups in SCF admin; ensure no missing keys.
 - Verify output with automated or manual tests to ensure escaping and defaults work.
 
-## References
+## See Also
 
 - [SCF GitHub Repository](https://github.com/WordPress/secure-custom-fields)
 - [SCF API Reference](https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/code-reference/api/index.md)

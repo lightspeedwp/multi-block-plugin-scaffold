@@ -1,7 +1,11 @@
 ---
 name: Schema Files Instructions
-description: Rules and standards for JSON Schema files and validation in the multi-block plugin scaffold
+description: >-
+  Rules and standards for JSON Schema files and validation in the multi-block
+  plugin scaffold
 applyTo: '**/*.schema.json,**/schemas/**'
+references:
+  - ../custom-instructions.md
 ---
 
 # Schema Files Instructions
@@ -44,12 +48,6 @@ These instructions define standards for creating, storing, and validating JSON S
 - Validate schemas with `npx ajv validate -s schema.json -d sample.json` (or configured lint task).
 - Run `npm run lint` to catch JSON format issues.
 - Ensure CI workflows that consume schemas pass after updates.
-
-## References
-
-- docs/CONFIGS.md
-- instructions.instructions.md
-- .github/instructions/README.md
 
 ### Configuration Schema Files
 
@@ -482,3 +480,9 @@ npm run validate:schemas
 ✅ **Enforced** - Rules apply to all developers and agents
 
 Follow these guidelines to maintain a robust, well-validated schema system for plugin configuration.
+
+## See Also
+
+- docs/CONFIGS.md
+- instructions.instructions.md
+- .github/instructions/README.md

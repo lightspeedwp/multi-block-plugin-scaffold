@@ -1,10 +1,14 @@
 ---
-file_type: "instructions"
-applyTo: ["**/*.php"]
-description: "Enforce WordPress PHP inline documentation (DocBlocks)."
-last_updated: "2025-10-19"
-version: "v1.0"
-owners: ["LightSpeed Engineering"]
+file_type: instructions
+applyTo:
+  - '**/*.php'
+description: Enforce WordPress PHP inline documentation (DocBlocks).
+last_updated: '2025-10-19'
+version: v1.0
+owners:
+  - LightSpeed Engineering
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress PHP Documentation Standards
@@ -952,7 +956,7 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [ ] `@since`, `@param`, and `@return` are used correctly.
 - [ ] Deprecated functions include a `@deprecated` tag with replacement guidance.
 
-## References
+## See Also
 
 - <https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/>
 - instructions.instructions.md

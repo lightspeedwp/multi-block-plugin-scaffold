@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "example_plugin/example-plugin-slider",
-	"title": "Example Plugin Slider",
-	"category": "example-plugin",
+	"name": "{{namespace}}/{{slug}}-slider",
+	"title": "{{name}} Slider",
+	"category": "{{slug}}",
 	"icon": "slides",
 	"description": "Display items or custom slides in a slider/carousel.",
 	"version": "1.0.0",

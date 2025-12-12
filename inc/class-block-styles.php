@@ -1,11 +1,11 @@
 <?php
+namespace {{namespace|lowerCase}}\classes;
+
 /**
  * Block Style Variations Registration.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
-
-namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -13,11 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Block style variations (including section-style like presets).
+ *
+ * @since 1.0.0
  */
-class Block_Styles {
+class {{namespace|pascalCase}}_Block_Styles {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_block_styles' ) );
@@ -26,6 +30,7 @@ class Block_Styles {
 	/**
 	 * Register block style variations.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_block_styles() {
@@ -37,8 +42,8 @@ class Block_Styles {
 		register_block_style(
 			array( 'core/group', 'core/columns' ),
 			array(
-				'name'       => 'example-plugin-section-highlight',
-				'label'      => __( 'Example Plugin Section Highlight', '{{textdomain}}' ),
+				'name'       => '{{namespace}}-section-highlight',
+				'label'      => __( '{{name}} Section Highlight', '{{textdomain}}' ),
 				'style_data' => array(
 					'color' => array(
 						'background' => 'var:preset|color|contrast',

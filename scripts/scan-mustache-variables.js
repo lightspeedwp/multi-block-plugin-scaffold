@@ -59,6 +59,10 @@ const MUSTACHE_REGEX = /\{\{([a-zA-Z0-9_]+(?:\|[a-zA-Z0-9_]+)?)\}\}/g;
 
 /**
  * Recursively scan directory for files
+ *
+ * @param {string} dir Directory path to scan
+ * @param {string} basePath Base path for relative paths
+ * @return {Array} Array of file objects
  */
 function scanDirectory(dir, basePath = '') {
 	const files = [];
@@ -93,6 +97,9 @@ function scanDirectory(dir, basePath = '') {
 
 /**
  * Extract mustache variables from file content
+ *
+ * @param {string} content File content to scan
+ * @return {Array} Array of variable names
  */
 function extractVariables(content) {
 	const variables = new Set();
@@ -108,6 +115,9 @@ function extractVariables(content) {
 
 /**
  * Categorize variable by name pattern
+ *
+ * @param {string} varName Variable name to categorize
+ * @return {string} Category name
  */
 function categorizeVariable(varName) {
 	// Remove transformation suffix (e.g., variable|upper -> variable)
@@ -281,6 +291,9 @@ function scanRepository() {
 
 /**
  * Display results in human-readable format
+ *
+ * @param {Object} results Scan results object
+ * @param {Array} sortedVariables Variables sorted by usage
  */
 function displayResults(results, sortedVariables) {
 	console.log('📊 Scan Results\n');
@@ -327,6 +340,9 @@ function displayResults(results, sortedVariables) {
 
 /**
  * Validate theme-config.json against discovered variables
+ *
+ * @param {string} configPath Path to config file
+ * @param {Object} results Scan results
  */
 function validateConfig(configPath, results) {
 	console.error(`\n🔍 Validating ${configPath}...\n`);
@@ -390,6 +406,10 @@ function validateConfig(configPath, results) {
 
 /**
  * Flatten nested config object
+ *
+ * @param {Object} config Config object to flatten
+ * @param {string} prefix Key prefix for nested objects
+ * @return {Object} Flattened config object
  */
 function flattenConfig(config, prefix = '') {
 	const flattened = {};
@@ -409,6 +429,9 @@ function flattenConfig(config, prefix = '') {
 
 /**
  * Check if variable is auto-derived from other variables
+ *
+ * @param {string} varName Variable name to check
+ * @return {boolean} True if variable is derived
  */
 function isDerivedVariable(varName) {
 	const derived = [

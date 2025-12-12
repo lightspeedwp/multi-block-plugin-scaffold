@@ -1,16 +1,27 @@
 ---
-file_type: "instructions"
-title: "WordPress JavaScript/React Development Standards"
-description: "Comprehensive standards for WordPress JavaScript and React block development following WordPress and LightSpeed conventions."
-version: "v2.1"
-last_updated: "2025-11-27"
-author: "LightSpeedWP Team"
-maintainer: "Engineering Team"
-owners: ["lightspeedwp/maintainers"]
-tags: ["javascript", "react", "wordpress", "blocks", "jsx", "tsx"]
-applyTo: "**/*.{js,jsx,ts,tsx}"
-domain: "wp-core"
-stability: "stable"
+file_type: instructions
+title: WordPress JavaScript/React Development Standards
+description: >-
+  Comprehensive standards for WordPress JavaScript and React block development
+  following WordPress and LightSpeed conventions.
+version: v2.1
+last_updated: '2025-11-27'
+author: LightSpeedWP Team
+maintainer: Engineering Team
+owners:
+  - lightspeedwp/maintainers
+tags:
+  - javascript
+  - react
+  - wordpress
+  - blocks
+  - jsx
+  - tsx
+applyTo: '**/*.{js,jsx,ts,tsx}'
+domain: wp-core
+stability: stable
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress JavaScript/React Development Standards
@@ -225,12 +236,6 @@ Avoid anonymous default exports and keep props typed (`EditProps`) when using Ty
 - Run `npm run lint` and `npm test` to validate JS/TS and block behaviour.
 - Run `npm run build` to ensure code compiles with the shared pipeline.
 - For TypeScript, run `npm run typecheck` if available; otherwise configure `tsc --noEmit`.
-
-## References
-
-- wpcs-javascript.instructions.md
-- wpcs-js-docs.instructions.md
-- README.md
 
 ### Block Component Template
 
@@ -790,3 +795,9 @@ const MyComponent = ({ isActive, isDisabled }) => {
 - [React Hooks Documentation](https://react.dev/reference/react/hooks)
 - [ESLint Configuration](https://eslint.org/docs/latest/)
 - [Testing React Components](https://testing-library.com/docs/react-testing-library/intro/)
+
+## See Also
+
+- wpcs-javascript.instructions.md
+- wpcs-js-docs.instructions.md
+- README.md

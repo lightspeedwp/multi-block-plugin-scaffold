@@ -1,8 +1,12 @@
 ---
-file_type: "instructions"
-name: "WordPress JavaScript Coding Standards"
-description: "Apply WordPress JavaScript coding standards (formatting, naming, patterns) for block plugins and WordPress development."
-applyTo: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
+file_type: instructions
+name: WordPress JavaScript Coding Standards
+description: >-
+  Apply WordPress JavaScript coding standards (formatting, naming, patterns) for
+  block plugins and WordPress development.
+applyTo: '**/*.{js,jsx,ts,tsx,mjs,cjs}'
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress JavaScript Coding Standards
@@ -1195,6 +1199,6 @@ if ( typeof jQuery.fn.hoverIntent === 'undefined' ) {
 - [ ] All exported functions/classes are documented with JSDoc.
 - [ ] Asynchronous code uses Promises or async/await instead of callbacks.
 
-# References
+## See Also
 
 - <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/>

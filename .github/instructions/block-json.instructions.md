@@ -1,8 +1,10 @@
 ---
-file_type: "instructions"
-applyTo: "**/block.json"
-description: "Comprehensive block.json configuration standards for WordPress block plugins"
-license: "GPL-3.0-or-later"
+file_type: instructions
+applyTo: '**/block.json'
+description: Comprehensive block.json configuration standards for WordPress block plugins
+license: GPL-3.0-or-later
+references:
+  - ../custom-instructions.md
 ---
 
 > ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.

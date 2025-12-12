@@ -390,7 +390,6 @@ Use browser developer tools or VSCode:
 
 ```javascript
 // Add debugging statements
-console.log( 'Debug info:', data );
 debugger; // Breakpoint in browser
 ```
 

@@ -1,17 +1,27 @@
 ---
-file_type: "instructions"
-title: "Block Pattern and Template Development"
-description: "Comprehensive guide for developing reusable block patterns and templates in WordPress block plugins and themes"
-version: "2.0.0"
-last_updated: "2025-12-10"
-author: "LightSpeedWP Team"
-maintainer: "LightSpeedWP Team"
-owners: ["LightSpeedWP Team"]
-tags: ["pattern", "wordpress", "block", "template", "instructions"]
-applyTo: "**/patterns/**/*.php"
-license: "GPL-3.0"
-domain: "wp-core"
-stability: "stable"
+file_type: instructions
+title: Block Pattern and Template Development
+description: >-
+  Comprehensive guide for developing reusable block patterns and templates in
+  WordPress block plugins and themes
+version: 2.0.0
+last_updated: '2025-12-10'
+author: LightSpeedWP Team
+maintainer: LightSpeedWP Team
+owners:
+  - LightSpeedWP Team
+tags:
+  - pattern
+  - wordpress
+  - block
+  - template
+  - instructions
+applyTo: '**/patterns/**/*.php'
+license: GPL-3.0
+domain: wp-core
+stability: stable
+references:
+  - ../custom-instructions.md
 ---
 
 > ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin and theme repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.
@@ -689,8 +699,6 @@ function myplugin_register_synced_pattern() {
 - Validate pattern PHP files with `php -l patterns/*.php`.
 - Insert patterns in the editor and run E2E smoke tests for insertion and RTL.
 - Ensure `block.json` references (if any) are correct and pattern slugs are unique.
-
-## References
 
 ### Official Documentation
 

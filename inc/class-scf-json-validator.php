@@ -7,11 +7,10 @@ namespace {{namespace|lowerCase}}\classes;
  * Comprehensive JSON Schema validation for SCF field groups using
  * JSON Schema Draft 7 validation.
  *
- * @package example_plugin
+ * @package {{namespace}}
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/local-json.md
+ * @since 1.0.0
  */
-
-namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -21,8 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * SCF JSON Schema Validator class.
  *
  * Validates SCF field group JSON files against the schema.
+ *
+ * @since 1.0.0
  */
-class SCF_JSON_Validator {
+class {{namespace|pascalCase}}_SCF_JSON_Validator {
 
 	/**
 	 * Path to the JSON schema file.
@@ -41,7 +42,7 @@ class SCF_JSON_Validator {
 	/**
 	 * SCF JSON handler instance.
 	 *
-	 * @var SCF_JSON
+	 * @var {{namespace|pascalCase}}_SCF_JSON
 	 */
 	private $scf_json;
 
@@ -80,12 +81,14 @@ class SCF_JSON_Validator {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$this->schema_path = EXAMPLE_PLUGIN_PLUGIN_DIR . 'scf-json/schema/scf-field-group.schema.json';
+		$this->schema_path = {{namespace|upper}}_PLUGIN_DIR . 'scf-json/schema/scf-field-group.schema.json';
 
-		if ( class_exists( 'example_plugin\classes\SCF_JSON' ) ) {
-			$this->scf_json = new SCF_JSON();
+		if ( class_exists( '{{namespace|lowerCase}}\classes\{{namespace|pascalCase}}_SCF_JSON' ) ) {
+			$this->scf_json = new {{namespace|pascalCase}}_SCF_JSON();
 		}
 
 		$this->load_schema();
@@ -114,6 +117,7 @@ class SCF_JSON_Validator {
 	 *
 	 * @param string $file_path Path to JSON file to validate.
 	 * @return array{valid: bool, errors: array, warnings: array} Validation result.
+	 * @since 1.0.0
 	 */
 	public function validate( $file_path ) {
 		$result = array(
@@ -436,6 +440,7 @@ class SCF_JSON_Validator {
 	 * Validate all JSON files in SCF JSON directory.
 	 *
 	 * @return array Array of validation results keyed by filename.
+	 * @since 1.0.0
 	 */
 	public function validate_all_files() {
 		$results = array();
@@ -458,6 +463,7 @@ class SCF_JSON_Validator {
 	 * Get schema information.
 	 *
 	 * @return array|null Schema array or null if not loaded.
+	 * @since 1.0.0
 	 */
 	public function get_schema() {
 		return $this->schema;
@@ -467,6 +473,7 @@ class SCF_JSON_Validator {
 	 * Check if schema is loaded.
 	 *
 	 * @return bool True if schema is available.
+	 * @since 1.0.0
 	 */
 	public function has_schema() {
 		return ! empty( $this->schema );

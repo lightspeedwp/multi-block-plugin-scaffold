@@ -1,10 +1,17 @@
 ---
-file_type: "instructions"
-applyTo: ["**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs"]
-description: "Enforce WordPress JavaScript inline documentation (JSDoc)."
-last_updated: "2025-10-19"
-version: "v1.0"
-owners: ["LightSpeed Engineering"]
+file_type: instructions
+applyTo:
+  - '**/*.js'
+  - '**/*.jsx'
+  - '**/*.mjs'
+  - '**/*.cjs'
+description: Enforce WordPress JavaScript inline documentation (JSDoc).
+last_updated: '2025-10-19'
+version: v1.0
+owners:
+  - LightSpeed Engineering
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress JavaScript Documentation Standards
@@ -54,10 +61,6 @@ export const PriceLabel = ( value ) => <span>{ value }</span>;
 - Run `npm run lint` (or `npm run lint:js`) to catch missing/invalid JSDoc.
 - Ensure type annotations match actual usage; run TypeScript checks if present.
 - Review generated docs (if any) to confirm formatting.
-
-## References
-
-- instructions.instructions.md
 
 ## Coding Standards
 
@@ -563,3 +566,7 @@ WordPress uses JSHint for general code quality testing. Any inline configuration
 # References
 
 - <https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/>
+
+## See Also
+
+- instructions.instructions.md

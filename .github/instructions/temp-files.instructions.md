@@ -1,7 +1,9 @@
 ---
 name: Temporary File Management Instructions
 description: Rules and standards for using the tmp/ directory
-applyTo: 'tmp/**'
+applyTo: tmp/**
+references:
+  - ../custom-instructions.md
 ---
 
 # Instruction: Temporary File Management
@@ -45,31 +47,6 @@ The `tmp/` directory should be organized by the type of content it holds.
 - Confirm `tmp/` remains in `.gitignore` and `git status` is clean after runs.
 - Ensure scripts that write to `tmp/` clean up after completion.
 - Verify no pipeline copies `tmp/` content into release artefacts.
-
-## References
-
-- .gitignore
-- folder-structure.instructions.md
-
-```plaintext
-tmp/
-├── .gitkeep             # Ensures the directory is tracked by Git, but not its contents
-├── README.md            # This file, explaining the purpose of tmp/
-├── build/               # For temporary build artifacts, caches, or intermediate files
-│   └── intermediate-asset.js
-├── coverage/            # For code coverage reports (e.g., from Jest or PHPUnit)
-│   ├── lcov-report/
-│   └── lcov.info
-├── logs/                # For temporary, verbose, or debug-level logs not intended for permanent storage
-│   └── debug-session-2025-12-08.log
-├── reports/             # For intermediate report data before it's finalized in .github/reports/
-│   ├── analysis/
-│   │   └── raw-data.json
-│   └── performance/
-│       └── benchmark-run-1.json
-└── uploads/             # For temporary file uploads during testing or development
-    └── test-image.jpg
-```
 
 ### Key Subdirectories
 
@@ -158,3 +135,8 @@ The root `.gitignore` file contains entries to prevent the contents of `tmp/` fr
 
 -   Reporting Instructions - Describes how `tmp/reports/` is used to stage report artifacts.
 -   Logging Instructions - Differentiates between permanent logs in `logs/` and temporary logs in `tmp/logs/`.
+
+## See Also
+
+- .gitignore
+- folder-structure.instructions.md

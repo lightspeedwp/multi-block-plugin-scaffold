@@ -24,7 +24,8 @@
 		"test": "phpunit",
 		"phpcs": "phpcs",
 		"phpcbf": "phpcbf",
-		"phpstan": "phpstan analyse"
+		"phpstan": "phpstan analyse",
+		"lint": "composer phpcs"
 	},
 	"config": {
 		"allow-plugins": {

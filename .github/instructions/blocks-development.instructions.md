@@ -1,14 +1,25 @@
 ---
-file_type: "instructions"
-title: "WordPress Block Development Guidelines"
-description: "Comprehensive guide for developing WordPress blocks using modern patterns, block.json-first approach, and WordPress best practices"
-applyTo: "**/*.{js,jsx,ts,tsx,php}"
-version: "v3.0"
-last_updated: "2025-12-10"
-owners: ["LightSpeedWP Team"]
-tags: ["wordpress", "blocks", "gutenberg", "plugin", "development", "react"]
-domain: "wp-core"
-stability: "stable"
+file_type: instructions
+title: WordPress Block Development Guidelines
+description: >-
+  Comprehensive guide for developing WordPress blocks using modern patterns,
+  block.json-first approach, and WordPress best practices
+applyTo: '**/*.{js,jsx,ts,tsx,php}'
+version: v3.0
+last_updated: '2025-12-10'
+owners:
+  - LightSpeedWP Team
+tags:
+  - wordpress
+  - blocks
+  - gutenberg
+  - plugin
+  - development
+  - react
+domain: wp-core
+stability: stable
+references:
+  - ../custom-instructions.md
 ---
 
 > ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress plugin code.
@@ -735,16 +746,6 @@ See [security.instructions.md](./security.instructions.md) for comprehensive sec
 
 ---
 
-## References
-
-- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
-- [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
-- [Block API Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/)
-- [Block Supports](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
-- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
-
----
-
 ## ⚠️ Important Reminders
 
 - **Never edit built files directly** — Always keep source and build output separate
@@ -805,3 +806,11 @@ import { useState, useEffect, useCallback, useMemo } from '@wordpress/element';
 - For dynamic blocks, hit render endpoints or E2E tests to confirm server output.
 
 ---
+
+## See Also
+
+- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
+- [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
+- [Block API Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/)
+- [Block Supports](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
+- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)

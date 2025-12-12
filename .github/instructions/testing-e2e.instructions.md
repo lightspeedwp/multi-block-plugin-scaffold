@@ -1,8 +1,10 @@
 ---
-file_type: "instructions"
-description: "Playwright test generation instructions"
-applyTo: "**"
-license: "GPL-3.0"
+file_type: instructions
+description: Playwright test generation instructions
+applyTo: '**'
+license: GPL-3.0
+references:
+  - ../custom-instructions.md
 ---
 
 # End-to-End Testing Instructions

@@ -1,46 +1,49 @@
 <?php
 namespace {{namespace|lowerCase}}\classes;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Options Pages Registration using Secure Custom Fields.
  *
  * Creates global settings pages for site-wide configuration that is not
  * tied to individual posts, pages, or taxonomies.
  *
- * @package example_plugin
+ * @package {{namespace}}
+ * @since 1.0.0
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/first-options-page.md
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/code-reference/api/index.md
  */
-
-namespace example_plugin\classes;
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 /**
  * Options class.
  *
  * Registers options pages and their associated field groups using SCF.
  */
-class Options {
+class {{namespace|pascalCase}}_Options {
 
 	/**
 	 * Main options page slug.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
-	const OPTIONS_PAGE = 'example-plugin-settings';
+	const OPTIONS_PAGE = '{{namespace}}_settings';
 
 	/**
 	 * Field group key for main settings.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
-	const FIELD_GROUP = 'group_example-plugin_options';
+	const FIELD_GROUP = 'group_{{namespace}}_options';
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'acf/init', array( $this, 'register_options_pages' ) );
@@ -50,6 +53,7 @@ class Options {
 	/**
 	 * Check if Secure Custom Fields is active.
 	 *
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public function is_scf_active() {
@@ -61,6 +65,7 @@ class Options {
 	 *
 	 * Creates the main settings page and any sub-pages.
 	 *
+	 * @since 1.0.0
 	 * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/first-options-page.md
 	 * @return void
 	 */
@@ -72,8 +77,8 @@ class Options {
 		// Main options page.
 		acf_add_options_page(
 			array(
-				'page_title'      => __( 'Example Plugin Settings', '{{textdomain}}' ),
-				'menu_title'      => __( 'Example Plugin', '{{textdomain}}' ),
+				'page_title'      => __( '{{name}} Settings', '{{textdomain}}' ),
+				'menu_title'      => __( '{{name}}', '{{textdomain}}' ),
 				'menu_slug'       => self::OPTIONS_PAGE,
 				'capability'      => 'manage_options',
 				'icon_url'        => 'dashicons-admin-generic',
@@ -122,6 +127,7 @@ class Options {
 	/**
 	 * Register options page fields.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_options_fields() {
@@ -137,14 +143,14 @@ class Options {
 				'fields'          => array(
 					// Tab: Branding.
 					array(
-						'key'   => 'field_example-plugin_tab_branding',
+						'key'   => 'field_{{namespace}}_tab_branding',
 						'label' => __( 'Branding', '{{textdomain}}' ),
 						'type'  => 'tab',
 					),
 					array(
-						'key'           => 'field_example-plugin_logo',
+						'key'           => 'field_{{namespace}}_logo',
 						'label'         => __( 'Logo', '{{textdomain}}' ),
-						'name'          => 'example-plugin_logo',
+						'name'          => '{{namespace}}_logo',
 						'type'          => 'image',
 						'return_format' => 'array',
 						'preview_size'  => 'medium',
@@ -152,14 +158,14 @@ class Options {
 						'instructions'  => __( 'Upload your site logo.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_company_name',
+						'key'          => 'field_{{namespace}}_company_name',
 						'label'        => __( 'Company Name', '{{textdomain}}' ),
-						'name'         => 'example-plugin_company_name',
+						'name'         => '{{namespace}}_company_name',
 						'type'         => 'text',
 						'instructions' => __( 'Enter your company or organisation name.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_tagline',
+						'key'          => 'field_{{namespace}}_tagline',
 						'label'        => __( 'Tagline', '{{textdomain}}' ),
 						'name'         => 'example-plugin_tagline',
 						'type'         => 'text',
@@ -167,48 +173,48 @@ class Options {
 					),
 					// Tab: Contact.
 					array(
-						'key'   => 'field_example-plugin_tab_contact',
+						'key'   => 'field_{{namespace}}_tab_contact',
 						'label' => __( 'Contact', '{{textdomain}}' ),
 						'type'  => 'tab',
 					),
 					array(
-						'key'          => 'field_example-plugin_email',
+						'key'          => 'field_{{namespace}}_email',
 						'label'        => __( 'Email Address', '{{textdomain}}' ),
-						'name'         => 'example-plugin_email',
+						'name'         => '{{namespace}}_email',
 						'type'         => 'email',
 						'instructions' => __( 'Primary contact email address.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_phone',
+						'key'          => 'field_{{namespace}}_phone',
 						'label'        => __( 'Phone Number', '{{textdomain}}' ),
-						'name'         => 'example-plugin_phone',
+						'name'         => '{{namespace}}_phone',
 						'type'         => 'text',
 						'instructions' => __( 'Primary contact phone number.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_address',
+						'key'          => 'field_{{namespace}}_address',
 						'label'        => __( 'Address', '{{textdomain}}' ),
-						'name'         => 'example-plugin_address',
+						'name'         => '{{namespace}}_address',
 						'type'         => 'textarea',
 						'rows'         => 3,
 						'instructions' => __( 'Physical address or mailing address.', '{{textdomain}}' ),
 					),
 					// Tab: Social Media.
 					array(
-						'key'   => 'field_example-plugin_tab_social',
+						'key'   => 'field_{{namespace}}_tab_social',
 						'label' => __( 'Social Media', '{{textdomain}}' ),
 						'type'  => 'tab',
 					),
 					array(
-						'key'          => 'field_example-plugin_social_links',
+						'key'          => 'field_{{namespace}}_social_links',
 						'label'        => __( 'Social Links', '{{textdomain}}' ),
-						'name'         => 'example-plugin_social_links',
+						'name'         => '{{namespace}}_social_links',
 						'type'         => 'repeater',
 						'layout'       => 'table',
 						'button_label' => __( 'Add Social Link', '{{textdomain}}' ),
 						'sub_fields'   => array(
 							array(
-								'key'     => 'field_example-plugin_social_platform',
+								'key'     => 'field_{{namespace}}_social_platform',
 								'label'   => __( 'Platform', '{{textdomain}}' ),
 								'name'    => 'platform',
 								'type'    => 'select',
@@ -223,7 +229,7 @@ class Options {
 								),
 							),
 							array(
-								'key'   => 'field_example-plugin_social_url',
+								'key'   => 'field_{{namespace}}_social_url',
 								'label' => __( 'URL', '{{textdomain}}' ),
 								'name'  => 'url',
 								'type'  => 'url',
@@ -254,9 +260,9 @@ class Options {
 				'title'    => __( 'Display Settings', '{{textdomain}}' ),
 				'fields'   => array(
 					array(
-						'key'          => 'field_example-plugin_items_per_page',
+						'key'          => 'field_{{namespace}}_items_per_page',
 						'label'        => __( 'Items Per Page', '{{textdomain}}' ),
-						'name'         => 'example-plugin_items_per_page',
+						'name'         => '{{namespace}}_items_per_page',
 						'type'         => 'number',
 						'default'      => 12,
 						'min'          => 1,
@@ -264,9 +270,9 @@ class Options {
 						'instructions' => __( 'Number of items to display per page in archive views.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_layout',
+						'key'          => 'field_{{namespace}}_layout',
 						'label'        => __( 'Archive Layout', '{{textdomain}}' ),
-						'name'         => 'example-plugin_layout',
+						'name'         => '{{namespace}}_layout',
 						'type'         => 'button_group',
 						'choices'      => array(
 							'grid'    => __( 'Grid', '{{textdomain}}' ),
@@ -277,16 +283,16 @@ class Options {
 						'instructions' => __( 'Choose the default layout for archive pages.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_show_sidebar',
+						'key'          => 'field_{{namespace}}_show_sidebar',
 						'label'        => __( 'Show Sidebar', '{{textdomain}}' ),
-						'name'         => 'example-plugin_show_sidebar',
+						'name'         => '{{namespace}}_show_sidebar',
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'default'      => 1,
 						'instructions' => __( 'Display sidebar on archive and single views.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_featured_image_size',
+						'key'          => 'field_{{namespace}}_featured_image_size',
 						'label'        => __( 'Featured Image Size', '{{textdomain}}' ),
 						'name'         => 'example-plugin_featured_image_size',
 						'type'         => 'select',
@@ -319,39 +325,39 @@ class Options {
 				'title'    => __( 'API Settings', '{{textdomain}}' ),
 				'fields'   => array(
 					array(
-						'key'          => 'field_example-plugin_api_key',
+						'key'          => 'field_{{namespace}}_api_key',
 						'label'        => __( 'API Key', '{{textdomain}}' ),
-						'name'         => 'example-plugin_api_key',
+						'name'         => '{{namespace}}_api_key',
 						'type'         => 'text',
 						'instructions' => __( 'Enter your API key for external integrations.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_api_secret',
+						'key'          => 'field_{{namespace}}_api_secret',
 						'label'        => __( 'API Secret', '{{textdomain}}' ),
-						'name'         => 'example-plugin_api_secret',
+						'name'         => '{{namespace}}_api_secret',
 						'type'         => 'password',
 						'instructions' => __( 'Enter your API secret (stored securely).', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_api_endpoint',
+						'key'          => 'field_{{namespace}}_api_endpoint',
 						'label'        => __( 'API Endpoint', '{{textdomain}}' ),
-						'name'         => 'example-plugin_api_endpoint',
+						'name'         => '{{namespace}}_api_endpoint',
 						'type'         => 'url',
 						'instructions' => __( 'Custom API endpoint URL.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_enable_api',
+						'key'          => 'field_{{namespace}}_enable_api',
 						'label'        => __( 'Enable API', '{{textdomain}}' ),
-						'name'         => 'example-plugin_enable_api',
+						'name'         => '{{namespace}}_enable_api',
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'default'      => 0,
 						'instructions' => __( 'Enable external API integration.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_api_cache_duration',
+						'key'          => 'field_{{namespace}}_api_cache_duration',
 						'label'        => __( 'Cache Duration', '{{textdomain}}' ),
-						'name'         => 'example-plugin_api_cache_duration',
+						'name'         => '{{namespace}}_api_cache_duration',
 						'type'         => 'number',
 						'default'      => 3600,
 						'min'          => 0,
@@ -377,6 +383,7 @@ class Options {
 	 *
 	 * Helper method to retrieve option values using get_field().
 	 *
+	 * @since 1.0.0
 	 * @param string $field_name The field name without prefix.
 	 * @param mixed  $default    Default value if field is empty.
 	 * @return mixed The field value or default.
@@ -386,7 +393,7 @@ class Options {
 			return $default;
 		}
 
-		$value = get_field( 'example-plugin_' . $field_name, 'option' );
+		$value = get_field( '{{namespace}}_' . $field_name, 'option' );
 
 		return $value ? $value : $default;
 	}
@@ -396,6 +403,7 @@ class Options {
 	 *
 	 * Helper method to update option values using update_field().
 	 *
+	 * @since 1.0.0
 	 * @param string $field_name The field name without prefix.
 	 * @param mixed  $value      The value to save.
 	 * @return bool True on success, false on failure.
@@ -405,6 +413,6 @@ class Options {
 			return false;
 		}
 
-		return update_field( 'example-plugin_' . $field_name, $value, 'option' );
+		return update_field( '{{namespace}}_' . $field_name, $value, 'option' );
 	}
 }

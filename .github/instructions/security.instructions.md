@@ -1,14 +1,25 @@
 ---
-file_type: "instructions"
-title: "Block Plugin Security Standards"
-description: "Security best practices and guidelines for WordPress block plugin development, covering sanitization, escaping, nonces, and capability checks."
-applyTo: "**/*.php"
-version: "v1.0"
-last_updated: "2025-11-27"
-owners: ["LightSpeedWP Team"]
-tags: ["security", "wordpress", "blocks", "sanitization", "escaping", "nonces"]
-domain: "security"
-stability: "stable"
+file_type: instructions
+title: Block Plugin Security Standards
+description: >-
+  Security best practices and guidelines for WordPress block plugin development,
+  covering sanitization, escaping, nonces, and capability checks.
+applyTo: '**/*.php'
+version: v1.0
+last_updated: '2025-11-27'
+owners:
+  - LightSpeedWP Team
+tags:
+  - security
+  - wordpress
+  - blocks
+  - sanitization
+  - escaping
+  - nonces
+domain: security
+stability: stable
+references:
+  - ../custom-instructions.md
 ---
 
 # Block Plugin Security Standards
@@ -373,7 +384,7 @@ public function test_nonce_verification() {
 }
 ```
 
-## References
+## See Also
 
 - [WordPress Security Handbook](https://developer.wordpress.org/plugins/security/)
 - [Data Validation](https://developer.wordpress.org/plugins/security/data-validation/)

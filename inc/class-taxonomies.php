@@ -1,32 +1,34 @@
 <?php
 namespace {{namespace|lowerCase}}\classes;
 
-/**
- * Custom Taxonomy Registration.
- *
- * @package {{namespace|lowerCase}}
- */
-
-namespace {{namespace|lowerCase}}\classes;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
+ * Custom Taxonomy Registration.
+ *
+ * @package {{namespace}}
+ * @since 1.0.0
+ */
+
+/**
  * Taxonomies class.
  */
-class Taxonomies {
+class {{namespace|pascalCase}}_Taxonomies {
 
 	/**
 	 * Taxonomy slug.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
-	const TAXONOMY = '{{slug}}_category';
+	const TAXONOMY = '{{taxonomy_slug}}';
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
@@ -35,6 +37,7 @@ class Taxonomies {
 	/**
 	 * Register custom taxonomies.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_taxonomies() {
@@ -63,12 +66,12 @@ class Taxonomies {
 			'show_in_rest'      => true, // Required for block editor.
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array( 'slug' => '{{slug}}-category' ),
+			'rewrite'           => array( 'slug' => '{{taxonomy_slug}}' ),
 		);
 
 		register_taxonomy(
 			self::TAXONOMY,
-			Post_Types::POST_TYPE,
+			{{namespace|pascalCase}}_Post_Types::POST_TYPE,
 			$args
 		);
 	}

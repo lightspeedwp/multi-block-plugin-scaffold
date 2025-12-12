@@ -1,10 +1,15 @@
 ---
-file_type: "instructions"
-applyTo: ["**/*.css", "**/*.scss", "**/*.sass"]
-description: "Enforce conforming to the Web Content Accessibility Guidelines (WCAG), version 2.2, at level AA."
-last_updated: "2025-10-19"
-version: "v1.0"
-owners: ["LightSpeed Engineering"]
+file_type: instructions
+applyTo: '**/*.{css,scss,sass,html,htm,php,js,jsx,mjs,cjs}'
+description: >-
+  Enforce conforming to the Web Content Accessibility Guidelines (WCAG), version
+  2.2, at level AA.
+last_updated: '2025-10-19'
+version: v1.0
+owners:
+  - LightSpeed Engineering
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress Accessibility Coding Standards

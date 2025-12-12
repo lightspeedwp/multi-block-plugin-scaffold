@@ -1,7 +1,9 @@
 ---
 name: Reporting Instructions
-description: Rules and standards for report generation, storage, and management
+description: 'Rules and standards for report generation, storage, and management'
 applyTo: '**'
+references:
+  - ../custom-instructions.md
 ---
 
 # Reporting Instructions
@@ -46,11 +48,6 @@ These instructions define standards for creating, storing, and managing reports 
 - Confirm file lives under `.github/reports/<category>/`.
 - Check frontmatter includes title, date, author, summary, scope.
 - Run markdown lint (if configured) and verify links to related docs.
-
-## References
-
-- docs/REPORTING.md
-- instructions.instructions.md
 
 ### Analysis Reports
 
@@ -700,3 +697,8 @@ Before committing any report:
 ✅ **Enforced** - Rules apply to all developers and agents
 
 Reports are historical records of analysis, migrations, and organizational work. Follow these guidelines to maintain clear, organized, and discoverable reporting infrastructure.
+
+## See Also
+
+- docs/REPORTING.md
+- instructions.instructions.md

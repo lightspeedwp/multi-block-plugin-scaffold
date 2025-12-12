@@ -1,8 +1,12 @@
 ---
-description: "Release preparation and tagging guidance for the multi-block plugin scaffold and generated plugins"
-applyTo: "**/RELEASE*.md"
-version: "1.0"
-last_updated: "2025-12-11"
+description: >-
+  Release preparation and tagging guidance for the multi-block plugin scaffold
+  and generated plugins
+applyTo: '**/RELEASE*.md'
+version: '1.0'
+last_updated: '2025-12-11'
+references:
+  - ../custom-instructions.md
 ---
 
 # Release Instructions

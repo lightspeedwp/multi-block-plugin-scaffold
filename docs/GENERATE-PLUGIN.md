@@ -264,12 +264,14 @@ The scaffold supports two operational modes depending on **where you're running 
 **Use when**: You are working in the `lightspeedwp/multi-block-plugin-scaffold` repository itself.
 
 **Scenario:**
+
 - You cloned or are contributing to the scaffold repository
 - You want to test plugin generation
 - You want to create multiple different plugins
 - You're experimenting with configurations
 
 **Behavior:**
+
 - Creates new plugin in `output-plugin/` or `generated-plugins/<slug>/`
 - Leaves scaffold directory completely unchanged
 - Output folders are excluded via `.gitignore`
@@ -292,6 +294,7 @@ node scripts/generate-plugin.js --config my-config.json
 6. Scaffold remains pristine for next generation
 
 **Output Location:**
+
 ```
 multi-block-plugin-scaffold/
 ├── ... (scaffold files unchanged)
@@ -308,12 +311,14 @@ multi-block-plugin-scaffold/
 **Use when**: You created a NEW repository from the scaffold template.
 
 **Scenario:**
+
 - You used "Use this template" on GitHub to create `yourname/my-plugin`
 - You cloned your new repository
 - You want to transform the scaffold INTO your actual plugin
 - You're creating ONE plugin from the template
 
 **Behavior:**
+
 - Processes files IN-PLACE in current directory
 - Replaces ALL `{{mustache}}` variables throughout codebase
 - Renames files and folders to match your slug
@@ -338,6 +343,7 @@ node scripts/generate-plugin.js --config my-config.json --in-place
 7. Commit and push to YOUR repository
 
 **Before:**
+
 ```
 my-awesome-plugin/              ← Your new repo
 ├── {{slug}}.php                ← Mustache variables everywhere
@@ -347,6 +353,7 @@ my-awesome-plugin/              ← Your new repo
 ```
 
 **After:**
+
 ```
 my-awesome-plugin/              ← Same repo, transformed
 ├── my-awesome-plugin.php       ← All variables replaced
@@ -362,6 +369,7 @@ my-awesome-plugin/              ← Same repo, transformed
 **Ask yourself:**
 
 1. **What repository am I in?**
+
    ```bash
    git remote get-url origin
    ```
@@ -520,7 +528,60 @@ Create a tour operator plugin with tours CPT, destination taxonomy, and booking 
 - Follows agent specification in `.github/agents/generate-plugin.agent.md`
 - Best for experienced users who know their requirements
 
-### Method 3: CLI Script
+### Method 5: Agent-Driven Workflow
+
+For advanced users and automated workflows, the scaffold supports direct agent interaction through the GitHub Copilot coding agent:
+
+```text
+#github-pull-request_copilot-coding-agent
+Generate a complete tour operator plugin with:
+- Tours custom post type
+- Destination taxonomy
+- Booking fields using core APIs
+- Card and slider blocks
+- Archive and single templates
+```
+
+**Agent-Driven Process:**
+
+1. **Request Analysis** - Agent analyzes requirements and maps to scaffold capabilities
+2. **Configuration Generation** - Creates plugin-config.json with all settings
+3. **Validation** - Runs schema validation and compatibility checks
+4. **Generation** - Executes plugin generation with full logging
+5. **Branch Creation** - Creates feature branch for the new plugin
+6. **Pull Request** - Opens PR with generated plugin for review
+7. **Post-Generation Setup** - Provides installation and development instructions
+
+**Benefits:**
+
+- **Full Automation** - Complete plugin generation without manual steps
+- **Quality Assurance** - Built-in validation and testing
+- **Version Control** - Automatic branching and PR creation
+- **Documentation** - Comprehensive commit messages and PR descriptions
+- **Integration** - Works with existing CI/CD pipelines
+
+**Supported Agent Commands:**
+
+```text
+#github-pull-request_copilot-coding-agent
+Create a [plugin-type] plugin with [features]
+Generate [specific-plugin] using scaffold
+Build plugin for [use-case] with [requirements]
+```
+
+**Example Requests:**
+
+```text
+#github-pull-request_copilot-coding-agent
+Create a portfolio plugin with projects CPT, skills taxonomy, and gallery blocks
+```
+
+```text
+#github-pull-request_copilot-coding-agent
+Generate an events plugin with event CPT, venue taxonomy, and calendar blocks using core APIs only
+```
+
+### Method 6: CLI Script
 
 Run the generator script directly from the command line:
 
@@ -535,23 +596,9 @@ node scripts/generate-plugin.js
 node scripts/generate-plugin.js
 ```
 
-### Method 4: Agent-Based Generation
-
-Request the scaffold generator agent directly:
-
-```bash
-# Provide all values via arguments
-node scripts/generate-plugin.js \
-  --slug tour-operator \
-  --name "Tour Operator" \
-  --description "Tour booking and display plugin" \
-  --author "LightSpeed" \
-  --author-uri "https://developer.lsdev.biz"
-```
-
 **Configuration File Mode** (Recommended):
 
-```bashbash
+```bash
 # Start with example configuration
 cp .github/schemas/plugin-config.example.json my-plugin.json
 
@@ -563,24 +610,7 @@ node scripts/validate-plugin-config.js my-plugin.json
 
 # Generate plugin
 node scripts/generate-plugin.js --config my-plugin.json
-```text
-Generate a new multi-block plugin from scaffold
 ```
-
-Or be more specific:
-
-```text
-Create a tour operator plugin with tours CPT, destination taxonomy, and booking fields
-```
-
-**Features:**
-
-- Conversational interface
-- Can infer requirements from description
-- Validates configuration automatically
-- Follows agent specification in `.github/agents/generate-plugin.agent.md`
-- Best for experienced users who know their requirements
-- Can use either template or generator mode
 
 ## Post-Generation Workflow
 
@@ -887,9 +917,27 @@ cat logs/generate-plugin-my-plugin.log | jq '.[] | select(.message | contains("f
 
 ## Secure Custom Fields (SCF) Integration
 
-The scaffold includes full SCF support for all field types:
+The scaffold supports Secure Custom Fields (SCF) as a **secondary option** for complex custom field requirements that cannot be met with WordPress core APIs. **Always prefer WordPress core APIs first** - SCF should only be used when core functionality is insufficient for your use case.
+
+### When to Use SCF
+
+SCF is justified when you need:
+
+- **Complex field relationships** (repeaters, flexible content)
+- **Advanced field types** (date/time pickers, color pickers, maps)
+- **Conditional logic** between fields
+- **Custom validation rules** beyond WordPress core
+- **Rich media management** (galleries, file uploads with restrictions)
+
+**Avoid SCF for:**
+
+- Simple text/number fields (use core post meta APIs)
+- Basic taxonomy relationships (use core taxonomy APIs)
+- Standard content fields (use core editor features)
 
 ### Field Types Supported
+
+SCF provides these advanced field types when core APIs are insufficient:
 
 - **Text** - text, textarea, wysiwyg, email, url, password
 - **Content** - image, file, gallery, oembed
@@ -900,6 +948,8 @@ The scaffold includes full SCF support for all field types:
 
 ### Field Group Management
 
+When SCF is required, the scaffold provides:
+
 - **Local JSON** - Field groups stored in `scf-json/` directory
 - **Schema Validation** - JSON Schema validation for all field groups
 - **Options Pages** - Automatic options page registration
@@ -907,7 +957,7 @@ The scaffold includes full SCF support for all field types:
 
 ### Example Field Groups
 
-Generate example field groups demonstrating all field types:
+Generate example field groups demonstrating SCF field types (use only when core APIs insufficient):
 
 ```bash
 node scripts/generate-plugin.js --with-example-fields

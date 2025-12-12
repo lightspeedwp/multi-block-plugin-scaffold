@@ -1,17 +1,23 @@
 ---
-file_type: "instructions"
-applyTo: ['**/*.html', '**/*.htm', '**/*.php']
-title: "[Instructions] HTML Coding Standards"
-description: "Guidelines for HTML template parts and block templates in LightSpeed WordPress projects."
-last_updated: "2025-10-19"
-version: "v1.0"
-owners: ["LightSpeed Engineering"]
+file_type: instructions
+applyTo:
+  - '**/*.html'
+  - '**/*.htm'
+  - '**/*.php'
+title: '[Instructions] HTML Coding Standards'
+description: >-
+  Guidelines for HTML template parts and block templates in LightSpeed WordPress
+  projects.
+last_updated: '2025-10-19'
+version: v1.0
+owners:
+  - LightSpeed Engineering
 contributors:
-  - name: "Ash Shaw"
-    github: "ashleyshaw"
-  - name: "LightSpeedWP"
-    github: "lightspeedwp"
-license: "MIT"
+  - name: Ash Shaw
+    github: ashleyshaw
+  - name: LightSpeedWP
+    github: lightspeedwp
+license: MIT
 tags:
   - html
   - template
@@ -19,6 +25,8 @@ tags:
   - accessibility
   - responsive
   - performance
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress HTML Coding Standards
@@ -100,18 +108,6 @@ Avoid nesting headings out of order or injecting unescaped content.
 - Run `npm run lint` / `composer lint` with HTML/PHPCS rules enabled.
 - Validate markup via W3C validator or IDE tools for template files.
 - Check accessibility (axe/Lighthouse) for rendered templates.
-
-## References
-
-- wpcs-accessibility.instructions.md
-- wpcs-php.instructions.md
-- blocks-development.instructions.md
-
-- Store reusable components in the `parts/` directory.
-- Use descriptive filenames that reflect the component's purpose.
-- Keep template parts focused on a single responsibility.
-- Use proper comments to document template structure.
-- Prefer core blocks over custom HTML when possible.
 
 ## Accessibility
 
@@ -275,3 +271,14 @@ Incorrect:
 # References
 
 - <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/html/>
+
+## See Also
+
+- wpcs-accessibility.instructions.md
+- wpcs-php.instructions.md
+- blocks-development.instructions.md
+- Store reusable components in the `parts/` directory.
+- Use descriptive filenames that reflect the component's purpose.
+- Keep template parts focused on a single responsibility.
+- Use proper comments to document template structure.
+- Prefer core blocks over custom HTML when possible.

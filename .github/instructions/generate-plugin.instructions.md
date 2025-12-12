@@ -1,7 +1,11 @@
 ---
 name: Plugin Generator Instructions
-description: Rules and standards for using mustache template values in scaffold plugin generation
+description: >-
+  Rules and standards for using mustache template values in scaffold plugin
+  generation
 applyTo: '**'
+references:
+  - ../custom-instructions.md
 ---
 
 # Plugin Generator Instructions

@@ -1,8 +1,12 @@
 ---
-description: "Instructions for maintaining release workflow scaffolding for the multi-block plugin scaffold"
-applyTo: ".github/workflows/release-*.yml"
-version: "1.0"
-last_updated: "2025-12-11"
+description: >-
+  Instructions for maintaining release workflow scaffolding for the multi-block
+  plugin scaffold
+applyTo: .github/workflows/release-*.yml
+version: '1.0'
+last_updated: '2025-12-11'
+references:
+  - ../custom-instructions.md
 ---
 
 # Release Scaffold Instructions

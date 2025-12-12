@@ -4,11 +4,10 @@ namespace {{namespace|lowerCase}}\classes;
 /**
  * Custom Fields Registration using Secure Custom Fields.
  *
- * @package example_plugin
+ * @package {{namespace}}
+ * @since 1.0.0
  * @see https://wordpress.org/plugins/secure-custom-fields/
  */
-
-namespace example_plugin\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,18 +15,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Fields class.
+ *
+ * @since 1.0.0
  */
-class Fields {
+class {{namespace|pascalCase}}_Fields {
 
 	/**
 	 * Field group key.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
-	const FIELD_GROUP = 'group_example-plugin_fields';
+	const FIELD_GROUP = 'group_{{namespace}}_fields';
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'acf/init', array( $this, 'register_fields' ) );
@@ -37,7 +41,8 @@ class Fields {
 	/**
 	 * Check if Secure Custom Fields is active.
 	 *
-	 * @return bool
+	 * @since 1.0.0
+	 * @return bool True if SCF is active, false otherwise.
 	 */
 	public function is_scf_active() {
 		return function_exists( 'acf_add_local_field_group' );
@@ -46,6 +51,7 @@ class Fields {
 	/**
 	 * Display admin notice if SCF is not active.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function scf_dependency_notice() {
@@ -57,7 +63,7 @@ class Fields {
 					printf(
 						/* translators: %s: Plugin name */
 						esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', '{{textdomain}}' ),
-						'<strong>Example Plugin</strong>'
+						'<strong>{{name}}</strong>'
 					);
 					?>
 				</p>
@@ -69,6 +75,7 @@ class Fields {
 	/**
 	 * Register custom fields.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_fields() {
@@ -82,24 +89,24 @@ class Fields {
 				'title'           => __( 'Item Details', '{{textdomain}}' ),
 				'fields'          => array(
 					array(
-						'key'          => 'field_example-plugin_subtitle',
+						'key'          => 'field_{{namespace}}_subtitle',
 						'label'        => __( 'Subtitle', '{{textdomain}}' ),
-						'name'         => 'example-plugin_subtitle',
+						'name'         => '{{namespace}}_subtitle',
 						'type'         => 'text',
 						'instructions' => __( 'Enter a subtitle for this item.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_example-plugin_featured',
+						'key'          => 'field_{{namespace}}_featured',
 						'label'        => __( 'Featured', '{{textdomain}}' ),
-						'name'         => 'example-plugin_featured',
+						'name'         => '{{namespace}}_featured',
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'instructions' => __( 'Mark this item as featured.', '{{textdomain}}' ),
 					),
 					array(
-						'key'           => 'field_example-plugin_gallery',
+						'key'           => 'field_{{namespace}}_gallery',
 						'label'         => __( 'Gallery', '{{textdomain}}' ),
-						'name'          => 'example-plugin_gallery',
+						'name'          => '{{namespace}}_gallery',
 						'type'          => 'gallery',
 						'instructions'  => __( 'Add images to the gallery.', '{{textdomain}}' ),
 						'return_format' => 'array',
@@ -107,11 +114,11 @@ class Fields {
 						'library'       => 'all',
 					),
 					array(
-						'key'           => 'field_example-plugin_related',
+						'key'           => 'field_{{namespace}}_related',
 						'label'         => __( 'Related Items', '{{textdomain}}' ),
-						'name'          => 'example-plugin_related',
+						'name'          => '{{namespace}}_related',
 						'type'          => 'relationship',
-						'post_type'     => array( Post_Types::POST_TYPE ),
+						'post_type'     => array( {{namespace|pascalCase}}_Post_Types::POST_TYPE ),
 						'filters'       => array( 'search', 'taxonomy' ),
 						'return_format' => 'object',
 						'instructions'  => __( 'Select related items.', '{{textdomain}}' ),
@@ -122,7 +129,7 @@ class Fields {
 						array(
 							'param'    => 'post_type',
 							'operator' => '==',
-							'value'    => Post_Types::POST_TYPE,
+							'value'    => {{namespace|pascalCase}}_Post_Types::POST_TYPE,
 						),
 					),
 				),

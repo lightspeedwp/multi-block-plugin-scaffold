@@ -4,30 +4,23 @@ namespace {{namespace|lowerCase}}\classes;
 /**
  * Block Bindings Registration.
  *
- * @package example_plugin
+ * @package {{namespace}}
  * @since 6.5.0 Block Bindings API
  */
-
-namespace example_plugin\classes;
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-/**
- * Block Bindings class.
- */
-class Block_Bindings {
+class {{namespace|pascalCase}}_Block_Bindings {
 
 	/**
 	 * Binding source name.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
 	const SOURCE = '{{namespace}}/fields';
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_sources' ) );
@@ -36,6 +29,7 @@ class Block_Bindings {
 	/**
 	 * Register bindings sources.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register_sources() {
@@ -44,9 +38,9 @@ class Block_Bindings {
 		}
 
 		register_block_bindings_source(
-			'example-plugin/post-meta',
+			self::SOURCE,
 			array(
-				'label'              => __( 'Example Plugin Post Meta', '{{textdomain}}' ),
+				'label'              => __( '{{name}} Post Meta', '{{textdomain}}' ),
 				'get_value_callback' => array( $this, 'get_post_meta_value' ),
 				'uses_context'       => array( 'postId' ),
 			)
@@ -56,6 +50,7 @@ class Block_Bindings {
 	/**
 	 * Example binding: fetch a scalar post meta value.
 	 *
+	 * @since 1.0.0
 	 * @param array $args    Binding arguments (expects 'key').
 	 * @param array $context Binding context (expects 'postId').
 	 * @return string|null

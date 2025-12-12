@@ -1,10 +1,16 @@
 ---
-file_type: "instructions"
-applyTo: ["**/*.css", "**/*.scss", "**/*.sass"]
-description: "Enforce WordPress CSS coding standards, naming, specificity and formatting."
-last_updated: "2025-10-19"
-version: "v1.0"
-owners: ["LightSpeed Engineering"]
+file_type: instructions
+applyTo:
+  - '**/*.css'
+  - '**/*.scss'
+  - '**/*.sass'
+description: 'Enforce WordPress CSS coding standards, naming, specificity and formatting.'
+last_updated: '2025-10-19'
+version: v1.0
+owners:
+  - LightSpeed Engineering
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress CSS Coding Standards
@@ -54,10 +60,6 @@ Avoid deep selectors (`.foo .bar .baz`) and avoid `!important` unless mitigating
 - Run `npm run lint:style` or `npm run lint` to enforce style rules.
 - Check for specificity regressions using browser devtools.
 - Verify colour contrast and focus visibility after changes.
-
-## References
-
-- README.md
 
 ## Language & Frameworks
 
@@ -413,3 +415,7 @@ Check out the [WP Admin CSS Audit](https://wordpress.github.io/css-audit/public/
 # References
 
 - <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/>
+
+## See Also
+
+- README.md

@@ -14,40 +14,40 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-$slug      = '{{textdomain}}';
-$post_type = '{{textdomain}}';
-$taxonomy  = 'example-plugin_category';
+$plugin_slug      = '{{textdomain}}';
+$custom_post_type = '{{textdomain}}';
+$custom_taxonomy  = 'example-plugin_category';
 
 /**
  * Delete all posts of the custom post type.
  */
-$posts = get_posts(
+$all_posts = get_posts(
 	array(
-		'post_type'      => $post_type,
+		'post_type'      => $custom_post_type,
 		'post_status'    => 'any',
 		'posts_per_page' => -1,
 		'fields'         => 'ids',
 	)
 );
 
-foreach ( $posts as $post_id ) {
-	wp_delete_post( $post_id, true );
+foreach ( $all_posts as $current_post_id ) {
+	wp_delete_post( $current_post_id, true );
 }
 
 /**
  * Delete all terms from the custom taxonomy.
  */
-$terms = get_terms(
+$all_terms = get_terms(
 	array(
-		'taxonomy'   => $taxonomy,
+		'taxonomy'   => $custom_taxonomy,
 		'hide_empty' => false,
 		'fields'     => 'ids',
 	)
 );
 
-if ( ! is_wp_error( $terms ) ) {
-	foreach ( $terms as $term_id ) {
-		wp_delete_term( $term_id, $taxonomy );
+if ( ! is_wp_error( $all_terms ) ) {
+	foreach ( $all_terms as $term_id ) {
+		wp_delete_term( $term_id, $custom_taxonomy );
 	}
 }
 
@@ -57,7 +57,7 @@ if ( ! is_wp_error( $terms ) ) {
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
-		$wpdb->esc_like( $slug . '_' ) . '%'
+		$wpdb->esc_like( $plugin_slug . '_' ) . '%'
 	)
 );
 
@@ -67,8 +67,8 @@ $wpdb->query(
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
-		$wpdb->esc_like( '_transient_' . $slug . '_' ) . '%',
-		$wpdb->esc_like( '_site_transient_' . $slug . '_' ) . '%'
+		$wpdb->esc_like( '_transient_' . $plugin_slug . '_' ) . '%',
+		$wpdb->esc_like( '_site_transient_' . $plugin_slug . '_' ) . '%'
 	)
 );
 
@@ -78,7 +78,7 @@ $wpdb->query(
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s",
-		$wpdb->esc_like( $slug . '_' ) . '%'
+		$wpdb->esc_like( $plugin_slug . '_' ) . '%'
 	)
 );
 
@@ -88,7 +88,7 @@ $wpdb->query(
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
-		$wpdb->esc_like( $slug . '_' ) . '%'
+		$wpdb->esc_like( $plugin_slug . '_' ) . '%'
 	)
 );
 
@@ -98,7 +98,7 @@ $wpdb->query(
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->termmeta} WHERE meta_key LIKE %s",
-		$wpdb->esc_like( $slug . '_' ) . '%'
+		$wpdb->esc_like( $plugin_slug . '_' ) . '%'
 	)
 );
 
@@ -106,10 +106,10 @@ $wpdb->query(
  * Clear scheduled cron hooks.
  */
 $hooks = array(
-	"{$slug}_cron",
-	"{$slug}_daily",
-	"{$slug}_hourly",
-	"{$slug}_cleanup",
+	"{$plugin_slug}_cron",
+	"{$plugin_slug}_daily",
+	"{$plugin_slug}_hourly",
+	"{$plugin_slug}_cleanup",
 );
 
 foreach ( $hooks as $hook ) {

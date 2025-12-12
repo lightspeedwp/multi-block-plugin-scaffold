@@ -1,10 +1,14 @@
 ---
-file_type: "instructions"
-applyTo: ["**/*.php"]
-description: "Apply WordPress PHP standards (formatting, naming, security, I18N)."
-last_updated: "2025-10-19"
-version: "v1.0"
-owners: ["LightSpeed Engineering"]
+file_type: instructions
+applyTo:
+  - '**/*.php'
+description: 'Apply WordPress PHP standards (formatting, naming, security, I18N).'
+last_updated: '2025-10-19'
+version: v1.0
+owners:
+  - LightSpeed Engineering
+references:
+  - ../custom-instructions.md
 ---
 
 # WordPress PHP Coding Standards
@@ -58,11 +62,6 @@ Avoid echoing unsanitised input or using inconsistent indentation.
 - Run `php -l` on modified files if PHPCS is unavailable.
 - Validate translations using `wp i18n` tools where applicable.
 
-## References
-
-- wpcs-php-docs.instructions.md
-- instructions.instructions.md
-
 ## Project Structure
 
 - Organise code under `includes/`, `src/` or `plugins/` with autoloadable namespaces.
@@ -70,7 +69,7 @@ Avoid echoing unsanitised input or using inconsistent indentation.
 
 ## Coding Standards
 
-- Use **4‑space indentation**; brace styles follow the WordPress guidelines (K&R).
+- Use **tabs for indentation**; brace styles follow the WordPress guidelines (K&R).
 - Prefer **Yoda conditions** when performing comparisons that may involve assignments.
 - Escape data on output (`esc_html`, `esc_attr`, `wp_kses_post`) and sanitise data on input (`sanitize_text_field`, `intval`, etc.).
 - Protect against CSRF by using WordPress nonces for forms and actions.
@@ -995,3 +994,8 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [Draft PSR-5 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md)
 - [Draft PSR-19 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc-tags.md)
 - <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/>
+
+## See Also
+
+- wpcs-php-docs.instructions.md
+- instructions.instructions.md

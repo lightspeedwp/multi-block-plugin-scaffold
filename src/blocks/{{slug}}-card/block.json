@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "example_plugin/example-plugin-card",
-	"title": "Example Plugin Card",
-	"category": "example-plugin",
+	"name": "{{namespace}}/{{slug}}-card",
+	"title": "{{name}} Card",
+	"category": "{{slug}}",
 	"icon": "id-alt",
 	"description": "Display a single item in a card layout.",
 	"version": "1.0.0",
-	"textdomain": "example-plugin",
-	"keywords": [ "card", "example-plugin", "post" ],
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "card", "{{slug}}", "post" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -33,16 +33,16 @@
 		}
 	},
 	"selectors": {
-		"root": ".example_plugin-example-plugin-card",
+		"root": ".{{namespace}}-{{slug}}-card",
 		"color": {
-			"text": ".example_plugin-example-plugin-card__content",
-			"background": ".example_plugin-example-plugin-card"
+			"text": ".{{namespace}}-{{slug}}-card__content",
+			"background": ".{{namespace}}-{{slug}}-card"
 		},
 		"typography": {
-			"fontSize": ".example_plugin-example-plugin-card__title"
+			"fontSize": ".{{namespace}}-{{slug}}-card__title"
 		},
 		"dimensions": {
-			"aspectRatio": ".example_plugin-example-plugin-card__image"
+			"aspectRatio": ".{{namespace}}-{{slug}}-card__image"
 		}
 	},
 	"attributes": {

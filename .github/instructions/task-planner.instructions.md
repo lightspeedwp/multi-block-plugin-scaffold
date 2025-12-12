@@ -1,8 +1,12 @@
 ---
-description: "Planning workflow guidance for breaking down work in the multi-block plugin scaffold"
-applyTo: "**"
-version: "1.0"
-last_updated: "2025-12-11"
+description: >-
+  Planning workflow guidance for breaking down work in the multi-block plugin
+  scaffold
+applyTo: '**'
+version: '1.0'
+last_updated: '2025-12-11'
+references:
+  - ../custom-instructions.md
 ---
 
 # Task Planner Instructions

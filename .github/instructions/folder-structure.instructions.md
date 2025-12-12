@@ -2,6 +2,8 @@
 name: Folder Structure Instructions
 description: Repository folder organization and file placement rules
 applyTo: '**'
+references:
+  - ../custom-instructions.md
 ---
 
 # Folder Structure Instructions
