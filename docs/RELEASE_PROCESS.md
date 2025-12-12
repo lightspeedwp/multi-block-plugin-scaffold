@@ -9,7 +9,7 @@ date: 2025-12-10
 
 # Release Process Guide
 
-This guide covers the release process for the **Multi-Block Plugin Scaffold**, following semantic versioning and the governance standards defined in [GOVERNANCE.md](GOVERNANCE.md).
+This guide covers the release process for the **Multi-Block Plugin Scaffold**, following semantic versioning and best practices for maintainability, accessibility, and performance.
 
 ## Table of Contents
 
@@ -266,13 +266,17 @@ Notes: requires public visibility and admin/owner permissions.
 
 1. On the repo home page, click the **About** gear icon
 2. Set description:
+
    ```
    WordPress plugin scaffold with multi-block architecture, dual-mode generator, and comprehensive development tools
    ```
+
 3. Add topics (comma-separated):
+
    ```
    wordpress, wordpress-plugin, gutenberg, blocks, block-plugin, scaffold, generator, plugin-template, gutenberg-blocks, wordpress-blocks, wordpress-development, block-editor, mustache-templates, plugin-scaffold, lightspeed
    ```
+
 4. (Optional) Website URL: `https://github.com/lightspeedwp/multi-block-plugin-scaffold`
 
 Expected: topics show as badges; description and URL appear in the About panel.
