@@ -819,4 +819,4 @@ import { useState, useEffect, useCallback, useMemo } from '@wordpress/element';
 
 ---
 
-**Stay updated** — consult `.github/instructions/README.md` for the latest instruction list and navigation tips.
+**For the latest and any additional instructions, always check all files in `.github/instructions/`.**

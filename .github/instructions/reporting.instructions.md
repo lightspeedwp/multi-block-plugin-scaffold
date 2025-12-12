@@ -51,7 +51,6 @@ These instructions define standards for creating, storing, and managing reports 
 
 - docs/REPORTING.md
 - instructions.instructions.md
-- .github/instructions/README.md
 
 ### Analysis Reports
 

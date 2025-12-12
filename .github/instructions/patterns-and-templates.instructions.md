@@ -12,13 +12,6 @@ applyTo: "**/patterns/**/*.php"
 license: "GPL-3.0"
 domain: "wp-core"
 stability: "stable"
-references:
-  - path: "./wpcs-php.instructions.md"
-    description: "WordPress PHP coding standards"
-  - path: "./wpcs-html.instructions.md"
-    description: "WordPress HTML standards"
-  - path: "./wpcs-accessibility.instructions.md"
-    description: "Accessibility standards"
 ---
 
 > ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin and theme repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress code.
@@ -708,6 +701,7 @@ function myplugin_register_synced_pattern() {
 
 ### Related Instructions
 
+- [blocks-development.instructions.md](./blocks-development.instructions.md) — Core block development
 - [wpcs-html.instructions.md](./wpcs-html.instructions.md) — HTML standards
 - [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md) — Accessibility standards
 - [wpcs-php.instructions.md](./wpcs-php.instructions.md) — PHP standards
@@ -754,5 +748,3 @@ function myplugin_register_synced_pattern() {
 - `page` — Full page layouts
 
 ---
-
-**Stay updated** — refer to `.github/instructions/README.md` for navigation and new instruction releases.

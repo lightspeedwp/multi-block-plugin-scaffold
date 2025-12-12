@@ -72,7 +72,7 @@ flowchart LR
 
 ## Reference hygiene
 
-- Run `node scripts/fix-instruction-references.js` before you edit instruction metadata so only `custom-instructions.md` and `_index.instructions.md` remain in frontmatter references.
+- Run `node scripts/fix-instruction-references.js` before you edit instruction metadata so only `custom-instructions.md` remains in frontmatter references.
 - Whenever you encounter `## References` or `## See Also` sections in `.github/instructions/*.instructions.md`, avoid manually linking to other `.instructions.md` files and let the fixer reintroduce those links safely.
 - Include the latest `.github/reports/analysis/*-frontmatter-audit.csv` file with the PR so reviewers can confirm the reference graph stayed cycle-free.
 

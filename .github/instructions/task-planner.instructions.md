@@ -45,4 +45,3 @@ Use these rules when outlining implementation plans or task lists for this repos
 ## References
 
 - instructions.instructions.md
-- .github/instructions/README.md

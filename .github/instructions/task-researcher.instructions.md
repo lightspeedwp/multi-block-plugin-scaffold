@@ -40,10 +40,9 @@ Use these steps when asked to research a feature, bug, or process. Focus on evid
 ## Validation
 
 - Validate citations by re-opening files/lines mentioned.
-- Check `.github/instructions/README.md` for any relevant guidance not yet referenced.
+- Check `_index.instructions.md` for any relevant guidance not yet referenced.
 
 ## References
 
 - instructions.instructions.md
 - folder-structure.instructions.md
-- .github/instructions/README.md
