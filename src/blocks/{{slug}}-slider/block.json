@@ -7,8 +7,8 @@
 	"icon": "slides",
 	"description": "Display items or custom slides in a slider/carousel.",
 	"version": "1.0.0",
-	"textdomain": "example-plugin",
-	"keywords": [ "slider", "carousel", "example-plugin" ],
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "slider", "carousel", "{{slug}}" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -81,16 +81,16 @@
 		}
 	},
 	"selectors": {
-		"root": ".example_plugin-example-plugin-slider",
+		"root": ".{{namespace}}-{{slug}}-slider",
 		"color": {
-			"text": ".example_plugin-example-plugin-slider__caption",
-			"background": ".example_plugin-example-plugin-slider"
+			"text": ".{{namespace}}-{{slug}}-slider__caption",
+			"background": ".{{namespace}}-{{slug}}-slider"
 		},
 		"typography": {
-			"fontSize": ".example_plugin-example-plugin-slider__caption"
+			"fontSize": ".{{namespace}}-{{slug}}-slider__caption"
 		},
 		"dimensions": {
-			"aspectRatio": ".example_plugin-example-plugin-slider__slide"
+			"aspectRatio": ".{{namespace}}-{{slug}}-slider__slide"
 		}
 	},
 	"editorScript": "file:./index.js",

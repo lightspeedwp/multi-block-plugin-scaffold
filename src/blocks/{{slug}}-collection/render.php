@@ -25,7 +25,7 @@ $display_pagination     = $attributes['displayPagination'] ?? true;
 
 // Build WP_Query args.
 $args = array(
-	'post_type'      => '{{textdomain}}',
+	'post_type'      => '{{slug}}',
 	'posts_per_page' => $query_args['perPage'] ?? 6,
 	'order'          => $query_args['order'] ?? 'desc',
 	'orderby'        => $query_args['orderBy'] ?? 'date',
@@ -36,7 +36,7 @@ $args = array(
 if ( ! empty( $query_args['featured'] ) && function_exists( 'get_field' ) ) {
 	$args['meta_query'] = array(
 		array(
-			'key'     => 'example-plugin_featured',
+			'key'     => '{{namespace}}_featured',
 			'value'   => '1',
 			'compare' => '=',
 		),
@@ -51,7 +51,7 @@ if ( ! empty( $query_args['taxQuery'] ) ) {
 $collection_query = new WP_Query( $args );
 
 $wrapper_classes = array(
-	'wp-block-example_plugin-example-plugin-collection',
+	'wp-block-{{namespace}}-{{slug}}-collection',
 	'is-layout-' . esc_attr( $layout ),
 );
 
@@ -73,26 +73,26 @@ if ( 'grid' === $layout ) {
 
 <div <?php echo $wrapper_attributes; ?>>
 	<?php if ( $collection_query->have_posts() ) : ?>
-		<div class="wp-block-example_plugin-example-plugin-collection__items" <?php echo $grid_style; ?>>
+		<div class="wp-block-{{namespace}}-{{slug}}-collection__items" <?php echo $grid_style; ?>>
 			<?php
 			while ( $collection_query->have_posts() ) :
 				$collection_query->the_post();
 				$post_id   = get_the_ID();
 				$permalink = get_permalink();
-				$subtitle  = function_exists( 'get_field' ) ? get_field( 'example-plugin_subtitle', $post_id ) : '';
+				$subtitle  = function_exists( 'get_field' ) ? get_field( '{{namespace}}_subtitle', $post_id ) : '';
 				?>
-				<article class="wp-block-example_plugin-example-plugin-collection__item">
+				<article class="wp-block-{{namespace}}-{{slug}}-collection__item">
 					<?php if ( $display_featured_image && has_post_thumbnail() ) : ?>
-						<div class="wp-block-example_plugin-example-plugin-collection__image">
+						<div class="wp-block-{{namespace}}-{{slug}}-collection__image">
 							<a href="<?php echo esc_url( $permalink ); ?>">
 								<?php the_post_thumbnail( 'medium_large' ); ?>
 							</a>
 						</div>
 					<?php endif; ?>
 
-					<div class="wp-block-example_plugin-example-plugin-collection__content">
+					<div class="wp-block-{{namespace}}-{{slug}}-collection__content">
 						<?php if ( $display_title ) : ?>
-							<h3 class="wp-block-example_plugin-example-plugin-collection__title">
+							<h3 class="wp-block-{{namespace}}-{{slug}}-collection__title">
 								<a href="<?php echo esc_url( $permalink ); ?>">
 									<?php the_title(); ?>
 								</a>
@@ -100,13 +100,13 @@ if ( 'grid' === $layout ) {
 						<?php endif; ?>
 
 						<?php if ( $display_excerpt ) : ?>
-							<div class="wp-block-example_plugin-example-plugin-collection__excerpt">
+							<div class="wp-block-{{namespace}}-{{slug}}-collection__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
 						<?php if ( $display_meta ) : ?>
-							<div class="wp-block-example_plugin-example-plugin-collection__meta">
+							<div class="wp-block-{{namespace}}-{{slug}}-collection__meta">
 								<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
 									<?php echo esc_html( get_the_date() ); ?>
 								</time>
@@ -118,7 +118,7 @@ if ( 'grid' === $layout ) {
 		</div>
 
 		<?php if ( $display_pagination && $collection_query->max_num_pages > 1 ) : ?>
-			<nav class="wp-block-example_plugin-example-plugin-collection__pagination">
+			<nav class="wp-block-{{namespace}}-{{slug}}-collection__pagination">
 				<?php
 				echo paginate_links(
 					array(
@@ -135,7 +135,7 @@ if ( 'grid' === $layout ) {
 		<?php wp_reset_postdata(); ?>
 
 	<?php else : ?>
-		<p class="wp-block-example_plugin-example-plugin-collection__no-results">
+		<p class="wp-block-{{namespace}}-{{slug}}-collection__no-results">
 			<?php esc_html_e( 'No items found.', '{{textdomain}}' ); ?>
 		</p>
 	<?php endif; ?>

@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "example_plugin/example-plugin-featured",
+	"name": "{{namespace}}/{{slug}}-featured",
 	"title": "Featured Items",
-	"category": "example-plugin",
+	"category": "{{slug}}",
 	"icon": "star-filled",
 	"description": "Display featured items in a highlight section.",
 	"version": "1.0.0",
-	"textdomain": "example-plugin",
-	"keywords": [ "featured", "example-plugin", "highlight" ],
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "featured", "{{slug}}", "highlight" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -82,17 +82,17 @@
 		}
 	},
 	"selectors": {
-		"root": ".example_plugin-example-plugin-featured",
+		"root": ".{{namespace}}-{{slug}}-featured",
 		"color": {
-			"text": ".example_plugin-example-plugin-featured__item",
-			"background": ".example_plugin-example-plugin-featured"
+			"text": ".{{namespace}}-{{slug}}-featured__item",
+			"background": ".{{namespace}}-{{slug}}-featured"
 		},
 		"typography": {
-			"fontSize": ".example_plugin-example-plugin-featured__title"
+			"fontSize": ".{{namespace}}-{{slug}}-featured__title"
 		},
 		"dimensions": {
-			"aspectRatio": ".example_plugin-example-plugin-featured__image",
-			"minHeight": ".example_plugin-example-plugin-featured--hero"
+			"aspectRatio": ".{{namespace}}-{{slug}}-featured__image",
+			"minHeight": ".{{namespace}}-{{slug}}-featured--hero"
 		}
 	},
 	"editorScript": "file:./index.js",

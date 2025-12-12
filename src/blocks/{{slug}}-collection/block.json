@@ -1,17 +1,17 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "example_plugin/example-plugin-collection",
-	"title": "Example Plugin Collection",
-	"category": "example-plugin",
+	"name": "{{namespace}}/{{slug}}-collection",
+	"title": "{{name}} Collection",
+	"category": "{{slug}}",
 	"icon": "grid-view",
 	"description": "Display a collection of items with filtering and layout options.",
 	"version": "1.0.0",
-	"textdomain": "example-plugin",
-	"keywords": [ "collection", "example-plugin", "grid", "list", "query" ],
+	"textdomain": "{{textdomain}}",
+	"keywords": [ "collection", "{{slug}}", "grid", "list", "query" ],
 	"usesContext": [ "postId", "postType" ],
 	"providesContext": {
-		"example_plugin/queryId": "queryId",
+		"{{namespace}}/queryId": "queryId",
 		"postId": "queryId"
 	},
 	"supports": {
@@ -38,7 +38,7 @@
 			"type": "object",
 			"role": "content",
 			"default": {
-				"postType": "example-plugin",
+				"postType": "{{slug}}",
 				"perPage": 6,
 				"pages": 0,
 				"offset": 0,
@@ -91,10 +91,10 @@
 		}
 	},
 	"selectors": {
-		"root": ".example_plugin-example-plugin-collection",
+		"root": ".{{namespace}}-{{slug}}-collection",
 		"color": {
-			"text": ".example_plugin-example-plugin-collection__item",
-			"background": ".example_plugin-example-plugin-collection"
+			"text": ".{{namespace}}-{{slug}}-collection__item",
+			"background": ".{{namespace}}-{{slug}}-collection"
 		}
 	},
 	"editorScript": "file:./index.js",
