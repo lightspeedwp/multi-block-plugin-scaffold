@@ -9,28 +9,14 @@ echo "🔍 Running pre-commit checks for {{name}}..."
 
 # Check if this is a scaffold template (has mustache variables)
 if grep -q "{{slug}}" package.json 2>/dev/null; then
-    echo "📋 Scaffold template detected - using dry-run mode"
-
-    # Run linting with dry-run mode (substitutes mustache variables temporarily)
-    echo "🟡 Running dry-run linting..."
-    npm run dry-run:lint || {
-        echo "❌ Dry-run linting failed. Please fix the issues and try again."
-        echo "💡 Tip: Variables like {{slug}} are temporarily replaced with test values during linting"
+    echo "📋 Scaffold template detected - running safe dry-run checks..."
+    npm run dry-run:all || {
+        echo "❌ Dry-run checks failed. Please fix the issues and try again."
         exit 1
     }
 else
-    # Standard linting for generated plugins
-    echo "🟡 Linting JavaScript..."
-    npm run lint:js || {
-        echo "❌ JavaScript linting failed. Please fix the issues and try again."
-        exit 1
-    }
-
-    echo "🟡 Linting CSS..."
-    npm run lint:css || {
-        echo "❌ CSS linting failed. Please fix the issues and try again."
-        exit 1
-    }
+    echo "🚀 Generated plugin detected - running lint-staged..."
+    npx lint-staged
 fi
 
 # Run PHP linting (if composer is available and not in scaffold mode)

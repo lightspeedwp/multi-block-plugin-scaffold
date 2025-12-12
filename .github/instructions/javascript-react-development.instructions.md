@@ -11,15 +11,6 @@ tags: ["javascript", "react", "wordpress", "blocks", "jsx", "tsx"]
 applyTo: "**/*.{js,jsx,ts,tsx}"
 domain: "wp-core"
 stability: "stable"
-references:
-  - path: ".github/instructions/coding-standards.instructions.md"
-    description: "Unified coding standards"
-  - path: ".github/instructions/inline-docs/inline-jsdoc.instructions.md"
-    description: "JSDoc documentation standards"
-  - path: ".github/instructions/linting/linting-javascript.instructions.md"
-    description: "JavaScript linting standards"
-  - path: ".github/instructions/wpcs.instructions.md"
-    description: "WordPress coding standards index"
 ---
 
 # WordPress JavaScript/React Development Standards

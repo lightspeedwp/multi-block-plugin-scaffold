@@ -2,6 +2,13 @@
 name: Plugin Generator Instructions
 description: Rules and standards for using mustache template values in scaffold plugin generation
 applyTo: '**'
+references:
+  - path: "docs/GENERATE-PLUGIN.md"
+    description: "Complete generation workflow"
+  - path: "agents/generate-plugin.agent.md"
+    description: "Agent specification"
+  - path: "scf-fields.instructions.md"
+    description: "Field types and usage"
 ---
 
 # Plugin Generator Instructions

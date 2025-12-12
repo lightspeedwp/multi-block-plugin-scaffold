@@ -3,6 +3,8 @@ file_type: "instructions"
 name: "WordPress JavaScript Coding Standards"
 description: "Apply WordPress JavaScript coding standards (formatting, naming, patterns) for block plugins and WordPress development."
 applyTo: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
+references:
+  - "https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/"
 ---
 
 # WordPress JavaScript Coding Standards
@@ -52,10 +54,6 @@ Avoid trailing whitespace, double quotes, and inconsistent indentation.
 - Run `npm run lint` (or `npm run lint:js`) to enforce standards.
 - Ensure Prettier or formatter configs align with WordPress settings; avoid conflicting overrides.
 - Review diffs for unintended formatting changes.
-
-## References
-
-- wpcs-js-docs.instructions.md
 
 Many of the examples below have been adapted directly from the jQuery style guide; these differences have all been integrated into the examples on this page. Any of the below standards and examples should be considered best practice for WordPress code, unless explicitly noted as anti-patterns.
 

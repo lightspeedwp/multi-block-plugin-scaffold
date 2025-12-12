@@ -74,7 +74,11 @@
 		"env:destroy": "wp-env destroy",
 		"env:logs": "wp-env logs",
 		"env:cli": "wp-env run cli wp",
-		"update-version": "node scripts/update-version.js"
+		"update-version": "node scripts/update-version.js",
+		"check:markdown-references": "node scripts/check-markdown-references.js",
+		"clean:markdown-references": "node scripts/fix-instruction-references.js",
+		"audit:markdown": "npm run check:markdown-references && npm run clean:markdown-references",
+		"clean:gh-references": "node scripts/clean-github-references.js"
 	},
 	"devDependencies": {
 		"@lhci/cli": "^0.13.0",
@@ -93,6 +97,7 @@
 		"ajv-formats": "3.0.1",
 		"axe-core": "^4.10.2",
 		"axe-playwright": "^2.0.3",
+		"gray-matter": "^4.0.3",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.7",
 		"size-limit": "^11.1.6",
@@ -129,11 +134,6 @@
 		"*.php": [
 			"composer run lint:fix"
 		]
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
 	},
 	"dryRun": {
 		"enabled": true,

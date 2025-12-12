@@ -5,6 +5,8 @@ description: "Enforce WordPress CSS coding standards, naming, specificity and fo
 last_updated: "2025-10-19"
 version: "v1.0"
 owners: ["LightSpeed Engineering"]
+references:
+  - "https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/"
 ---
 
 # WordPress CSS Coding Standards
@@ -57,7 +59,6 @@ Avoid deep selectors (`.foo .bar .baz`) and avoid `!important` unless mitigating
 
 ## References
 
-- javascript-react-development.instructions.md
 - README.md
 
 ## Language & Frameworks

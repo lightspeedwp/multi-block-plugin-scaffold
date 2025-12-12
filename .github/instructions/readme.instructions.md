@@ -3,6 +3,7 @@ description: "Guidance for drafting and updating README files in the multi-block
 applyTo: "**/README.md"
 version: "1.0"
 last_updated: "2025-12-11"
+references:
 ---
 
 # README Authoring Instructions
@@ -69,6 +70,12 @@ flowchart LR
 - [ ] Related docs/tests linked
 - [ ] Text uses the correct text domain/placeholders where required
 
+## Reference hygiene
+
+- Run `node scripts/fix-instruction-references.js` before you edit instruction metadata so only `custom-instructions.md` and `_index.instructions.md` remain in frontmatter references.
+- Whenever you encounter `## References` or `## See Also` sections in `.github/instructions/*.instructions.md`, avoid manually linking to other `.instructions.md` files and let the fixer reintroduce those links safely.
+- Include the latest `.github/reports/analysis/*-frontmatter-audit.csv` file with the PR so reviewers can confirm the reference graph stayed cycle-free.
+
 ## Examples
 
 ```md
@@ -99,4 +106,3 @@ Avoid promising features that are not in the repository or documenting unused sc
 
 - docs/README.md
 - docs/ARCHITECTURE.md
-- instructions.instructions.md
