@@ -9,10 +9,6 @@ apply_to: [".github/agents/*.agent.md"]
 file_type: "template"
 tags: ["agent", "spec", "template", "copilot"]
 tools: ["Copilot Agents"]
-references:
-  - "../../AGENTS.md"
-  - "../instructions/agent-spec.instructions.md"
-  - "../instructions/coding-standards.instructions.md"
 metadata:
   guardrails: "Agents must never perform destructive or irreversible actions without explicit confirmation and must follow AGENTS.md."
 ---
