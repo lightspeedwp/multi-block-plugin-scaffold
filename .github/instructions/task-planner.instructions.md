@@ -41,7 +41,3 @@ Use these rules when outlining implementation plans or task lists for this repos
 
 - Ensure each plan includes validation steps (lint/test/build) relevant to the work.
 - Cross-check plans against instructions in `.github/instructions` to avoid conflicts.
-
-## References
-
-- instructions.instructions.md

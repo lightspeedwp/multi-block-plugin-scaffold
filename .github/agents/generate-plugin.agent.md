@@ -574,7 +574,3 @@ logs/generate-plugin-{{slug}}.log
 - Manual cleanup recommended for old projects
 
 ---
-
-## Related Files
-
-- [Generate Plugin Prompt](../prompts/generate-plugin.prompt.md) - Interactive generation workflow

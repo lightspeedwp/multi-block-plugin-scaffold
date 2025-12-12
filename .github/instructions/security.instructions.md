@@ -9,13 +9,6 @@ owners: ["LightSpeedWP Team"]
 tags: ["security", "wordpress", "blocks", "sanitization", "escaping", "nonces"]
 domain: "security"
 stability: "stable"
-references:
-  - path: "./block-plugin-development.instructions.md"
-    description: "Main block plugin development instructions"
-  - path: "../wpcs/wpcs-php.instructions.md"
-    description: "WordPress PHP coding standards"
-  - path: "../coding-standards.instructions.md"
-    description: "General coding standards"
 ---
 
 # Block Plugin Security Standards

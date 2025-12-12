@@ -101,8 +101,3 @@ Avoid promising features that are not in the repository or documenting unused sc
 - Check links resolve locally (docs/) and externally.
 - Run `npm run lint` (or configured Markdown lint) if available.
 - Ensure diagrams render via the Mermaid preview in your editor or CI.
-
-## References
-
-- docs/README.md
-- docs/ARCHITECTURE.md

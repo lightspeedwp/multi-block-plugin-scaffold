@@ -54,9 +54,3 @@ Avoid embedding secrets or skipping tests in workflow steps.
 - Run `npm test` and `composer test` where applicable.
 - Run `npm run lint` and `composer lint` to ensure coding standards before release.
 - Dry-run release workflows locally or via workflow_dispatch in a staging branch before production tags.
-
-## References
-
-- .github/workflows/ (existing release workflows)
-- docs/RELEASE_PROCESS.md
-- instructions.instructions.md

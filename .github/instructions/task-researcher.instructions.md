@@ -41,8 +41,3 @@ Use these steps when asked to research a feature, bug, or process. Focus on evid
 
 - Validate citations by re-opening files/lines mentioned.
 - Check `_index.instructions.md` for any relevant guidance not yet referenced.
-
-## References
-
-- instructions.instructions.md
-- folder-structure.instructions.md

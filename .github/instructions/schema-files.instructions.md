@@ -465,12 +465,6 @@ node scripts/validate-plugin-config.js --schema-only
 npm run validate:schemas
 ```
 
-## Related Documentation
-
-- **[GENERATE_PLUGIN.md](../../docs/GENERATE_PLUGIN.md)** - Plugin generation guide
-- **[folder-structure.instructions.md](./folder-structure.instructions.md)** - Directory organization
-- **[generate-plugin.instructions.md](./generate-plugin.instructions.md)** - Plugin generator rules
-
 ## Summary
 
 ✅ **Single Location** - All schemas in `.github/schemas/`

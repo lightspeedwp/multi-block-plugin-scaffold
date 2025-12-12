@@ -2,13 +2,6 @@
 name: Plugin Generator Instructions
 description: Rules and standards for using mustache template values in scaffold plugin generation
 applyTo: '**'
-references:
-  - path: "docs/GENERATE-PLUGIN.md"
-    description: "Complete generation workflow"
-  - path: "agents/generate-plugin.agent.md"
-    description: "Agent specification"
-  - path: "scf-fields.instructions.md"
-    description: "Field types and usage"
 ---
 
 # Plugin Generator Instructions
@@ -601,13 +594,6 @@ All plugin generation operations are logged to per-project JSON log files:
 - **Appending**: New runs append to existing log file
 - **Location**: All logs stored in `logs/` directory (git-ignored)
 - **Cleanup**: Manual cleanup recommended for completed projects
-
-## References
-
-- [Plugin Generation Guide](../../docs/GENERATE-PLUGIN.md) - Complete generation workflow
-- [Plugin Generator Agent](../agents/generate-plugin.agent.md) - Agent specification
-- [SCF Fields Reference](scf-fields.instructions.md) - Field types and usage
-- [AGENTS.md](../../AGENTS.md) - Global agent rules and coding standards
 
 ## Changelog
 

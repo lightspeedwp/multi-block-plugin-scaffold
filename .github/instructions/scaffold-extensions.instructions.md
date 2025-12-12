@@ -411,9 +411,3 @@ Do not include any production opinions; keep everything clearly marked as exampl
 - Run `node scripts/scan-mustache-variables.js` after adding placeholders.
 - Run `npm run lint` and `composer lint` to ensure scaffolding code remains valid.
 - Generate a sample plugin to confirm no raw placeholders or missing files remain.
-
-## References
-
-- docs/GENERATE-PLUGIN.md
-- scripts/mustache-variables-registry.json
-- instructions.instructions.md

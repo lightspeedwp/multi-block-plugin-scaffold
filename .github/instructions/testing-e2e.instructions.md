@@ -130,9 +130,3 @@ Avoid `page.waitForTimeout` and CSS-only selectors unless necessary.
 - Run `npm run test:e2e` (or the configured Playwright script) locally before PRs.
 - Use `npx playwright test --list` to confirm discovery and focus scopes.
 - Capture traces/screenshots on failure (`PWDEBUG=1` or `--trace on`) and review.
-
-## References
-
-- docs/TESTING.md
-- javascript-react-development.instructions.md
-- wpcs-accessibility.instructions.md

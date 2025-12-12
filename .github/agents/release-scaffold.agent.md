@@ -12,13 +12,6 @@ status: "active"
 visibility: "public"
 tags: ["release", "automation", "validation", "wordpress", "plugin-scaffold", "mustache-preservation"]
 owners: ["lightspeedwp/maintainers"]
-references:
-  - path: "docs/RELEASE_PROCESS.md"
-    description: "Complete release guide"
-  - path: "docs/GOVERNANCE.md"
-    description: "Project policies"
-  - path: "agents/reporting.agent.md"
-    description: "Reporting Agent spec for readiness reports"
 metadata:
   guardrails: "Never skip validation steps. Never modify mustache variables. Always verify mustache variables are preserved. Abort if critical checks fail. Log all actions for audit."
 ---
@@ -443,14 +436,6 @@ When adding new validation steps:
 | Version | Date       | Changes                             |
 | ------- | ---------- | ----------------------------------- |
 | v1.0    | 2025-12-15 | Initial release agent specification for block theme scaffold |
-
-## Related Files
-
-- [RELEASE_PROCESS.md](../../docs/RELEASE_PROCESS.md) - Complete release guide
-- [GOVERNANCE.md](../../docs/GOVERNANCE.md) - Project policies
-- [VALIDATION.md](../../docs/VALIDATION.md) - Validation standards
-- [reporting.agent.md](./reporting.agent.md) - Reporting Agent spec for readiness reports
-- [reporting.prompt.md](../prompts/reporting.prompt.md) - Reporting Agent prompt template
 
 ## Implementation Script
 

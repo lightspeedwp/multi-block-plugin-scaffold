@@ -3,8 +3,6 @@ file_type: "instructions"
 name: "WordPress JavaScript Coding Standards"
 description: "Apply WordPress JavaScript coding standards (formatting, naming, patterns) for block plugins and WordPress development."
 applyTo: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
-references:
-  - "https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/"
 ---
 
 # WordPress JavaScript Coding Standards

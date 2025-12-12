@@ -106,11 +106,3 @@ You can use these shortcuts to get help quickly:
 | `help build` | Ask about the Webpack build process. |
 
 ---
-
-## Context & Related Files
-
-- **Primary Instructions**: `/.github/custom-instructions.md`
-- **Agent Overview**: `/docs/AGENTS-OVERVIEW.md`
-- **Plugin Generator**: `/scripts/generate-plugin.js`
-
-I'm ready to assist you. What are we working on today?

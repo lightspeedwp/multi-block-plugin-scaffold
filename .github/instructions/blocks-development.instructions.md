@@ -9,19 +9,6 @@ owners: ["LightSpeedWP Team"]
 tags: ["wordpress", "blocks", "gutenberg", "plugin", "development", "react"]
 domain: "wp-core"
 stability: "stable"
-references:
-  - path: "./block-json.instructions.md"
-    description: "Detailed block.json configuration reference"
-  - path: "./patterns-and-templates.instructions.md"
-    description: "Block pattern and template development"
-  - path: "./wpcs-php.instructions.md"
-    description: "WordPress PHP coding standards"
-  - path: "./wpcs-javascript.instructions.md"
-    description: "WordPress JavaScript coding standards"
-  - path: "./javascript-react-development.instructions.md"
-    description: "React development patterns for blocks"
-  - path: "./wpcs-accessibility.instructions.md"
-    description: "Accessibility standards (WCAG 2.2 AA)"
 ---
 
 > ⚠️ **Scope Notice**: These instructions are intended for **WordPress block plugin repositories** within the `lightspeedwp` GitHub organisation. They should **not** be applied to the `lightspeedwp/.github` community health repository, as that repository does not contain WordPress plugin code.
@@ -818,5 +805,3 @@ import { useState, useEffect, useCallback, useMemo } from '@wordpress/element';
 - For dynamic blocks, hit render endpoints or E2E tests to confirm server output.
 
 ---
-
-**For the latest and any additional instructions, always check all files in `.github/instructions/`.**

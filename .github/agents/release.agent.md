@@ -12,13 +12,6 @@ status: "active"
 visibility: "public"
 tags: ["release", "automation", "validation", "wordpress", "block-theme"]
 owners: ["lightspeedwp/maintainers"]
-references:
-  - path: "docs/RELEASE_PROCESS.md"
-    description: "Complete release guide"
-  - path: "docs/GOVERNANCE.md"
-    description: "Project policies"
-  - path: "agents/reporting.agent.md"
-    description: "Reporting Agent spec for readiness reports"
 metadata:
   guardrails: "Never skip validation steps. Always verify before making changes. Abort if critical checks fail. Log all actions for audit."
 ---

@@ -553,14 +553,6 @@ npm run plugin-zip
 unzip -l *.zip | grep -E "src/|tests/|docs/"  # Should be empty
 ```
 
-## References
-
-- **[ARCHITECTURE.md](../../docs/ARCHITECTURE.md)** - Complete repository architecture
-- **[logs/README.md](../../logs/README.md)** - Logging documentation
-- **[tmp/README.md](../../tmp/README.md)** - Temporary files guide
-- **[reports/README.md](../../reports/README.md)** - Reports documentation
-- **[generate-plugin.instructions.md](./generate-plugin.instructions.md)** - Mustache template rules
-
 ## Summary
 
 ✅ **Designated Places** - Every file type has a specific location
