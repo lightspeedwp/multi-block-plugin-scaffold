@@ -526,6 +526,55 @@ node .github/agents/scaffold-generator.agent.js
 
 ---
 
+## Logging
+
+The plugin generator creates per-project log files in JSON format:
+
+**Log File Location:**
+```
+logs/generate-plugin-{{slug}}.log
+```
+
+**Log Format:**
+```json
+[
+  {
+    "timestamp": "2025-12-12T10:30:00.000Z",
+    "level": "INFO",
+    "message": "Plugin generator starting",
+    "data": {
+      "nodeVersion": "v20.10.0",
+      "workingDirectory": "/path/to/scaffold",
+      "mode": "generator"
+    }
+  },
+  {
+    "timestamp": "2025-12-12T10:30:01.000Z",
+    "level": "INFO",
+    "message": "Configuration validated successfully",
+    "data": {
+      "slug": "my-plugin",
+      "name": "My Plugin",
+      "version": "1.0.0"
+    }
+  }
+]
+```
+
+**What Gets Logged:**
+- User interactions and prompts
+- Configuration validation results
+- Plugin generation progress
+- File operations
+- Errors and warnings
+
+**Log Retention:**
+- Logs are stored per-project (by slug)
+- New runs append to existing log file
+- Manual cleanup recommended for old projects
+
+---
+
 ## Related Files
 
 - [Generate Plugin Prompt](../prompts/generate-plugin.prompt.md) - Interactive generation workflow

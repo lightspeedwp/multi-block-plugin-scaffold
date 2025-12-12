@@ -1,11 +1,7 @@
 ---
 name: Code Quality Agent
 description: An agent that runs repository-wide linting, formatting, testing, and other quality checks.
-tools:
-  - run_in_terminal
-  - read_file
-  - grep_search
-  - file_search
+tools: ["run_in_terminal", "read_file", "grep_search", "file_search"]
 ---
 
 # Code Quality Agent

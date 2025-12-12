@@ -955,5 +955,4 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 ## References
 
 - <https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/>
-- wpcs-php.instructions.md
 - instructions.instructions.md

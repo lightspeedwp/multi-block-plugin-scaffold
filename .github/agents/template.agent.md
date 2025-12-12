@@ -1,5 +1,5 @@
 ---
-title: "Template: Agent Specification"
+name: "Template: Agent Specification"
 description: "Standard specification template for LightSpeed multi-block plugin scaffold agents, covering role, tooling, inputs, outputs, and guardrails."
 version: "v1.1"
 last_updated: "YYYY-MM-DD"

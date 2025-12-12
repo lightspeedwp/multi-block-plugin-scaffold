@@ -167,6 +167,4 @@ For more information on techniques, visit [Understanding Techniques for WCAG Suc
 
 ## References
 
-- a11y.instructions.md
 - wpcs-css.instructions.md
-- blocks-development.instructions.md

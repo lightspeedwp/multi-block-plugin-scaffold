@@ -368,9 +368,29 @@ The plugin will automatically declare SCF as a dependency using the WordPress 6.
 
 ---
 
+## Logging & Debugging
+
+Every plugin generation creates a detailed log file for debugging and audit purposes:
+
+**Log File:** `logs/generate-plugin-{{slug}}.log`
+
+**What's logged:**
+- All configuration values used
+- Validation results
+- Files created/modified
+- Any errors or warnings
+
+**View your log:**
+```bash
+cat logs/generate-plugin-my-plugin.log | jq '.'
+```
+
+This helps track what happened during generation and debug any issues.
+
+---
+
 ## Related Resources
 
-- [Multi-Block Plugin Scaffold Reference](multi-block-plugin-scaffold.prompt.md)
 - [Plugin Generator Agent](../agents/generate-plugin.agent.md)
-- [Development Assistant](../agents/development-assistant.agent.md)
+- [Plugin Generator Instructions](../instructions/generate-plugin.instructions.md)
 - [SCF Fields Reference](../instructions/scf-fields.instructions.md)

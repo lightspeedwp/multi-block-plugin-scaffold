@@ -13,8 +13,6 @@ license: "GPL-3.0"
 domain: "wp-core"
 stability: "stable"
 references:
-  - path: "./blocks-development.instructions.md"
-    description: "Core block development patterns"
   - path: "./wpcs-php.instructions.md"
     description: "WordPress PHP coding standards"
   - path: "./wpcs-html.instructions.md"
@@ -710,7 +708,6 @@ function myplugin_register_synced_pattern() {
 
 ### Related Instructions
 
-- [blocks-development.instructions.md](./blocks-development.instructions.md) — Core block development
 - [wpcs-html.instructions.md](./wpcs-html.instructions.md) — HTML standards
 - [wpcs-accessibility.instructions.md](./wpcs-accessibility.instructions.md) — Accessibility standards
 - [wpcs-php.instructions.md](./wpcs-php.instructions.md) — PHP standards
@@ -758,4 +755,4 @@ function myplugin_register_synced_pattern() {
 
 ---
 
-**For the latest and any additional instructions, always check all files in `.github/instructions/` and reference the master index at [_index.instructions.md](./_index.instructions.md).**
+**Stay updated** — refer to `.github/instructions/README.md` for navigation and new instruction releases.

@@ -61,7 +61,6 @@ Avoid echoing unsanitised input or using inconsistent indentation.
 ## References
 
 - wpcs-php-docs.instructions.md
-- security.instructions.md
 - instructions.instructions.md
 
 ## Project Structure

@@ -757,7 +757,95 @@ Updates: `package.json`, `composer.json`, main plugin file, all `block.json` fil
 }
 ```
 
+## Logging & Debugging
+
+### Log Files
+
+Every plugin generation creates a detailed JSON log file:
+
+**Location:** `logs/generate-plugin-{{slug}}.log`
+
+**Format:** JSON array of log entries
+
+**Example:**
+
+```json
+[
+  {
+    "timestamp": "2025-12-12T10:30:00.000Z",
+    "level": "INFO",
+    "message": "Plugin generator starting",
+    "data": {
+      "nodeVersion": "v20.10.0",
+      "mode": "generator"
+    }
+  },
+  {
+    "timestamp": "2025-12-12T10:30:01.000Z",
+    "level": "INFO",
+    "message": "Configuration validated successfully",
+    "data": {
+      "slug": "tour-operator",
+      "name": "Tour Operator",
+      "version": "1.0.0"
+    }
+  }
+]
+```
+
+### What Gets Logged
+
+- **Configuration**: All config values used for generation
+- **Validation**: Schema validation results and errors
+- **File Operations**: Files created, modified, or copied
+- **Errors**: Detailed error messages with stack traces
+- **Completion**: Final status and output directory
+
+### Viewing Logs
+
+**Pretty print with jq:**
+
+```bash
+cat logs/generate-plugin-tour-operator.log | jq '.'
+```
+
+**Filter by level:**
+
+```bash
+cat logs/generate-plugin-tour-operator.log | jq '.[] | select(.level=="ERROR")'
+```
+
+**Get last entry:**
+
+```bash
+cat logs/generate-plugin-tour-operator.log | jq '.[-1]'
+```
+
+### Log Management
+
+- **Per-project**: Each plugin slug gets its own log file
+- **Appending**: New runs add to existing log
+- **Location**: All logs in `logs/` directory (git-ignored)
+- **Cleanup**: Manually remove old logs as needed
+
+---
+
 ## Troubleshooting
+
+### Using Log Files for Debugging
+
+When troubleshooting issues, always check the log file first:
+
+```bash
+# Check if generation completed
+cat logs/generate-plugin-my-plugin.log | jq '.[] | select(.message | contains("completed"))'
+
+# Find errors
+cat logs/generate-plugin-my-plugin.log | jq '.[] | select(.level=="ERROR")'
+
+# See what files were processed
+cat logs/generate-plugin-my-plugin.log | jq '.[] | select(.message | contains("file"))'
+```
 
 ### Common Issues
 
@@ -765,11 +853,13 @@ Updates: `package.json`, `composer.json`, main plugin file, all `block.json` fil
 
 - Slug format: Use `my-plugin-name` (lowercase, hyphens only)
 - Version format: Use `1.0.0` (major.minor.patch)
+- Check log file for detailed validation errors
 
 **Generation Errors:**
 
 - Template not found: Run from scaffold directory
-- Directory exists: Remove `output-plugin/` or use `--force`
+- Directory exists: Remove `generated-plugins/<slug>/` or use `--force`
+- Check log file for stack traces
 
 **Build Errors:**
 

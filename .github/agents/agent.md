@@ -1,10 +1,10 @@
 ---
-title: Multi-Block Plugin Agents Index
-description: Main index of automation agents for multi-block plugin scaffold
-category: Agent
-type: Agent Index
-audience: Developers, AI Agents
-date: 2025-12-01
+name: "Multi-Block Plugin Agents Index"
+description: "Main index of automation agents for multi-block plugin scaffold"
+category: "Agent"
+type: "Agent Index"
+audience: "Developers, AI Agents"
+date: "2025-12-01"
 ---
 
 # Multi-Block Plugin Scaffold: Main Agent Index

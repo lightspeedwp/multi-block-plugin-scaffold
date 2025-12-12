@@ -57,8 +57,6 @@ export const PriceLabel = ( value ) => <span>{ value }</span>;
 
 ## References
 
-- wpcs-javascript.instructions.md
-- javascript-react-development.instructions.md
 - instructions.instructions.md
 
 ## Coding Standards

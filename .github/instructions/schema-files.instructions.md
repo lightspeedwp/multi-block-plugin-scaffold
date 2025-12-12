@@ -49,7 +49,7 @@ These instructions define standards for creating, storing, and validating JSON S
 
 - docs/CONFIGS.md
 - instructions.instructions.md
-- _index.instructions.md
+- .github/instructions/README.md
 
 ### Configuration Schema Files
 

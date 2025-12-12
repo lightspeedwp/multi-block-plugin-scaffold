@@ -39,36 +39,96 @@ if (!fs.existsSync(logsDir)) {
 	fs.mkdirSync(logsDir, { recursive: true });
 }
 
-// Create log file with timestamp
-const timestamp = new Date().toISOString().replace(/:/g, '-').split('.')[0];
-const logFile = path.join(logsDir, `generate-plugin-${timestamp}.log`);
-const logStream = fs.createWriteStream(logFile, { flags: 'a' });
+// Global log state
+let logStream = null;
+let logFile = null;
+let logEntries = [];
 
 /**
- * Log function
- * @param level
- * @param message
+ * Initialize logging for a specific plugin slug
+ * @param {string} slug - Plugin slug for log file name
  */
-function log(level, message) {
-	const entry = `[${new Date().toISOString()}] [${level}] ${message}\n`;
-	logStream.write(entry);
-	console.log(entry.trim());
+function initializeLogging(slug) {
+	if (logStream) {
+		return; // Already initialized
+	}
+
+	logFile = path.join(logsDir, `generate-plugin-${slug}.log`);
+
+	// Load existing log entries if file exists
+	if (fs.existsSync(logFile)) {
+		try {
+			const existingContent = fs.readFileSync(logFile, 'utf8');
+			if (existingContent.trim()) {
+				logEntries = JSON.parse(existingContent);
+			}
+		} catch (error) {
+			// If file exists but is not valid JSON, start fresh
+			logEntries = [];
+		}
+	}
+
+	logStream = fs.createWriteStream(logFile, { flags: 'w' });
 }
 
-log('INFO', 'Plugin generator starting');
-log('INFO', `Node version: ${process.version}`);
-log('INFO', `Working directory: ${process.cwd()}`);
-log('INFO', `Log file: ${logFile}`);
+/**
+ * Log function - stores entries in JSON format
+ * @param {string} level - Log level (INFO, WARN, ERROR, DEBUG)
+ * @param {string} message - Log message
+ * @param {Object} data - Optional additional data
+ */
+function log(level, message, data = null) {
+	const entry = {
+		timestamp: new Date().toISOString(),
+		level,
+		message,
+		...(data && { data }),
+	};
+
+	logEntries.push(entry);
+
+	// Console output for immediate feedback
+	const consoleMessage = `[${entry.timestamp}] [${level}] ${message}`;
+	if (level === 'ERROR') {
+		console.error(consoleMessage);
+	} else if (level === 'WARN') {
+		console.warn(consoleMessage);
+	} else {
+		console.log(consoleMessage);
+	}
+
+	// Write to file if stream is initialized
+	if (logStream) {
+		try {
+			logStream.write(JSON.stringify(logEntries, null, 2));
+		} catch (error) {
+			console.error('Failed to write to log file:', error.message);
+		}
+	}
+}
+
+/**
+ * Close log stream and finalize log file
+ */
+function closeLogging() {
+	if (logStream) {
+		try {
+			logStream.write(JSON.stringify(logEntries, null, 2));
+			logStream.end();
+		} catch (error) {
+			console.error('Failed to finalize log file:', error.message);
+		}
+	}
+}
 
 // Cleanup on exit
 process.on('exit', () => {
-	log('INFO', 'Generator execution completed');
-	logStream.end();
+	closeLogging();
 });
 
 process.on('SIGINT', () => {
 	log('WARN', 'Generator interrupted by user');
-	logStream.end();
+	closeLogging();
 	process.exit(1);
 });
 
@@ -544,15 +604,35 @@ function promptConfirmation(message) {
  * @param {boolean} inPlace - If true, generates in current directory (template mode)
  */
 function generatePlugin(config, inPlace = false) {
+	// Initialize logging with plugin slug
+	initializeLogging(config.slug || 'unknown');
+
+	log('INFO', 'Plugin generator starting', {
+		nodeVersion: process.version,
+		workingDirectory: process.cwd(),
+		mode: inPlace ? 'template' : 'generator',
+	});
+
 	log('INFO', `Starting plugin generation: ${config.name} (${config.slug})`);
 
 	// Apply defaults and validation
 	const fullConfig = applyDefaults(config);
+
+	log('INFO', 'Validating configuration', { slug: fullConfig.slug });
 	const validation = validateConfig(fullConfig);
 
 	if (!validation.valid) {
+		log('ERROR', 'Configuration validation failed', {
+			errors: validation.errors,
+		});
 		throw new Error('Configuration validation failed');
 	}
+
+	log('INFO', 'Configuration validated successfully', {
+		slug: fullConfig.slug,
+		name: fullConfig.name,
+		version: fullConfig.version,
+	});
 
 	// Determine output directory based on mode
 	let outputDir;
@@ -622,15 +702,24 @@ function generatePlugin(config, inPlace = false) {
 	}
 
 	// Generate package.json
+	log('INFO', 'Generating package.json');
 	generatePackageJson(outputDir, fullConfig);
 
 	// Generate composer.json
+	log('INFO', 'Generating composer.json');
 	generateComposerJson(outputDir, fullConfig);
 
 	// Generate README.md
+	log('INFO', 'Generating README.md');
 	generateReadme(outputDir, fullConfig);
 
-	log('INFO', `Plugin generated successfully at: ${outputDir}`);
+	log('INFO', 'Plugin generated successfully', {
+		outputDirectory: outputDir,
+		mode: inPlace ? 'template' : 'generator',
+		slug: fullConfig.slug,
+		name: fullConfig.name,
+		version: fullConfig.version,
+	});
 
 	// Output next steps
 	console.log('\n✅ Plugin generated successfully!\n');
@@ -641,6 +730,7 @@ function generatePlugin(config, inPlace = false) {
 	console.log('  composer install');
 	console.log('  npm install');
 	console.log('  npm run build\n');
+	console.log(`📝 Log file: ${logFile}\n`);
 
 	return outputDir;
 }

@@ -100,4 +100,3 @@ Avoid promising features that are not in the repository or documenting unused sc
 - docs/README.md
 - docs/ARCHITECTURE.md
 - instructions.instructions.md
-- _index.instructions.md

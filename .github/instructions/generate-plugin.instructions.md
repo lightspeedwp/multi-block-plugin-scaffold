@@ -560,14 +560,50 @@ Avoid interpolating values manually (e.g. `Tour Operator`) where a placeholder s
 - Run `npm test` / `npm run lint` to validate syntax after generation.
 - Validate JSON files with `npm run lint` or schema tools; run `php -l` on generated PHP files.
 
+## Logging
+
+All plugin generation operations are logged to per-project JSON log files:
+
+### Log File Format
+
+**Location:** `logs/generate-plugin-{{slug}}.log`
+
+**Structure:**
+```json
+[
+  {
+    "timestamp": "2025-12-12T10:30:00.000Z",
+    "level": "INFO|WARN|ERROR|DEBUG",
+    "message": "Log message",
+    "data": { /* optional additional context */ }
+  }
+]
+```
+
+### Logged Events
+
+- Configuration loading and validation
+- Mustache variable replacements
+- File generation operations
+- Errors and warnings
+- Generation completion status
+
+### Log Management
+
+- **Per-project logs**: Each plugin slug gets its own log file
+- **Appending**: New runs append to existing log file
+- **Location**: All logs stored in `logs/` directory (git-ignored)
+- **Cleanup**: Manual cleanup recommended for completed projects
+
 ## References
 
 - [Plugin Generation Guide](../../docs/GENERATE-PLUGIN.md) - Complete generation workflow
-- [Scaffold Generator Agent](../agents/scaffold-generator.agent.md) - Agent specification
+- [Plugin Generator Agent](../agents/generate-plugin.agent.md) - Agent specification
 - [SCF Fields Reference](scf-fields.instructions.md) - Field types and usage
 - [AGENTS.md](../../AGENTS.md) - Global agent rules and coding standards
 
 ## Changelog
 
+- **2025-12-12**: Added per-project JSON logging system
 - **2025-12-05**: Initial comprehensive documentation of mustache template system
 - Previous: Implicit rules scattered across files

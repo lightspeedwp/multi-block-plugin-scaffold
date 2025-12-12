@@ -55,9 +55,7 @@ Avoid trailing whitespace, double quotes, and inconsistent indentation.
 
 ## References
 
-- javascript-react-development.instructions.md
 - wpcs-js-docs.instructions.md
-- blocks-development.instructions.md
 
 Many of the examples below have been adapted directly from the jQuery style guide; these differences have all been integrated into the examples on this page. Any of the below standards and examples should be considered best practice for WordPress code, unless explicitly noted as anti-patterns.
 

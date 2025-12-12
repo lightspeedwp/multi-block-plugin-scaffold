@@ -443,6 +443,4 @@ echo esc_url( $url );
 - [block.json Schema](https://schemas.wp.org/trunk/block.json)
 - [Block Supports Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
 - [Block Attributes Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/)
-- blocks-development.instructions.md
 - wpcs-accessibility.instructions.md
-- javascript-react-development.instructions.md

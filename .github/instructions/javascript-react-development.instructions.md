@@ -237,8 +237,6 @@ Avoid anonymous default exports and keep props typed (`EditProps`) when using Ty
 
 ## References
 
-- blocks-development.instructions.md
-- block-json.instructions.md
 - wpcs-javascript.instructions.md
 - wpcs-js-docs.instructions.md
 - README.md

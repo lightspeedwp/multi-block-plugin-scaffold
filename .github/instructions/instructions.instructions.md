@@ -177,11 +177,11 @@ Explain when to create a new block, when to extend an existing one, and how regi
 - Confirm each instruction file includes frontmatter with `description` and `applyTo`.
 - Check that the role declaration follows the standard pattern directly under the H1.
 - Ensure the recommended sections (Overview, General Rules, Detailed Guidance, Examples, Validation, References) are present.
-- Validate internal links after renames or new files via `_index.instructions.md`.
+- Validate internal links after renames or new files via `.github/instructions/README.md`.
 
 ## References
 
 - AGENTS.md
 - CONTRIBUTING.md
 - docs/ARCHITECTURE.md
-- .github/instructions/_index.instructions.md
+- .github/instructions/README.md

@@ -57,7 +57,6 @@ Avoid deep selectors (`.foo .bar .baz`) and avoid `!important` unless mitigating
 
 ## References
 
-- wpcs-accessibility.instructions.md
 - javascript-react-development.instructions.md
 - README.md
 
