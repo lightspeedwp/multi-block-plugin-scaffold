@@ -14,20 +14,40 @@ const path = require('path');
 const newVersion = process.argv[2];
 
 if (!newVersion) {
-	console.error('Usage: node scripts/update-version.js <new-version>');
+	log('ERROR', 'Usage: node scripts/update-version.js <new-version>');
 	process.exit(1);
 }
 
 // Validate semver format.
 const semverRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9.-]+)?$/;
 if (!semverRegex.test(newVersion)) {
-	console.error(
+	log(
+		'ERROR',
 		'Invalid version format. Use semantic versioning (e.g., 1.0.0)'
 	);
 	process.exit(1);
 }
 
 const rootDir = path.resolve(__dirname, '..');
+
+/**
+ * Structured log helper
+ *
+ * @param {string} level
+ * @param {string} message
+ */
+function log(level, message) {
+	process.stdout.write(`[${level}] ${message}\n`);
+}
+
+/**
+ * Print raw spacing line
+ *
+ * @param {string} message
+ */
+function print(message = '') {
+	process.stdout.write(`${message}\n`);
+}
 
 const filesToUpdate = [
 	{
@@ -48,11 +68,12 @@ const filesToUpdate = [
 	},
 ];
 
-console.log(`📦 Updating version to ${newVersion}...\n`);
+log('INFO', `📦 Updating version to ${newVersion}...`);
+print();
 
 filesToUpdate.forEach(({ file, pattern, replacement }) => {
 	if (!fs.existsSync(file)) {
-		console.warn(`⚠️  File not found: ${file}`);
+		log('WARN', `File not found: ${file}`);
 		return;
 	}
 
@@ -61,10 +82,11 @@ filesToUpdate.forEach(({ file, pattern, replacement }) => {
 
 	if (content !== updated) {
 		fs.writeFileSync(file, updated);
-		console.log(`✅ Updated: ${path.relative(rootDir, file)}`);
+		log('INFO', `Updated: ${path.relative(rootDir, file)}`);
 	} else {
-		console.log(`⏭️  No changes: ${path.relative(rootDir, file)}`);
+		log('INFO', `No changes: ${path.relative(rootDir, file)}`);
 	}
 });
 
-console.log('\n🎉 Version update complete!');
+print();
+log('SUCCESS', '🎉 Version update complete!');

@@ -82,55 +82,58 @@ export default function Gallery({
 			</div>
 
 			{lightbox && activeImage !== null && (
-				<div
-					className="example_plugin-gallery__lightbox"
-					onClick={() => setActiveImage(null)}
-					onKeyDown={(e) =>
-						e.key === 'Escape' && setActiveImage(null)
-					}
-					role="dialog"
-					aria-modal="true"
-					aria-label={__('Image lightbox', '{{textdomain}}')}
-					tabIndex={-1}
-					ref={(el) => el && el.focus()}
-					style={{
-						position: 'fixed',
-						inset: 0,
-						backgroundColor: 'rgba(0, 0, 0, 0.9)',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						zIndex: 99999,
-						outline: 'none',
-					}}
-				>
-					<img
-						src={images[activeImage].url}
-						alt={images[activeImage].alt || ''}
-						style={{
-							maxWidth: '90%',
-							maxHeight: '90%',
-							objectFit: 'contain',
-						}}
-					/>
-					<button
-						className="example_plugin-gallery__lightbox-close"
+				<>
+					{/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+					<div
+						className="example_plugin-gallery__lightbox"
 						onClick={() => setActiveImage(null)}
-						aria-label={__('Close lightbox', '{{textdomain}}')}
+						onKeyDown={(e) =>
+							e.key === 'Escape' && setActiveImage(null)
+						}
+						role="dialog"
+						aria-modal="true"
+						aria-label={__('Image lightbox', '{{textdomain}}')}
+						tabIndex={-1}
+						ref={(el) => el && el.focus()}
 						style={{
-							position: 'absolute',
-							top: '1rem',
-							right: '1rem',
-							background: '#fff',
-							border: 'none',
-							padding: '0.5rem 1rem',
-							cursor: 'pointer',
-							borderRadius: '4px',
+							position: 'fixed',
+							inset: 0,
+							backgroundColor: 'rgba(0, 0, 0, 0.9)',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							zIndex: 99999,
+							outline: 'none',
 						}}
 					>
-						{__('Close', '{{textdomain}}')}
-					</button>
-				</div>
+						<img
+							src={images[activeImage].url}
+							alt={images[activeImage].alt || ''}
+							style={{
+								maxWidth: '90%',
+								maxHeight: '90%',
+								objectFit: 'contain',
+							}}
+						/>
+						<button
+							className="example_plugin-gallery__lightbox-close"
+							onClick={() => setActiveImage(null)}
+							aria-label={__('Close lightbox', '{{textdomain}}')}
+							style={{
+								position: 'absolute',
+								top: '1rem',
+								right: '1rem',
+								background: '#fff',
+								border: 'none',
+								padding: '0.5rem 1rem',
+								cursor: 'pointer',
+								borderRadius: '4px',
+							}}
+						>
+							{__('Close', '{{textdomain}}')}
+						</button>
+					</div>
+				</>
 			)}
 		</>
 	);

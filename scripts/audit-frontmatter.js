@@ -29,7 +29,16 @@ const logStream = fs.createWriteStream(logFile, { flags: 'a' });
 function log(level, message) {
 	const entry = `[${new Date().toISOString()}] [${level}] ${message}\n`;
 	logStream.write(entry);
-	console.log(entry.trim());
+	process.stdout.write(`${entry.trim()}\n`);
+}
+
+/**
+ * Print raw line (including blank lines)
+ *
+ * @param {string} message
+ */
+function printLine(message = '') {
+	process.stdout.write(`${message}\n`);
 }
 
 log('INFO', 'Frontmatter audit started');
@@ -52,7 +61,9 @@ const EXCLUDE_DIRS = [
 
 /**
  * Check if path should be excluded
- * @param filePath
+ *
+ * @param {string} filePath
+ * @return {boolean} True when the file path should be skipped.
  */
 function shouldExclude(filePath) {
 	return EXCLUDE_DIRS.some(
@@ -63,7 +74,9 @@ function shouldExclude(filePath) {
 
 /**
  * Get all markdown files recursively
- * @param dir
+ *
+ * @param {string} dir
+ * @return {string[]} Array of markdown file paths.
  */
 function getMarkdownFiles(dir) {
 	const files = [];
@@ -95,7 +108,9 @@ function getMarkdownFiles(dir) {
 
 /**
  * Extract frontmatter from markdown file
- * @param content
+ *
+ * @param {string} content
+ * @return {Record<string, string> | null} Parsed frontmatter data or null.
  */
 function extractFrontmatter(content) {
 	const match = content.match(/^---\n([\s\S]*?)\n---/);
@@ -123,10 +138,9 @@ function extractFrontmatter(content) {
 
 /**
  * Extract file references from markdown content
- * @param content
- * @param filePath
+ * @param {string} content
  */
-function extractReferences(content, filePath) {
+function extractReferences(content) {
 	const references = new Set();
 
 	// Match markdown links: [text](path) or [text](path "title")
@@ -147,8 +161,10 @@ function extractReferences(content, filePath) {
 
 /**
  * Resolve relative path to absolute
- * @param fromFile
- * @param toPath
+ *
+ * @param {string} fromFile
+ * @param {string} toPath
+ * @return {string} Relative path from the current working directory.
  */
 function resolvePath(fromFile, toPath) {
 	const fromDir = path.dirname(fromFile);
@@ -158,18 +174,20 @@ function resolvePath(fromFile, toPath) {
 
 /**
  * Detect circular references using DFS
- * @param graph
+ *
+ * @param {Record<string, string[]>} graph
+ * @return {string[][]} List of detected circular paths.
  */
 function findCircularReferences(graph) {
 	const circular = [];
 	const visited = new Set();
 	const recursionStack = new Set();
 
-	function dfs(node, path = []) {
+	function dfs(node, currentPath = []) {
 		if (recursionStack.has(node)) {
 			// Found a cycle
-			const cycleStart = path.indexOf(node);
-			circular.push([...path.slice(cycleStart), node]);
+			const cycleStart = currentPath.indexOf(node);
+			circular.push([...currentPath.slice(cycleStart), node]);
 			return;
 		}
 
@@ -179,11 +197,12 @@ function findCircularReferences(graph) {
 
 		visited.add(node);
 		recursionStack.add(node);
-		path.push(node);
+
+		const nextPath = [...currentPath, node];
 
 		const neighbors = graph[node] || [];
 		for (const neighbor of neighbors) {
-			dfs(neighbor, [...path]);
+			dfs(neighbor, nextPath);
 		}
 
 		recursionStack.delete(node);
@@ -200,7 +219,9 @@ function findCircularReferences(graph) {
 
 /**
  * Find transitive references (A -> B -> C, so A -> C is transitive)
- * @param graph
+ *
+ * @param {Record<string, string[]>} graph
+ * @return {Record<string, string[]>} Transitive reference map.
  */
 function findTransitiveReferences(graph) {
 	const transitive = {};
@@ -258,7 +279,7 @@ files.forEach((filePath) => {
 		const relativePath = path.relative(process.cwd(), filePath);
 
 		const frontmatter = extractFrontmatter(content);
-		const references = extractReferences(content, filePath);
+		const references = extractReferences(content);
 
 		// Resolve references to absolute paths
 		const resolvedRefs = references.map((ref) =>
@@ -329,65 +350,73 @@ Object.entries(fileData).forEach(([file, data]) => {
 });
 
 // Output results
-console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('📊 FRONTMATTER REFERENCE AUDIT');
-console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+printLine('');
+printLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+printLine('📊 FRONTMATTER REFERENCE AUDIT');
+printLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+printLine('');
 
-console.log('Statistics:');
-console.log(`  Total Files:           ${stats.totalFiles}`);
-console.log(`  Files with References: ${stats.filesWithRefs}`);
-console.log(`  Total References:      ${stats.totalReferences}`);
-console.log(`  Circular Chains:       ${stats.circularChains}`);
-console.log(`  Files w/ Transitive:   ${stats.filesWithTransitive}\n`);
+printLine('Statistics:');
+printLine(`  Total Files:           ${stats.totalFiles}`);
+printLine(`  Files with References: ${stats.filesWithRefs}`);
+printLine(`  Total References:      ${stats.totalReferences}`);
+printLine(`  Circular Chains:       ${stats.circularChains}`);
+printLine(`  Files w/ Transitive:   ${stats.filesWithTransitive}`);
+printLine('');
 
 if (circularRefs.length > 0) {
-	console.log('🔴 Circular References Detected:\n');
+	printLine('🔴 Circular References Detected:');
 	circularRefs.forEach((chain, i) => {
-		console.log(`  ${i + 1}. ${chain.join(' → ')}`);
+		printLine(`  ${i + 1}. ${chain.join(' → ')}`);
 	});
-	console.log('');
+	printLine('');
 }
 
-console.log('Top 10 Files by Reference Count:\n');
+printLine('Top 10 Files by Reference Count:');
+printLine('');
 recommendations
 	.sort((a, b) => b.directRefs - a.directRefs)
 	.slice(0, 10)
 	.forEach((rec, i) => {
-		const status =
-			rec.recommendation === 'CRITICAL'
-				? '🔴'
-				: rec.recommendation === 'REDUCE'
-					? '🟡'
-					: rec.recommendation === 'REVIEW'
-						? '🟠'
-						: '🟢';
-		console.log(`  ${i + 1}. ${status} ${rec.file}`);
-		console.log(
+		let status = '🟢';
+		if (rec.recommendation === 'CRITICAL') {
+			status = '🔴';
+		} else if (rec.recommendation === 'REDUCE') {
+			status = '🟡';
+		} else if (rec.recommendation === 'REVIEW') {
+			status = '🟠';
+		}
+		printLine(`  ${i + 1}. ${status} ${rec.file}`);
+		printLine(
 			`     Direct: ${rec.directRefs}, Transitive: ${rec.transitiveRefs}, ${rec.reason}`
 		);
 	});
 
-console.log('');
+printLine('');
 
-// Output CSV if requested
+// Output CSV to stdout by default (for tests to capture)
+const csvLines = [
+	'File,Direct References,Transitive References,Circular,Recommendation,Reason',
+];
+
+recommendations.forEach((rec) => {
+	csvLines.push(
+		`"${rec.file}",${rec.directRefs},${rec.transitiveRefs},${rec.circular ? 'Yes' : 'No'},"${rec.recommendation}","${rec.reason}"`
+	);
+});
+
+printLine(csvLines.join('\n'));
+
+// Output CSV if requested (to file)
 if (outputCsv) {
 	const csvFile = path.join(
 		__dirname,
 		'../tmp',
 		`frontmatter-audit-${timestamp}.csv`
 	);
-	const csvLines = [
-		'File,Direct References,Transitive References,Circular,Recommendation,Reason',
-	];
-
-	recommendations.forEach((rec) => {
-		csvLines.push(
-			`"${rec.file}",${rec.directRefs},${rec.transitiveRefs},${rec.circular ? 'Yes' : 'No'},"${rec.recommendation}","${rec.reason}"`
-		);
-	});
-
 	fs.writeFileSync(csvFile, csvLines.join('\n'));
-	console.log(`📄 CSV report saved to: ${csvFile}\n`);
+	printLine(`📄 CSV report saved to: ${csvFile}`);
+	printLine('');
 }
 
 // Output graph if requested
@@ -411,7 +440,8 @@ if (outputGraph) {
 			2
 		)
 	);
-	console.log(`📊 Graph data saved to: ${graphFile}\n`);
+	printLine(`📊 Graph data saved to: ${graphFile}`);
+	printLine('');
 }
 
 log('INFO', 'Frontmatter audit completed');

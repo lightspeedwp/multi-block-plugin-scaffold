@@ -29,7 +29,16 @@ const logStream = fs.createWriteStream(logFile, { flags: 'a' });
 function log(level, message) {
 	const entry = `[${new Date().toISOString()}] [${level}] ${message}\n`;
 	logStream.write(entry);
-	console.log(entry.trim());
+	process.stdout.write(`${entry.trim()}\n`);
+}
+
+/**
+ * Print a raw line to stdout (no formatting)
+ *
+ * @param {string} message
+ */
+function printLine(message = '') {
+	process.stdout.write(`${message}\n`);
 }
 
 log('INFO', 'Token counting started');
@@ -57,7 +66,9 @@ const EXCLUDE_DIRS = [
 
 /**
  * Count tokens in a string
- * @param text
+ *
+ * @param {string} text
+ * @return {number} Estimated token count.
  */
 function countTokens(text) {
 	return Math.ceil(text.length / CHARS_PER_TOKEN);
@@ -65,7 +76,9 @@ function countTokens(text) {
 
 /**
  * Check if path should be excluded
- * @param filePath
+ *
+ * @param {string} filePath
+ * @return {boolean} True when the path should be excluded from scanning.
  */
 function shouldExclude(filePath) {
 	return EXCLUDE_DIRS.some(
@@ -76,7 +89,9 @@ function shouldExclude(filePath) {
 
 /**
  * Get all markdown files recursively
- * @param dir
+ *
+ * @param {string} dir
+ * @return {string[]} List of markdown files found under the directory.
  */
 function getMarkdownFiles(dir) {
 	const files = [];
@@ -108,7 +123,9 @@ function getMarkdownFiles(dir) {
 
 /**
  * Analyze markdown file
- * @param filePath
+ *
+ * @param {string} filePath
+ * @return {Object|null} File metadata or null when analysis fails.
  */
 function analyzeFile(filePath) {
 	try {
@@ -132,7 +149,9 @@ function analyzeFile(filePath) {
 
 /**
  * Categorize file by directory
- * @param filePath
+ *
+ * @param {string} filePath
+ * @return {string} Category key for reporting.
  */
 function categorizeFile(filePath) {
 	const relative = path.relative(process.cwd(), filePath);
@@ -195,42 +214,47 @@ const totals = {
 };
 
 // Output results
-console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('📊 TOKEN COUNT SUMMARY');
-console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+printLine('');
+printLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+printLine('📊 TOKEN COUNT SUMMARY');
+printLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+printLine('');
 
-console.log('Total Statistics:');
-console.log(`  Files:  ${totals.files.toLocaleString()}`);
-console.log(`  Tokens: ${totals.tokens.toLocaleString()}`);
-console.log(`  Lines:  ${totals.lines.toLocaleString()}`);
-console.log(`  Chars:  ${totals.chars.toLocaleString()}\n`);
+printLine('Total Statistics:');
+printLine(`  Files:  ${totals.files.toLocaleString()}`);
+printLine(`  Tokens: ${totals.tokens.toLocaleString()}`);
+printLine(`  Lines:  ${totals.lines.toLocaleString()}`);
+printLine(`  Chars:  ${totals.chars.toLocaleString()}`);
+printLine('');
 
-console.log('By Category:');
-console.log('┌─────────────────┬────────┬──────────┬─────────┬───────────┐');
-console.log('│ Category        │ Files  │ Tokens   │ Lines   │ Chars     │');
-console.log('├─────────────────┼────────┼──────────┼─────────┼───────────┤');
+printLine('By Category:');
+printLine('┌─────────────────┬────────┬──────────┬─────────┬───────────┐');
+printLine('│ Category        │ Files  │ Tokens   │ Lines   │ Chars     │');
+printLine('├─────────────────┼────────┼──────────┼─────────┼───────────┤');
 
 Object.entries(categories)
 	.sort((a, b) => b[1].tokens - a[1].tokens)
 	.forEach(([category, stats]) => {
 		const pct = ((stats.tokens / totals.tokens) * 100).toFixed(1);
-		console.log(
+		printLine(
 			`│ ${category.padEnd(15)} │ ${String(stats.files).padStart(6)} │ ${String(stats.tokens.toLocaleString()).padStart(8)} │ ${String(stats.lines.toLocaleString()).padStart(7)} │ ${String(stats.chars.toLocaleString()).padStart(9)} │ ${pct}%`
 		);
 	});
 
-console.log('└─────────────────┴────────┴──────────┴─────────┴───────────┘\n');
+printLine('└─────────────────┴────────┴──────────┴─────────┴───────────┘');
+printLine('');
 
 // Detailed output
 if (detailed) {
-	console.log('\nTop 20 Files by Token Count:');
-	console.log(
+	printLine('');
+	printLine('Top 20 Files by Token Count:');
+	printLine(
 		'┌────────────────────────────────────────────────────┬──────────┐'
 	);
-	console.log(
+	printLine(
 		'│ File                                               │ Tokens   │'
 	);
-	console.log(
+	printLine(
 		'├────────────────────────────────────────────────────┼──────────┤'
 	);
 
@@ -243,14 +267,15 @@ if (detailed) {
 				relativePath.length > 50
 					? '...' + relativePath.slice(-47)
 					: relativePath;
-			console.log(
+			printLine(
 				`│ ${displayPath.padEnd(50)} │ ${String(result.tokens.toLocaleString()).padStart(8)} │`
 			);
 		});
 
-	console.log(
-		'└────────────────────────────────────────────────────┴──────────┘\n'
+	printLine(
+		'└────────────────────────────────────────────────────┴──────────┘'
 	);
+	printLine('');
 }
 
 // Log summary
@@ -290,6 +315,7 @@ fs.writeFileSync(
 	)
 );
 
-console.log(`📝 Detailed report saved to: ${reportFile}\n`);
+printLine(`📝 Detailed report saved to: ${reportFile}`);
+printLine('');
 
 logStream.end();

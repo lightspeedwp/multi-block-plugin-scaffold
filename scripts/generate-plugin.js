@@ -18,9 +18,6 @@ const path = require('path');
 const readline = require('readline');
 const Ajv2020 = require('ajv/dist/2020');
 
-// Import shared configuration schema (eliminates duplication)
-const { loadSchema: loadSchemaFromLib } = require('./lib/config-schema');
-
 // Paths
 const scaffoldDir = path.resolve(__dirname, '..');
 const schemaPath = path.join(
@@ -74,9 +71,9 @@ function initializeLogging(slug) {
 
 /**
  * Log function - stores entries in JSON format
- * @param {string} level - Log level (INFO, WARN, ERROR, DEBUG)
+ * @param {string} level   - Log level (INFO, WARN, ERROR, DEBUG)
  * @param {string} message - Log message
- * @param {Object} data - Optional additional data
+ * @param {Object} data    - Optional additional data
  */
 function log(level, message, data = null) {
 	const entry = {
@@ -106,7 +103,11 @@ function closeLogging() {
 	if (logFile && logEntries.length > 0) {
 		try {
 			// Write synchronously to ensure log persists
-			fs.writeFileSync(logFile, JSON.stringify(logEntries, null, 2), 'utf8');
+			fs.writeFileSync(
+				logFile,
+				JSON.stringify(logEntries, null, 2),
+				'utf8'
+			);
 		} catch (error) {
 			console.error('Failed to write log file:', error.message);
 		}

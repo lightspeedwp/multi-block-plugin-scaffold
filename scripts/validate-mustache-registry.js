@@ -24,17 +24,35 @@ const schemaPath = path.join(
 );
 
 /**
+ * Structured logging helper
+ *
+ * @param {string} level
+ * @param {string} message
+ */
+function log(level, message) {
+	process.stdout.write(`[${level}] ${message}\n`);
+}
+
+/**
+ * Print raw line (no prefix)
+ *
+ * @param {string} message
+ */
+function print(message = '') {
+	process.stdout.write(`${message}\n`);
+}
+
+/**
  * Load JSON file
  *
  * @param {string} filePath - Path to JSON file
- * @return {Object} Parsed JSON
  */
 function loadJson(filePath) {
 	try {
 		const content = fs.readFileSync(filePath, 'utf8');
 		return JSON.parse(content);
 	} catch (error) {
-		console.error(`❌ Error loading ${filePath}:`, error.message);
+		log('ERROR', `Error loading ${filePath}: ${error.message}`);
 		process.exit(1);
 	}
 }
@@ -61,55 +79,52 @@ function validateRegistry(registry, schema) {
  * Main function
  */
 function main() {
-	console.log('🔍 Validating mustache variables registry...\n');
+	log('INFO', '🔍 Validating mustache variables registry...');
+	print();
 
 	// Load registry
-	console.log(`📄 Loading registry: ${registryPath}`);
+	log('INFO', `📄 Loading registry: ${registryPath}`);
 	const registry = loadJson(registryPath);
 
 	// Load schema
-	console.log(`📋 Loading schema: ${schemaPath}`);
+	log('INFO', `📋 Loading schema: ${schemaPath}`);
 	const schema = loadJson(schemaPath);
 
 	// Validate
-	console.log('⚙️  Validating...\n');
+	log('INFO', '⚙️  Validating...');
+	print();
 	const result = validateRegistry(registry, schema);
 
 	if (!result.valid) {
-		console.error('❌ Validation failed!\n');
-		console.error('Errors:');
+		log('ERROR', '❌ Validation failed!');
+		log('ERROR', 'Errors:');
 		result.errors.forEach((error, index) => {
-			const path = error.instancePath || 'root';
+			const instancePath = error.instancePath || 'root';
 			const message = error.message || 'Unknown error';
 			const params = error.params ? JSON.stringify(error.params) : '';
 
-			console.error(
-				`  ${index + 1}. ${path}: ${message} ${params ? `(${params})` : ''}`
+			log(
+				'ERROR',
+				`  ${index + 1}. ${instancePath}: ${message} ${params ? `(${params})` : ''}`
 			);
 		});
-		console.error('');
+		print();
 		process.exit(1);
 	}
 
 	// Success
-	console.log('✅ Registry is valid!\n');
-	console.log('Summary:');
-	console.log(
-		`  - Total files scanned: ${registry.summary.totalFiles}`
-	);
-	console.log(
-		`  - Files with variables: ${registry.summary.filesWithVariables}`
-	);
-	console.log(
-		`  - Unique variables: ${registry.summary.uniqueVariables}`
-	);
-	console.log(
-		`  - Total occurrences: ${registry.summary.totalOccurrences}`
-	);
-	console.log('');
+	log('SUCCESS', '✅ Registry is valid!');
+	print('');
+	print('Summary:');
+	print(`  - Total files scanned: ${registry.summary.totalFiles}`);
+	print(`  - Files with variables: ${registry.summary.filesWithVariables}`);
+	print(`  - Unique variables: ${registry.summary.uniqueVariables}`);
+	print(`  - Total occurrences: ${registry.summary.totalOccurrences}`);
+	print('');
 
 	// Additional validation checks
-	console.log('🔍 Running additional validation checks...\n');
+	log('INFO', '🔍 Running additional validation checks...');
+	print();
 
 	let warnings = 0;
 	let errors = 0;
@@ -121,16 +136,16 @@ function main() {
 		nameCounts[name] = (nameCounts[name] || 0) + 1;
 	});
 	const duplicates = Object.entries(nameCounts).filter(
-		([_, count]) => count > 1
+		([, count]) => count > 1
 	);
 	if (duplicates.length > 0) {
-		console.error('❌ Found duplicate variable names:');
+		log('ERROR', '❌ Found duplicate variable names:');
 		duplicates.forEach(([name, count]) => {
-			console.error(`  - ${name} (appears ${count} times)`);
+			log('ERROR', `  - ${name} (appears ${count} times)`);
 		});
 		errors++;
 	} else {
-		console.log('✓ No duplicate variable names');
+		log('INFO', '✓ No duplicate variable names');
 	}
 
 	// Verify count matches files array length
@@ -140,18 +155,18 @@ function main() {
 		const declaredCount = variable.count;
 		if (fileCount !== declaredCount) {
 			if (countMismatches === 0) {
-				console.warn(
-					'\n⚠️  Count mismatches (files.length !== count):'
-				);
+				print();
+				log('WARN', '⚠️  Count mismatches (files.length !== count):');
 			}
-			console.warn(
+			log(
+				'WARN',
 				`  - ${name}: files=${fileCount}, count=${declaredCount}`
 			);
 			countMismatches++;
 		}
 	});
 	if (countMismatches === 0) {
-		console.log('✓ All variable counts match files array length');
+		log('INFO', '✓ All variable counts match files array length');
 	} else {
 		warnings += countMismatches;
 	}
@@ -162,7 +177,8 @@ function main() {
 		const cat = variable.category || 'uncategorized';
 		categories[cat] = (categories[cat] || 0) + 1;
 	});
-	console.log('\n📊 Category distribution:');
+	print();
+	log('INFO', '📊 Category distribution:');
 	Object.entries(categories)
 		.sort((a, b) => b[1] - a[1])
 		.forEach(([category, count]) => {
@@ -170,28 +186,31 @@ function main() {
 				(count / registry.summary.uniqueVariables) *
 				100
 			).toFixed(1);
-			console.log(`  - ${category}: ${count} (${percentage}%)`);
+			print(`  - ${category}: ${count} (${percentage}%)`);
 		});
 
 	// Check for variables without category
 	const uncategorized = Object.entries(registry.variables).filter(
-		([_, v]) => !v.category || v.category === 'other'
+		([, v]) => !v.category || v.category === 'other'
 	);
 	if (uncategorized.length > 0) {
-		console.warn(
-			`\n⚠️  ${uncategorized.length} variables are uncategorized or marked as "other":`
+		print();
+		log(
+			'WARN',
+			`⚠️  ${uncategorized.length} variables are uncategorized or marked as "other":`
 		);
 		uncategorized.slice(0, 10).forEach(([name]) => {
-			console.warn(`  - ${name}`);
+			log('WARN', `  - ${name}`);
 		});
 		if (uncategorized.length > 10) {
-			console.warn(`  ... and ${uncategorized.length - 10} more`);
+			log('WARN', `  ... and ${uncategorized.length - 10} more`);
 		}
 		warnings += uncategorized.length;
 	}
 
 	// Verify file paths exist (sample check)
-	console.log('\n📁 Verifying file paths (sampling 10 random files)...');
+	print();
+	log('INFO', '📁 Verifying file paths (sampling 10 random files)...');
 	const allFiles = new Set();
 	Object.values(registry.variables).forEach((variable) => {
 		variable.files.forEach((file) => allFiles.add(file));
@@ -209,32 +228,33 @@ function main() {
 		const fullPath = path.join(process.cwd(), file);
 		if (!fs.existsSync(fullPath)) {
 			if (missingFiles === 0) {
-				console.error('\n❌ Missing files detected:');
+				print();
+				log('ERROR', '❌ Missing files detected:');
 			}
-			console.error(`  - ${file}`);
+			log('ERROR', `  - ${file}`);
 			missingFiles++;
 		}
 	}
 	if (missingFiles === 0) {
-		console.log(`✓ Sampled ${sampleSize} files, all exist`);
+		log('INFO', `✓ Sampled ${sampleSize} files, all exist`);
 	} else {
 		errors += missingFiles;
 	}
 
 	// Summary
-	console.log('\n' + '='.repeat(50));
+	print('');
+	print('='.repeat(50));
 	if (errors > 0) {
-		console.error(
-			`\n❌ Validation completed with ${errors} error(s) and ${warnings} warning(s)`
+		log(
+			'ERROR',
+			`Validation completed with ${errors} error(s) and ${warnings} warning(s)`
 		);
 		process.exit(1);
 	} else if (warnings > 0) {
-		console.warn(
-			`\n⚠️  Validation completed with ${warnings} warning(s)`
-		);
+		log('WARN', `⚠️  Validation completed with ${warnings} warning(s)`);
 		process.exit(0);
 	} else {
-		console.log('\n✅ All validation checks passed!');
+		log('SUCCESS', '✅ All validation checks passed!');
 		process.exit(0);
 	}
 }

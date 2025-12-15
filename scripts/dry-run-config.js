@@ -150,6 +150,25 @@ module.exports = {
 	getFilesWithMustacheVars,
 };
 
+/**
+ * Structured log helper for CLI output
+ *
+ * @param {string} level
+ * @param {string} message
+ */
+function log(level, message) {
+	process.stdout.write(`[${level}] ${message}\n`);
+}
+
+/**
+ * Print raw lines (including blank ones)
+ *
+ * @param {string} message
+ */
+function print(message = '') {
+	process.stdout.write(`${message}\n`);
+}
+
 // CLI usage
 if (require.main === module) {
 	const args = process.argv.slice(2);
@@ -157,28 +176,28 @@ if (require.main === module) {
 
 	switch (command) {
 		case 'config':
-			console.log(JSON.stringify(getDryRunConfig(), null, 2));
+			print(JSON.stringify(getDryRunConfig(), null, 2));
 			break;
 
 		case 'value':
-			console.log(getDryRunValue(args[1]));
+			print(getDryRunValue(args[1]));
 			break;
 
 		case 'files':
-			console.log(getFilesWithMustacheVars(args[1]).join('\n'));
+			print(getFilesWithMustacheVars(args[1]).join('\n'));
 			break;
 
 		case 'replace':
 			if (args[1]) {
-				console.log(replaceMustacheVarsInFile(args[1]));
+				print(replaceMustacheVarsInFile(args[1]));
 			} else {
-				console.error('Error: Please provide a file path');
+				log('ERROR', 'Please provide a file path for replacement');
 				process.exit(1);
 			}
 			break;
 
 		default:
-			console.log(
+			print(
 				`
 Dry Run Configuration Tool
 
@@ -196,8 +215,11 @@ Examples:
   node scripts/dry-run-config.js value slug
   node scripts/dry-run-config.js files "src/**/*.js"
   node scripts/dry-run-config.js replace src/index.js
-			`.trim()
+				`.trim()
 			);
+			if (args.length === 0) {
+				process.exit(0);
+			}
 			break;
 	}
 }

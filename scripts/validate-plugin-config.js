@@ -31,26 +31,41 @@ const colors = {
 
 /**
  * Print colored message to console
- * @param color
- * @param symbol
- * @param message
+ *
+ * @param {string} color
+ * @param {string} symbol
+ * @param {string} message
  */
 function print(color, symbol, message) {
-	console.log(`${colors[color]}${symbol} ${message}${colors.reset}`);
+	process.stdout.write(
+		`${colors[color]}${symbol} ${message}${colors.reset}\n`
+	);
 }
 
 /**
  * Print section header
- * @param title
+ *
+ * @param {string} title
  */
 function printHeader(title) {
-	console.log(`\n${title}`);
-	console.log('='.repeat(title.length));
+	process.stdout.write(`\n${title}\n`);
+	process.stdout.write(`${'='.repeat(title.length)}\n`);
+}
+
+/**
+ * Print raw line (supports blank lines)
+ *
+ * @param {string} message
+ */
+function writeLine(message = '') {
+	process.stdout.write(`${message}\n`);
 }
 
 /**
  * Load and parse JSON file
- * @param filePath
+ *
+ * @param {string} filePath
+ * @return {Object} Parsed JSON content.
  */
 function loadJson(filePath) {
 	try {
@@ -71,8 +86,10 @@ function loadJson(filePath) {
 
 /**
  * Validate configuration against schema
- * @param config
- * @param schema
+ *
+ * @param {Object} config
+ * @param {Object} schema
+ * @return {{ valid: boolean, errors: Array }} Validation outcome.
  */
 function validateConfig(config, schema) {
 	const ajv = new Ajv({
@@ -94,7 +111,9 @@ function validateConfig(config, schema) {
 
 /**
  * Validate field types for SCF fields
- * @param config
+ *
+ * @param {Object} config
+ * @return {string[]} Array of field validation errors.
  */
 function validateFieldTypes(config) {
 	const errors = [];
@@ -193,7 +212,9 @@ function validateFieldTypes(config) {
 
 /**
  * Validate taxonomies configuration
- * @param config
+ *
+ * @param {Object} config
+ * @return {string[]} Array of taxonomy validation errors.
  */
 function validateTaxonomies(config) {
 	const errors = [];
@@ -231,7 +252,9 @@ function validateTaxonomies(config) {
 
 /**
  * Check best practices
- * @param config
+ *
+ * @param {Object} config
+ * @return {string[]} Array of best practices suggestions.
  */
 function checkBestPractices(config) {
 	const warnings = [];
@@ -277,11 +300,13 @@ function checkBestPractices(config) {
 
 /**
  * Format AJV validation errors
- * @param errors
+ *
+ * @param {Array} errors
+ * @return {string[]} Formatted error messages.
  */
 function formatAjvErrors(errors) {
 	return errors.map((error) => {
-		const path = error.instancePath || 'root';
+		const instancePath = error.instancePath || 'root';
 		const message = error.message || 'Unknown error';
 
 		let details = '';
@@ -295,7 +320,7 @@ function formatAjvErrors(errors) {
 			}
 		}
 
-		return `  ${path}: ${message}${details}`;
+		return `  ${instancePath}: ${message}${details}`;
 	});
 }
 
@@ -307,7 +332,7 @@ function main() {
 
 	// Show help
 	if (args.includes('--help') || args.includes('-h')) {
-		console.log(`
+		writeLine(`
 Plugin Configuration Validator
 
 Usage:
@@ -339,9 +364,9 @@ Examples:
 	if (args.includes('--schema-only')) {
 		// Validate schema file only
 		try {
-			console.log(`\nValidating Schema File: ${schemaPath}`);
-			console.log('='.repeat(50));
-			const schema = loadJson(schemaPath);
+			writeLine(`\nValidating Schema File: ${schemaPath}`);
+			writeLine('='.repeat(50));
+			loadJson(schemaPath);
 			print('green', '✅', 'Schema file is valid JSON');
 			process.exit(0);
 		} catch (error) {
@@ -356,8 +381,8 @@ Examples:
 	let schema, config;
 
 	try {
-		console.log(`\nValidating Plugin Configuration: ${configPath}`);
-		console.log('='.repeat(75));
+		writeLine(`\nValidating Plugin Configuration: ${configPath}`);
+		writeLine('='.repeat(75));
 
 		schema = loadJson(schemaPath);
 		print('blue', 'ℹ️ ', `Loaded schema: ${schemaPath}`);
@@ -385,7 +410,7 @@ Examples:
 			`Schema validation failed with ${schemaResult.errors.length} error(s):`
 		);
 		formatAjvErrors(schemaResult.errors).forEach((error) =>
-			console.log(error)
+			writeLine(error)
 		);
 		hasErrors = true;
 	}
@@ -402,7 +427,7 @@ Examples:
 			'❌',
 			`Found ${fieldErrors.length} field configuration error(s):`
 		);
-		fieldErrors.forEach((error) => console.log(`  ${error}`));
+		fieldErrors.forEach((error) => writeLine(`  ${error}`));
 		hasErrors = true;
 	}
 
@@ -414,7 +439,7 @@ Examples:
 		print('green', '✅', 'All taxonomies are properly configured');
 	} else {
 		print('red', '❌', `Found ${taxonomyErrors.length} taxonomy error(s):`);
-		taxonomyErrors.forEach((error) => console.log(`  ${error}`));
+		taxonomyErrors.forEach((error) => writeLine(`  ${error}`));
 		hasErrors = true;
 	}
 
@@ -426,7 +451,7 @@ Examples:
 		print('green', '✅', 'Configuration follows all best practices');
 	} else {
 		print('yellow', '⚠️ ', `Found ${warnings.length} suggestion(s):`);
-		warnings.forEach((warning) => console.log(`  ${warning}`));
+		warnings.forEach((warning) => writeLine(`  ${warning}`));
 		hasWarnings = true;
 	}
 

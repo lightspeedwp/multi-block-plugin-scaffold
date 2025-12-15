@@ -7,6 +7,10 @@ node_modules
 build
 dist
 
+# Generated artifact directories
+generated-plugins
+tmp
+
 # Log files
 
 # Vendor directories

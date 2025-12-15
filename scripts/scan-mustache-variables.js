@@ -60,7 +60,7 @@ const MUSTACHE_REGEX = /\{\{([a-zA-Z0-9_]+(?:\|[a-zA-Z0-9_]+)?)\}\}/g;
 /**
  * Recursively scan directory for files
  *
- * @param {string} dir Directory path to scan
+ * @param {string} dir      Directory path to scan
  * @param {string} basePath Base path for relative paths
  * @return {Array} Array of file objects
  */
@@ -124,17 +124,29 @@ function categorizeVariable(varName) {
 	const cleanName = varName.split('|')[0];
 
 	// Core identity
-	if (['theme_slug', 'theme_name', 'namespace', 'description'].includes(cleanName)) {
+	if (
+		['theme_slug', 'theme_name', 'namespace', 'description'].includes(
+			cleanName
+		)
+	) {
 		return 'core_identity';
 	}
 
 	// Author & contact
-	if (cleanName.includes('author') || cleanName.includes('email') || cleanName === 'year') {
+	if (
+		cleanName.includes('author') ||
+		cleanName.includes('email') ||
+		cleanName === 'year'
+	) {
 		return 'author_contact';
 	}
 
 	// Versioning
-	if (cleanName.includes('version') || cleanName.includes('_wp_') || cleanName.includes('_php_')) {
+	if (
+		cleanName.includes('version') ||
+		cleanName.includes('_wp_') ||
+		cleanName.includes('_php_')
+	) {
 		return 'versioning';
 	}
 
@@ -188,7 +200,11 @@ function categorizeVariable(varName) {
 	}
 
 	// Theme tags and metadata
-	if (cleanName.includes('tags') || cleanName.includes('textdomain') || cleanName.includes('audience')) {
+	if (
+		cleanName.includes('tags') ||
+		cleanName.includes('textdomain') ||
+		cleanName.includes('audience')
+	) {
 		return 'theme_metadata';
 	}
 
@@ -265,7 +281,11 @@ function scanRepository() {
 					}
 
 					// Count occurrences
-					const occurrences = (content.match(new RegExp(`\\{\\{${varName}\\}\\}`, 'g')) || []).length;
+					const occurrences = (
+						content.match(
+							new RegExp(`\\{\\{${varName}\\}\\}`, 'g')
+						) || []
+					).length;
 					results.variables[varName].count += occurrences;
 					results.summary.totalOccurrences += occurrences;
 				}
@@ -279,11 +299,14 @@ function scanRepository() {
 	results.summary.uniqueVariables = Object.keys(results.variables).length;
 
 	// Sort variables by usage count
-	const sortedVariables = Object.values(results.variables).sort((a, b) => b.count - a.count);
+	const sortedVariables = Object.values(results.variables).sort(
+		(a, b) => b.count - a.count
+	);
 
 	// Count variables per category
 	for (const category of Object.keys(results.categories)) {
-		results.categories[category].count = results.categories[category].variables.length;
+		results.categories[category].count =
+			results.categories[category].variables.length;
 	}
 
 	return { results, sortedVariables };
@@ -292,14 +315,16 @@ function scanRepository() {
 /**
  * Display results in human-readable format
  *
- * @param {Object} results Scan results object
- * @param {Array} sortedVariables Variables sorted by usage
+ * @param {Object} results         Scan results object
+ * @param {Array}  sortedVariables Variables sorted by usage
  */
 function displayResults(results, sortedVariables) {
 	console.log('📊 Scan Results\n');
 	console.log('Summary:');
 	console.log(`  Total files scanned: ${results.summary.totalFiles}`);
-	console.log(`  Files with variables: ${results.summary.filesWithVariables}`);
+	console.log(
+		`  Files with variables: ${results.summary.filesWithVariables}`
+	);
 	console.log(`  Unique variables: ${results.summary.uniqueVariables}`);
 	console.log(`  Total occurrences: ${results.summary.totalOccurrences}\n`);
 
@@ -332,7 +357,9 @@ function displayResults(results, sortedVariables) {
 	console.log('\nTop 20 Most Used Variables:\n');
 	for (let i = 0; i < Math.min(20, sortedVariables.length); i++) {
 		const v = sortedVariables[i];
-		console.log(`  ${i + 1}. {{${v.name}}} - ${v.count} occurrences in ${v.files.length} files`);
+		console.log(
+			`  ${i + 1}. {{${v.name}}} - ${v.count} occurrences in ${v.files.length} files`
+		);
 	}
 
 	console.log('\n✅ Scan complete!');
@@ -342,7 +369,7 @@ function displayResults(results, sortedVariables) {
  * Validate theme-config.json against discovered variables
  *
  * @param {string} configPath Path to config file
- * @param {Object} results Scan results
+ * @param {Object} results    Scan results
  */
 function validateConfig(configPath, results) {
 	console.error(`\n🔍 Validating ${configPath}...\n`);
@@ -370,7 +397,14 @@ function validateConfig(configPath, results) {
 
 		// Check for extra variables in config
 		for (const key of configKeys) {
-			if (!discoveredVars.has(key) && !key.startsWith('_') && key !== 'design_system' && key !== 'theme_structure' && key !== 'features' && key !== 'content') {
+			if (
+				!discoveredVars.has(key) &&
+				!key.startsWith('_') &&
+				key !== 'design_system' &&
+				key !== 'theme_structure' &&
+				key !== 'features' &&
+				key !== 'content'
+			) {
 				extra.push(key);
 			}
 		}
@@ -380,7 +414,9 @@ function validateConfig(configPath, results) {
 		console.log(`  Variables in repository: ${discoveredVars.size}`);
 
 		if (missing.length > 0) {
-			console.log(`\n  ⚠️  Missing ${missing.length} variables in config:`);
+			console.log(
+				`\n  ⚠️  Missing ${missing.length} variables in config:`
+			);
 			missing.slice(0, 10).forEach((v) => console.log(`    - {{${v}}}`));
 			if (missing.length > 10) {
 				console.log(`    ... and ${missing.length - 10} more`);
@@ -388,7 +424,9 @@ function validateConfig(configPath, results) {
 		}
 
 		if (extra.length > 0) {
-			console.log(`\n  ℹ️  Extra ${extra.length} variables in config (not found in templates):`);
+			console.log(
+				`\n  ℹ️  Extra ${extra.length} variables in config (not found in templates):`
+			);
 			extra.slice(0, 10).forEach((v) => console.log(`    - ${v}`));
 			if (extra.length > 10) {
 				console.log(`    ... and ${extra.length - 10} more`);

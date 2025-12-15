@@ -117,6 +117,7 @@ export default function Slider({
 	const translateX = -currentIndex * slideWidth;
 
 	return (
+		/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */
 		<div
 			className={`example_plugin-slider ${className}`}
 			ref={sliderRef}
