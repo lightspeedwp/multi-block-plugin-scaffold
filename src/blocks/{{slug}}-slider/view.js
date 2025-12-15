@@ -27,12 +27,22 @@
 			return;
 		}
 
-		const track = slider.querySelector(
-			'.wp-block-{{namespace}}-{{slug}}-slider__track'
-		);
 		const slides = slider.querySelectorAll(
 			'.wp-block-{{namespace}}-{{slug}}-slider__slide'
 		);
+
+		if (slides.length === 0) {
+			return;
+		}
+
+		const track = slider.querySelector(
+			'.wp-block-{{namespace}}-{{slug}}-slider__track'
+		);
+
+		if (!track) {
+			return;
+		}
+
 		const prevBtn = slider.querySelector(
 			'.wp-block-{{namespace}}-{{slug}}-slider__arrow--prev'
 		);
@@ -42,10 +52,6 @@
 		const dots = slider.querySelectorAll(
 			'.wp-block-{{namespace}}-{{slug}}-slider__dot'
 		);
-
-		if (!track || slides.length === 0) {
-			return;
-		}
 
 		// Parse settings from data attribute.
 		let settings = {
