@@ -59,7 +59,7 @@ $permalink = get_permalink( $post );
 		</div>
 	<?php endif; ?>
 
-	<div class="wp-block-example_plugin-example-plugin-card__content">
+	<div class="wp-block-{{namespace}}-{{slug}}-card__content">
 		<?php if ( $display_title ) : ?>
 			<h3 class="wp-block-{{namespace}}-{{slug}}-card__title">
 				<?php if ( $link_to_post ) : ?>

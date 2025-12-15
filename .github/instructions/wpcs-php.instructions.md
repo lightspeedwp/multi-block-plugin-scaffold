@@ -994,8 +994,3 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [Draft PSR-5 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md)
 - [Draft PSR-19 recommendations](https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc-tags.md)
 - <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/>
-
-## See Also
-
-- wpcs-php-docs.instructions.md
-- instructions.instructions.md

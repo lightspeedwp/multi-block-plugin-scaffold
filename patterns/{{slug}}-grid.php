@@ -1,11 +1,27 @@
 <?php
 /**
- * Title: Item Grid
- * Slug: example_plugin/example-plugin-grid
- * Categories: example-plugin
- * Keywords: grid, example-plugin, collection
- * Description: A grid of items.
- * Viewport Width: 1200
+ * {{slug|pascalCase}} Grid Pattern
+ *
+ * @package {{namespace}}
+ * @since 1.0.0
  */
-?>
-<!-- wp:example_plugin/example-plugin-collection {"layout":"grid","columns":3,"query":{"postType":"example-plugin","perPage":6}} /-->
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+return array(
+	'title'       => __( '{{name}} Grid', '{{textdomain}}' ),
+	'slug'        => '{{namespace}}/{{slug}}-grid',
+	'description' => __( 'A grid of items.', '{{textdomain}}' ),
+	'categories'  => array( '{{textdomain}}' ),
+	'keywords'    => array(
+		__( 'grid', '{{textdomain}}' ),
+		__( '{{slug}}', '{{textdomain}}' ),
+		__( 'collection', '{{textdomain}}' ),
+	),
+	'blockTypes'  => array( 'core/group', 'core/query' ),
+	'postTypes'   => array( '{{slug}}' ),
+	'viewportWidth' => 1200,
+	'content'     => '<!-- wp:{{namespace}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"{{slug}}","perPage":6}} /-->',
+);

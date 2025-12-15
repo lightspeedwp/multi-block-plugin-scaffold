@@ -6,12 +6,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	const sliders = document.querySelectorAll(
-		'.wp-block-example_plugin-example-plugin-collection.is-layout-slider'
+		'.wp-block-{{namespace}}-{{slug}}-collection.is-layout-slider'
 	);
 
 	sliders.forEach((slider) => {
 		const itemsContainer = slider.querySelector(
-			'.wp-block-example_plugin-example-plugin-collection__items'
+			'.wp-block-{{namespace}}-{{slug}}-collection__items'
 		);
 
 		if (!itemsContainer) {
@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Optional: Add navigation buttons dynamically.
 		const prevBtn = document.createElement('button');
 		prevBtn.className =
-			'wp-block-example_plugin-example-plugin-collection__nav-prev';
+			'wp-block-{{namespace}}-{{slug}}-collection__nav-prev';
 		prevBtn.innerHTML = '&lsaquo;';
 		prevBtn.setAttribute('aria-label', 'Previous');
 
 		const nextBtn = document.createElement('button');
 		nextBtn.className =
-			'wp-block-example_plugin-example-plugin-collection__nav-next';
+			'wp-block-{{namespace}}-{{slug}}-collection__nav-next';
 		nextBtn.innerHTML = '&rsaquo;';
 		nextBtn.setAttribute('aria-label', 'Next');
 

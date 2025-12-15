@@ -9,7 +9,7 @@
 
 	document.addEventListener('DOMContentLoaded', function () {
 		const sliders = document.querySelectorAll(
-			'.wp-block-example_plugin-example-plugin-slider'
+			'.wp-block-{{namespace}}-{{slug}}-slider'
 		);
 
 		sliders.forEach(function (slider) {
@@ -28,19 +28,19 @@
 		}
 
 		const track = slider.querySelector(
-			'.wp-block-example_plugin-example-plugin-slider__track'
+			'.wp-block-{{namespace}}-{{slug}}-slider__track'
 		);
 		const slides = slider.querySelectorAll(
-			'.wp-block-example_plugin-example-plugin-slider__slide'
+			'.wp-block-{{namespace}}-{{slug}}-slider__slide'
 		);
 		const prevBtn = slider.querySelector(
-			'.wp-block-example_plugin-example-plugin-slider__arrow--prev'
+			'.wp-block-{{namespace}}-{{slug}}-slider__arrow--prev'
 		);
 		const nextBtn = slider.querySelector(
-			'.wp-block-example_plugin-example-plugin-slider__arrow--next'
+			'.wp-block-{{namespace}}-{{slug}}-slider__arrow--next'
 		);
 		const dots = slider.querySelectorAll(
-			'.wp-block-example_plugin-example-plugin-slider__dot'
+			'.wp-block-{{namespace}}-{{slug}}-slider__dot'
 		);
 
 		if (!track || slides.length === 0) {

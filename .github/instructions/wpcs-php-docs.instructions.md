@@ -955,8 +955,3 @@ The `@copyright` and `@license` tags are used in external libraries and scripts,
 - [ ] Every function, method and class has a DocBlock.
 - [ ] `@since`, `@param`, and `@return` are used correctly.
 - [ ] Deprecated functions include a `@deprecated` tag with replacement guidance.
-
-## See Also
-
-- <https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/>
-- instructions.instructions.md

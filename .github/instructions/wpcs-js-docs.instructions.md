@@ -563,10 +563,6 @@ WordPress uses JSHint for general code quality testing. Any inline configuration
 - [ ] `@param` and `@returns` tags accurately describe the types and behaviour.
 - [ ] Examples compile and demonstrate typical usage.
 
-# References
-
-- <https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/>
-
 ## See Also
 
-- instructions.instructions.md
+- <https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/>

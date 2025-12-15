@@ -787,7 +787,7 @@ const MyComponent = ({ isActive, isDisabled }) => {
 - Ignore performance optimization opportunities
 - Skip error handling in async operations
 
-## References
+## See Also
 
 - [WordPress JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/)
 - [WordPress JavaScript Documentation](https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/)
@@ -795,9 +795,3 @@ const MyComponent = ({ isActive, isDisabled }) => {
 - [React Hooks Documentation](https://react.dev/reference/react/hooks)
 - [ESLint Configuration](https://eslint.org/docs/latest/)
 - [Testing React Components](https://testing-library.com/docs/react-testing-library/intro/)
-
-## See Also
-
-- wpcs-javascript.instructions.md
-- wpcs-js-docs.instructions.md
-- README.md

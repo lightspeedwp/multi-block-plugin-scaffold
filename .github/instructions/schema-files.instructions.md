@@ -480,9 +480,3 @@ npm run validate:schemas
 ✅ **Enforced** - Rules apply to all developers and agents
 
 Follow these guidelines to maintain a robust, well-validated schema system for plugin configuration.
-
-## See Also
-
-- docs/CONFIGS.md
-- instructions.instructions.md
-- .github/instructions/README.md

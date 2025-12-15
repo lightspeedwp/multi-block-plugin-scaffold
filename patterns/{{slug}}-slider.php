@@ -1,11 +1,27 @@
 <?php
 /**
- * Title: Item Slider
- * Slug: example_plugin/example-plugin-slider-pattern
- * Categories: example-plugin
- * Keywords: slider, example-plugin, carousel
- * Description: A slider/carousel of items.
- * Viewport Width: 1200
+ * {{slug|pascalCase}} Slider Pattern
+ *
+ * @package {{namespace}}
+ * @since 1.0.0
  */
-?>
-<!-- wp:example_plugin/example-plugin-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+return array(
+	'title'       => __( '{{name}} Slider', '{{textdomain}}' ),
+	'slug'        => '{{namespace}}/{{slug}}-slider-pattern',
+	'description' => __( 'A slider/carousel of items.', '{{textdomain}}' ),
+	'categories'  => array( '{{textdomain}}' ),
+	'keywords'    => array(
+		__( 'slider', '{{textdomain}}' ),
+		__( '{{slug}}', '{{textdomain}}' ),
+		__( 'carousel', '{{textdomain}}' ),
+	),
+	'blockTypes'  => array( 'core/group', 'core/query' ),
+	'postTypes'   => array( '{{slug}}' ),
+	'viewportWidth' => 1200,
+	'content'     => '<!-- wp:{{namespace}}/{{slug}}-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->',
+);

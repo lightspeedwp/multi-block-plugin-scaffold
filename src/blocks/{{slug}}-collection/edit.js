@@ -61,7 +61,7 @@ export default function Edit({ attributes, setAttributes }) {
 	);
 
 	const blockProps = useBlockProps({
-		className: `wp-block-example_plugin-example-plugin-collection is-layout-${layout}`,
+		className: `wp-block-{{namespace}}-{{slug}}-collection is-layout-${layout}`,
 	});
 
 	const gridStyle = useMemo(() => {
@@ -212,19 +212,19 @@ export default function Edit({ attributes, setAttributes }) {
 
 				{posts && posts.length > 0 && (
 					<div
-						className="wp-block-example_plugin-example-plugin-collection__items"
+						className="wp-block-{{namespace}}-{{slug}}-collection__items"
 						style={gridStyle}
 					>
 						{posts.map((post) => (
 							<article
 								key={post.id}
-								className="wp-block-example_plugin-example-plugin-collection__item"
+								className="wp-block-{{namespace}}-{{slug}}-collection__item"
 							>
 								{displayFeaturedImage &&
 									post._embedded?.[
 										'wp:featuredmedia'
 									]?.[0] && (
-										<div className="wp-block-example_plugin-example-plugin-collection__image">
+										<div className="wp-block-{{namespace}}-{{slug}}-collection__image">
 											<img
 												src={
 													post._embedded[
@@ -239,22 +239,22 @@ export default function Edit({ attributes, setAttributes }) {
 											/>
 										</div>
 									)}
-								<div className="wp-block-example_plugin-example-plugin-collection__content">
+								<div className="wp-block-{{namespace}}-{{slug}}-collection__content">
 									{displayTitle && (
-										<h3 className="wp-block-example_plugin-example-plugin-collection__title">
+										<h3 className="wp-block-{{namespace}}-{{slug}}-collection__title">
 											{post.title.rendered}
 										</h3>
 									)}
 									{displayExcerpt && (
 										<div
-											className="wp-block-example_plugin-example-plugin-collection__excerpt"
+											className="wp-block-{{namespace}}-{{slug}}-collection__excerpt"
 											dangerouslySetInnerHTML={{
 												__html: post.excerpt.rendered,
 											}}
 										/>
 									)}
 									{displayMeta && (
-										<div className="wp-block-example_plugin-example-plugin-collection__meta">
+										<div className="wp-block-{{namespace}}-{{slug}}-collection__meta">
 											<time>
 												{new Date(
 													post.date

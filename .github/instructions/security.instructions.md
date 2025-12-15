@@ -383,12 +383,3 @@ public function test_nonce_verification() {
     $this->assertFalse( wp_verify_nonce( $nonce, 'wrong_action' ) );
 }
 ```
-
-## See Also
-
-- [WordPress Security Handbook](https://developer.wordpress.org/plugins/security/)
-- [Data Validation](https://developer.wordpress.org/plugins/security/data-validation/)
-- [Data Sanitization](https://developer.wordpress.org/plugins/security/sanitizing-input/)
-- [Data Escaping](https://developer.wordpress.org/plugins/security/securing-output/)
-- [Nonces](https://developer.wordpress.org/plugins/security/nonces/)
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/)

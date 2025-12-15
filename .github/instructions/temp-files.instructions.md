@@ -135,8 +135,3 @@ The root `.gitignore` file contains entries to prevent the contents of `tmp/` fr
 
 -   Reporting Instructions - Describes how `tmp/reports/` is used to stage report artifacts.
 -   Logging Instructions - Differentiates between permanent logs in `logs/` and temporary logs in `tmp/logs/`.
-
-## See Also
-
-- .gitignore
-- folder-structure.instructions.md

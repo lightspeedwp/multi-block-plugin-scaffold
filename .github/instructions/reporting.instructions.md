@@ -697,8 +697,3 @@ Before committing any report:
 ✅ **Enforced** - Rules apply to all developers and agents
 
 Reports are historical records of analysis, migrations, and organizational work. Follow these guidelines to maintain clear, organized, and discoverable reporting infrastructure.
-
-## See Also
-
-- docs/REPORTING.md
-- instructions.instructions.md

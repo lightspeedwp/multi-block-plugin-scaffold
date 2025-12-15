@@ -412,10 +412,6 @@ Check out the [WP Admin CSS Audit](https://wordpress.github.io/css-audit/public/
 - [ ] Stylelint passes without errors.
 - [ ] Colours and spacing reference `theme.json` presets where available.
 
-# References
-
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/>
-
 ## See Also
 
-- README.md
+- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/>

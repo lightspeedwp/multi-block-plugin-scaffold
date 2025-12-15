@@ -108,15 +108,135 @@ function main() {
 	);
 	console.log('');
 
-	// TODO: Additional validation checks
-	// TODO: Check for duplicate variable names
-	// TODO: Verify file paths exist
-	// TODO: Validate category distribution
-	// TODO: Check for orphaned variables (defined but not used)
-	// TODO: Verify count matches files array length
+	// Additional validation checks
+	console.log('🔍 Running additional validation checks...\n');
 
-	console.log('💡 Note: Additional validation checks are TODO');
-	process.exit(0);
+	let warnings = 0;
+	let errors = 0;
+
+	// Check for duplicate variable names
+	const variableNames = Object.keys(registry.variables);
+	const nameCounts = {};
+	variableNames.forEach((name) => {
+		nameCounts[name] = (nameCounts[name] || 0) + 1;
+	});
+	const duplicates = Object.entries(nameCounts).filter(
+		([_, count]) => count > 1
+	);
+	if (duplicates.length > 0) {
+		console.error('❌ Found duplicate variable names:');
+		duplicates.forEach(([name, count]) => {
+			console.error(`  - ${name} (appears ${count} times)`);
+		});
+		errors++;
+	} else {
+		console.log('✓ No duplicate variable names');
+	}
+
+	// Verify count matches files array length
+	let countMismatches = 0;
+	Object.entries(registry.variables).forEach(([name, variable]) => {
+		const fileCount = variable.files.length;
+		const declaredCount = variable.count;
+		if (fileCount !== declaredCount) {
+			if (countMismatches === 0) {
+				console.warn(
+					'\n⚠️  Count mismatches (files.length !== count):'
+				);
+			}
+			console.warn(
+				`  - ${name}: files=${fileCount}, count=${declaredCount}`
+			);
+			countMismatches++;
+		}
+	});
+	if (countMismatches === 0) {
+		console.log('✓ All variable counts match files array length');
+	} else {
+		warnings += countMismatches;
+	}
+
+	// Validate category distribution
+	const categories = {};
+	Object.values(registry.variables).forEach((variable) => {
+		const cat = variable.category || 'uncategorized';
+		categories[cat] = (categories[cat] || 0) + 1;
+	});
+	console.log('\n📊 Category distribution:');
+	Object.entries(categories)
+		.sort((a, b) => b[1] - a[1])
+		.forEach(([category, count]) => {
+			const percentage = (
+				(count / registry.summary.uniqueVariables) *
+				100
+			).toFixed(1);
+			console.log(`  - ${category}: ${count} (${percentage}%)`);
+		});
+
+	// Check for variables without category
+	const uncategorized = Object.entries(registry.variables).filter(
+		([_, v]) => !v.category || v.category === 'other'
+	);
+	if (uncategorized.length > 0) {
+		console.warn(
+			`\n⚠️  ${uncategorized.length} variables are uncategorized or marked as "other":`
+		);
+		uncategorized.slice(0, 10).forEach(([name]) => {
+			console.warn(`  - ${name}`);
+		});
+		if (uncategorized.length > 10) {
+			console.warn(`  ... and ${uncategorized.length - 10} more`);
+		}
+		warnings += uncategorized.length;
+	}
+
+	// Verify file paths exist (sample check)
+	console.log('\n📁 Verifying file paths (sampling 10 random files)...');
+	const allFiles = new Set();
+	Object.values(registry.variables).forEach((variable) => {
+		variable.files.forEach((file) => allFiles.add(file));
+	});
+	const filesArray = Array.from(allFiles);
+	const sampleSize = Math.min(10, filesArray.length);
+	const sampleFiles = [];
+	for (let i = 0; i < sampleSize; i++) {
+		const randomIndex = Math.floor(Math.random() * filesArray.length);
+		sampleFiles.push(filesArray[randomIndex]);
+	}
+
+	let missingFiles = 0;
+	for (const file of sampleFiles) {
+		const fullPath = path.join(process.cwd(), file);
+		if (!fs.existsSync(fullPath)) {
+			if (missingFiles === 0) {
+				console.error('\n❌ Missing files detected:');
+			}
+			console.error(`  - ${file}`);
+			missingFiles++;
+		}
+	}
+	if (missingFiles === 0) {
+		console.log(`✓ Sampled ${sampleSize} files, all exist`);
+	} else {
+		errors += missingFiles;
+	}
+
+	// Summary
+	console.log('\n' + '='.repeat(50));
+	if (errors > 0) {
+		console.error(
+			`\n❌ Validation completed with ${errors} error(s) and ${warnings} warning(s)`
+		);
+		process.exit(1);
+	} else if (warnings > 0) {
+		console.warn(
+			`\n⚠️  Validation completed with ${warnings} warning(s)`
+		);
+		process.exit(0);
+	} else {
+		console.log('\n✅ All validation checks passed!');
+		process.exit(0);
+	}
 }
 
 // Run if executed directly

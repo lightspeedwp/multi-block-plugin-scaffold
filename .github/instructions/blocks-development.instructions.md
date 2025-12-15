@@ -806,11 +806,3 @@ import { useState, useEffect, useCallback, useMemo } from '@wordpress/element';
 - For dynamic blocks, hit render endpoints or E2E tests to confirm server output.
 
 ---
-
-## See Also
-
-- [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
-- [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
-- [Block API Reference](https://developer.wordpress.org/block-editor/reference-guides/block-api/)
-- [Block Supports](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/)
-- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)

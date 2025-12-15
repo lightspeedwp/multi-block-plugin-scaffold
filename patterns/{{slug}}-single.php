@@ -1,14 +1,30 @@
 <?php
 /**
- * Title: Item Single
- * Slug: example_plugin/example-plugin-single
- * Categories: example-plugin
- * Keywords: single, example-plugin, post
- * Description: Single item content layout.
- * Viewport Width: 1200
+ * {{slug|pascalCase}} Single Pattern
+ *
+ * @package {{namespace}}
+ * @since 1.0.0
  */
-?>
-<!-- wp:group {"layout":{"type":"constrained"}} -->
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+return array(
+	'title'       => __( '{{name}} Single', '{{textdomain}}' ),
+	'slug'        => '{{namespace}}/{{slug}}-single',
+	'description' => __( 'Single item content layout.', '{{textdomain}}' ),
+	'categories'  => array( '{{textdomain}}' ),
+	'keywords'    => array(
+		__( 'single', '{{textdomain}}' ),
+		__( '{{slug}}', '{{textdomain}}' ),
+		__( 'post', '{{textdomain}}' ),
+	),
+	'blockTypes'  => array( 'core/post-content', 'core/group' ),
+	'postTypes'   => array( '{{slug}}' ),
+	'templateTypes' => array( 'single', 'single-{{slug}}' ),
+	'viewportWidth' => 1200,
+	'content'     => '<!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group">
 	<!-- wp:post-featured-image {"aspectRatio":"21/9"} /-->
 
@@ -16,7 +32,7 @@
 	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40)">
 		<!-- wp:post-title {"level":1} /-->
 
-		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"example_plugin/fields","args":{"key":"example-plugin_subtitle"}}}},"style":{"typography":{"fontSize":"1.25rem","fontStyle":"italic"},"color":{"text":"#666666"}}} -->
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"{{namespace}}/fields","args":{"key":"{{namespace}}_subtitle"}}}},"style":{"typography":{"fontSize":"1.25rem","fontStyle":"italic"},"color":{"text":"#666666"}}} -->
 		<p class="has-text-color" style="color:#666666;font-size:1.25rem;font-style:italic"></p>
 		<!-- /wp:paragraph -->
 
@@ -31,6 +47,7 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:pattern {"slug":"example_plugin/example-plugin-meta"} /-->
+	<!-- wp:pattern {"slug":"{{namespace}}/{{slug}}-meta"} /-->
 </div>
-<!-- /wp:group -->
+<!-- /wp:group -->',
+);

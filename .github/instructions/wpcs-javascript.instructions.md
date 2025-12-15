@@ -1198,7 +1198,3 @@ if ( typeof jQuery.fn.hoverIntent === 'undefined' ) {
 - [ ] ESLint passes without errors.
 - [ ] All exported functions/classes are documented with JSDoc.
 - [ ] Asynchronous code uses Promises or async/await instead of callbacks.
-
-## See Also
-
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/>

@@ -82,15 +82,22 @@ class Core {
 	 * @return void
 	 */
 	public function register_blocks() {
-		// Auto-register all blocks in src/blocks/.
-		$blocks_dir = {{namespace|upper}}_PLUGIN_DIR . 'build/blocks/';
+		// Auto-register all blocks in build/blocks/ (filtered for flexibility).
+		$default_dir = {{namespace|upper}}_PLUGIN_DIR . 'build/blocks/';
+		$blocks_dir = apply_filters( '{{slug}}_blocks_dir', $default_dir );
 
-		if ( is_dir( $blocks_dir ) ) {
-			$blocks = glob( $blocks_dir . '*/block.json' );
+		if ( ! is_dir( $blocks_dir ) ) {
+			return;
+		}
 
-			foreach ( $blocks as $block_json ) {
-				register_block_type( dirname( $block_json ) );
-			}
+		$blocks = glob( $blocks_dir . '*/block.json' );
+
+		if ( ! is_array( $blocks ) ) {
+			return;
+		}
+
+		foreach ( $blocks as $block_json ) {
+			register_block_type( dirname( $block_json ) );
 		}
 	}
 

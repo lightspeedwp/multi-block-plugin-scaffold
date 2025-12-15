@@ -68,7 +68,8 @@ function initializeLogging(slug) {
 		}
 	}
 
-	logStream = fs.createWriteStream(logFile, { flags: 'w' });
+	// Stream not needed - we'll write synchronously on close
+	logStream = true; // Flag to indicate logging is initialized
 }
 
 /**
@@ -96,29 +97,21 @@ function log(level, message, data = null) {
 	} else {
 		console.log(consoleMessage);
 	}
-
-	// Write to file if stream is initialized
-	if (logStream) {
-		try {
-			logStream.write(JSON.stringify(logEntries, null, 2));
-		} catch (error) {
-			console.error('Failed to write to log file:', error.message);
-		}
-	}
 }
 
 /**
  * Close log stream and finalize log file
  */
 function closeLogging() {
-	if (logStream) {
+	if (logFile && logEntries.length > 0) {
 		try {
-			logStream.write(JSON.stringify(logEntries, null, 2));
-			logStream.end();
+			// Write synchronously to ensure log persists
+			fs.writeFileSync(logFile, JSON.stringify(logEntries, null, 2), 'utf8');
 		} catch (error) {
-			console.error('Failed to finalize log file:', error.message);
+			console.error('Failed to write log file:', error.message);
 		}
 	}
+	logStream = null;
 }
 
 // Cleanup on exit
@@ -674,6 +667,9 @@ function generatePlugin(config, inPlace = false) {
 		'logs',
 		'tmp',
 		'reports',
+		'generated-plugins',
+		'output-plugin',
+		'output',
 		'.git',
 		'.github/reports',
 		'.github/agents',

@@ -905,7 +905,7 @@ Repository includes validation scripts in `scripts/`:
 - `check-markdown-references.js` - Validates internal links
 - `fix-instruction-references.js` - Updates cross-references
 
-## References
+## See Also
 
 - [CommonMark Specification](https://commonmark.org/)
 - [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
@@ -913,9 +913,3 @@ Repository includes validation scripts in `scripts/`:
 - [Keep a Changelog](https://keepachangelog.com/)
 - [Semantic Versioning](https://semver.org/)
 - [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-
-## See Also
-
-- readme.instructions.md
-- reporting.instructions.md
-- docs/README.md

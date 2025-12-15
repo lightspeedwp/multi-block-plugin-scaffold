@@ -268,17 +268,6 @@ Incorrect:
 - [ ] All form controls have associated labels.
 - [ ] Dynamic content is properly escaped in PHP files.
 
-# References
-
-- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/html/>
-
 ## See Also
 
-- wpcs-accessibility.instructions.md
-- wpcs-php.instructions.md
-- blocks-development.instructions.md
-- Store reusable components in the `parts/` directory.
-- Use descriptive filenames that reflect the component's purpose.
-- Keep template parts focused on a single responsibility.
-- Use proper comments to document template structure.
-- Prefer core blocks over custom HTML when possible.
+- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/html/>
