@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console, jsdoc/require-param-type */
 const fs = require('fs');
 const path = require('path');
 

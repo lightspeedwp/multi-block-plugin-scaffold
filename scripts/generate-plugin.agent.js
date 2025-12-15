@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console, jsdoc/require-param-type */
 
 /**
  * Multi-Block Plugin Scaffold Generator Agent

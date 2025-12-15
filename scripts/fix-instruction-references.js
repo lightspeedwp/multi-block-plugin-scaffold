@@ -5,7 +5,7 @@ const matter = require('gray-matter');
 
 const instructionsDir = path.resolve(__dirname, '../.github/instructions');
 
-function getAllowedReferences(fileName) {
+function getAllowedReferences() {
 	return ['../custom-instructions.md'];
 }
 
