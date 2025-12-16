@@ -118,8 +118,8 @@ if ( WP_DEBUG ) {
 
 // User-friendly error messages
 wp_die(
-    __( 'Something went wrong. Please try again later.', 'textdomain' ),
-    __( 'Error', 'textdomain' ),
+    __( 'Something went wrong. Please try again later.', '{{textdomain}}' ),
+    __( 'Error', '{{textdomain}}' ),
     array( 'response' => 500 )
 );
 ```
@@ -292,20 +292,22 @@ function my_plugin_render_custom_block( $attributes, $content, $block ) {
 
 ### Internationalization (i18n) Examples
 
+> **Note:** In examples, `'{{textdomain}}'` represents your plugin's actual text domain placeholder. When writing code for the scaffold, always use `'{{textdomain}}'` so the generator can replace it. In production plugin code, use your actual text domain (e.g., `'my-plugin'`).
+
 ```php
 // Use proper text domain consistently
-__( 'Text to translate', 'textdomain' );
-_e( 'Text to echo', 'textdomain' );
-_x( 'Text', 'Context for translators', 'textdomain' );
-_n( 'Singular', 'Plural', $count, 'textdomain' );
+__( 'Text to translate', '{{textdomain}}' );
+_e( 'Text to echo', '{{textdomain}}' );
+_x( 'Text', 'Context for translators', '{{textdomain}}' );
+_n( 'Singular', 'Plural', $count, '{{textdomain}}' );
 
 // For JavaScript strings
 wp_localize_script( 'my-script', 'myL10n', array(
     'ajaxurl' => admin_url( 'admin-ajax.php' ),
     'nonce' => wp_create_nonce( 'my_ajax_nonce' ),
     'strings' => array(
-        'loading' => __( 'Loading...', 'textdomain' ),
-        'error' => __( 'An error occurred', 'textdomain' ),
+        'loading' => __( 'Loading...', '{{textdomain}}' ),
+        'error' => __( 'An error occurred', '{{textdomain}}' ),
     )
 ) );
 ```
@@ -387,7 +389,7 @@ function my_plugin_rest_permission_check() {
 
 ## Translation & Internationalization
 
-- Use correct text domain for all translations: `__('text', 'lsx-theme')`.
+- Use correct text domain for all translations: `__( 'text', '{{textdomain}}' )` (use your plugin's actual text domain, represented here as `{{textdomain}}` placeholder).
 - Ensure all user-visible strings are translatable.
 - Use proper escaping functions with translations: `esc_html__()`, `esc_attr__()`.
 - For HTML with translations, use `esc_html_e()` or appropriate alternatives.

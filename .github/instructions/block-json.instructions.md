@@ -304,7 +304,9 @@ The `block.json` file is the canonical way to register blocks in WordPress. This
 
 ## Render Callback (Dynamic Blocks)
 
-### PHP Rendering
+### WordPress 6.5+ File-based Rendering (RECOMMENDED)
+
+**This is the PRIMARY method** for dynamic blocks in WordPress 6.5+. Use `render` property in block.json:
 
 ```json
 {
@@ -312,25 +314,57 @@ The `block.json` file is the canonical way to register blocks in WordPress. This
 }
 ```
 
+**render.php** receives these variables automatically:
+- `$attributes` - Block attributes array
+- `$content` - Block inner content (for dynamic InnerBlocks)
+- `$block` - WP_Block instance with context and metadata
+
 ```php
 <?php
 /**
- * Render callback for dynamic block
+ * Dynamic block rendering template
  *
- * @param array $attributes Block attributes
- * @param string $content Block content
- * @param WP_Block $block Block instance
+ * @package {{namespace}}
+ * @var array    $attributes Block attributes
+ * @var string   $content    Block inner content
+ * @var WP_Block $block      Block instance
  */
-function render_callback( $attributes, $content, $block ) {
-    $alignment = $attributes['alignment'] ?? 'left';
 
+$alignment = $attributes['alignment'] ?? 'left';
+$post_id = $block->context['postId'] ?? get_the_ID();
+
+?>
+<div class="wp-block-{{namespace}}-{{slug}}-card align<?php echo esc_attr( $alignment ); ?>">
+    <?php echo wp_kses_post( $content ); ?>
+</div>
+```
+
+### Legacy PHP Callback (WordPress < 6.5 - DEPRECATED)
+
+**Only use if you need to support WordPress versions before 6.5.** Register callback in PHP:
+
+```php
+register_block_type( 'namespace/block-name', array(
+    'render_callback' => 'namespace_render_block_callback',
+) );
+
+function namespace_render_block_callback( $attributes, $content, $block ) {
     return sprintf(
-        '<div class="wp-block-namespace-block align%s">%s</div>',
-        esc_attr( $alignment ),
+        '<div class="wp-block-namespace-block">%s</div>',
         wp_kses_post( $content )
     );
 }
 ```
+
+### Version Compatibility Matrix
+
+| WordPress Version | Render Method | Support Status |
+|-------------------|---------------|----------------|
+| **6.5+** | `"render": "file:./render.php"` | ✅ Recommended |
+| **6.0 - 6.4** | `render_callback` in PHP | ⚠️ Legacy support |
+| **< 6.0** | `render_callback` in PHP | ❌ Not scaffold target |
+
+**Scaffold Standard:** Always use `"render": "file:./render.php"` in block.json. This is cleaner, more maintainable, and aligns with WordPress core direction.
 
 ### Dynamic Block Best Practices
 
