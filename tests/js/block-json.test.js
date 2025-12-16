@@ -11,9 +11,13 @@ const path = require('path');
 
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
+const https = require('https');
 
-const { loadConfigFile, applyDefaults, replaceMustacheVars } = require('../../scripts/generate-plugin');
-const blockSchema = require('../fixtures/block.schema.json');
+const {
+	loadConfigFile,
+	applyDefaults,
+	replaceMustacheVars,
+} = require('../../scripts/generate-plugin');
 
 const FIXTURE_PATH = path.join(
 	__dirname,
@@ -32,12 +36,21 @@ const blockDirectories = fs
 	.map((entry) => entry.name);
 
 describe('Block metadata templates', () => {
+	const schemaPath = path.join(
+		__dirname,
+		'..',
+		'..',
+		'.github',
+		'schemas',
+		'block.json'
+	);
+	const localSchema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
 	const ajv = new Ajv({ allErrors: true, strict: false });
 	addFormats(ajv);
-	const validate = ajv.compile(blockSchema);
+	const validate = ajv.compile(localSchema);
 
 	blockDirectories.forEach((blockName) => {
-		it(`validates ${blockName}/block.json`, () => {
+		it(`validates ${blockName}/block.json against local schema`, () => {
 			const blockPath = path.join(BLOCKS_DIR, blockName, 'block.json');
 			const raw = fs.readFileSync(blockPath, 'utf8');
 			const rendered = replaceMustacheVars(raw, pluginConfig);
@@ -47,8 +60,7 @@ describe('Block metadata templates', () => {
 			if (!valid) {
 				const errList = (validate.errors || [])
 					.map(
-						(err) =>
-							`${err.instancePath || 'root'}: ${err.message}`
+						(err) => `${err.instancePath || 'root'}: ${err.message}`
 					)
 					.join('; ');
 				throw new Error(

@@ -374,8 +374,108 @@ Do not include any production opinions; keep everything clearly marked as exampl
 - Add new binding placeholder: `{{binding_example}}` documented in `scripts/mustache-variables-registry.json`.
 - New template part placeholder: `templates/parts/{{slug}}-cta.php` with namespaced CSS class `{{namespace}}-cta`.
 
-## Validation
+## Mustache Placeholder Preservation Checklist
 
-- Run `node scripts/scan-mustache-variables.js` after adding placeholders.
-- Run `npm run lint` and `composer lint` to ensure scaffolding code remains valid.
-- Generate a sample plugin to confirm no raw placeholders or missing files remain.
+Before committing any changes to scaffold files, ensure:
+
+### ✅ Core Placeholders Never Hard-coded
+
+- [ ] `{{namespace}}` - Used for PHP namespaces, block registration, CSS classes
+- [ ] `{{slug}}` - Used for post types, taxonomies, file/folder names, URLs
+- [ ] `{{textdomain}}` - Used for all `__()`, `_e()`, `esc_html__()` translation functions
+- [ ] `{{name}}` - Used for user-facing display names
+- [ ] `{{name_plural}}`, `{{name_singular}}` - Used for CPT labels
+- [ ] `{{author}}`, `{{author_uri}}`, `{{version}}`, `{{license}}` - Used in plugin headers
+
+### ✅ Template Files Preserve Placeholders
+
+- [ ] **Patterns** (`patterns/*.php`): All CSS classes use `{{namespace}}` and `{{slug}}`
+- [ ] **Templates** (`templates/*.html`): Block references use `{{namespace}}/{{slug}}-*`
+- [ ] **Template Parts** (`template-parts/*.html`): Taxonomy references use `{{slug}}_category`
+- [ ] **Block render.php**: ACF field names use `{{namespace}}_field_name` format
+- [ ] **Block edit.js**: CSS classes follow `wp-block-{{namespace}}-{{slug}}-*` pattern
+- [ ] **Block view.js**: Selectors dynamically construct class names from block attributes
+
+### ✅ Common Hard-coding Mistakes to Avoid
+
+❌ **DON'T DO THIS:**
+```php
+// BAD: Hard-coded namespace
+namespace example_plugin\classes;
+$field = get_field( 'example_plugin_subtitle' );
+
+// BAD: Hard-coded CSS class
+<div className="wp-block-example_plugin-example_plugin-card">
+
+// BAD: Hard-coded text domain
+__( 'View All Tours', 'example-plugin' )
+```
+
+✅ **DO THIS:**
+```php
+// GOOD: Mustache placeholders
+namespace {{namespace|lowerCase}}\classes;
+$field = get_field( '{{namespace}}_subtitle' );
+
+// GOOD: Dynamic placeholders
+<div className="wp-block-{{namespace}}-{{slug}}-card">
+
+// GOOD: Template placeholder
+__( 'View All {{name_plural}}', '{{textdomain}}' )
+```
+
+### ✅ Validation Steps
+
+After making changes to scaffold templates:
+
+1. **Scan for new variables:**
+   ```bash
+   node scripts/scan-mustache-variables.js
+   ```
+
+2. **Validate registry integrity:**
+   ```bash
+   node scripts/validate-mustache-registry.js
+   ```
+
+3. **Run all linting:**
+   ```bash
+   npm run lint
+   composer lint
+   ```
+
+4. **Generate test plugin:**
+   ```bash
+   node scripts/generate-plugin.js --config tests/fixtures/plugin-config.test.json
+   ```
+
+5. **Check generated output has NO unreplaced mustache variables:**
+   ```bash
+   grep -r "{{" generated-plugins/test-plugin/ | grep -v node_modules | grep -v build
+   ```
+   Should return no results (except in comments explaining the system).
+
+### ✅ Documentation Requirements
+
+When adding new placeholders:
+
+- [ ] Add to `scripts/mustache-variables-registry.json` with:
+  - Variable name
+  - Description
+  - Category (namespace, text, meta)
+  - Example value
+  - All files where it's used
+- [ ] Update `docs/GENERATE-PLUGIN.md` if it's user-facing
+- [ ] Add example to this instruction file showing correct usage
+- [ ] Update `.github/agents/generate-plugin.agent.md` if it affects the generator interface
+
+### ✅ Risk Prevention
+
+**HIGH RISK:** These files are most likely to accidentally introduce hard-coded values:
+
+- `src/blocks/*/edit.js` - Block editor components with CSS class strings
+- `src/blocks/*/render.php` - Dynamic block rendering with ACF fields
+- `patterns/*.php` - Block patterns with inline styles and classes
+- `inc/class-*.php` - PHP classes with namespaces and text domains
+
+Always verify these files after editing.

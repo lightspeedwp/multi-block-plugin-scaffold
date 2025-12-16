@@ -376,7 +376,7 @@ function my_plugin_rest_permission_check() {
 ## PHP Block & Theme Setup Instructions
 
 - Follow WordPress coding standards: <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/>
-- Use 4 spaces for indentation, no tabs
+- Use tabs for indentation (WordPress PHP standard)
 
 ## Pattern Registration
 

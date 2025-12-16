@@ -128,7 +128,8 @@ Use spaces liberally throughout your code. "When in doubt, space it out."
 
 These rules encourage liberal spacing for improved developer readability. The minification process creates a file that is optimized for browsers to read and process.
 
-- Indentation with tabs.
+- Indentation with tabs for vanilla JavaScript (WordPress core standard).
+- For React/JSX files, use 2 spaces to align with @wordpress/scripts and modern tooling.
 - No whitespace at the end of line or on blank lines.
 - Lines should usually be no longer than 80 characters, and should not exceed 100 (counting tabs as 4 spaces). _This is a "soft" rule, but long lines generally indicate unreadable or disorganized code._
 - `if`/`else`/`for`/`while`/`try` blocks should always use braces, and always go on multiple lines.
@@ -558,7 +559,7 @@ function getKeyCode(keyCode) {
 ## Language & Frameworks
 
 - **ES Version**: ES2020+ with Babel transpilation
-- **Indentation**: 2 spaces (conform to WordPress standards)
+- **Indentation**: 2 spaces for React/JSX files (Gutenberg standard), tabs for vanilla JS (WordPress core standard)
 - **Quotes**: Single quotes (`'`) for strings, template literals for interpolation
 - **Semicolons**: Required at end of statements
 - **Naming**: `camelCase` for variables/functions, `PascalCase` for classes/components
