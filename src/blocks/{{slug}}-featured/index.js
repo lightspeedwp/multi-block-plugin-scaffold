@@ -13,7 +13,7 @@
  * @see ./save.js Client-side save function
  * @see ./render.php Server-side rendering with featured meta query
  *
- * @package
+ * @package {{namespace}}
  * @since 1.0.0
  */
 

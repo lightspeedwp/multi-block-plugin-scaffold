@@ -135,8 +135,12 @@ function getFilesWithMustacheVars(
 	});
 
 	return files.filter((file) => {
-		const content = fs.readFileSync(file, 'utf8');
-		return /\{\{[a-z_]+\}\}/i.test(content);
+		   const stat = fs.statSync(file);
+		   if (!stat.isFile()) {
+			   return false;
+		   }
+		   const content = fs.readFileSync(file, 'utf8');
+		   return /\{\{[a-z_]+\}\}/i.test(content);
 	});
 }
 

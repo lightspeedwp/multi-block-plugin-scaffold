@@ -14,9 +14,9 @@ const {
 	validateFieldTypes,
 	validateTaxonomies,
 	checkBestPractices,
-} = require('../../scripts/validate-plugin-config');
+} = require('./validate-plugin-config');
 
-const { loadConfigFile } = require('../../scripts/generate-plugin');
+const { loadConfigFile } = require('./generate-plugin');
 
 const FIXTURE_PATH = path.join(
 	__dirname,

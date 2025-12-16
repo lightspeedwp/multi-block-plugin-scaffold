@@ -1,7 +1,7 @@
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
 
-const blockSchema = require('../fixtures/block.schema.json');
+const blockSchema = require('../tests/fixtures/block.schema.json');
 
 describe('Block schema fixture', () => {
 	const ajv = new Ajv({ allErrors: true, strict: false });

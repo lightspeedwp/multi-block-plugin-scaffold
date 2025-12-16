@@ -22,7 +22,7 @@ const {
 	validateConfig,
 	loadSchema,
 	generatePlugin,
-} = require('../../scripts/generate-plugin');
+} = require('./generate-plugin');
 
 const ROOT_DIR = path.resolve(__dirname, '..', '..');
 const CLI_PATH = path.join(ROOT_DIR, 'scripts', 'generate-plugin.js');

@@ -11,7 +11,7 @@ describe('Entry point', () => {
 	});
 
 	it('registers every block export', () => {
-		require('../../src/index');
+		require('../src/index');
 
 		expect(global.wp.blocks.registerBlockType).toHaveBeenCalledTimes(4);
 	});

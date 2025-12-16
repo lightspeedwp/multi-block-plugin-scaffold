@@ -16,7 +16,7 @@ const {
 	loadConfigFile,
 	applyDefaults,
 	replaceMustacheVars,
-} = require('../../scripts/generate-plugin');
+} = require('./generate-plugin');
 
 const FIXTURE_PATH = path.join(
 	__dirname,

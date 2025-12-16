@@ -17,7 +17,7 @@ const {
 	replaceMustacheVars,
 	replaceMustacheVarsInFile,
 	getFilesWithMustacheVars,
-} = require('../../scripts/dry-run-config');
+} = require('./dry-run-config');
 
 const TEMP_DIR = path.join(__dirname, '..', 'tmp', 'dry-run-tests');
 const ROOT_DIR = path.resolve(__dirname, '..', '..');

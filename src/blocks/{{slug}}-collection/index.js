@@ -14,7 +14,7 @@
  * @see ./render.php Server-side rendering with query loop
  * @see ./variations.js Block variations (grid, list, masonry)
  *
- * @package
+ * @package {{namespace}}
  * @since 1.0.0
  */
 

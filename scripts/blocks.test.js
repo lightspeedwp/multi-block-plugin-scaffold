@@ -6,7 +6,7 @@
 
 const { render, screen, fireEvent } = require('@testing-library/react');
 const { useSelect } = require('@wordpress/data');
-const CardEdit = require('../../src/blocks/{{slug}}-card/edit').default;
+const CardEdit = require('../src/blocks/{{slug}}-card/edit').default;
 
 describe('Example Plugin Blocks', () => {
 	beforeEach(() => {
