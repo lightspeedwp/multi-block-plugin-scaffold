@@ -10,7 +10,7 @@ const { spawn } = require('child_process');
 
 jest.mock('fs');
 
-const AGENT_SCRIPT = path.join(__dirname, '../generate-plugin.agent.js');
+const AGENT_SCRIPT = path.join(__dirname, '../agents/generate-plugin.agent.js');
 
 /* eslint-disable jsdoc/check-line-alignment */
 /**
@@ -59,6 +59,10 @@ describe('generate-plugin.agent.js', () => {
 		fs.writeFileSync = jest.fn();
 		fs.existsSync = jest.fn().mockReturnValue(false);
 		fs.readFileSync = jest.fn();
+		console.log.mockClear();
+		console.info.mockClear();
+		console.warn.mockClear();
+		console.error.mockClear();
 	});
 
 	describe('Command Line Arguments', () => {
@@ -68,6 +72,7 @@ describe('generate-plugin.agent.js', () => {
 			expect(result.stdout).toContain('Usage:');
 			expect(result.stdout).toContain('Interactive:');
 			expect(result.stdout).toContain('With JSON:');
+			expect(console).toHaveLogged();
 		});
 
 		it('prints the schema when --schema is supplied', async () => {
@@ -75,6 +80,7 @@ describe('generate-plugin.agent.js', () => {
 			expect(result.code).toBe(0);
 			expect(result.stdout).toContain('"$schema"');
 			expect(result.stdout).toContain('"type": "object"');
+			expect(console).toHaveLogged();
 		});
 	});
 
@@ -89,6 +95,7 @@ describe('generate-plugin.agent.js', () => {
 			const result = await runAgent(['--json'], { input: validConfig });
 			expect(result.code).toBe(0);
 			expect(result.stderr).toBe('');
+			expect(console).toHaveLogged();
 		});
 
 		it('rejects invalid JSON that is provided via stdin', async () => {
@@ -97,6 +104,7 @@ describe('generate-plugin.agent.js', () => {
 			});
 			expect(result.code).not.toBe(0);
 			expect(result.stderr).toContain('Invalid JSON');
+			expect(console).toHaveErrored();
 		});
 
 		it('validates structure while running in JSON mode', async () => {
@@ -110,6 +118,7 @@ describe('generate-plugin.agent.js', () => {
 			});
 			expect(result.code).not.toBe(0);
 			expect(result.stderr).toContain('required');
+			expect(console).toHaveErrored();
 		});
 	});
 
@@ -127,6 +136,7 @@ describe('generate-plugin.agent.js', () => {
 				result.stdout.includes(symbol)
 			);
 			expect(hasSuccessIndicator).toBe(true);
+			expect(console).toHaveLogged();
 		});
 
 		it('fails when the configuration format is invalid', async () => {
@@ -137,6 +147,7 @@ describe('generate-plugin.agent.js', () => {
 
 			const result = await runAgent(['--validate', invalidConfig]);
 			expect(result.code).not.toBe(0);
+			expect(console).toHaveErrored();
 		});
 	});
 });
