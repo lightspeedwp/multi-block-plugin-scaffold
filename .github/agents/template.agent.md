@@ -1,14 +1,15 @@
 ---
 name: "Template: Agent Specification"
 description: "Standard specification template for LightSpeed multi-block plugin scaffold agents, covering role, tooling, inputs, outputs, and guardrails."
-version: "v1.1"
-last_updated: "YYYY-MM-DD"
+version: "v1.2"
+last_updated: "2025-12-16"
 owners: ["LightSpeedWP Engineering"]
 status: "draft"
 apply_to: [".github/agents/*.agent.md"]
 file_type: "template"
 tags: ["agent", "spec", "template", "copilot"]
 tools: ["Copilot Agents"]
+permissions: ["read"]
 metadata:
   guardrails: "Agents must never perform destructive or irreversible actions without explicit confirmation and must follow AGENTS.md."
 ---

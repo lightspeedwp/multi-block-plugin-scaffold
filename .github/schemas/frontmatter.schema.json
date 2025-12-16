@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://lightspeedwp.com/schemas/agent-frontmatter.schema.json",
+  "title": "Agent Specification Frontmatter Schema",
+  "description": "Schema for validating frontmatter metadata in agent specification files",
+  "type": "object",
+  "required": ["name", "description", "tools"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the agent",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the agent's purpose and capabilities",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the agent specification",
+      "pattern": "^v?\\d+\\.\\d+(\\.\\d+)?$",
+      "examples": ["v1.0", "v1.0.0", "1.0.0"]
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO 8601 date when the specification was last updated",
+      "format": "date",
+      "examples": ["2025-12-16", "2025-01-15"]
+    },
+    "owners": {
+      "type": "array",
+      "description": "List of teams or individuals responsible for maintaining this agent",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      },
+      "minItems": 1,
+      "examples": [["LightSpeedWP Engineering"], ["Platform Team", "DevOps"]]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the agent specification",
+      "enum": ["draft", "active", "deprecated", "archived"],
+      "default": "draft"
+    },
+    "apply_to": {
+      "type": "array",
+      "description": "File patterns or paths where this agent applies",
+      "items": {
+        "type": "string"
+      },
+      "examples": [[".github/agents/*.agent.md"], ["**/*.md"]]
+    },
+    "file_type": {
+      "type": "string",
+      "description": "Type of specification file",
+      "enum": ["agent", "template", "instructions", "schema"],
+      "default": "agent"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Searchable tags for categorizing agents",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "examples": [["generator", "wordpress", "testing"], ["release", "ci", "automation"]]
+    },
+    "tools": {
+      "type": "array",
+      "description": "List of tools the agent is explicitly allowed to use",
+      "items": {
+        "type": "string",
+        "enum": [
+          "semantic_search",
+          "read_file",
+          "grep_search",
+          "file_search",
+          "run_in_terminal",
+          "create_file",
+          "update_file",
+          "delete_file",
+          "move_file",
+          "list_directory",
+          "github_api",
+          "wp_cli",
+          "npm",
+          "composer",
+          "git",
+          "Copilot Agents",
+          "Browser",
+          "Terminal"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "permissions": {
+      "type": "array",
+      "description": "Fine-grained permissions defining what the agent can access and modify. These permissions gate agent actions and should be granted conservatively.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "read",
+          "write",
+          "execute",
+          "shell",
+          "filesystem",
+          "network",
+          "github:repo",
+          "github:issues",
+          "github:pulls",
+          "github:workflows",
+          "github:checks",
+          "github:actions"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1,
+      "examples": [
+        ["read", "write", "filesystem"],
+        ["read", "execute", "github:repo", "github:pulls"],
+        ["read", "write", "shell", "filesystem", "network"]
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for the agent",
+      "properties": {
+        "guardrails": {
+          "type": "string",
+          "description": "Summary of non-negotiable safety rules and constraints",
+          "minLength": 10
+        },
+        "requires_confirmation": {
+          "type": "boolean",
+          "description": "Whether agent actions require explicit user confirmation",
+          "default": false
+        },
+        "supports_dry_run": {
+          "type": "boolean",
+          "description": "Whether agent supports dry-run mode for testing",
+          "default": false
+        },
+        "rate_limit": {
+          "type": "object",
+          "description": "Rate limiting configuration for agent operations",
+          "properties": {
+            "max_requests": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "window_seconds": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "Related documentation, specs, or guides",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        ["../../AGENTS.md", "../instructions/agent-spec.instructions.md"],
+        ["../custom-instructions.md", "https://developer.wordpress.org/"]
+      ]
+    }
+  },
+  "additionalProperties": false
+}
