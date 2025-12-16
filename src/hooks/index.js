@@ -5,7 +5,7 @@
  * These hooks provide convenient access to WordPress data, ACF/meta fields,
  * and component-specific functionality.
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 

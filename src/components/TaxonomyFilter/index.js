@@ -7,7 +7,7 @@
  * @see ./TaxonomyFilter.js Component implementation
  * @see ./style.scss Component styles
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 

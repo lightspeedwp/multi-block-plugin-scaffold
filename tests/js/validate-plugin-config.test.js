@@ -47,7 +47,11 @@ describe('Plugin configuration validation', () => {
 	test('validateFieldTypes reports invalid definitions', () => {
 		const config = {
 			fields: [
-				{ name: 'field_one', label: 'Invalid field', type: 'unsupported' },
+				{
+					name: 'field_one',
+					label: 'Invalid field',
+					type: 'unsupported',
+				},
 				{ name: 'choices', label: 'Needs options', type: 'select' },
 			],
 		};
@@ -57,7 +61,7 @@ describe('Plugin configuration validation', () => {
 		expect(errors).toEqual(
 			expect.arrayContaining([
 				expect.stringContaining(
-					"Field at index 0 has invalid type: unsupported"
+					'Field at index 0 has invalid type: unsupported'
 				),
 				expect.stringContaining(
 					"Field 'choices' of type 'select' requires 'choices' property"
@@ -104,7 +108,9 @@ describe('Plugin configuration validation', () => {
 			expect.arrayContaining([
 				"textdomain 'different-domain' should match slug 'example-plugin'",
 				"namespace 'exampleplugin' should be 'example_plugin' (slug with underscores)",
-				expect.stringContaining("cpt_slug 'very-long-custom-post-type-slug'"),
+				expect.stringContaining(
+					"cpt_slug 'very-long-custom-post-type-slug'"
+				),
 				'No blocks defined - consider adding at least one block',
 				'No templates defined - consider adding at least one template',
 			])

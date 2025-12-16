@@ -11,7 +11,6 @@ const path = require('path');
 
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
-const https = require('https');
 
 const {
 	loadConfigFile,

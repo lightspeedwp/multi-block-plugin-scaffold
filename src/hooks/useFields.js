@@ -3,7 +3,7 @@
  *
  * Custom hook for accessing all ACF or custom meta field values from a post.
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 
@@ -16,8 +16,8 @@ import { useSelect } from '@wordpress/data';
  * access all custom field data without needing to query individual fields. Gracefully
  * handles missing posts by returning an empty object. Prioritizes ACF fields if available.
  *
- * @param {number}      postId   Post ID to fetch fields from.
- * @param {string}      postType Post type slug. Default: '{{cpt_slug}}'.
+ * @param {number} postId   Post ID to fetch fields from.
+ * @param {string} postType Post type slug. Default: '{{cpt_slug}}'.
  *
  * @return {Object} Hook return value:
  *   - fields: {Object} Field data object containing all ACF/meta fields, or empty object.

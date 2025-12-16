@@ -3,7 +3,7 @@
  *
  * Custom hook for fetching taxonomy terms with configurable query options.
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 
@@ -18,9 +18,9 @@ import { useSelect } from '@wordpress/data';
  *
  * @param {string} taxonomy Taxonomy slug to query. Default: 'example-plugin_category'.
  * @param {Object} args     Additional query arguments to merge with defaults.
- *   - per_page: {number} Number of terms to fetch (default: 100).
- *   - hide_empty: {boolean} Whether to hide empty terms (default: false).
- *   - Any other REST API query parameters supported by the taxonomy endpoint.
+ *                          - per_page: {number} Number of terms to fetch (default: 100).
+ *                          - hide_empty: {boolean} Whether to hide empty terms (default: false).
+ *                          - Any other REST API query parameters supported by the taxonomy endpoint.
  *
  * @return {Object} Hook return value:
  *   - terms: {Array} Array of term objects from REST API, or undefined if loading.

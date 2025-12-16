@@ -179,10 +179,14 @@ describe('Dry Run CLI commands', () => {
 
 	test('replace command substitutes mustache variables', () => {
 		const templatePath = path.join(CLI_TEMP_DIR, 'replace.txt');
-		const result = spawnSync('node', [CLI_SCRIPT, 'replace', templatePath], {
-			encoding: 'utf8',
-			cwd: ROOT_DIR,
-		});
+		const result = spawnSync(
+			'node',
+			[CLI_SCRIPT, 'replace', templatePath],
+			{
+				encoding: 'utf8',
+				cwd: ROOT_DIR,
+			}
+		);
 
 		expect(result.status).toBe(0);
 		expect(result.stdout.trim()).toBe('Name: Example Plugin');

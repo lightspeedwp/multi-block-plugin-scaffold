@@ -33,17 +33,17 @@ export default function Edit({ attributes, setAttributes, context }) {
 
 	const post = useSelect(
 		(select) => {
-			if ( ! postId ) {
+			if (!postId) {
 				return null;
 			}
 
-			return select( 'core' ).getEntityRecord(
+			return select('core').getEntityRecord(
 				'postType',
 				context.postType || '{{cpt_slug}}',
 				postId
 			);
 		},
-		[ postId, context.postType ]
+		[postId, context.postType]
 	);
 
 	const featuredMedia = useSelect(

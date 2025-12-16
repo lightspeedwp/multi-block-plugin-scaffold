@@ -48,7 +48,9 @@ const FIXTURE_PATH = path.join(
 describe('generate-plugin helpers', () => {
 	test('sanitizeInput canonicalises slug, namespace, name, url, and version', () => {
 		expect(sanitizeInput(' Tour__Plugin++ ', 'slug')).toBe('tour-plugin');
-		expect(sanitizeInput('Tour Operator', 'namespace')).toBe('tour_operator');
+		expect(sanitizeInput('Tour Operator', 'namespace')).toBe(
+			'tour_operator'
+		);
 		expect(sanitizeInput('  sample name ', 'name')).toBe('Sample Name');
 		expect(sanitizeInput('example.com', 'url')).toBe('https://example.com');
 		expect(sanitizeInput('not-a-url', 'url')).toBe('https://not-a-url');
@@ -84,10 +86,18 @@ describe('generate-plugin helpers', () => {
 	test('applyFilter handles text transformations', () => {
 		expect(applyFilter('example plugin', 'upper')).toBe('EXAMPLE PLUGIN');
 		expect(applyFilter('Example Plugin', 'lower')).toBe('example plugin');
-		expect(applyFilter('example-plugin', 'pascalCase')).toBe('ExamplePlugin');
-		expect(applyFilter('example-plugin', 'camelCase')).toBe('examplePlugin');
-		expect(applyFilter('examplePlugin', 'kebabCase')).toBe('example-plugin');
-		expect(applyFilter('examplePlugin', 'snakeCase')).toBe('example_plugin');
+		expect(applyFilter('example-plugin', 'pascalCase')).toBe(
+			'ExamplePlugin'
+		);
+		expect(applyFilter('example-plugin', 'camelCase')).toBe(
+			'examplePlugin'
+		);
+		expect(applyFilter('examplePlugin', 'kebabCase')).toBe(
+			'example-plugin'
+		);
+		expect(applyFilter('examplePlugin', 'snakeCase')).toBe(
+			'example_plugin'
+		);
 		expect(applyFilter('value', 'unknown')).toBe('value');
 	});
 
@@ -127,7 +137,10 @@ describe('generate-plugin helpers', () => {
 		expect(result.valid).toBe(false);
 		expect(result.errors).toEqual(
 			expect.arrayContaining([
-				expect.objectContaining({ instancePath: '', message: expect.any(String) }),
+				expect.objectContaining({
+					instancePath: '',
+					message: expect.any(String),
+				}),
 			])
 		);
 	});
@@ -161,11 +174,15 @@ describe('generate-plugin CLI commands', () => {
 	});
 
 	test('--validate succeeds with a valid config file', () => {
-		const result = spawnSync('node', [CLI_PATH, '--validate', FIXTURE_PATH], {
-			encoding: 'utf8',
-			cwd: ROOT_DIR,
-			env: CLI_ENV,
-		});
+		const result = spawnSync(
+			'node',
+			[CLI_PATH, '--validate', FIXTURE_PATH],
+			{
+				encoding: 'utf8',
+				cwd: ROOT_DIR,
+				env: CLI_ENV,
+			}
+		);
 
 		expect(result.status).toBe(0);
 		expect(result.stdout).toContain('Configuration is valid');
@@ -179,16 +196,18 @@ describe('generate-plugin CLI commands', () => {
 			'utf8'
 		);
 
-		const result = spawnSync('node', [CLI_PATH, '--validate', INVALID_CONFIG_PATH], {
-			encoding: 'utf8',
-			cwd: ROOT_DIR,
-			env: CLI_ENV,
-		});
+		const result = spawnSync(
+			'node',
+			[CLI_PATH, '--validate', INVALID_CONFIG_PATH],
+			{
+				encoding: 'utf8',
+				cwd: ROOT_DIR,
+				env: CLI_ENV,
+			}
+		);
 
 		expect(result.status).toBe(1);
-		expect(result.stderr).toContain(
-			'❌ Configuration validation failed'
-		);
+		expect(result.stderr).toContain('❌ Configuration validation failed');
 	});
 });
 
@@ -209,12 +228,12 @@ describe('generatePlugin runner', () => {
 			outputDir = generatePlugin(config, false);
 
 			expect(outputDir).toContain(path.join('generated-plugins', slug));
-			expect(
-				fs.existsSync(path.join(outputDir, 'package.json'))
-			).toBe(true);
-			expect(
-				fs.existsSync(path.join(outputDir, 'composer.json'))
-			).toBe(true);
+			expect(fs.existsSync(path.join(outputDir, 'package.json'))).toBe(
+				true
+			);
+			expect(fs.existsSync(path.join(outputDir, 'composer.json'))).toBe(
+				true
+			);
 			expect(fs.existsSync(path.join(outputDir, 'README.md'))).toBe(true);
 
 			expect(console).toHaveLogged();

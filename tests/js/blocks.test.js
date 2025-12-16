@@ -102,9 +102,7 @@ describe('Example Plugin Blocks', () => {
 
 		it('displays the placeholder message when no post is selected', () => {
 			useSelect.mockReset();
-			useSelect.mockImplementation((selector) =>
-				selector(() => ({}))
-			);
+			useSelect.mockImplementation((selector) => selector(() => ({})));
 
 			const setAttributes = jest.fn();
 

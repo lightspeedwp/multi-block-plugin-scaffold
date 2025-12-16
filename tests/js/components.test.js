@@ -4,12 +4,7 @@
  * @package
  */
 
-const {
-	render,
-	screen,
-	fireEvent,
-	act,
-} = require('@testing-library/react');
+const { render, screen, fireEvent, act } = require('@testing-library/react');
 const Slider = require('../../src/components/Slider/Slider').default;
 
 describe('Example Plugin Components', () => {

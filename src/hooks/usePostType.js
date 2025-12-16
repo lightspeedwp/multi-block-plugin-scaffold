@@ -3,7 +3,7 @@
  *
  * Custom hook for fetching a single post from a custom post type with loading state.
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 

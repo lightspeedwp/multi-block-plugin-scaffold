@@ -3,7 +3,7 @@
  *
  * Custom hook for managing slider/carousel state and navigation controls.
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 

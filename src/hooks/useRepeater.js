@@ -3,7 +3,7 @@
  *
  * Custom hook for accessing ACF or custom meta field repeater data.
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 
@@ -17,9 +17,9 @@ import { useSelect } from '@wordpress/data';
  * dynamic content blocks, multiple similar items, or gallery-like structures that
  * are stored as array data in post meta.
  *
- * @param {number}      postId    Post ID to fetch fields from.
- * @param {string}      fieldName Repeater field name (key) to retrieve.
- * @param {string}      postType  Post type slug. Default: '{{cpt_slug}}'.
+ * @param {number} postId    Post ID to fetch fields from.
+ * @param {string} fieldName Repeater field name (key) to retrieve.
+ * @param {string} postType  Post type slug. Default: '{{cpt_slug}}'.
  *
  * @return {Object} Hook return value:
  *   - rows: {Array} Array of repeater field items, or empty array if not found.
