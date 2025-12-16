@@ -54,6 +54,8 @@ if ( ! is_wp_error( $all_terms ) ) {
 /**
  * Delete plugin options.
  */
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -64,6 +66,8 @@ $wpdb->query(
 /**
  * Delete transients.
  */
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
@@ -75,6 +79,8 @@ $wpdb->query(
 /**
  * Delete user meta.
  */
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s",
@@ -85,6 +91,8 @@ $wpdb->query(
 /**
  * Delete post meta (including ACF fields).
  */
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
@@ -95,6 +103,8 @@ $wpdb->query(
 /**
  * Delete term meta.
  */
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 $wpdb->query(
 	$wpdb->prepare(
 		"DELETE FROM {$wpdb->termmeta} WHERE meta_key LIKE %s",

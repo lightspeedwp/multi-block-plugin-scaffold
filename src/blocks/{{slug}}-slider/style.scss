@@ -4,7 +4,9 @@
  * @package {{namespace}}
  */
 
-.wp-block-{{namespace}}-{{slug}}-slider {
+@use "../scss/template" as *;
+
+.wp-block-#{$namespace}-#{$slug}-slider {
 	position: relative;
 	overflow: hidden;
 
@@ -124,7 +126,8 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-	.wp-block-{{namespace}}-{{slug}}-slider {
+	.wp-block-#{$namespace}-#{$slug}-slider {
+
 		&__arrow {
 			width: 40px;
 			height: 40px;

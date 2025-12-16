@@ -78,6 +78,13 @@ Use this guide when creating, moving, or auditing files. It covers where to plac
 - **Naming**: `group_{{slug}}_{feature}.json`
 - **Shipped**: Yes
 
+**`styles/`** - Block style library
+
+- Subfolders: `blocks/`, `sections/`, `colors/`, `typography/`, `presets/`
+- Each JSON file exports style metadata (`scope`, `blocks`, `name`, `label`, `style_data`)
+- Used by `inc/class-block-styles.php` to auto-register block variations
+- **Shipped**: Yes
+
 ### Build & Development
 
 **`bin/`** - Shell scripts and entry points

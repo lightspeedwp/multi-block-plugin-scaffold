@@ -27,11 +27,6 @@ export default function useCollection(query = {}) {
 		featured = false,
 	} = query;
 
-	const taxQueryKey =
-		typeof taxQuery === 'undefined' || taxQuery === null
-			? ''
-			: JSON.stringify(taxQuery);
-
 	return useSelect(
 		(select) => {
 			const queryArgs = {
@@ -75,15 +70,6 @@ export default function useCollection(query = {}) {
 				hasNoPosts: posts && posts.length === 0,
 			};
 		},
-			[
-				postType,
-				perPage,
-				page,
-				order,
-				orderBy,
-				search,
-				taxQueryKey,
-				featured,
-			]
-		);
-	}
+		[postType, perPage, page, order, orderBy, search, taxQuery, featured]
+	);
+}

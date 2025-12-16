@@ -1,0 +1,27 @@
+# Ignore files and directories that should not be linted by Stylelint
+
+# Node modules
+node_modules
+
+# Build directories
+build
+dist
+
+# Generated artifact directories
+generated-plugins
+tmp
+logs/
+
+# Vendor directories
+vendor
+
+# Test directories
+coverage
+playwright-report
+test-results
+
+# Bin scripts (use different linting rules)
+bin/
+
+# Scripts directory (contains CLI tools with console output)
+scripts/

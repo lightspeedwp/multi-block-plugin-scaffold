@@ -4,7 +4,9 @@
  * @package {{namespace}}
  */
 
-.{{namespace}}-scroll-down-arrow {
+@use "../scss/template" as *;
+
+.#{$namespace}-scroll-down-arrow {
 	position: absolute;
 	bottom: 8rem;
 	left: 50%;
@@ -26,7 +28,7 @@
 
 	// Gradient border effect
 	&::before {
-		content: '';
+		content: "";
 		position: absolute;
 		inset: 0;
 		border-radius: 50%;
@@ -37,7 +39,7 @@
 
 	// Inner circle
 	&::after {
-		content: '';
+		content: "";
 		position: absolute;
 		inset: 0;
 		border-radius: 50%;
@@ -77,7 +79,7 @@
 	}
 
 	// Pulsing ring animation
-	.{{namespace}}-scroll-down-arrow__pulse {
+	.#{$namespace}-scroll-down-arrow__pulse {
 		position: absolute;
 		inset: 0;
 		border-radius: 50%;
@@ -109,28 +111,36 @@
 	@media (prefers-reduced-motion: reduce) {
 		animation: none;
 
-		.{{namespace}}-scroll-down-arrow__pulse {
+		.#{$namespace}-scroll-down-arrow__pulse {
 			animation: none;
 		}
 	}
 }
 
 // Bounce animation
+
 @keyframes scroll-down-bounce {
-	0%, 100% {
+
+	0%,
+	100% {
 		transform: translateX(-50%) translateY(0);
 	}
+
 	50% {
 		transform: translateX(-50%) translateY(-0.5rem);
 	}
 }
 
 // Pulse animation
+
 @keyframes scroll-down-pulse {
-	0%, 100% {
+
+	0%,
+	100% {
 		transform: scale(1);
 		opacity: 0.1;
 	}
+
 	50% {
 		transform: scale(1.2);
 		opacity: 0;

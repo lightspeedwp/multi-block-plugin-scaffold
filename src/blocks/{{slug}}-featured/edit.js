@@ -39,18 +39,18 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const posts = useSelect(
 		(select) => {
-			return select('core').getEntityRecords(
+			return select( 'core' ).getEntityRecords(
 				'postType',
-				'{{textdomain}}',
+				'{{cpt_slug}}',
 				{
 					per_page: count,
-					meta_key: 'example-plugin_featured',
+					meta_key: '{{namespace}}_featured',
 					meta_value: '1',
 					_embed: true,
 				}
 			);
 		},
-		[count]
+		[ count ]
 	);
 
 	const blockProps = useBlockProps({

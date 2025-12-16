@@ -51,7 +51,7 @@ const variations = [
 			layout: 'grid',
 			columns: 3,
 			query: {
-				postType: '{{textdomain}}',
+				postType: '{{cpt_slug}}',
 				perPage: 3,
 				order: 'desc',
 				orderBy: 'date',

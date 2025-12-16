@@ -21,7 +21,7 @@ return array(
 		__( 'post', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/post-template', 'core/query' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'viewportWidth' => 400,
 	'content'     => '<!-- wp:group {"className":"{{namespace}}-{{slug}}-card","layout":{"type":"constrained"}} -->
 <div class="wp-block-group {{namespace}}-{{slug}}-card">

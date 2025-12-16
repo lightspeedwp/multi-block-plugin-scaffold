@@ -21,7 +21,7 @@ return array(
 		__( 'post', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/post-content', 'core/group' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'templateTypes' => array( 'single', 'single-{{slug}}' ),
 	'viewportWidth' => 1200,
 	'content'     => '<!-- wp:group {"layout":{"type":"constrained"}} -->

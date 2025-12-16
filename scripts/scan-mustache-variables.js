@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable jsdoc/require-param-type */
 
 /**
  * scripts/scan-mustache-variables.js

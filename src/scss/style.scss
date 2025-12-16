@@ -4,17 +4,19 @@
  * @package {{namespace}}
  */
 
+@use "template" as *;
+
 // Import slider styles.
-@import 'slider';
+@import "slider";
 
 // Base variables.
 :root {
-	--{{namespace}}-primary-color: #333;
-	--{{namespace}}-secondary-color: #666;
-	--{{namespace}}-border-color: #ddd;
-	--{{namespace}}-background-color: #fff;
-	--{{namespace}}-hover-color: #f5f5f5;
-	--{{namespace}}-border-radius: 8px;
-	--{{namespace}}-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	--{{namespace}}-transition: 0.3s ease;
+	--#{$namespace}-primary-color: #333;
+	--#{$namespace}-secondary-color: #666;
+	--#{$namespace}-border-color: #ddd;
+	--#{$namespace}-background-color: #fff;
+	--#{$namespace}-hover-color: #f5f5f5;
+	--#{$namespace}-border-radius: 8px;
+	--#{$namespace}-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	--#{$namespace}-transition: 0.3s ease;
 }

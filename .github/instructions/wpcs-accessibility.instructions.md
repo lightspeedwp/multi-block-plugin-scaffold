@@ -169,3 +169,8 @@ For more information on techniques, visit [Understanding Techniques for WCAG Suc
 - Run style linting (`npm run lint:style` or `npm run lint`) to catch common issues.
 - Manually tab through UI to verify focus order and visibility.
 - Use axe/Lighthouse to check contrast and ARIA violations after CSS changes.
+
+## See Also
+
+- <https://developer.wordpress.org/coding-standards/wordpress-coding-standards/accessibility/>
+- <https://www.w3.org/TR/WCAG22/>

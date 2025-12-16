@@ -25,7 +25,7 @@ $read_more_text         = $attributes['readMoreText'] ?? __( 'Read More', '{{tex
 
 // Query for featured posts.
 $args = array(
-	'post_type'      => '{{slug}}',
+	'post_type'      => '{{cpt_slug}}',
 	'posts_per_page' => $count,
 	'post_status'    => 'publish',
 );

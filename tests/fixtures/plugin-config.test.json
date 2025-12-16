@@ -1,0 +1,9 @@
+{
+  "slug": "test-plugin",
+  "name": "Test Plugin",
+  "author": "Test Team",
+  "description": "A plugin used for generator tests.",
+  "requires_wp": "6.5",
+  "requires_php": "8.0",
+  "license": "GPL-2.0-or-later"
+}

@@ -21,7 +21,7 @@ return array(
 		__( 'collection', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/group', 'core/query' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'viewportWidth' => 1200,
-	'content'     => '<!-- wp:{{namespace}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"{{slug}}","perPage":6}} /-->',
+	'content'     => '<!-- wp:{{namespace}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"{{cpt_slug}}","perPage":6}} /-->',
 );

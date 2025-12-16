@@ -21,7 +21,7 @@ return array(
 		__( 'carousel', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/group', 'core/query' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'viewportWidth' => 1200,
 	'content'     => '<!-- wp:{{namespace}}/{{slug}}-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->',
 );

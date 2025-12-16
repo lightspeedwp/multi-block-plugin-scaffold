@@ -10,6 +10,26 @@
 const fs = require('fs');
 const path = require('path');
 
+require('@testing-library/jest-dom');
+
+const mockWpElement = jest.requireActual('@wordpress/element');
+
+const createToggleControl = ({ label, checked, onChange }) =>
+	mockWpElement.createElement(
+		'label',
+		{ style: { display: 'block' } },
+		mockWpElement.createElement('input', {
+			type: 'checkbox',
+			checked,
+			onChange: (event) => {
+				if (typeof onChange === 'function') {
+					onChange(event.target.checked);
+				}
+			},
+		}),
+		label
+	);
+
 // Create logs directory
 const logsDir = path.join(__dirname, '../logs');
 if (!fs.existsSync(logsDir)) {
@@ -51,6 +71,9 @@ afterAll(() => {
 });
 
 // Mock WordPress globals.
+const useSelect = jest.fn(() => ({}));
+const useDispatch = jest.fn(() => ({}));
+
 global.wp = {
 	blocks: {
 		registerBlockType: jest.fn(),
@@ -60,17 +83,10 @@ global.wp = {
 		_x: (str) => str,
 		sprintf: (str, ...args) => str.replace(/%s/g, () => args.shift()),
 	},
-	element: {
-		createElement: jest.fn(),
-		useState: jest.fn((initial) => [initial, jest.fn()]),
-		useEffect: jest.fn(),
-		useCallback: jest.fn((fn) => fn),
-		useRef: jest.fn(() => ({ current: null })),
-		useMemo: jest.fn((fn) => fn()),
-	},
+	element: mockWpElement,
 	data: {
-		useSelect: jest.fn(() => ({})),
-		useDispatch: jest.fn(() => ({})),
+		useSelect,
+		useDispatch,
 	},
 	blockEditor: {
 		useBlockProps: jest.fn((props) => props),
@@ -78,19 +94,27 @@ global.wp = {
 	},
 	components: {
 		PanelBody: jest.fn(({ children }) => children),
-		ToggleControl: jest.fn(),
-		RangeControl: jest.fn(),
+		ToggleControl: jest.fn(createToggleControl),
+		RangeControl: jest.fn(({ children }) => children),
 		SelectControl: jest.fn(),
 		TextControl: jest.fn(),
-		Button: jest.fn(),
-		Spinner: jest.fn(),
+		Button: jest.fn(({ label, children, ...props }) =>
+			mockWpElement.createElement(
+				'button',
+				{ 'aria-label': label, type: 'button', ...props },
+				children || label
+			)
+		),
+		Spinner: jest.fn(() =>
+			mockWpElement.createElement('span', { role: 'status' }, 'Loading')
+		),
 	},
 };
 
 // Mock @wordpress packages.
 jest.mock('@wordpress/blocks', () => global.wp.blocks);
 jest.mock('@wordpress/i18n', () => global.wp.i18n);
-jest.mock('@wordpress/element', () => global.wp.element);
+jest.mock('@wordpress/element', () => mockWpElement);
 jest.mock('@wordpress/data', () => global.wp.data);
 jest.mock('@wordpress/block-editor', () => global.wp.blockEditor);
 jest.mock('@wordpress/components', () => global.wp.components);

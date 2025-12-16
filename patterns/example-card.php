@@ -80,7 +80,7 @@ return array(
 	 *
 	 * Examples: array( '{{textdomain}}', 'post', 'page' )
 	 */
-	'postTypes'     => array( '{{textdomain}}' ),
+	'postTypes'     => array( '{{cpt_slug}}' ),
 
 	/**
 	 * Template Types (Optional)

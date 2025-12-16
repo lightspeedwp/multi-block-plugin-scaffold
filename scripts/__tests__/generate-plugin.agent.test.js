@@ -12,14 +12,16 @@ jest.mock('fs');
 
 const AGENT_SCRIPT = path.join(__dirname, '../generate-plugin.agent.js');
 
+/* eslint-disable jsdoc/check-line-alignment */
 /**
  * Run the agent as a subprocess and capture stdout/stderr.
  *
- * @param {string[]} args                        Command line arguments.
- * @param {Object}   options                     Optional settings.
- * @param {string}   options.input               Data that should be piped to stdin.
- * @return {Promise<Object>}                    Resolves with the exit code and outputs.
+ * @param {string[]} args - Command line arguments.
+ * @param {Object} options - Optional settings.
+ * @param {string} options.input - Data that should be piped to stdin.
+ * @return {Promise<Object>} - Resolves with the exit code and outputs.
  */
+/* eslint-enable jsdoc/check-line-alignment */
 function runAgent(args = [], options = {}) {
 	return new Promise((resolve, reject) => {
 		const proc = spawn('node', [AGENT_SCRIPT, ...args], {

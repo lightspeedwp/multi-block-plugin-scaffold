@@ -4,9 +4,12 @@
  * @package {{namespace}}
  */
 
+@use "../scss/template" as *;
+
 /* stylelint-disable no-descending-specificity */
 
-.wp-block-{{namespace}}-{{slug}}-featured {
+.wp-block-#{$namespace}-#{$slug}-featured {
+
 	&__items {
 		display: grid;
 		gap: 1.5rem;
@@ -26,11 +29,11 @@
 			grid-column: 1 / 2;
 			grid-row: 1 / 3;
 
-			.wp-block-{{namespace}}-{{slug}}-featured__image {
+			.wp-block-#{$namespace}-#{$slug}-featured__image {
 				aspect-ratio: 3 / 4;
 			}
 
-			.wp-block-{{namespace}}-{{slug}}-featured__title {
+			.wp-block-#{$namespace}-#{$slug}-featured__title {
 				font-size: 1.5rem;
 			}
 		}
@@ -45,7 +48,7 @@
 		position: relative;
 		min-height: 400px;
 
-		.wp-block-{{namespace}}-{{slug}}-featured__image {
+		.wp-block-#{$namespace}-#{$slug}-featured__image {
 			position: absolute;
 			inset: 0;
 
@@ -55,14 +58,14 @@
 			}
 
 			&::after {
-				content: '';
+				content: "";
 				position: absolute;
 				inset: 0;
 				background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.8));
 			}
 		}
 
-		.wp-block-{{namespace}}-{{slug}}-featured__content {
+		.wp-block-#{$namespace}-#{$slug}-featured__content {
 			position: absolute;
 			bottom: 0;
 			left: 0;
@@ -71,11 +74,11 @@
 			color: #fff;
 		}
 
-		.wp-block-{{namespace}}-{{slug}}-featured__title a {
+		.wp-block-#{$namespace}-#{$slug}-featured__title a {
 			color: #fff;
 		}
 
-		.wp-block-{{namespace}}-{{slug}}-featured__read-more {
+		.wp-block-#{$namespace}-#{$slug}-featured__read-more {
 			background-color: #fff;
 			color: #333;
 
@@ -188,7 +191,8 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-	.wp-block-{{namespace}}-{{slug}}-featured {
+	.wp-block-#{$namespace}-#{$slug}-featured {
+
 		&.is-layout-grid &__items,
 		&.is-layout-featured-first &__items {
 			grid-template-columns: repeat(2, 1fr);
@@ -201,7 +205,8 @@
 }
 
 @media (max-width: 768px) {
-	.wp-block-{{namespace}}-{{slug}}-featured {
+	.wp-block-#{$namespace}-#{$slug}-featured {
+
 		&.is-layout-grid &__items,
 		&.is-layout-featured-first &__items {
 			grid-template-columns: 1fr;

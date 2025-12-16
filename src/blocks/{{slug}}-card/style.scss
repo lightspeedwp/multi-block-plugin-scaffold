@@ -4,7 +4,9 @@
  * @package {{namespace}}
  */
 
-.wp-block-{{namespace}}-{{slug}}-card {
+@use "../scss/template" as *;
+
+.wp-block-#{$namespace}-#{$slug}-card {
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;

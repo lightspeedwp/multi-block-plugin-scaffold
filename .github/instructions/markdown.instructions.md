@@ -96,6 +96,12 @@ Use `-` for unordered lists, and intent two spaces for list subitems:
 - List
 ```
 
+### List Spacing
+
+- Surround lists with a blank line before and after so Markdown parsers treat them as distinct blocks and the reader can easily distinguish sections.
+- Indent nested list levels by two spaces per depth and keep the same bullet marker (e.g., `-`) to avoid mixed markers.
+- When combining ordered and unordered lists, keep them separated by a blank line and avoid jumping list styles mid-block.
+
 ## Examples
 
 ```md

@@ -4,7 +4,10 @@
  * @package {{namespace}}
  */
 
-.wp-block-{{namespace}}-{{slug}}-slider {
+@use "../scss/template" as *;
+
+.wp-block-#{$namespace}-#{$slug}-slider {
+
 	&__empty,
 	&__posts-notice,
 	&__repeater-notice {

@@ -5,15 +5,24 @@
  * @package example_plugin
  */
 
-// Create logs directory.
+// Create logs directory. Fall back to the system temp dir when logs/ is read-only.
 $logs_dir = __DIR__ . '/../logs';
 if ( ! is_dir( $logs_dir ) ) {
-	mkdir( $logs_dir, 0755, true );
+	$created = @mkdir( $logs_dir, 0755, true );
+	if ( ! $created && ! is_dir( $logs_dir ) ) {
+		$logs_dir = rtrim( sys_get_temp_dir(), '/\\' );
+	}
 }
 
-// Create log file with timestamp.
-$timestamp = gmdate( 'Y-m-d\TH-i-s' );
-$log_file  = $logs_dir . "/test-phpunit-{$timestamp}.log";
+if ( ! is_dir( $logs_dir ) ) {
+	$logs_dir = rtrim( sys_get_temp_dir(), '/\\' );
+}
+
+// Create log file before writing so we avoid permission issues later.
+$log_file = @tempnam( $logs_dir, 'phpunit-log-' );
+if ( false === $log_file ) {
+	$log_file = tempnam( rtrim( sys_get_temp_dir(), '/\\' ), 'phpunit-log-' );
+}
 
 /**
  * Log function for PHPUnit tests
@@ -23,6 +32,9 @@ $log_file  = $logs_dir . "/test-phpunit-{$timestamp}.log";
  */
 function test_log( $level, $message ) {
 	global $log_file;
+	if ( empty( $log_file ) ) {
+		$log_file = tempnam( rtrim( sys_get_temp_dir(), '/\\' ), 'phpunit-log-' );
+	}
 	$entry = sprintf(
 		"[%s] [%s] %s\n",
 		gmdate( 'c' ),

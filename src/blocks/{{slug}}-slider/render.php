@@ -36,7 +36,7 @@ switch ( $source ) {
 	case 'posts':
 		$posts_query = new WP_Query(
 			array(
-				'post_type'      => '{{slug}}',
+				'post_type'      => '{{cpt_slug}}',
 				'posts_per_page' => 10,
 				'post_status'    => 'publish',
 			)
@@ -62,7 +62,7 @@ switch ( $source ) {
 
 	case 'repeater':
 		if ( function_exists( 'have_rows' ) && have_rows( '{{namespace}}_slides', $post_id ) ) {
-			while ( have_rows( 'example-plugin_slides', $post_id ) ) {
+			while ( have_rows( '{{namespace}}_slides', $post_id ) ) {
 				the_row();
 				$image = get_sub_field( 'image' );
 				$link  = get_sub_field( 'link' );

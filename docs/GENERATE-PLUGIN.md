@@ -965,6 +965,16 @@ node scripts/generate-plugin.js --with-example-fields
 
 See [SCF Fields Reference](.github/instructions/scf-fields.instructions.md) for complete documentation.
 
+### SCF JSON Handling & Validation
+
+All Secure Custom Fields configurations are driven by JSON stored in `scf-json/`. The generator copies the sample files, and new group files are expected to follow the `group_{{slug}}_*.json` pattern so field definitions remain version-controlled and repeatable.
+
+- **Local JSON integration** is performed by `inc/class-scf-json.php`, which hooks `acf/settings/save_json` and `acf/settings/load_json` so SCF always loads field groups from `scf-json/` and saves exports back there. This class also lazily creates the directory during bootstrap, keeping the path consistent across environments.
+- **Schema validation** is provided by `inc/class-scf-json-validator.php`, which reads `scf-json/schema/scf-field-group.schema.json` and validates each JSON file before registration. Validation results include errors and warnings that agents can surface for faster fixes.
+- **Recommended workflow**: author SCF groups in JSON, commit the files alongside your plugin, and run `vendor/bin/phpunit tests/php/test-scf-json-schema-validation.php` (or `composer run test`) to confirm the schema passes. Refer to the schema file when adding complex repeaters, flexible content, or conditional logic so your data stays compatible with the generator.
+
+Because these classes are instantiated from `inc/class-core.php`, once the plugin is active all JSON files are immediately available without manual imports. Keep SCF usage targeted to cases where WordPress core APIs cannot deliver the required UI or validation, and rely on the JSON validator plus `.github/prompts/block-plugin-refactor-alt.prompt.md` when you need Phase 6-style reviews of new groups.
+
 ## Custom Post Types & Taxonomies
 
 ### Supported CPT Features
@@ -998,6 +1008,20 @@ The generator supports these block categories:
 - `widgets` - Widget-style blocks (search, categories, tags)
 - `theme` - Theme-specific blocks (site logo, navigation)
 - `embed` - Embed blocks for external content
+
+## Block Styles Library
+
+Block styles are defined entirely via JSON so new variations remain editable and versioned. The bootstrap class `inc/class-block-styles.php` scans the `styles/` folder for JSON definitions, and registers each style via `register_block_style()` automatically on `init`.
+
+Current directories:
+
+- `styles/blocks/` – Block-specific variations such as `button-primary.json`, `button-rounded.json`, and `heading-serif.json`.
+- `styles/sections/` – Section-level wrappers and hero/feature skinning (`content-section.json`, `hero-section.json`).
+- `styles/typography/` – Typography token sets (e.g. serif headings).
+- `styles/colors/` – Named colour palettes (`palette.json`, `dark.json`).
+- `styles/presets/` – Global presets for modes such as dark/light theming.
+
+Each JSON file exposes `scope`, `blocks`, `name`, `label`, and `style_data` (or token definitions) so the loader can register the style and keep the logic outside PHP. When generating a plugin, update or add JSON files as needed rather than hard-coding styles in `inc/class-block-styles.php`.
 
 ## Development Workflow Integration
 

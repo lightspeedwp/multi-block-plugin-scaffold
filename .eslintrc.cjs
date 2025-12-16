@@ -28,7 +28,6 @@ module.exports = {
 			},
 			rules: {
 				'no-console': 'off',
-				'jsdoc/require-param-type': 'off',
 			},
 		},
 	],

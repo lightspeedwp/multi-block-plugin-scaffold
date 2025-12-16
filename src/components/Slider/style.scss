@@ -4,7 +4,9 @@
  * @package {{namespace}}
  */
 
-.{{namespace}}-slider {
+@use "../scss/template" as *;
+
+.#{$namespace}-slider {
 	position: relative;
 	overflow: hidden;
 

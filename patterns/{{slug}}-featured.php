@@ -21,7 +21,7 @@ return array(
 		__( 'highlight', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/group', 'core/query' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'viewportWidth' => 1200,
 	'content'     => '<!-- wp:{{namespace}}/{{slug}}-featured {"count":3,"layout":"featured-first"} /-->',
 );

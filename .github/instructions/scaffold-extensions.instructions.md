@@ -279,79 +279,43 @@ No major code changes are needed; just ensure the doc explains how to add new pa
 
 ## **5. Styles / section styles scaffolding**
 
-### **5.1. Files**
+### **5.1. Files & directories**
 
-Create:
+The scaffold now stores block styles and design tokens in JSON so the definitions stay editable and versioned. Keep this structure intact:
 
-* `inc/class-block-styles.php`
-* `styles/README.md`
-* Optionally: `styles/section-highlight.json` as an example JSON “partial”.
+* `inc/class-block-styles.php` – Scans `styles/` on `init`, loads every JSON definition, and registers each `scope: block` style via `register_block_style()`.
+* `styles/blocks/` – Block-specific variations (e.g., `button-primary.json`, `button-rounded.json`, `heading-serif.json`).
+* `styles/sections/` – Section/hero tokens for patterns (`content-section.json`, `hero-section.json`).
+* `styles/typography/`, `styles/colors/`, `styles/presets/` – Typographic tokens, palettes, and preset bundles used for documentation or future theme.json exports.
+
+Each JSON asset should define:
+
+- `scope` (defaults to `block`) to describe what the definition targets.
+- `blocks` (array or string) listing the block slugs that should receive the style.
+- `name` and `label` for the style.
+- `style_data` for colours/typography/spacings that WordPress uses internally.
+- Optional `class_name` or `style_handle`.
+
+Files can expose an object or a numeric array; the loader handles both shapes. Choose a consistent naming convention and keep the JSON free from PHP logic.
 
 ### **5.2. Class implementation**
 
-`inc/class-block-styles.php` should register at least one **block style variation** (section-style-like) for core blocks.
+`inc/class-block-styles.php` already performs this: it resolves `{{namespace|upper}}_PLUGIN_DIR . 'styles/'`, collects every `.json` file, decodes it, and flattens the definitions. For each definition with `scope === 'block'`, it calls `register_block_style()` with the translated `label`, the provided `name`, and any `style_data`.
 
-```php
-<?php
-namespace {{namespace|lowerCase}}\classes;
+When extending the class, keep the same pattern — avoid duplicating style metadata in PHP. Add new JSON files and let the loader pick them up automatically rather than hard-coding more styles in PHP.
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
+### **5.3. Example JSON references**
 
-/**
- * Block style variations (including section-style like presets).
- */
-class Block_Styles {
+The repository ships with concrete JSON examples you can emulate:
 
-    /**
-     * Constructor.
-     */
-    public function __construct() {
-        add_action( 'init', array( $this, 'register_block_styles' ) );
-    }
+- `styles/blocks/button-primary.json` – Primary button skin with spacing and colour tokens.
+- `styles/blocks/button-rounded.json` – Rounded button variant with border and accent colours.
+- `styles/blocks/heading-serif.json` – Serif heading treatment that tweaks typography.
+- `styles/sections/content-section.json` and `styles/sections/hero-section.json` – Section tokens documenting padding and backgrounds.
+- `styles/colors/palette.json` and `styles/dark.json` – Colour palettes and dark-mode presets.
+- `styles/typography/serif-titles.json` and `styles/presets/dark.json` – Typography tokens and preset bundles.
 
-    /**
-     * Register block style variations.
-     *
-     * @return void
-     */
-    public function register_block_styles() {
-        if ( ! function_exists( 'register_block_style' ) ) {
-            return;
-        }
-
-        // Minimal example: section-like highlight for groups and columns.
-        register_block_style(
-            array( 'core/group', 'core/columns' ),
-            array(
-                'name'       => '{{slug}}-section-highlight',
-                'label'      => __( '{{name}} Section Highlight', '{{textdomain}}' ),
-                'style_data' => array(
-                    'color' => array(
-                        'background' => 'var:preset|color|contrast',
-                        'text'       => 'var:preset|color|base',
-                    ),
-                ),
-            )
-        );
-    }
-}
-```
-
-### **5.3. Optional JSON-based style\_data**
-
-In `styles/README.md`:
-
-* Explain that plugin authors can store theme.json-shaped fragments in `styles/*.json` and load them in `Block_Styles::register_block_styles()` via `wp_read_json_file()` (if present).
-
-* Provide a brief example snippet (in the README) that shows:
-
-  * Reading a JSON file.
-  * Extracting `$json['styles']`.
-  * Passing that array as the `style_data` argument to `register_block_style()`.
-
-Do **not** implement the JSON loading in the class by default – keep it as a commented-out example or documented pattern so the scaffold remains lightweight.
+Add new files to the appropriate folder whenever you need new style variations or tokens. They will be registered without additional PHP code.
 
 ---
 

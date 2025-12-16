@@ -53,7 +53,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 			return select('core').getEntityRecords(
 				'postType',
-				'{{textdomain}}',
+				'{{cpt_slug}}',
 				queryArgs
 			);
 		},

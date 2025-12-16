@@ -21,7 +21,7 @@ return array(
 		__( 'taxonomy', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/post-template', 'core/group' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'viewportWidth' => 720,
 	'content'     => '<!-- wp:group {"className":"{{namespace}}-{{slug}}-meta","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"},"margin":{"top":"var:preset|spacing|40"}}},"backgroundColor":"contrast","layout":{"type":"constrained"}} -->
 <div class="wp-block-group {{namespace}}-{{slug}}-meta has-contrast-background-color has-background" style="margin-top:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">

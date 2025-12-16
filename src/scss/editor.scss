@@ -4,13 +4,15 @@
  * @package {{namespace}}
  */
 
+@use "template" as *;
+
 // Editor-specific overrides and styles.
 .editor-styles-wrapper {
 	// Ensure blocks display properly in editor.
-	.wp-block-{{namespace}}-{{slug}}-card,
-	.wp-block-{{namespace}}-{{slug}}-collection,
-	.wp-block-{{namespace}}-{{slug}}-slider,
-	.wp-block-{{namespace}}-{{slug}}-featured {
+	.wp-block-#{$namespace}-#{$slug}-card,
+	.wp-block-#{$namespace}-#{$slug}-collection,
+	.wp-block-#{$namespace}-#{$slug}-slider,
+	.wp-block-#{$namespace}-#{$slug}-featured {
 		margin-bottom: 1.5rem;
 	}
 }

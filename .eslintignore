@@ -10,8 +10,7 @@ dist
 # Generated artifact directories
 generated-plugins
 tmp
-
-# Log files
+logs/
 
 # Vendor directories
 vendor
@@ -23,3 +22,6 @@ test-results
 
 # Bin scripts (use different linting rules)
 bin/
+
+# Scripts directory (contains CLI tools with console output)
+scripts/

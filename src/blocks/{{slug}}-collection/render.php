@@ -25,7 +25,7 @@ $display_pagination     = $attributes['displayPagination'] ?? true;
 
 // Build WP_Query args.
 $args = array(
-	'post_type'      => '{{slug}}',
+	'post_type'      => '{{cpt_slug}}',
 	'posts_per_page' => $query_args['perPage'] ?? 6,
 	'order'          => $query_args['order'] ?? 'desc',
 	'orderby'        => $query_args['orderBy'] ?? 'date',

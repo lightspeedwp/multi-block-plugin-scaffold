@@ -4,7 +4,10 @@
  * @package {{namespace}}
  */
 
-.wp-block-{{namespace}}-{{slug}}-featured {
+@use "../scss/template" as *;
+
+.wp-block-#{$namespace}-#{$slug}-featured {
+
 	&__loading,
 	&__empty {
 		padding: 2rem;

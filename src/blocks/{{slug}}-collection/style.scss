@@ -4,9 +4,12 @@
  * @package {{namespace}}
  */
 
+@use "../scss/template" as *;
+
 /* stylelint-disable no-descending-specificity */
 
-.wp-block-{{namespace}}-{{slug}}-collection {
+.wp-block-#{$namespace}-#{$slug}-collection {
+
 	&__items {
 		display: grid;
 		gap: 1.5rem;
@@ -152,7 +155,8 @@
 
 /* Responsive grid adjustments */
 @media (max-width: 1024px) {
-	.wp-block-{{namespace}}-{{slug}}-collection {
+	.wp-block-#{$namespace}-#{$slug}-collection {
+
 		&.is-layout-grid.has-4-columns &__items,
 		&.is-layout-grid.has-5-columns &__items,
 		&.is-layout-grid.has-6-columns &__items {
@@ -162,7 +166,8 @@
 }
 
 @media (max-width: 768px) {
-	.wp-block-{{namespace}}-{{slug}}-collection {
+	.wp-block-#{$namespace}-#{$slug}-collection {
+
 		&.is-layout-grid &__items {
 			grid-template-columns: repeat(2, 1fr);
 		}
@@ -170,7 +175,8 @@
 }
 
 @media (max-width: 480px) {
-	.wp-block-{{namespace}}-{{slug}}-collection {
+	.wp-block-#{$namespace}-#{$slug}-collection {
+
 		&.is-layout-grid &__items {
 			grid-template-columns: 1fr;
 		}

@@ -84,6 +84,8 @@ This directory contains all documentation for the multi-block plugin scaffold. U
 - **[../AGENTS.md](../AGENTS.md)** - AI agent specifications and workflows
 - **[../.github/agents/](../.github/agents/)** - Agent implementation files
 - **[../.github/prompts/](../.github/prompts/)** - Interactive prompts and templates
+- **[../.github/prompts/block-plugin-refactor-alt.prompt.md](../.github/prompts/block-plugin-refactor-alt.prompt.md)** - Phase 6 review checklist for docs, instructions, SCF, inc/class-*, blocks/patterns, template parts and instruction audits
+- **[../.github/reports/consolidation/SCAFFOLD-REVIEW-PHASED-EXECUTION-2025-12-12.md](../.github/reports/consolidation/SCAFFOLD-REVIEW-PHASED-EXECUTION-2025-12-12.md)** - Consolidated execution summary for the latest scaffold review sweep
 
 ## File Categories
 

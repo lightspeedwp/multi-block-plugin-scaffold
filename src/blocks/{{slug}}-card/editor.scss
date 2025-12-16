@@ -4,7 +4,10 @@
  * @package {{namespace}}
  */
 
-.wp-block-{{namespace}}-{{slug}}-card {
+@use "../scss/template" as *;
+
+.wp-block-#{$namespace}-#{$slug}-card {
+
 	&__placeholder {
 		padding: 2rem;
 		text-align: center;

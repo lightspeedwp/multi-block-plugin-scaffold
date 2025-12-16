@@ -21,10 +21,10 @@ return array(
 		__( 'grid', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/query' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( '{{cpt_slug}}' ),
 	'templateTypes' => array( 'archive', 'archive-{{slug}}' ),
 	'viewportWidth' => 1200,
-	'content'     => '<!-- wp:query {"queryId":1,"query":{"postType":"{{slug}}","perPage":12,"inherit":true},"layout":{"type":"constrained"}} -->
+	'content'     => '<!-- wp:query {"queryId":1,"query":{"postType":"{{cpt_slug}}","perPage":12,"inherit":true},"layout":{"type":"constrained"}} -->
 <div class="wp-block-query">
 	<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
 		<!-- wp:pattern {"slug":"{{namespace}}/{{slug}}-card"} /-->
