@@ -1,7 +1,12 @@
 /**
  * Custom Hooks
  *
- * @package
+ * Central export point for all custom React hooks used throughout the plugin.
+ * These hooks provide convenient access to WordPress data, ACF/meta fields,
+ * and component-specific functionality.
+ *
+ * @package {{namespace}}
+ * @since 1.0.0
  */
 
 export { default as usePostType } from './usePostType';

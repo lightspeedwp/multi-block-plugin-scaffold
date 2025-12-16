@@ -1,9 +1,10 @@
 /**
  * useTaxonomies Hook
  *
- * Custom hook for fetching taxonomy terms.
+ * Custom hook for fetching taxonomy terms with configurable query options.
  *
- * @package
+ * @package {{namespace}}
+ * @since 1.0.0
  */
 
 import { useSelect } from '@wordpress/data';
@@ -11,10 +12,36 @@ import { useSelect } from '@wordpress/data';
 /**
  * useTaxonomies hook.
  *
- * @param {string} taxonomy Taxonomy slug.
- * @param {Object} args     Query arguments.
+ * Fetches taxonomy terms from the WordPress REST API with support for custom query
+ * arguments. By default fetches all terms (up to 100) including empty terms. Useful
+ * for populating filter controls, dropdowns, and term selection interfaces.
  *
- * @return {Object} Terms data and loading state.
+ * @param {string} taxonomy Taxonomy slug to query. Default: 'example-plugin_category'.
+ * @param {Object} args     Additional query arguments to merge with defaults.
+ *   - per_page: {number} Number of terms to fetch (default: 100).
+ *   - hide_empty: {boolean} Whether to hide empty terms (default: false).
+ *   - Any other REST API query parameters supported by the taxonomy endpoint.
+ *
+ * @return {Object} Hook return value:
+ *   - terms: {Array} Array of term objects from REST API, or undefined if loading.
+ *   - isLoading: {boolean} Whether the terms are currently being fetched.
+ *
+ * @throws {Error} If the WordPress data store is unavailable.
+ *
+ * @example
+ * const { terms, isLoading } = useTaxonomies('example-plugin_category', {
+ *   hide_empty: true,
+ *   per_page: 50,
+ * });
+ *
+ * if (isLoading) return <Spinner />;
+ * return (
+ *   <select>
+ *     {terms?.map(term => (
+ *       <option key={term.id} value={term.id}>{term.name}</option>
+ *     ))}
+ *   </select>
+ * );
  */
 export default function useTaxonomies(
 	taxonomy = 'example-plugin_category',

@@ -1,7 +1,14 @@
 /**
- * Taxonomy Filter Component
+ * TaxonomyFilter Component
  *
- * @package
+ * Taxonomy term filtering component for dynamically filtering collection block queries.
+ * Enables users to refine content display by taxonomy terms with real-time query updates.
+ *
+ * @see ./TaxonomyFilter.js Component implementation
+ * @see ./style.scss Component styles
+ *
+ * @package {{namespace}}
+ * @since 1.0.0
  */
 
 export { default } from './TaxonomyFilter';

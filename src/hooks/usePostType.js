@@ -1,9 +1,10 @@
 /**
  * usePostType Hook
  *
- * Custom hook for fetching post type data.
+ * Custom hook for fetching a single post from a custom post type with loading state.
  *
- * @package
+ * @package {{namespace}}
+ * @since 1.0.0
  */
 
 import { useSelect } from '@wordpress/data';
@@ -11,10 +12,25 @@ import { useSelect } from '@wordpress/data';
 /**
  * usePostType hook.
  *
- * @param {number} postId   Post ID.
- * @param {string} postType Post type slug.
+ * Fetches a single post from the WordPress REST API by ID and post type. Provides
+ * reactive loading state and gracefully handles missing post IDs. Uses the WordPress
+ * data store for automatic request deduplication and caching.
  *
- * @return {Object} Post data and loading state.
+ * @param {number|null} postId   Post ID to fetch. If falsy, returns null post.
+ * @param {string}      postType Post type slug to query. Default: '{{cpt_slug}}'.
+ *
+ * @return {Object} Hook return value:
+ *   - post: {Object|null} Post object from REST API, or null if not found or postId is missing.
+ *   - isLoading: {boolean} Whether the post is currently being fetched.
+ *
+ * @throws {Error} If the WordPress data store is unavailable.
+ *
+ * @example
+ * const { post, isLoading } = usePostType(123, '{{cpt_slug}}');
+ *
+ * if (isLoading) return <Spinner />;
+ * if (!post) return <p>Post not found</p>;
+ * return <h1>{post.title.rendered}</h1>;
  */
 export default function usePostType(postId, postType = '{{cpt_slug}}') {
 	return useSelect(

@@ -1,9 +1,10 @@
 /**
  * useFields Hook
  *
- * Custom hook for accessing ACF/SCF field values.
+ * Custom hook for accessing all ACF or custom meta field values from a post.
  *
- * @package
+ * @package {{namespace}}
+ * @since 1.0.0
  */
 
 import { useSelect } from '@wordpress/data';
@@ -11,10 +12,30 @@ import { useSelect } from '@wordpress/data';
 /**
  * useFields hook.
  *
- * @param {number} postId   Post ID.
- * @param {string} postType Post type slug.
+ * Fetches all ACF or custom meta fields from a post. Provides a convenient way to
+ * access all custom field data without needing to query individual fields. Gracefully
+ * handles missing posts by returning an empty object. Prioritizes ACF fields if available.
  *
- * @return {Object} Fields data and loading state.
+ * @param {number}      postId   Post ID to fetch fields from.
+ * @param {string}      postType Post type slug. Default: '{{cpt_slug}}'.
+ *
+ * @return {Object} Hook return value:
+ *   - fields: {Object} Field data object containing all ACF/meta fields, or empty object.
+ *   - isLoading: {boolean} Whether the post data is currently being fetched.
+ *
+ * @throws {Error} If the WordPress data store is unavailable.
+ *
+ * @example
+ * const { fields, isLoading } = useFields(123, '{{cpt_slug}}');
+ *
+ * if (isLoading) return <Spinner />;
+ * return (
+ *   <div>
+ *     <h1>{fields.title}</h1>
+ *     <p>{fields.description}</p>
+ *     <img src={fields.featured_image} alt={fields.title} />
+ *   </div>
+ * );
  */
 export default function useFields(postId, postType = '{{cpt_slug}}') {
 	return useSelect(

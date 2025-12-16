@@ -1,9 +1,10 @@
 /**
  * useSlider Hook
  *
- * Custom hook for managing slider state.
+ * Custom hook for managing slider/carousel state and navigation controls.
  *
- * @package
+ * @package {{namespace}}
+ * @since 1.0.0
  */
 
 import { useState, useCallback, useEffect, useRef } from '@wordpress/element';
@@ -11,15 +12,42 @@ import { useState, useCallback, useEffect, useRef } from '@wordpress/element';
 /**
  * useSlider hook.
  *
- * @param {Object}  options                Slider options.
- * @param {number}  options.totalSlides    Total number of slides.
- * @param {number}  options.slidesToShow   Slides visible at once.
- * @param {number}  options.slidesToScroll Slides to scroll per action.
- * @param {boolean} options.infinite       Enable infinite loop.
- * @param {boolean} options.autoplay       Enable autoplay.
- * @param {number}  options.autoplaySpeed  Autoplay interval in ms.
+ * Manages the state and behavior of a slider component, including current slide index,
+ * autoplay functionality, and navigation controls. Supports both infinite and finite loops.
  *
- * @return {Object} Slider state and controls.
+ * @param {Object}  options                Slider options.
+ * @param {number}  options.totalSlides    Total number of slides. Default: 0.
+ * @param {number}  options.slidesToShow   Number of slides visible at once. Default: 1.
+ * @param {number}  options.slidesToScroll Number of slides to scroll per navigation action. Default: 1.
+ * @param {boolean} options.infinite       Enable infinite loop (wraps around at ends). Default: true.
+ * @param {boolean} options.autoplay       Enable automatic slide progression. Default: false.
+ * @param {number}  options.autoplaySpeed  Autoplay interval in milliseconds. Default: 5000.
+ *
+ * @return {Object} Hook return value:
+ *   - currentIndex: {number} Current slide index position.
+ *   - maxIndex: {number} Maximum reachable slide index.
+ *   - isPlaying: {boolean} Current autoplay state.
+ *   - nextSlide: {Function} Navigate to next slide.
+ *   - prevSlide: {Function} Navigate to previous slide.
+ *   - goToSlide: {Function} Navigate to specific slide by index.
+ *   - play: {Function} Start autoplay.
+ *   - pause: {Function} Stop autoplay.
+ *   - canGoPrev: {boolean} Whether previous navigation is available.
+ *   - canGoNext: {boolean} Whether next navigation is available.
+ *
+ * @example
+ * const slider = useSlider({
+ *   totalSlides: 5,
+ *   slidesToShow: 1,
+ *   infinite: true,
+ *   autoplay: true,
+ *   autoplaySpeed: 5000,
+ * });
+ *
+ * // Use in component
+ * slider.nextSlide();
+ * slider.goToSlide(2);
+ * slider.play();
  */
 export default function useSlider({
 	totalSlides = 0,
