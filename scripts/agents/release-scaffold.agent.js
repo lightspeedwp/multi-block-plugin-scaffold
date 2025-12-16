@@ -1,0 +1,290 @@
+#!/usr/bin/env node
+/**
+ * Release Scaffold Agent
+ *
+ * Handles the release process for the multi-block-plugin-scaffold repository itself.
+ * This is separate from release.agent.js which handles releasing GENERATED plugins.
+ *
+ * @package multi-block-plugin-scaffold
+ * @since 1.0.0
+ */
+
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+
+/**
+ * Release Scaffold Agent Class
+ */
+class ReleaseScaffoldAgent {
+	constructor() {
+		this.rootDir = path.resolve(__dirname, '../..');
+		this.changelogPath = path.join(this.rootDir, 'CHANGELOG.md');
+		this.packageJsonPath = path.join(this.rootDir, 'package.json');
+	}
+
+	/**
+	 * Run the release process
+	 *
+	 * @param {Object} options Release options
+	 * @param {string} options.version Version to release (e.g., '1.1.0')
+	 * @param {boolean} options.dryRun Whether to run in dry-run mode
+	 */
+	async run(options = {}) {
+		const { version, dryRun = false } = options;
+
+		console.log('🚀 Release Scaffold Agent Starting...\n');
+
+		if (dryRun) {
+			console.log('⚠️  DRY RUN MODE - No changes will be committed\n');
+		}
+
+		try {
+			// 1. Validate git status
+			this.validateGitStatus();
+
+			// 2. Validate version format
+			if (!version) {
+				throw new Error('Version is required. Usage: --version=1.1.0');
+			}
+			this.validateVersion(version);
+
+			// 3. Run tests
+			this.runTests();
+
+			// 4. Run linting
+			this.runLinting();
+
+			// 5. Update CHANGELOG
+			this.updateChangelog(version, dryRun);
+
+			// 6. Update package.json version
+			this.updatePackageVersion(version, dryRun);
+
+			// 7. Create git tag
+			this.createGitTag(version, dryRun);
+
+			// 8. Show next steps
+			this.showNextSteps(version, dryRun);
+
+			console.log('\n✅ Release Scaffold Agent completed successfully!');
+		} catch (error) {
+			console.error('\n❌ Release failed:', error.message);
+			process.exit(1);
+		}
+	}
+
+	/**
+	 * Validate git status is clean
+	 */
+	validateGitStatus() {
+		console.log('📋 Checking git status...');
+
+		try {
+			const status = execSync('git status --porcelain', {
+				encoding: 'utf8',
+			}).trim();
+
+			if (status) {
+				throw new Error(
+					'Working directory is not clean. Commit or stash changes first.'
+				);
+			}
+
+			console.log('✓ Git status is clean\n');
+		} catch (error) {
+			throw new Error(`Git status check failed: ${error.message}`);
+		}
+	}
+
+	/**
+	 * Validate version format
+	 *
+	 * @param {string} version Version string
+	 */
+	validateVersion(version) {
+		console.log(`📋 Validating version: ${version}...`);
+
+		const semverRegex = /^\d+\.\d+\.\d+$/;
+		if (!semverRegex.test(version)) {
+			throw new Error(
+				`Invalid version format: ${version}. Use semantic versioning (e.g., 1.1.0)`
+			);
+		}
+
+		console.log('✓ Version format is valid\n');
+	}
+
+	/**
+	 * Run test suite
+	 */
+	runTests() {
+		console.log('🧪 Running tests...');
+
+		try {
+			execSync('npm test', { stdio: 'inherit', cwd: this.rootDir });
+			console.log('✓ All tests passed\n');
+		} catch (error) {
+			throw new Error('Tests failed. Fix issues before releasing.');
+		}
+	}
+
+	/**
+	 * Run linting
+	 */
+	runLinting() {
+		console.log('🔍 Running linting...');
+
+		try {
+			execSync('npm run lint:js', {
+				stdio: 'inherit',
+				cwd: this.rootDir,
+			});
+			execSync('npm run lint:css', {
+				stdio: 'inherit',
+				cwd: this.rootDir,
+			});
+			console.log('✓ Linting passed\n');
+		} catch (error) {
+			throw new Error('Linting failed. Fix issues before releasing.');
+		}
+	}
+
+	/**
+	 * Update CHANGELOG.md
+	 *
+	 * @param {string} version Version string
+	 * @param {boolean} dryRun Dry run mode
+	 */
+	updateChangelog(version, dryRun) {
+		console.log(`📝 Updating CHANGELOG.md for v${version}...`);
+
+		const changelog = fs.readFileSync(this.changelogPath, 'utf8');
+		const today = new Date().toISOString().split('T')[0];
+
+		// Replace [Unreleased] with version and date
+		const updated = changelog.replace(
+			'## [Unreleased]',
+			`## [Unreleased]\n\n### Added\n\n- Nothing yet\n\n### Changed\n\n- Nothing yet\n\n### Fixed\n\n- Nothing yet\n\n---\n\n## [${version}] - ${today}`
+		);
+
+		if (dryRun) {
+			console.log('✓ CHANGELOG.md update prepared (dry run)\n');
+			return;
+		}
+
+		fs.writeFileSync(this.changelogPath, updated, 'utf8');
+		execSync(`git add ${this.changelogPath}`, { cwd: this.rootDir });
+		console.log('✓ CHANGELOG.md updated\n');
+	}
+
+	/**
+	 * Update package.json version
+	 *
+	 * @param {string} version Version string
+	 * @param {boolean} dryRun Dry run mode
+	 */
+	updatePackageVersion(version, dryRun) {
+		console.log(`📦 Updating package.json to v${version}...`);
+
+		if (dryRun) {
+			console.log('✓ package.json update prepared (dry run)\n');
+			return;
+		}
+
+		execSync(`npm version ${version} --no-git-tag-version`, {
+			cwd: this.rootDir,
+		});
+		execSync(`git add ${this.packageJsonPath}`, { cwd: this.rootDir });
+		console.log('✓ package.json updated\n');
+	}
+
+	/**
+	 * Create git tag
+	 *
+	 * @param {string} version Version string
+	 * @param {boolean} dryRun Dry run mode
+	 */
+	createGitTag(version, dryRun) {
+		console.log(`🏷️  Creating git tag v${version}...`);
+
+		if (dryRun) {
+			console.log('✓ Git tag creation prepared (dry run)\n');
+			return;
+		}
+
+		execSync(`git commit -m "chore: Release v${version}"`, {
+			cwd: this.rootDir,
+		});
+		execSync(`git tag -a v${version} -m "Release v${version}"`, {
+			cwd: this.rootDir,
+		});
+		console.log('✓ Git tag created\n');
+	}
+
+	/**
+	 * Show next steps
+	 *
+	 * @param {string} version Version string
+	 * @param {boolean} dryRun Dry run mode
+	 */
+	showNextSteps(version, dryRun) {
+		if (dryRun) {
+			console.log('\n📌 Next Steps (after dry run review):');
+			console.log(`   1. Run without --dry-run to apply changes`);
+			console.log(`   2. git push origin main`);
+			console.log(`   3. git push origin v${version}`);
+			return;
+		}
+
+		console.log('\n📌 Next Steps:');
+		console.log('   1. Review the changes:');
+		console.log('      git log -1');
+		console.log('      git show');
+		console.log('');
+		console.log('   2. Push to remote:');
+		console.log('      git push origin main');
+		console.log(`      git push origin v${version}`);
+		console.log('');
+		console.log('   3. GitHub will automatically:');
+		console.log('      - Create a release');
+		console.log('      - Build and attach assets');
+		console.log('      - Publish to npm (if configured)');
+	}
+}
+
+// CLI execution
+if (require.main === module) {
+	const args = process.argv.slice(2);
+	const options = {};
+
+	args.forEach((arg) => {
+		if (arg.startsWith('--version=')) {
+			options.version = arg.split('=')[1];
+		} else if (arg === '--dry-run') {
+			options.dryRun = true;
+		} else if (arg === '--help' || arg === '-h') {
+			console.log(`
+Release Scaffold Agent
+
+Usage:
+  node scripts/agents/release-scaffold.agent.js --version=X.Y.Z [--dry-run]
+
+Options:
+  --version=X.Y.Z    Version to release (required)
+  --dry-run          Run without making changes
+  --help, -h         Show this help message
+
+Examples:
+  node scripts/agents/release-scaffold.agent.js --version=1.1.0 --dry-run
+  node scripts/agents/release-scaffold.agent.js --version=1.1.0
+			`);
+			process.exit(0);
+		}
+	});
+
+	const agent = new ReleaseScaffoldAgent();
+	agent.run(options);
+}
+
+module.exports = ReleaseScaffoldAgent;
