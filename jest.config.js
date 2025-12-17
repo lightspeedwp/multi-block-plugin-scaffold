@@ -26,7 +26,7 @@ module.exports = {
 	],
 
 	// Setup files
-	setupFilesAfterEnv: ['<rootDir>/tests/setup-tests.js'],
+	setupFilesAfterEnv: ['<rootDir>/.github/__tests__/setup-tests.js'],
 
 	// Coverage configuration
 	collectCoverageFrom: [
@@ -59,6 +59,11 @@ module.exports = {
 		'\\.(css|less|scss|sass)$': '<rootDir>/tests/__mocks__/styleMock.js',
 		'\\.(gif|ttf|eot|svg|png)$': '<rootDir>/tests/__mocks__/fileMock.js',
 	},
+
+	// Transform ES modules from node_modules
+	transformIgnorePatterns: [
+		'node_modules/(?!(parsel-js)/)',
+	],
 
 	// Verbose output
 	verbose: true,

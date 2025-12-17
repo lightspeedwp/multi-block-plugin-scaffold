@@ -5,12 +5,22 @@
  * @since 1.0.0
  */
 
-const logger = require('../logger');
+const path = require('path');
+const fs = require('fs');
+const { FileLogger } = require('../logger');
 
 describe('Logger', () => {
+       test('writes to dryrun-debug.log in root when category is dryrun-debug', async () => {
+	       const logger = new FileLogger('dryrun', 'dryrun-debug');
+	       logger.info('Test dryrun-debug root log', { foo: 'bar' });
+	       await logger.save();
+	       const logPath = path.resolve(__dirname, '../../../dryrun-debug.log');
+	       const logContent = fs.readFileSync(logPath, 'utf8');
+	       expect(logContent).toMatch(/Test dryrun-debug root log/);
+       });
 	describe('ensureLogsDirectory', () => {
 		test('creates logs directory if it does not exist', () => {
-			const logsDir = logger.ensureLogsDirectory();
+			const logsDir = FileLogger.ensureLogsDirectory();
 			expect(logsDir).toBeDefined();
 			expect(typeof logsDir).toBe('string');
 		});
@@ -18,14 +28,13 @@ describe('Logger', () => {
 
 	describe('createLogEntry', () => {
 		test('creates log entry object with all fields', () => {
-			const entry = logger.createLogEntry(
+			const entry = FileLogger.createLogEntry(
 				'test-slug',
 				'success',
 				{ name: 'Test' },
 				{ passed: true },
 				'/output/path'
 			);
-
 			expect(entry).toHaveProperty('timestamp');
 			expect(entry).toHaveProperty('slug', 'test-slug');
 			expect(entry).toHaveProperty('status', 'success');

@@ -1247,6 +1247,49 @@ For complete schema details, see:
 - [Build Process](BUILD-PROCESS.md) - Detailed build documentation
 - [API Reference](API-REFERENCE.md) - PHP and JavaScript APIs
 
+## CLI Reference
+
+WordPress Multi-Block Plugin Generator
+
+Usage:
+  node generate-plugin.js [options]
+
+Modes:
+  Interactive    No arguments - step-by-step wizard
+  JSON File      --config <file> - load configuration from JSON file
+  JSON Stdin     --json or pipe - read JSON from stdin
+  Validate       --validate [file] - validate configuration without generating
+  Schema         --schema - display JSON schema
+  Help           --help - show this message
+
+Options:
+  -c, --config <file>    Load configuration from JSON file
+  -o, --output <dir>     Output directory (default: ./generated-plugins)
+  -f, --force            Overwrite existing output directory
+  -v, --verbose          Verbose output
+  --dry-run              Dry run (don't write files)
+  --validate [file]      Validate configuration
+  --schema               Display JSON schema
+  --help                 Show this help message
+
+Examples:
+  # Interactive mode
+  node generate-plugin.js
+
+  # With config file
+  node generate-plugin.js --config my-plugin.json
+
+  # From stdin
+  echo '{"slug":"my-plugin","name":"My Plugin"}' | node generate-plugin.js --json
+
+  # Validate configuration
+  node generate-plugin.js --validate my-plugin.json
+
+  # Display schema
+  node generate-plugin.js --schema
+
+For more information, see: docs/GENERATE-PLUGIN.md
+
 ## Support
 
 For issues or questions:

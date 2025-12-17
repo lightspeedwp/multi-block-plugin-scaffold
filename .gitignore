@@ -56,3 +56,7 @@ package-lock.json
 # Test coverage
 coverage/
 .phpunit.result.cache
+
+# Temporary test build directories (created/cleaned by tests)
+tests/test-plugin-build/
+tests/test-theme-build/

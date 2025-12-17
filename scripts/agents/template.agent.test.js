@@ -81,7 +81,6 @@ describe('[TEMPLATE] TemplateAgent', () => {
 	});
 });
 
-// Note: This is a template test file
 describe('Template File Warning', () => {
 	test('warns that this is a template file', () => {
 		expect(true).toBe(true); // This test always passes
@@ -89,3 +88,4 @@ describe('Template File Warning', () => {
 		console.warn('Copy and customize this file for your agent.\n');
 	});
 });
+

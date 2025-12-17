@@ -43,26 +43,63 @@ const colors = {
 	bold: '\x1b[1m',
 };
 
+/**
+ * Output a log message using the provided colour.
+ *
+ * @param {string} color Colour escape sequence prefix.
+ * @param {...any} args Additional values to log.
+ * @return {void}
+ */
 function log(color, ...args) {
 	console.log(color, ...args, colors.reset);
 }
 
+/**
+ * Log an error-level message.
+ *
+ * @param {...any} args Error message segments.
+ * @return {void}
+ */
 function error(...args) {
 	log(colors.red, '❌', ...args);
 }
 
+/**
+ * Log a success-level message.
+ *
+ * @param {...any} args Success message segments.
+ * @return {void}
+ */
 function success(...args) {
 	log(colors.green, '✅', ...args);
 }
 
+/**
+ * Log a warning-level message.
+ *
+ * @param {...any} args Warning message segments.
+ * @return {void}
+ */
 function warning(...args) {
 	log(colors.yellow, '⚠️ ', ...args);
 }
 
+/**
+ * Log an informational message.
+ *
+ * @param {...any} args Info message segments.
+ * @return {void}
+ */
 function info(...args) {
 	log(colors.blue, 'ℹ', ...args);
 }
 
+/**
+ * Print a stylised header block for major sections.
+ *
+ * @param {string} text Header title text.
+ * @return {void}
+ */
 function header(text) {
 	console.log(
 		'\n' + colors.magenta + colors.bold + '═'.repeat(60) + colors.reset
@@ -81,6 +118,15 @@ const validationResults = {
 	failed: [],
 };
 
+/**
+ * Record the outcome of a validation check.
+ *
+ * @param {string} type Result type (critical/important/etc.).
+ * @param {string} category Result category (e.g., version, quality).
+ * @param {string} message Descriptive message for the result.
+ * @param {string} [status='pass'] Status indicator.
+ * @return {void}
+ */
 function addResult(type, category, message, status = 'pass') {
 	const result = { category, message, status };
 
@@ -96,7 +142,13 @@ function addResult(type, category, message, status = 'pass') {
 	}
 }
 
-// Execute command safely
+/**
+ * Execute a shell command and capture its result.
+ *
+ * @param {string} command Shell command string.
+ * @param {Object} [options={}] execSync options.
+ * @return {{success: boolean, output?: string, error?: string}} Result object.
+ */
 function runCommand(command, options = {}) {
 	try {
 		const output = execSync(command, {
@@ -111,6 +163,12 @@ function runCommand(command, options = {}) {
 }
 
 // Helpers for version detection
+/**
+ * Locate the primary plugin PHP file by searching for a Plugin Name header.
+ *
+ * @param {string} rootDir Directory to search in.
+ * @return {string|null} Path when found or null.
+ */
 function findPluginFile(rootDir) {
 	const phpFiles = fs
 		.readdirSync(rootDir)
@@ -124,17 +182,34 @@ function findPluginFile(rootDir) {
 	return null;
 }
 
+/**
+ * Extract the version declared inside the plugin header comment block.
+ *
+ * @param {string} content File contents to scan.
+ * @return {string|null} Version string if present, otherwise null.
+ */
 function extractHeaderVersion(content) {
 	const match = content.match(/Version:\s*([\\d.]+(?:-[A-Za-z0-9.-]+)?)/);
 	return match ? match[1] : null;
 }
 
+/**
+ * Extract the `_VERSION` constant value from the plugin file.
+ *
+ * @param {string} content File contents to scan.
+ * @return {string|null} Constant value or null.
+ */
 function extractConstantVersion(content) {
 	const match = content.match(/_VERSION',\s*'([^']+)'/);
 	return match ? match[1] : null;
 }
 
 // Version consistency check
+/**
+ * Verify that all version references across files match.
+ *
+ * @return {{success: boolean, version?: string, versions?: Object, error?: string}} Summary of consistency check.
+ */
 function checkVersionConsistency() {
 	info('Checking version consistency...');
 
@@ -238,6 +313,11 @@ function checkVersionConsistency() {
 }
 
 // Quality gates validation
+/**
+ * Run linting, formatting, and test suites that guard release quality.
+ *
+ * @return {boolean} True when critical quality gates passed.
+ */
 function checkQualityGates() {
 	header('Quality Gates');
 
@@ -303,8 +383,15 @@ function checkQualityGates() {
 }
 
 // Documentation verification
+/**
+ * Validate presence and quality of documentation files.
+ *
+ * @return {void}
+ */
 function checkDocumentation() {
 	header('Documentation Verification');
+
+	// TODO: Include CHANGELOG.md, instructions, and other docs in this verification pass.
 
 	const rootDir = path.resolve(__dirname, '..');
 
@@ -363,6 +450,11 @@ function checkDocumentation() {
 }
 
 // Plugin generation validation
+/**
+ * Validate plugin generation logic using plugin-config.json.
+ *
+ * @return {boolean} True when validation succeeds.
+ */
 function testPluginGeneration() {
 	header('Plugin Generation Validation');
 
@@ -380,6 +472,7 @@ function testPluginGeneration() {
 		return false;
 	}
 
+	// TODO: Run the actual generator and validate output files instead of just schema validation.
 	const result = runCommand('npm run validate:config', { silent: true });
 	if (result.success) {
 		success('Generator validation: PASSED');
@@ -398,9 +491,15 @@ function testPluginGeneration() {
 }
 
 // Security audit
+/**
+ * Execute npm audit and report vulnerabilities.
+ *
+ * @return {boolean} True when no high/critical vulnerabilities exist.
+ */
 function runSecurityAudit() {
 	header('Security Audit');
 
+	// TODO: Capture and persist audit reports for later inspection.
 	info('Running npm audit...');
 	const result = runCommand('npm audit --audit-level=high', { silent: true });
 
@@ -432,9 +531,15 @@ function runSecurityAudit() {
 }
 
 // Generate full report
+/**
+ * Print a release readiness report summarising previous checks.
+ *
+ * @return {boolean} True when critical blockers are absent.
+ */
 function generateReport() {
 	header('Release Readiness Report');
 
+	// TODO: Serialize this report to disk or remote logging system.
 	const version = checkVersionConsistency().version || 'Unknown';
 
 	console.log(
@@ -538,6 +643,16 @@ function generateReport() {
 }
 
 // Main function
+/**
+ * CLI entry point for the release agent.
+ *
+ * @return {boolean} True when the requested command succeeded.
+ */
+/**
+ * CLI entry point for the release agent.
+ *
+ * @return {boolean} True when the requested command succeeded.
+ */
 function main() {
 	const args = process.argv.slice(2);
 	const command = args[0] || 'validate';
@@ -581,10 +696,10 @@ function main() {
 			checkDocumentation();
 			return generateReport();
 
-		case 'help':
-		case '--help':
-		case '-h':
-			console.log('\nUsage: node scripts/release.agent.js [command]\n');
+	case 'help':
+	case '--help':
+	case '-h':
+		console.log('\nUsage: node scripts/release.agent.js [command]\n');
 			console.log('Commands:');
 			console.log('  validate    Run full validation suite (default)');
 			console.log('  version     Check version consistency');
@@ -597,11 +712,12 @@ function main() {
 			console.log('  help        Show this help\n');
 			return true;
 
-		default:
-			error(`Unknown command: ${command}`);
-			console.log('Run with --help for usage information\n');
-			return false;
-	}
+	default:
+		// TODO: Provide suggestions when unknown commands are supplied.
+		error(`Unknown command: ${command}`);
+		console.log('Run with --help for usage information\n');
+		return false;
+}
 }
 
 // Run main function

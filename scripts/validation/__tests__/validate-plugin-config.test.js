@@ -22,6 +22,7 @@ const FIXTURE_PATH = path.join(
 	'..',
 	'..',
 	'..',
+	'tests',
 	'fixtures',
 	'plugin-config.test.json'
 );

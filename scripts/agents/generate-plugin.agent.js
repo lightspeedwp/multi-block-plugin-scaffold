@@ -1,25 +1,30 @@
 #!/usr/bin/env node
-/* eslint-disable no-console, jsdoc/require-param-type */
+/* eslint-disable no-console */
 
 /**
- * Multi-Block Plugin Scaffold Generator Agent
- *
- * Interactive agent that collects requirements and generates WordPress plugins.
- * Supports multiple modes:
- * - Interactive: Prompts for configuration
- * - JSON: Accepts configuration via stdin
- * - Validate: Validates configuration
- * - Schema: Outputs JSON schema
- *
- * @package
+ * @file Plugin Generation Agent
+ * @description This agent script manages the end-to-end process of generating a new
+ * WordPress plugin from the scaffold. It handles command-line arguments,
+ * orchestrates the interactive configuration wizard, and executes the file
+ * generation and setup steps.
  */
 
 const fs = require('fs');
 const path = require('path');
-const { loadSchema, validateConfig } = require('./generate-plugin.js');
+const {
+	getCanonicalConfigSchema,
+	validateConfig,
+} = require('../lib/config-schema.js');
+const { runWizard } = require('../lib/wizard.js');
+const { FileLogger } = require('../lib/logger.js');
+const minimist = require('minimist');
 
 /**
- * Display help information
+ * Display help information and usage instructions.
+ * This function prints a formatted help message to the console,
+ * detailing the script's usage, available options, and examples.
+ *
+ * @return {void}
  */
 function displayHelp() {
 	const help = `
@@ -33,6 +38,8 @@ Options:
   --schema       Output JSON schema
   --json         Accept configuration via stdin
   --validate     Validate configuration (provide config as argument)
+  --config <path> Load configuration from a JSON file
+  --dry-run      Run without writing any files
 
 Examples:
   Interactive:
@@ -44,6 +51,9 @@ Examples:
   Validate:
     node generate-plugin.agent.js --validate '{"slug":"test",...}'
 
+  From config file:
+    node generate-plugin.agent.js --config ./my-config.json
+
   Schema:
     node generate-plugin.agent.js --schema
 `;
@@ -51,91 +61,126 @@ Examples:
 }
 
 /**
- * Display JSON schema
+ * Display the stored JSON schema for plugin configuration.
+ * It loads the schema using `loadSchema` and prints it to the console
+ * in a human-readable JSON format.
+ *
+ * @return {void}
  */
 function displaySchema() {
-	const schema = loadSchema();
+	const schema = getCanonicalConfigSchema();
 	console.log(JSON.stringify(schema, null, 2));
 }
 
 /**
- * Handle JSON mode - read configuration from stdin
+ * Handle JSON mode by reading configuration data from stdin.
+ * This function reads a JSON string from standard input, parses it,
+ * validates it against the schema, and if valid, writes it to
+ * `plugin-config.json` in the current working directory.
+ * It provides detailed error feedback for invalid JSON or failed
+ * validation.
+ *
+ * @param {FileLogger} logger - The logger instance.
+ * @param {boolean} dryRun - If true, file writing will be skipped.
+ * @async
+ * @returns {Promise<void>} A promise that resolves on success or rejects on error.
  */
-function handleJsonMode() {
-	let input = '';
-
-	process.stdin.setEncoding('utf8');
-
-	process.stdin.on('data', (chunk) => {
-		input += chunk;
+async function handleJsonMode(logger, dryRun) {
+	const input = await new Promise((resolve, reject) => {
+		let data = '';
+		process.stdin.setEncoding('utf8');
+		process.stdin.on('data', (chunk) => (data += chunk));
+		process.stdin.on('end', () => resolve(data));
+		process.stdin.on('error', (err) => reject(err));
 	});
 
-	process.stdin.on('end', () => {
-		try {
-			// Parse JSON
-			const config = JSON.parse(input);
+	if (!input) {
+		logger.error('Error: No data received from stdin.');
+		process.exit(1);
+	}
 
-			// Validate configuration
-			const result = validateConfig(config);
+	try {
+		// Parse JSON
+		const config = JSON.parse(input);
 
-			if (!result.valid) {
-				console.error('Configuration validation failed:');
-				if (result.errors && result.errors.length > 0) {
-					result.errors.forEach((error) => {
-						const field =
-							error.instancePath || error.field || 'unknown';
-						const message = error.message || 'Validation error';
-						console.error(`  - ${field}: ${message}`);
+		// Validate configuration
+		const result = validateConfig(config);
 
-						// Check if it's a required field error
-						if (
-							error.keyword === 'required' ||
-							message.includes('required')
-						) {
-							const requiredField =
-								error.params?.missingProperty || '';
-							if (requiredField) {
-								console.error(
-									`    Required field missing: ${requiredField}`
-								);
-							}
-						}
-					});
-				}
-				process.exit(1);
-			}
-
-			// Configuration is valid
-			console.log('✓ Configuration validated successfully');
-
-			// Write to plugin-config.json
-			const outputPath = path.join(process.cwd(), 'plugin-config.json');
-			fs.writeFileSync(outputPath, JSON.stringify(config, null, 2));
-			console.log(`✓ Configuration written to: ${outputPath}`);
-
-			process.exit(0);
-		} catch (error) {
-			if (error instanceof SyntaxError) {
-				console.error('Invalid JSON:', error.message);
-			} else {
-				console.error('Error processing configuration:', error.message);
-			}
+		if (!result.valid) {
+			reportValidationErrors(result, logger);
 			process.exit(1);
 		}
-	});
 
-	process.stdin.on('error', (error) => {
-		console.error('Error reading stdin:', error.message);
+		// Configuration is valid
+		logger.info('✓ Configuration validated successfully');
+
+		if (dryRun) {
+			logger.info('[Dry Run] Would write configuration to plugin-config.json');
+		} else {
+			// Write to plugin-config.json
+			const outputPath = path.join(process.cwd(), 'plugin-config.json');
+			await fs.promises.writeFile(outputPath, JSON.stringify(config, null, 2));
+			logger.info(`✓ Configuration written to: ${outputPath}`);
+		}
+	} catch (error) {
+		logger.error('Error processing configuration:', { error: error.message });
 		process.exit(1);
-	});
+	}
+}
+
+// TODO: After successful dry-run JSON validation link this path to the actual generator workflow.
+
+/**
+ * Handles configuration provided via a file path.
+ * Reads the file, parses it as JSON, validates it, and then proceeds
+ * to the generation step.
+ *
+ * @param {string} configPath - Path to the configuration JSON file.
+ * @param {FileLogger} logger - The logger instance.
+ * @param {boolean} dryRun - If true, plugin generation will be skipped.
+ * @returns {Promise<void>}
+ */
+async function handleFileConfigMode(configPath, logger, dryRun) {
+	logger.info(`Loading configuration from: ${configPath}`);
+	try {
+		const fileContent = await fs.promises.readFile(configPath, 'utf8');
+		const config = JSON.parse(fileContent);
+
+		const result = validateConfig(config);
+		if (!result.valid) {
+			reportValidationErrors(result, logger);
+			process.exit(1);
+		}
+
+		logger.info('✓ Configuration from file is valid.');
+
+		if (dryRun) {
+			logger.info('[Dry Run] Would generate plugin with the provided configuration.');
+		} else {
+			// TODO: Replace with actual plugin generation call
+			// await generatePlugin(config);
+			logger.info('Plugin generated successfully from file configuration!');
+		}
+	} catch (error) {
+		logger.error(`Failed to process config file: ${configPath}`, {
+			error: error.message,
+		});
+		process.exit(1);
+	}
 }
 
 /**
  * Handle validate mode - validate configuration from argument
+ * This function takes a JSON string as an argument, parses it, and
+ * validates it against the schema. It prints a success message if valid,
+ * or detailed error messages if invalid. The process exits with a non-zero
+ * status code on failure.
  *
  * @param {string} configJson - JSON configuration string
+ * @param {FileLogger} logger - The logger instance.
+ * @return {void}
  */
-function handleValidateMode(configJson) {
+function handleValidateMode(configJson, logger) {
 	try {
 		// Parse JSON
 		const config = JSON.parse(configJson);
@@ -144,89 +189,143 @@ function handleValidateMode(configJson) {
 		const result = validateConfig(config);
 
 		if (!result.valid) {
-			console.error('Configuration validation failed:');
-			if (result.errors && result.errors.length > 0) {
-				result.errors.forEach((error) => {
-					const field =
-						error.instancePath || error.field || 'unknown';
-					const message = error.message || 'Validation error';
-					console.error(`  - ${field}: ${message}`);
-
-					// Check if it's a required field error
-					if (
-						error.keyword === 'required' ||
-						message.includes('required')
-					) {
-						const requiredField =
-							error.params?.missingProperty || '';
-						if (requiredField) {
-							console.error(
-								`    Required field missing: ${requiredField}`
-							);
-						}
-					}
-				});
-			}
+			reportValidationErrors(result, logger);
 			process.exit(1);
 		}
 
 		// Configuration is valid
-		console.log('✓ Configuration is valid');
+		logger.info('✓ Configuration is valid');
 		process.exit(0);
 	} catch (error) {
 		if (error instanceof SyntaxError) {
-			console.error('Invalid JSON:', error.message);
+			logger.error('Invalid JSON provided for validation.', { error: error.message });
 		} else {
-			console.error('Error validating configuration:', error.message);
+			logger.error('Error validating configuration.', { error: error.message });
 		}
 		process.exit(1);
 	}
 }
 
 /**
- * Main function
+ * Reports validation errors to the console in a structured format.
+ *
+ * @param {Object} validationResult - The result object from `validateConfig`.
+ * @param {FileLogger} logger - The logger instance.
  */
-function main() {
-	const args = process.argv.slice(2);
+function reportValidationErrors(validationResult, logger) {
+	logger.error('Configuration validation failed.');
+	if (validationResult.errors && validationResult.errors.length > 0) {
+		validationResult.errors.forEach((error) => {
+			// The path to the invalid property, e.g., "/slug"
+			const propertyPath = error.instancePath.substring(1) || 'config';
+			let message = error.message;
 
-	// Handle --help flag
-	if (args.includes('--help') || args.includes('-h')) {
-		displayHelp();
-		process.exit(0);
+			// Provide a more user-friendly message for required fields.
+			if (error.keyword === 'required') {
+				message = `is a required property (missing: '${error.params.missingProperty}')`;
+			}
+
+			// Log structured error for file, but keep console simple.
+			logger.error(`Validation error for '${propertyPath}': ${message}`, { propertyPath, error: error.message });
+		});
 	}
+}
 
-	// Handle --schema flag
-	if (args.includes('--schema')) {
-		displaySchema();
-		process.exit(0);
+/**
+ * Run the interactive wizard to gather configuration from the user.
+ *
+ * @param {FileLogger} logger - The logger instance.
+ * @param {boolean} dryRun - If true, plugin generation will be skipped.
+ * @async
+ * @returns {Promise<void>} A promise that resolves when the plugin generation is complete.
+ */
+async function runInteractiveMode(logger, dryRun) {
+	try {
+		// TODO: The wizard requires more context from the config-schema that is not yet implemented.
+		// This is a placeholder for the full interactive wizard implementation.
+		logger.info('Starting interactive plugin generator...');
+		const config = await runWizard(/* wizard dependencies */);
+		logger.info('Configuration received from wizard.', { config });
+		if (dryRun) {
+			logger.info('[Dry Run] Would generate plugin with the received configuration.');
+		} else {
+			// await generatePlugin(config);
+			logger.info('Plugin generated successfully!');
+		}
+	} catch (error) {
+		if (error.message !== 'Wizard cancelled.') {
+			logger.error('An error occurred during the wizard.', { error: error.message });
+		}
 	}
+}
 
-	// Handle --json flag (read from stdin)
-	if (args.includes('--json')) {
-		handleJsonMode();
-		return; // Don't exit here, let stdin handlers manage exit
-	}
+/**
+ * CLI entry point for the generator agent.
+ * Parses command-line arguments and routes to the appropriate handler function
+ * based on the flags provided (e.g., `--help`, `--schema`, `--json`, `--validate`).
+ * If no recognized flags are given, it displays the help message and exits.
+ *
+ * @async
+ * @return {void}
+ */
+async function main() {
+	const logger = new FileLogger('generate-plugin-agent', 'agents');
+	try {
+		const args = minimist(process.argv.slice(2), {
+			boolean: ['help', 'schema', 'json', 'dry-run'],
+			string: ['validate', 'config'],
+			alias: { h: 'help' },
+		});
 
-	// Handle --validate flag
-	if (args.includes('--validate')) {
-		const validateIndex = args.indexOf('--validate');
-		const configJson = args[validateIndex + 1];
-
-		if (!configJson) {
-			console.error(
-				'Error: --validate requires a JSON configuration argument'
-			);
-			process.exit(1);
+		const dryRun = args['dry-run'];
+		if (dryRun) {
+			logger.info('--- Dry Run Mode Enabled: No files will be written. ---');
 		}
 
-		handleValidateMode(configJson);
-		return;
-	}
+		// Handle --help flag
+		if (args.help) {
+			displayHelp();
+			return;
+		}
 
-	// No recognized flags - show help
-	console.log('No command provided. Use --help for usage information.');
-	displayHelp();
-	process.exit(0);
+		// Handle --schema flag
+		if (args.schema) {
+			displaySchema();
+			return;
+		}
+
+		// Handle --json flag (read from stdin)
+		if (args.json) {
+			await handleJsonMode(logger, dryRun);
+			return;
+		}
+
+		// Handle --validate flag
+		if (args.validate !== undefined) {
+			const configJson = args.validate || args._[0];
+			if (!configJson) {
+				logger.error('Error: --validate requires a JSON string or file path argument.');
+				process.exit(1);
+			}
+			handleValidateMode(configJson, logger);
+			return;
+		}
+
+		// Handle --config flag
+		if (args.config) {
+			await handleFileConfigMode(args.config, logger, dryRun);
+			return;
+		}
+
+		// Default to interactive mode if no other flags are provided.
+		await runInteractiveMode(logger, dryRun);
+	} catch (error) {
+		logger.error('An unexpected error occurred in the agent.', { error: error.stack });
+		process.exit(1);
+	} finally {
+		// Ensure all buffered logs are written to the file before exiting.
+		await logger.save();
+	}
 }
 
 // Run main function

@@ -68,6 +68,7 @@ class TemplateAgent {
 	validateInputs(params) {
 		console.log('📋 Validating inputs...');
 
+		// TODO: Provide real validation logic for required parameters.
 		// Add your validation logic here
 		// Example:
 		// if (!params.requiredField) {
@@ -92,6 +93,8 @@ class TemplateAgent {
 			success: true,
 			message: 'Template agent executed (no actual work performed)',
 		};
+
+		// TODO: Replace this stub with real work tailored to your agent.
 
 		console.log('✓ Work completed\n');
 		return result;
@@ -119,5 +122,7 @@ if (require.main === module) {
 	console.error('  cp scripts/agents/template.agent.js scripts/agents/your-agent.agent.js\n');
 	process.exit(1);
 }
+
+// TODO: Remove this template guard once you've implemented a concrete agent.
 
 module.exports = TemplateAgent;

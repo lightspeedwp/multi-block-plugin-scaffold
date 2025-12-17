@@ -1,19 +1,29 @@
 /**
- * Shared Configuration Schema
+ * @file Shared Configuration Schema
+ * @description Central schema definition used by all plugin generation modes.
+ * It loads the canonical schema from `.github/schemas/plugin-config.schema.json`
+ * and provides helper functions to access and validate configuration fields based on it.
  *
- * Central schema definition used by both generate-plugin.js and generate-plugin.agent.js
- * Ensures consistent validation and configuration structure across all generation modes.
+ * TODO: For high-frequency script execution, enhance schema caching with a file watcher
+ * during development to automatically invalidate the cache on schema changes.
  */
 
 const path = require('path');
 const fs = require('fs');
 
+let cachedSchema = null;
+
 /**
- * Load JSON schema from file
+ * Load JSON schema from file, caching the result for repeated requests.
  *
- * @return {Object} The parsed JSON schema
+ * @param {boolean} [forceReload=false] Refresh cached schema even if already loaded.
+ * @return {Object} The parsed JSON schema.
  */
-function loadSchema() {
+function loadSchema(forceReload = false) {
+	if (cachedSchema && !forceReload) {
+		return cachedSchema;
+	}
+
 	const schemaPath = path.resolve(
 		__dirname,
 		'../../.github/schemas/plugin-config.schema.json'
@@ -24,299 +34,54 @@ function loadSchema() {
 	}
 
 	const schemaContent = fs.readFileSync(schemaPath, 'utf8');
-	return JSON.parse(schemaContent);
+	cachedSchema = JSON.parse(schemaContent);
+	return cachedSchema;
 }
 
 /**
- * SCF Field types reference
+ * The canonical JSON schema for plugin configuration, loaded from the schema file.
+ *
+ * @type {Object}
  */
-const SCF_FIELD_TYPES = [
-	'text',
-	'textarea',
-	'wysiwyg',
-	'number',
-	'email',
-	'url',
-	'password',
-	'image',
-	'file',
-	'gallery',
-	'select',
-	'checkbox',
-	'radio',
-	'true_false',
-	'date_picker',
-	'time_picker',
-	'date_time_picker',
-	'color_picker',
-	'post_object',
-	'relationship',
-	'taxonomy',
-	'user',
-	'repeater',
-	'group',
-	'flexible_content',
-	'clone',
-];
+const canonicalSchema = loadSchema();
 
 /**
- * Available block categories
+ * SCF Field types reference derived from the canonical schema.
+ *
+ * @type {string[]}
  */
-const BLOCK_CATEGORIES = [
-	'text',
-	'media',
-	'design',
-	'widgets',
-	'theme',
-	'embed',
-];
+const SCF_FIELD_TYPES = Object.freeze(
+	getNestedSchemaArray(canonicalSchema, [
+		'properties',
+		'fields',
+		'items',
+		'properties',
+		'type',
+		'enum',
+	])
+);
 
 /**
- * Configuration schema defining all available options
+ * Available block categories derived from the canonical schema.
+ *
+ * @type {string[]}
  */
-const CONFIG_SCHEMA = {
-	// Stage 1: Plugin Identity (Required)
-	slug: {
-		stage: 1,
-		required: true,
-		type: 'string',
-		pattern: '^[a-z0-9]+(-[a-z0-9]+)*$',
-		maxLength: 50,
-		description: 'Plugin slug (lowercase, hyphens only, max 50 chars)',
-		examples: ['tour-operator', 'booking-system', 'event-manager'],
-	},
-	name: {
-		stage: 1,
-		required: true,
-		type: 'string',
-		description: 'Plugin display name',
-		examples: ['Tour Operator', 'Booking System', 'Event Manager'],
-	},
-	description: {
-		stage: 1,
-		required: false,
-		type: 'string',
-		description: 'Brief plugin description',
-		examples: [
-			'Manage tours and bookings',
-			'Complete booking solution',
-			'Event management plugin',
-		],
-	},
-	author: {
-		stage: 1,
-		required: true,
-		type: 'string',
-		description: 'Plugin author name',
-		examples: ['LightSpeed', 'Your Company', 'Your Name'],
-	},
-	author_uri: {
-		stage: 1,
-		required: false,
-		type: 'string',
-		format: 'uri',
-		description: 'Author website URL',
-		examples: ['https://lightspeedwp.com', 'https://example.com'],
-	},
+const BLOCK_CATEGORIES = Object.freeze(
+	getNestedSchemaArray(canonicalSchema, [
+		'properties',
+		'blocks',
+		'items',
+		'enum',
+	])
+);
 
-	// Stage 2: Custom Post Type
-	name_singular: {
-		stage: 2,
-		required: false,
-		type: 'string',
-		description: 'Singular post type name',
-		examples: ['Tour', 'Event', 'Product'],
-	},
-	name_plural: {
-		stage: 2,
-		required: false,
-		type: 'string',
-		description: 'Plural post type name',
-		examples: ['Tours', 'Events', 'Products'],
-	},
-	cpt_slug: {
-		stage: 2,
-		required: false,
-		type: 'string',
-		maxLength: 20,
-		description: 'Custom post type slug (max 20 chars)',
-		examples: ['tour', 'event', 'product'],
-	},
-	cpt_icon: {
-		stage: 2,
-		required: false,
-		type: 'string',
-		description: 'Dashicon class for admin menu',
-		examples: [
-			'dashicons-palmtree',
-			'dashicons-calendar',
-			'dashicons-cart',
-		],
-	},
-	cpt_supports: {
-		stage: 2,
-		required: false,
-		type: 'array',
-		items: {
-			type: 'string',
-			enum: [
-				'title',
-				'editor',
-				'thumbnail',
-				'excerpt',
-				'comments',
-				'revisions',
-				'custom-fields',
-			],
-		},
-		description: 'Features supported by the post type',
-	},
-	cpt_has_archive: {
-		stage: 2,
-		required: false,
-		type: 'boolean',
-		description: 'Enable archive page for the post type',
-	},
-
-	// Stage 3: Taxonomies
-	taxonomies: {
-		stage: 3,
-		required: false,
-		type: 'array',
-		items: {
-			type: 'object',
-			properties: {
-				slug: {
-					type: 'string',
-					description: 'Taxonomy slug',
-				},
-				singular: {
-					type: 'string',
-					description: 'Singular taxonomy name',
-				},
-				plural: {
-					type: 'string',
-					description: 'Plural taxonomy name',
-				},
-				hierarchical: {
-					type: 'boolean',
-					description: 'Is taxonomy hierarchical (like categories)',
-				},
-			},
-			required: ['slug', 'singular', 'plural'],
-		},
-		description: 'Taxonomies for the custom post type',
-	},
-
-	// Stage 4: Custom Fields
-	fields: {
-		stage: 4,
-		required: false,
-		type: 'array',
-		items: {
-			type: 'object',
-			properties: {
-				name: {
-					type: 'string',
-					description: 'Field name/key',
-				},
-				label: {
-					type: 'string',
-					description: 'Field label shown to users',
-				},
-				type: {
-					type: 'string',
-					enum: SCF_FIELD_TYPES,
-					description: 'SCF field type',
-				},
-				required: {
-					type: 'boolean',
-					description: 'Is this field required',
-				},
-				instructions: {
-					type: 'string',
-					description: 'Help text for editors',
-				},
-			},
-			required: ['name', 'label', 'type'],
-		},
-		description: 'Custom fields for the post type',
-	},
-
-	// Stage 5: Blocks
-	blocks: {
-		stage: 5,
-		required: false,
-		type: 'array',
-		items: {
-			type: 'string',
-			enum: ['card', 'collection', 'slider', 'featured'],
-		},
-		description: 'Blocks to generate',
-	},
-
-	// Stage 6: Templates & Patterns
-	templates: {
-		stage: 6,
-		required: false,
-		type: 'array',
-		items: {
-			type: 'string',
-			enum: ['single', 'archive'],
-		},
-		description: 'Block templates to generate',
-	},
-
-	// Stage 7: Version & Compatibility
-	version: {
-		stage: 7,
-		required: false,
-		type: 'string',
-		pattern: '^\\d+\\.\\d+\\.\\d+$',
-		default: '1.0.0',
-		description: 'Plugin version (semantic versioning)',
-	},
-	requires_wp: {
-		stage: 7,
-		required: false,
-		type: 'string',
-		default: '6.5',
-		description: 'Minimum WordPress version',
-	},
-	requires_php: {
-		stage: 7,
-		required: false,
-		type: 'string',
-		default: '8.0',
-		description: 'Minimum PHP version',
-	},
-	tested_up_to: {
-		stage: 7,
-		required: false,
-		type: 'string',
-		default: '6.7',
-		description: 'Tested up to WordPress version',
-	},
-	license: {
-		stage: 7,
-		required: false,
-		type: 'string',
-		default: 'GPL-2.0-or-later',
-		description: 'Plugin license',
-	},
-
-	// Auto-generated fields (not user-provided)
-	namespace: {
-		required: false,
-		type: 'string',
-		description: 'PHP namespace (auto-generated from slug)',
-	},
-	textdomain: {
-		required: false,
-		type: 'string',
-		description: 'i18n text domain (auto-generated from slug)',
-	},
-};
+/**
+ * Configuration schema defining all available options mapped by field name.
+ * Each entry includes stage metadata and whether the canonical schema marks
+ * it as required.
+ * @type {Object}
+ */
+const CONFIG_SCHEMA = buildConfigSchema(canonicalSchema);
 
 /**
  * Get required fields for a specific stage
@@ -326,9 +91,7 @@ const CONFIG_SCHEMA = {
  */
 function getRequiredFieldsForStage(stage) {
 	return Object.entries(CONFIG_SCHEMA)
-		.filter(
-			([, config]) => config.stage === stage && config.required === true
-		)
+		.filter(([, config]) => config.stage === stage && config.required)
 		.map(([field]) => field);
 }
 
@@ -358,7 +121,7 @@ function getFieldConfig(field) {
  * Validate a field value against its schema
  *
  * @param {string} field - Field name
- * @param {*}      value - Field value
+ * @param {*} value - Field value
  * @return {Object} { valid: boolean, error?: string }
  */
 function validateField(field, value) {
@@ -367,17 +130,14 @@ function validateField(field, value) {
 		return { valid: false, error: `Unknown field: ${field}` };
 	}
 
-	// Check required
 	if (config.required && !value) {
 		return { valid: false, error: `${field} is required` };
 	}
 
-	// If not required and no value, it's valid
 	if (!value && !config.required) {
 		return { valid: true };
 	}
 
-	// Type validation
 	const valueType = Array.isArray(value) ? 'array' : typeof value;
 	if (config.type !== valueType) {
 		return {
@@ -386,7 +146,6 @@ function validateField(field, value) {
 		};
 	}
 
-	// Pattern validation
 	if (config.pattern && !new RegExp(config.pattern).test(value)) {
 		return {
 			valid: false,
@@ -394,7 +153,6 @@ function validateField(field, value) {
 		};
 	}
 
-	// Max length validation
 	if (config.maxLength && value.length > config.maxLength) {
 		return {
 			valid: false,
@@ -402,7 +160,6 @@ function validateField(field, value) {
 		};
 	}
 
-	// Enum validation
 	if (config.enum && !config.enum.includes(value)) {
 		return {
 			valid: false,
@@ -413,11 +170,68 @@ function validateField(field, value) {
 	return { valid: true };
 }
 
+/**
+ * Extract an array from a nested path inside the JSON schema.
+ * Returns the fallback value when the path is missing or not an array.
+ *
+ * @param {Object} schema - JSON schema root
+ * @param {string[]} pathSegments - Keys leading to the target array
+ * @param {Array} [fallback=[]] - Fallback value when extraction fails
+ * @return {Array} The array found at the nested path
+ */
+function getNestedSchemaArray(schema, pathSegments, fallback = []) {
+	let pointer = schema;
+	for (const segment of pathSegments) {
+		if (!pointer || typeof pointer !== 'object') {
+			return fallback;
+		}
+		pointer = pointer[segment];
+	}
+	return Array.isArray(pointer) ? pointer : fallback;
+}
+
+/**
+ * Get the canonical JSON schema.
+ *
+ * @returns {Object} The canonical JSON schema.
+ */
+function getCanonicalConfigSchema() {
+	return canonicalSchema;
+}
+
+/**
+ * Build the stage-aware configuration schema from the canonical JSON definition.
+ *
+ * @param {Object} schema - Parsed canonical schema
+ * @todo Ensure that any new properties added to `plugin-config.schema.json` also include
+ *       the custom `x-stage` property so they are correctly handled by the interactive wizard.
+ * @return {Object} Schema entries augmented with stage and required metadata
+ */
+function buildConfigSchema(schema) {
+	const requiredFields = new Set(
+		Array.isArray(schema.required) ? schema.required : []
+	);
+	const properties = schema.properties || {};
+
+	return Object.fromEntries(
+		Object.entries(properties).map(([field, definition]) => [
+			field,
+			{
+				...definition,
+				// The `x-stage` property in the schema is the canonical source for the stage number.
+				stage: definition['x-stage'] ?? null,
+				required: requiredFields.has(field),
+			},
+		])
+	);
+}
+
 module.exports = {
 	CONFIG_SCHEMA,
 	SCF_FIELD_TYPES,
 	BLOCK_CATEGORIES,
 	loadSchema,
+	getCanonicalConfigSchema,
 	getRequiredFieldsForStage,
 	getFieldsForStage,
 	getFieldConfig,

@@ -24,12 +24,11 @@ const {
 	generatePlugin,
 } = require('./generate-plugin');
 
-const ROOT_DIR = path.resolve(__dirname, '..', '..');
+const ROOT_DIR = path.resolve(__dirname, '..');
 const CLI_PATH = path.join(ROOT_DIR, 'scripts', 'generate-plugin.js');
 const CLI_ENV = { ...process.env, NODE_ENV: 'test' };
 const INVALID_CONFIG_PATH = path.join(
-	__dirname,
-	'..',
+	ROOT_DIR,
 	'tmp',
 	'invalid-plugin-config.json'
 );
@@ -39,8 +38,8 @@ afterAll(() => {
 });
 
 const FIXTURE_PATH = path.join(
-	__dirname,
-	'..',
+	ROOT_DIR,
+	'tests',
 	'fixtures',
 	'plugin-config.test.json'
 );

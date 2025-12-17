@@ -1,9 +1,0 @@
-{
-  "version": "1.0.0",
-  "name": "test-theme",
-  "scripts": {
-    "build:production": "echo \"Building...\"",
-    "lint": "echo \"Linting...\"",
-    "test": "echo \"Testing...\""
-  }
-}

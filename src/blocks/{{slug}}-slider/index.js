@@ -14,7 +14,7 @@
  * @see ./render.php Server-side rendering with slide query
  * @see ./view.js Frontend slider interactivity
  *
- * @package {{namespace}}
+ * @package
  * @since 1.0.0
  */
 

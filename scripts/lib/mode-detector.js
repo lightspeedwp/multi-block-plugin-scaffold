@@ -1,108 +1,76 @@
 /* eslint-disable no-console */
+const fs = require('fs');
+const path = require('path');
+const minimist = require('minimist');
+
+const CLI_HELP_DOC_PATH = path.resolve(
+	__dirname,
+	'../../docs/GENERATE-PLUGIN.md'
+);
 /**
- * Mode Detector
+ * @file Mode Detector
+ * @description Detects which mode the plugin generator should run in based on CLI arguments and stdin.
  *
- * Detects which mode the plugin generator should run in:
- * - Interactive: User answers prompts step-by-step
- * - JSON: Configuration provided via file or stdin
- * - Validate: Just validate a configuration
- * - CLI: Configuration provided via command-line arguments
+ * The script supports several operational modes:
+ * - `interactive`: A step-by-step wizard for user input.
+ * - `json`: Configuration is provided via a specified file.
+ * - `json-stdin`: Configuration is piped via stdin.
+ * - `validate`: Validates a configuration file without generating the plugin.
+ * - `help`: Displays the help message.
  */
 
 /**
  * Parse command-line arguments
  *
- * @param {Array} argv - Process argv (defaults to process.argv)
- * @return {Object} Parsed arguments { mode, config, flags }
+ * @param {string[]} [argv=process.argv] - Process argv. Defaults to `process.argv`.
+ * @returns {{mode: string, config: string|null, flags: Object<string, (string|boolean)>}} Parsed arguments containing the detected mode,
+ * configuration file path (if any), and any provided flags.
  */
 function parseArgs(argv = process.argv) {
-	const args = argv.slice(2);
-	const flags = {};
+	const args = minimist(argv.slice(2), {
+		alias: {
+			h: 'help',
+			c: 'config',
+			o: 'output',
+			v: 'verbose',
+			f: 'force',
+		},
+		boolean: ['help', 'schema', 'json', 'dry-run', 'verbose', 'force'],
+		string: ['config', 'output'],
+		// `validate` can be a boolean or have a value, so we don't declare its type.
+	});
+
 	let mode = 'interactive';
 	let config = null;
 
-	for (let i = 0; i < args.length; i++) {
-		const arg = args[i];
-
-		// Help flag
-		if (arg === '--help' || arg === '-h') {
-			mode = 'help';
-			break;
+	if (args.help) {
+		mode = 'help';
+	} else if (args.schema) {
+		mode = 'schema';
+	} else if (args.validate !== undefined) {
+		mode = 'validate';
+		// Handle `--validate` and `--validate <file>`
+		if (typeof args.validate === 'string' && args.validate) {
+			config = args.validate;
+		} else if (args._.length > 0) {
+			// Handle `... --validate file.json`
+			config = args._.shift();
 		}
-
-		// Schema flag
-		if (arg === '--schema') {
-			mode = 'schema';
-			break;
-		}
-
-		// Validate mode
-		if (arg === '--validate') {
-			mode = 'validate';
-			if (args[i + 1] && !args[i + 1].startsWith('--')) {
-				config = args[i + 1];
-				i++;
-			}
-			continue;
-		}
-
-		// Config file mode
-		if (arg === '--config' || arg === '-c') {
-			mode = 'json';
-			if (args[i + 1] && !args[i + 1].startsWith('--')) {
-				config = args[i + 1];
-				i++;
-			}
-			continue;
-		}
-
-		// JSON mode (stdin)
-		if (arg === '--json') {
-			mode = 'json-stdin';
-			flags.json = true;
-			continue;
-		}
-
-		// Output directory
-		if (arg === '--output' || arg === '-o') {
-			if (args[i + 1] && !args[i + 1].startsWith('--')) {
-				flags.output = args[i + 1];
-				i++;
-			}
-			continue;
-		}
-
-		// Dry run flag
-		if (arg === '--dry-run') {
-			flags.dryRun = true;
-			continue;
-		}
-
-		// Verbose flag
-		if (arg === '--verbose' || arg === '-v') {
-			flags.verbose = true;
-			continue;
-		}
-
-		// Force flag
-		if (arg === '--force' || arg === '-f') {
-			flags.force = true;
-			continue;
-		}
-
-		// Other flags
-		if (arg.startsWith('--')) {
-			const key = arg
-				.slice(2)
-				.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
-			if (args[i + 1] && !args[i + 1].startsWith('--')) {
-				flags[key] = args[i + 1];
-				i++;
-			} else {
-				flags[key] = true;
-			}
-		}
+	} else if (args.config) {
+		mode = 'json';
+		config = args.config;
+	} else if (args.json) {
+		mode = 'json-stdin';
 	}
+
+	// The remaining flags are collected, excluding '_' for positional args.
+	const flags = { ...args };
+	delete flags._;
+	delete flags.h;
+	delete flags.c;
+	delete flags.o;
+	delete flags.v;
+	delete flags.f;
 
 	return { mode, config, flags };
 }
@@ -185,9 +153,52 @@ function getModeDescription(mode) {
 }
 
 /**
- * Show help message
+ * Read the CLI Reference section from the canonical docs to keep the help output in sync.
+ *
+ * @return {string|null} Trimmed section text or null when the section is unavailable
+ */
+function readCliHelpSection() {
+	try {
+		const content = fs.readFileSync(CLI_HELP_DOC_PATH, 'utf8');
+		const lines = content.split(/\r?\n/);
+		const startIndex = lines.findIndex(
+			(line) => line.trim() === '## CLI Reference'
+		);
+		if (startIndex === -1) {
+			return null;
+		}
+
+		const sectionLines = [];
+		for (let i = startIndex + 1; i < lines.length; i++) {
+			if (lines[i].startsWith('## ')) {
+				break;
+			}
+			sectionLines.push(lines[i]);
+		}
+
+		const section = sectionLines.join('\n').trim();
+		return section.length ? section : null;
+	} catch (error) {
+		console.warn(
+			`⚠️  Warning: Unable to read CLI help doc: ${error.message}`
+		);
+		return null;
+	}
+}
+
+/**
+ * Displays the CLI help message.
+ * It first attempts to read the "CLI Reference" section from `docs/GENERATE-PLUGIN.md`
+ * to ensure the help text is always synchronized with the documentation. If reading fails,
+ * it falls back to a hardcoded help message.
  */
 function showHelp() {
+	const docHelp = readCliHelpSection();
+	if (docHelp) {
+		console.log(docHelp);
+		return;
+	}
+
 	console.log(
 		`
 WordPress Multi-Block Plugin Generator

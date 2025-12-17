@@ -17,21 +17,11 @@
         },
         "slug": {
             "type": "string",
+            "x-stage": 1,
             "description": "URL-safe plugin identifier (lowercase, hyphens only, no underscores)",
             "pattern": "^[a-z][a-z0-9-]{1,48}[a-z0-9]$",
             "minLength": 2,
             "maxLength": 50,
-            "examples": [
-                "tour-operator",
-                "event-manager",
-                "portfolio-showcase"
-            ]
-        },
-        "name": {
-            "type": "string",
-            "description": "Human-readable plugin name shown in WordPress admin",
-            "minLength": 2,
-            "maxLength": 100,
             "examples": [
                 "Tour Operator",
                 "Event Manager Pro",
@@ -40,6 +30,7 @@
         },
         "name_singular": {
             "type": "string",
+            "x-stage": 2,
             "description": "Singular name for the custom post type",
             "minLength": 1,
             "maxLength": 50,
@@ -51,28 +42,12 @@
         },
         "name_plural": {
             "type": "string",
-            "description": "Plural name for the custom post type",
-            "minLength": 1,
-            "maxLength": 50,
-            "examples": [
-                "Tours",
-                "Events",
-                "Portfolio Items"
-            ]
-        },
-        "description": {
-            "type": "string",
-            "description": "Brief plugin description (1-2 sentences, max 500 chars)",
-            "maxLength": 500,
-            "default": "A multi-block WordPress plugin with custom post types and fields.",
-            "examples": [
-                "A comprehensive tour booking and management plugin with custom post types, taxonomies, custom fields, and multi-block display options.",
-                "Professional event management with calendar integration and booking system."
-            ]
+            "x-stage": 2,
+            "description": "Plural name for the custom post type"
         },
         "author": {
             "type": "string",
-            "description": "Plugin author name or organization",
+            "x-stage": 1,
             "minLength": 2,
             "maxLength": 100,
             "default": "Your Name or Company",
@@ -366,21 +341,11 @@
                     "default_value": {
                         "description": "Default value for the field (type depends on field type)",
                         "oneOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "number"
-                            },
-                            {
-                                "type": "boolean"
-                            },
-                            {
-                                "type": "array"
-                            },
-                            {
-                                "type": "null"
-                            }
+                            { "type": "string" },
+                            { "type": "number" },
+                            { "type": "boolean" },
+                            { "type": "array" },
+                            { "type": "null" }
                         ]
                     },
                     "placeholder": {
@@ -488,41 +453,6 @@
                     "search",
                     "taxonomy"
                 ]
-            }
-        },
-        "plugin_uri": {
-            "type": "string",
-            "description": "Plugin homepage URL",
-            "format": "uri",
-            "pattern": "^https?://",
-            "examples": [
-                "https://example.com/plugins/tour-operator"
-            ]
-        },
-        "license_uri": {
-            "type": "string",
-            "description": "URL to license text",
-            "format": "uri",
-            "default": "https://www.gnu.org/licenses/gpl-2.0.html"
-        },
-        "tested_up_to": {
-            "type": "string",
-            "description": "Tested up to WordPress version",
-            "pattern": "^\\d+\\.\\d+$",
-            "examples": [
-                "6.7",
-                "6.8"
-            ]
-        },
-        "requires_plugins": {
-            "type": "array",
-            "description": "Required plugins (WordPress 6.5+ Plugin Dependencies)",
-            "default": [
-                "secure-custom-fields"
-            ],
-            "items": {
-                "type": "string",
-                "pattern": "^[a-z0-9-]+$"
             }
         }
     },

@@ -39,6 +39,8 @@ class ReleaseScaffoldAgent {
 			console.log('⚠️  DRY RUN MODE - No changes will be committed\n');
 		}
 
+		// TODO: Emit a structured release report (JSON/yaml) summarizing the steps.
+
 		try {
 			// 1. Validate git status
 			this.validateGitStatus();
@@ -119,35 +121,39 @@ class ReleaseScaffoldAgent {
 	 * Run test suite
 	 */
 	runTests() {
-		console.log('🧪 Running tests...');
+	console.log('🧪 Running tests...');
 
-		try {
-			execSync('npm test', { stdio: 'inherit', cwd: this.rootDir });
-			console.log('✓ All tests passed\n');
-		} catch (error) {
-			throw new Error('Tests failed. Fix issues before releasing.');
-		}
+	try {
+		execSync('npm test', { stdio: 'inherit', cwd: this.rootDir });
+		console.log('✓ All tests passed\n');
+	} catch (error) {
+		throw new Error('Tests failed. Fix issues before releasing.');
+	}
+
+	// TODO: Capture test reports/coverage results for audit trails.
 	}
 
 	/**
 	 * Run linting
 	 */
 	runLinting() {
-		console.log('🔍 Running linting...');
+	console.log('🔍 Running linting...');
 
-		try {
-			execSync('npm run lint:js', {
-				stdio: 'inherit',
-				cwd: this.rootDir,
-			});
-			execSync('npm run lint:css', {
-				stdio: 'inherit',
-				cwd: this.rootDir,
-			});
-			console.log('✓ Linting passed\n');
-		} catch (error) {
-			throw new Error('Linting failed. Fix issues before releasing.');
-		}
+	try {
+		execSync('npm run lint:js', {
+			stdio: 'inherit',
+			cwd: this.rootDir,
+		});
+		execSync('npm run lint:css', {
+			stdio: 'inherit',
+			cwd: this.rootDir,
+		});
+		console.log('✓ Linting passed\n');
+	} catch (error) {
+		throw new Error('Linting failed. Fix issues before releasing.');
+	}
+
+	// TODO: Support lint auto-fixing or brief summary of lint results.
 	}
 
 	/**
@@ -288,3 +294,5 @@ Examples:
 }
 
 module.exports = ReleaseScaffoldAgent;
+
+// TODO: Support additional flags (e.g., --skip-tests) when the release workflow grows.
