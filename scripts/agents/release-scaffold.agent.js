@@ -5,6 +5,12 @@
  * Handles the release process for the multi-block-plugin-scaffold repository itself.
  * This is separate from release.agent.js which handles releasing GENERATED plugins.
  *
+ * **Git Flow Support:**
+ * This agent supports Git Flow workflow where:
+ * - `develop` branch is for active development and feature branches
+ * - `main` branch is stable and only updated via releases
+ * - Releases are created on develop, then merged to main
+ *
  * @package multi-block-plugin-scaffold
  * @since 1.0.0
  */
@@ -21,6 +27,52 @@ class ReleaseScaffoldAgent {
 		this.rootDir = path.resolve(__dirname, '../..');
 		this.changelogPath = path.join(this.rootDir, 'CHANGELOG.md');
 		this.packageJsonPath = path.join(this.rootDir, 'package.json');
+		this.currentBranch = this.getCurrentBranch();
+		this.mainBranch = this.getMainBranch();
+	}
+
+	/**
+	 * Get the current git branch
+	 *
+	 * @return {string} Current branch name
+	 */
+	getCurrentBranch() {
+		try {
+			return execSync('git branch --show-current', {
+				encoding: 'utf8',
+				cwd: this.rootDir,
+			}).trim();
+		} catch (error) {
+			throw new Error(`Failed to get current branch: ${error.message}`);
+		}
+	}
+
+	/**
+	 * Get the main branch name (main or master)
+	 *
+	 * @return {string} Main branch name
+	 */
+	getMainBranch() {
+		try {
+			const branches = execSync('git branch -r', {
+				encoding: 'utf8',
+				cwd: this.rootDir,
+			});
+
+			// Check if origin/main exists
+			if (branches.includes('origin/main')) {
+				return 'main';
+			}
+			// Fall back to master if main doesn't exist
+			if (branches.includes('origin/master')) {
+				return 'master';
+			}
+			// Default to main for new repos
+			return 'main';
+		} catch (error) {
+			// If git command fails, default to main
+			return 'main';
+		}
 	}
 
 	/**
@@ -34,6 +86,16 @@ class ReleaseScaffoldAgent {
 		const { version, dryRun = false } = options;
 
 		console.log('🚀 Release Scaffold Agent Starting...\n');
+
+		// Show Git Flow info if on develop
+		if (this.currentBranch === 'develop') {
+			console.log(`📍 Git Flow Mode Detected`);
+			console.log(`   Current branch: develop`);
+			console.log(`   Target branch: ${this.mainBranch}`);
+			console.log(`   Release will be created on develop, then merged to ${this.mainBranch}\n`);
+		} else {
+			console.log(`📍 Current branch: ${this.currentBranch}\n`);
+		}
 
 		if (dryRun) {
 			console.log('⚠️  DRY RUN MODE - No changes will be committed\n');
@@ -235,11 +297,23 @@ class ReleaseScaffoldAgent {
 	 * @param {boolean} dryRun Dry run mode
 	 */
 	showNextSteps(version, dryRun) {
+		const isGitFlow = this.currentBranch === 'develop';
+
 		if (dryRun) {
 			console.log('\n📌 Next Steps (after dry run review):');
 			console.log(`   1. Run without --dry-run to apply changes`);
-			console.log(`   2. git push origin main`);
-			console.log(`   3. git push origin v${version}`);
+
+			if (isGitFlow) {
+				console.log(`   2. git push origin develop`);
+				console.log(`   3. git checkout ${this.mainBranch}`);
+				console.log(`   4. git merge develop`);
+				console.log(`   5. git push origin ${this.mainBranch}`);
+				console.log(`   6. git push origin v${version}`);
+				console.log(`   7. git checkout develop`);
+			} else {
+				console.log(`   2. git push origin ${this.currentBranch}`);
+				console.log(`   3. git push origin v${version}`);
+			}
 			return;
 		}
 
@@ -248,12 +322,29 @@ class ReleaseScaffoldAgent {
 		console.log('      git log -1');
 		console.log('      git show');
 		console.log('');
-		console.log('   2. Push to remote:');
-		console.log('      git push origin main');
-		console.log(`      git push origin v${version}`);
+
+		if (isGitFlow) {
+			console.log('   2. Push develop and merge to main (Git Flow):');
+			console.log(`      git push origin develop`);
+			console.log(`      git checkout ${this.mainBranch}`);
+			console.log(`      git merge develop --no-ff -m "Release v${version}"`);
+			console.log(`      git push origin ${this.mainBranch}`);
+			console.log(`      git push origin v${version}`);
+			console.log(`      git checkout develop`);
+			console.log('');
+			console.log('   3. Or create a Pull Request:');
+			console.log(`      - Create PR from develop → ${this.mainBranch}`);
+			console.log('      - Merge the PR');
+			console.log(`      - Then: git push origin v${version}`);
+		} else {
+			console.log('   2. Push to remote:');
+			console.log(`      git push origin ${this.currentBranch}`);
+			console.log(`      git push origin v${version}`);
+		}
+
 		console.log('');
-		console.log('   3. GitHub will automatically:');
-		console.log('      - Create a release');
+		console.log('   ' + (isGitFlow ? '4' : '3') + '. GitHub will automatically:');
+		console.log('      - Create a release from the tag');
 		console.log('      - Build and attach assets');
 		console.log('      - Publish to npm (if configured)');
 	}
