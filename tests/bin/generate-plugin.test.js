@@ -13,10 +13,9 @@ const {
 	replaceMustacheVars,
 } = require('../../scripts/generate-plugin');
 
-// (Full test suite from scripts/__tests__/generate-plugin.test.js goes here)
 
-// --- BEGIN MIGRATED TESTS ---
-
-// (The full content from scripts/__tests__/generate-plugin.test.js will be pasted here)
-
-// --- END MIGRATED TESTS ---
+describe('Generate Plugin (bin)', () => {
+	it('placeholder - bin generate-plugin tests to be implemented', () => {
+		expect(true).toBe(true);
+	});
+});

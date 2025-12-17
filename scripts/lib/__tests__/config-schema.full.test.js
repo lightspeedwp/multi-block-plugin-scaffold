@@ -21,6 +21,7 @@ describe('Config Schema', () => {
 		expect(Array.isArray(required)).toBe(true);
 		expect(required).toContain('slug');
 		expect(required).toContain('author');
+		expect(required).not.toContain('name');
 	});
 
 	test('getFieldsForStage returns all fields for a stage', () => {
@@ -28,6 +29,7 @@ describe('Config Schema', () => {
 		expect(Array.isArray(fields)).toBe(true);
 		expect(fields).toContain('name_singular');
 		expect(fields).toContain('name_plural');
+		// Optionally, check for other stage 2 fields if present in schema
 	});
 
 	test('getFieldConfig returns field config or null', () => {

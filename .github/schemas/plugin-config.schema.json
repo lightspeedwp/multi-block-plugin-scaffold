@@ -23,10 +23,27 @@
             "minLength": 2,
             "maxLength": 50,
             "examples": [
+                "tour-operator",
+                "event-manager-pro",
+                "portfolio-showcase"
+            ]
+        },
+        "name": {
+            "type": "string",
+            "description": "Human-readable plugin name",
+            "minLength": 1,
+            "maxLength": 100,
+            "examples": [
                 "Tour Operator",
                 "Event Manager Pro",
                 "Portfolio Showcase"
             ]
+        },
+        "description": {
+            "type": "string",
+            "description": "Short description of what the plugin does",
+            "minLength": 1,
+            "maxLength": 500
         },
         "name_singular": {
             "type": "string",

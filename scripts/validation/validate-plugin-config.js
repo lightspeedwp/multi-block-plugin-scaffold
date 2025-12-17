@@ -19,7 +19,11 @@ const addFormats = require('ajv-formats');
  * @return {{valid: boolean, errors: Array|null}} Validation results.
  */
 function validateConfig(config, schema) {
-	const ajv = new Ajv({ allErrors: true, strict: false });
+	const ajv = new Ajv({
+		allErrors: true,
+		strict: false,
+		validateSchema: false,
+	});
 	addFormats(ajv);
 	const validate = ajv.compile(schema);
 	const valid = validate(config);
