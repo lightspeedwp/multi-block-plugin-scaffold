@@ -106,25 +106,7 @@ if (!isScaffold) {
 log('INFO', `📦 Updating version to ${newVersion}...`);
 print();
 
-filesToUpdate.forEach(({ file, pattern, replacement, mustacheSafe }) => {
-       if (!fs.existsSync(file)) {
-	       log('WARN', `File not found: ${file}`);
-	       return;
-       }
-       let content = fs.readFileSync(file, 'utf8');
-       // If mustacheSafe, skip if mustache variable present in version field
-       if (mustacheSafe && /\{\{.*version.*\}\}/i.test(content)) {
-	       log('INFO', `Skipped (mustache placeholder detected): ${path.relative(rootDir, file)}`);
-	       return;
-       }
-       const updated = content.replace(pattern, replacement);
-       if (content !== updated) {
-	       fs.writeFileSync(file, updated);
-	       log('INFO', `Updated: ${path.relative(rootDir, file)}`);
-       } else {
-	       log('INFO', `No changes: ${path.relative(rootDir, file)}`);
-       }
-});
+applyUpdates(filesToUpdate, rootDir);
 
 print();
 log('SUCCESS', '🎉 Version update complete!');

@@ -11,19 +11,20 @@
  * @module scripts/utils/update-scaffold-version
  */
 
-const fs = require('fs');
 const path = require('path');
+const { log, print, validateSemver, applyUpdates } = require('./version-utils');
 
 const newVersion = process.argv[2];
 
 if (!newVersion) {
-	console.error('Usage: node scripts/utils/update-scaffold-version.js <new-version>');
+	log('ERROR', 'Usage: node scripts/utils/update-scaffold-version.js <new-version>');
 	process.exit(1);
 }
 
-const semverRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9.-]+)?$/;
-if (!semverRegex.test(newVersion)) {
-	console.error('Invalid version format. Use semantic versioning (e.g., 1.0.0)');
+try {
+	validateSemver(newVersion);
+} catch (error) {
+	log('ERROR', error.message);
 	process.exit(1);
 }
 
@@ -52,19 +53,10 @@ const filesToUpdate = [
 	},
 ];
 
-filesToUpdate.forEach(({ file, pattern, replacement }) => {
-	if (!fs.existsSync(file)) {
-		console.warn(`File not found: ${file}`);
-		return;
-	}
-	const content = fs.readFileSync(file, 'utf8');
-	const updated = content.replace(pattern, replacement);
-	if (content !== updated) {
-		fs.writeFileSync(file, updated);
-		console.log(`Updated: ${path.relative(rootDir, file)}`);
-	} else {
-		console.log(`No changes: ${path.relative(rootDir, file)}`);
-	}
-});
+log('INFO', `📦 Updating scaffold version to ${newVersion}...`);
+print();
 
-console.log('Scaffold version update complete!');
+applyUpdates(filesToUpdate, rootDir);
+
+print();
+log('SUCCESS', '🎉 Scaffold version update complete!');

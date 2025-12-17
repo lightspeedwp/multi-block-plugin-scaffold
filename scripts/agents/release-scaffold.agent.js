@@ -23,12 +23,13 @@ const { execSync } = require('child_process');
  * Release Scaffold Agent Class
  */
 class ReleaseScaffoldAgent {
-	constructor() {
+	constructor(options = {}) {
 		this.rootDir = path.resolve(__dirname, '../..');
 		this.changelogPath = path.join(this.rootDir, 'CHANGELOG.md');
 		this.packageJsonPath = path.join(this.rootDir, 'package.json');
 		this.currentBranch = this.getCurrentBranch();
 		this.mainBranch = this.getMainBranch();
+		this.maxDryRun = options.maxDryRun || false;
 	}
 
 	/**
@@ -83,7 +84,8 @@ class ReleaseScaffoldAgent {
 	 * @param {boolean} options.dryRun Whether to run in dry-run mode
 	 */
 	async run(options = {}) {
-		const { version, dryRun = false } = options;
+		const { version, dryRun = false, maxDryRun = false } = options;
+		const effectiveDryRun = maxDryRun || dryRun;
 
 		console.log('🚀 Release Scaffold Agent Starting...\n');
 
@@ -97,13 +99,21 @@ class ReleaseScaffoldAgent {
 			console.log(`📍 Current branch: ${this.currentBranch}\n`);
 		}
 
-		if (dryRun) {
+		if (maxDryRun) {
+			console.log('=== MAXIMUM DRY RUN MODE ENABLED: All side effects are simulated. ===\n');
+		} else if (dryRun) {
 			console.log('⚠️  DRY RUN MODE - No changes will be committed\n');
 		}
 
 		// TODO: Emit a structured release report (JSON/yaml) summarizing the steps.
 
 		try {
+			if (maxDryRun) {
+				console.log('[MAXIMUM DRY RUN] All actions are simulated. No commands or writes will be performed.');
+				this.showNextSteps(version, true);
+				console.log('\n✅ Maximum Dry Run completed.');
+				return;
+			}
 			// 1. Validate git status
 			this.validateGitStatus();
 
@@ -354,33 +364,41 @@ class ReleaseScaffoldAgent {
 if (require.main === module) {
 	const args = process.argv.slice(2);
 	const options = {};
+	let maxDryRun = false;
 
 	args.forEach((arg) => {
 		if (arg.startsWith('--version=')) {
 			options.version = arg.split('=')[1];
 		} else if (arg === '--dry-run') {
 			options.dryRun = true;
+		} else if (arg === '--max-dry-run' || arg === '--dry-run=maximum') {
+			maxDryRun = true;
 		} else if (arg === '--help' || arg === '-h') {
 			console.log(`
 Release Scaffold Agent
 
 Usage:
-  node scripts/agents/release-scaffold.agent.js --version=X.Y.Z [--dry-run]
+	node scripts/agents/release-scaffold.agent.js --version=X.Y.Z [--dry-run] [--max-dry-run]
 
 Options:
-  --version=X.Y.Z    Version to release (required)
-  --dry-run          Run without making changes
-  --help, -h         Show this help message
+	--version=X.Y.Z    Version to release (required)
+	--dry-run          Run without making changes
+	--max-dry-run, --dry-run=maximum  Simulate all actions (maximum dry run)
+	--help, -h         Show this help message
 
 Examples:
-  node scripts/agents/release-scaffold.agent.js --version=1.1.0 --dry-run
-  node scripts/agents/release-scaffold.agent.js --version=1.1.0
+	node scripts/agents/release-scaffold.agent.js --version=1.1.0 --dry-run
+	node scripts/agents/release-scaffold.agent.js --version=1.1.0 --max-dry-run
 			`);
 			process.exit(0);
 		}
 	});
 
-	const agent = new ReleaseScaffoldAgent();
+	if (process.env.DRY_RUN === 'maximum') {
+		maxDryRun = true;
+	}
+	options.maxDryRun = maxDryRun;
+	const agent = new ReleaseScaffoldAgent(options);
 	agent.run(options);
 }
 

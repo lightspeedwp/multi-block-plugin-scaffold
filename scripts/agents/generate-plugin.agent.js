@@ -1,3 +1,11 @@
+// Detect maximum dry run mode
+function isMaximumDryRun(args) {
+	return (
+		process.env.DRY_RUN === 'maximum' ||
+		args['dry-run'] === 'maximum' ||
+		args['max-dry-run'] === true
+	);
+}
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
@@ -84,6 +92,10 @@ function displaySchema() {
  * @returns {Promise<void>} A promise that resolves on success or rejects on error.
  */
 async function handleJsonMode(logger, dryRun) {
+		if (dryRun === 'maximum' || process.env.DRY_RUN === 'maximum') {
+			logger.info('[MAXIMUM DRY RUN] All actions are simulated. Returning mock config.');
+			return { slug: 'mock-plugin', name: 'Mock Plugin', author: 'Mock Author' };
+		}
 	const input = await new Promise((resolve, reject) => {
 		let data = '';
 		process.stdin.setEncoding('utf8');
@@ -139,6 +151,10 @@ async function handleJsonMode(logger, dryRun) {
  * @returns {Promise<void>}
  */
 async function handleFileConfigMode(configPath, logger, dryRun) {
+		if (dryRun === 'maximum' || process.env.DRY_RUN === 'maximum') {
+			logger.info('[MAXIMUM DRY RUN] All actions are simulated. Returning mock config.');
+			return { slug: 'mock-plugin', name: 'Mock Plugin', author: 'Mock Author' };
+		}
 	logger.info(`Loading configuration from: ${configPath}`);
 	try {
 		const fileContent = await fs.promises.readFile(configPath, 'utf8');
@@ -238,6 +254,10 @@ function reportValidationErrors(validationResult, logger) {
  * @returns {Promise<void>} A promise that resolves when the plugin generation is complete.
  */
 async function runInteractiveMode(logger, dryRun) {
+		if (dryRun === 'maximum' || process.env.DRY_RUN === 'maximum') {
+			logger.info('[MAXIMUM DRY RUN] All actions are simulated. Returning mock config.');
+			return { slug: 'mock-plugin', name: 'Mock Plugin', author: 'Mock Author' };
+		}
 	try {
 		// TODO: The wizard requires more context from the config-schema that is not yet implemented.
 		// This is a placeholder for the full interactive wizard implementation.
@@ -270,13 +290,16 @@ async function main() {
 	const logger = new FileLogger('generate-plugin-agent', 'agents');
 	try {
 		const args = minimist(process.argv.slice(2), {
-			boolean: ['help', 'schema', 'json', 'dry-run'],
+			boolean: ['help', 'schema', 'json', 'dry-run', 'max-dry-run'],
 			string: ['validate', 'config'],
 			alias: { h: 'help' },
 		});
 
 		const dryRun = args['dry-run'];
-		if (dryRun) {
+		const maxDryRun = isMaximumDryRun(args);
+		if (maxDryRun) {
+			logger.info('=== MAXIMUM DRY RUN MODE ENABLED: All side effects are simulated. ===');
+		} else if (dryRun) {
 			logger.info('--- Dry Run Mode Enabled: No files will be written. ---');
 		}
 
@@ -294,7 +317,7 @@ async function main() {
 
 		// Handle --json flag (read from stdin)
 		if (args.json) {
-			await handleJsonMode(logger, dryRun);
+			await handleJsonMode(logger, maxDryRun || dryRun);
 			return;
 		}
 
@@ -311,12 +334,12 @@ async function main() {
 
 		// Handle --config flag
 		if (args.config) {
-			await handleFileConfigMode(args.config, logger, dryRun);
+			await handleFileConfigMode(args.config, logger, maxDryRun || dryRun);
 			return;
 		}
 
 		// Default to interactive mode if no other flags are provided.
-		await runInteractiveMode(logger, dryRun);
+		await runInteractiveMode(logger, maxDryRun || dryRun);
 	} catch (error) {
 		logger.error('An unexpected error occurred in the agent.', { error: error.stack });
 		process.exit(1);

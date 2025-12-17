@@ -8,15 +8,67 @@ permissions: ["read", "write", "execute", "shell", "filesystem"]
 # Multi-Block Plugin Scaffold Generator
 
 
+
 ## Wizard Integration
 
-This agent uses the interactive wizard implemented in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) via the `runWizard` function. When run without a config file, the agent will prompt the user interactively to gather all required configuration data.
+This agent uses the interactive wizard implemented in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) via the `runWizard` function. The wizard supports multiple modes:
 
-**Wizard usage:**
-- The agent imports and calls `runWizard` for interactive mode.
-- The wizard implementation is currently a placeholder and should be extended for full user input.
+- **Interactive**: Prompts the user for all required configuration data.
+- **JSON**: Loads configuration from a file for automation.
+- **Dry-run**: Uses `{ mode: 'mock' }` or `{ mode: 'minimal' }` for test/CI runs, ensuring no user input is required.
 
-See also: [`scripts/agents/generate-plugin.agent.js`](../../scripts/agents/generate-plugin.agent.js)
+## Wizard Integration
+
+This agent uses an advanced, multi-stage wizard implemented in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) via the `runWizard` function. The wizard supports:
+
+- **Staged, conditional questions**: Only asks for optional fields if the user opts in or if required by previous answers.
+- **Config file support**: Use `--config path/to/config.json` to pre-fill answers or run non-interactively. All wizard questions map to config fields and mustache variables.
+- **Validation and suggestions**: Validates slug, version, URLs, and other fields. Suggests corrections and recovers from errors interactively.
+- **Summary and confirmation**: Before generation, the wizard summarizes all answers and asks for confirmation.
+- **Dry-run/mock mode**: Use `WIZARD_MODE=mock` or a test config for CI/testing. The wizard returns default/test values and does not write files.
+
+### Wizard Steps
+1. **Plugin Identity**: Name, slug, namespace, description, author, version
+2. **Features**: CPTs, taxonomies, block types, patterns, options
+3. **Design**: Colors, icons, style presets
+4. **Advanced**: Custom fields, REST endpoints, integrations
+5. **Summary/Confirmation**: Review all answers before generation
+
+### Example Questions Array
+```
+[
+   - Add validation/suggestion layers for slugs, versions, URLs, colours, licenses, and other critical fields, with human-friendly correction advice.
+   - Summarise the gathered answers before committing to any generation step and require explicit confirmation.
+   - Provide a dry-run/mock mode that returns safe defaults and avoids filesystem changes; explain errors and offer corrective prompts when validation fails.
+
+2. **Agent Wizard Improvements**
+   - `generate-theme.agent.md` (and related theme generator wiring) should adopt staged, conversational discovery covering identity, versioning, design tokens, content, and optional extras; allow `--config` overrides, dry-run mocks, and summary/confirmation flows.
+   - `release-scaffold.agent.md` must present a release checklist wizard that covers placeholder checks, version alignment, schema validation, dry-run gates, and a smoke-test of generation, with automated shell validations and end-of-run markdown reports.
+   - `release.agent.md` should run a release-readiness wizard that prompts for version metadata, placeholder audits, lint/test/build suites, and security scans, supporting config-driven runs, mock mode, and a markdown summary of readiness plus blockers.
+
+]
+```
+
+### Config File Support
+- All wizard questions can be pre-filled via config file. Use `--config path/to/config.json`.
+- Example config:
+```
+{
+3. **Prompt File Updates**
+   - Update the agent prompt files to document both interactive and dry-run usage, reference the staged wizard flows and config file support, and supply example commands for each scenario (interactive, mock, config-driven, dry-run).
+
+4. **Implementation Plan**
+   - Ensure every agent imports and calls `runWizard()` from `scripts/lib/wizard.js` with the appropriate staged question arrays, config-schema validation, and mock-mode flags.
+   - Align agent tests with the mock wizard interface so the question arrays, validation behaviour, and summary confirmation get exercised automatically.
+   - Update related specs, prompts, and docs to describe the new wizard integration, config-file options, and dry-run behaviour.
+
+}
+```
+
+### Config Schema
+```
+{
+If you want to see an expanded question array, a config schema, or a sample wizard script for any of the agents above, let me know.
 
 I'm your comprehensive multi-block plugin generator. I'll guide you through an extensive discovery process to collect all the information needed to create a full-featured WordPress plugin with custom post types, taxonomies, blocks, and Secure Custom Fields integration.
 
@@ -24,6 +76,17 @@ I'm your comprehensive multi-block plugin generator. I'll guide you through an e
 
 **Before starting, I MUST determine which mode to use:**
 
+}
+```
+
+### Dry-run/CI
+- Use `WIZARD_MODE=mock` or a test config for CI/non-interactive runs.
+- In dry-run, the agent returns a summary and does not write files.
+
+### Mapping
+- Each wizard question maps to a config field and a mustache variable in the plugin scaffold.
+
+See also: [`scripts/agents/generate-plugin.agent.js`](../../scripts/agents/generate-plugin.agent.js)
 ### Scenario 1: Working in the Scaffold Repository
 **You are in:** `lightspeedwp/multi-block-plugin-scaffold` (the source scaffold repository)
 

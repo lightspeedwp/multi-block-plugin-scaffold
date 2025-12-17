@@ -16,6 +16,36 @@ metadata:
   guardrails: "Never skip validation steps. Always verify before making changes. Abort if critical checks fail. Log all actions for audit."
 ---
 
+# Wizard Integration
+
+This agent uses a multi-stage, validated wizard in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) to gather release configuration and run a release readiness checklist. The wizard supports:
+
+- **Readiness prompts**: Version, unreplaced placeholders, meta file alignment, lint/test/build, security audit.
+- **Interactive or config-driven**: Users can answer prompts or provide a config file for automation.
+- **Summary/confirmation**: The wizard summarizes the release status and outputs a markdown report.
+- **Config file support**: Use `--config path/to/config.json` to pre-fill or skip questions.
+- **Dry-run/CI**: Use `WIZARD_MODE=mock` or a test config file for CI/non-interactive runs. In dry-run, the agent returns a summary and does not write files.
+
+## Example Config File
+```
+{
+   "version": "1.2.3",
+   "runLint": true,
+   "runTests": true,
+   "runSecurityAudit": true
+}
+```
+
+## Wizard Steps
+- Version prompt
+- Placeholder check
+- Meta file alignment
+- Lint/test/build
+- Security audit
+- Summary/confirmation
+
+All release automation and validation steps use the wizard for config gathering and validation.
+
 # Block Theme Release Agent
 
 ## Role
@@ -45,20 +75,25 @@ This agent handles **Phase 1: Pre-Release Preparation** from `docs/RELEASE_PROCE
 
 The agent **does not** handle git operations, branch merging, or GitHub release creation - those remain manual steps following governance.
 
-## How It Works
+## Wizard Integration
 
-### Phase 1: Validation & Analysis
+This agent uses an advanced, multi-stage wizard implemented in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) via the `runWizard` function. The wizard supports:
 
-1. **Version Consistency Check**
-   - Verify VERSION, package.json, composer.json (if present), style.css header, theme.json (if present), and readme.txt stable tag (if present) all match
-   - Flag any version mismatches
-   - Validate semantic version format
+- **Staged, conditional prompts**: Only asks for optional or advanced metadata if the user opts in or if required by previous answers.
+- **Config file support**: Use `--config path/to/config.json` to pre-fill answers or run non-interactively. All wizard questions map to config fields and release variables.
+- **Validation and error handling**: Validates version, changelog, release notes, and other fields. Suggests corrections and recovers from errors interactively.
+- **Summary and confirmation**: Before release, the wizard summarizes all answers and asks for confirmation.
+- **Dry-run/mock mode**: Use `WIZARD_MODE=mock` or a test config for CI/testing. The wizard returns default/test values and does not run release scripts.
 
-2. **Code Quality Gates**
-   - Run `npm run lint:dry-run` (scaffold mode)
-   - Run `npm run format --check` (formatting validation)
-   - Run `npm run test:dry-run:all` (test placeholders)
-   - Run `npm run dry-run:all` (JS lint/test dry-run sequence)
+### Wizard Steps
+1. **Release Metadata**: Version, changelog, release notes, tag
+2. **Checklist**: Tests, build, docs, translations, plugin zip
+3. **Advanced/Optional**: Pre-release hooks, custom scripts, extra validation
+4. **Summary/Confirmation**: Review all answers before running release
+
+### Example Questions Array
+```
+[
    - Run `npm run test:php` (PHP unit tests, if applicable)
    - Report: ✓ PASS / ✗ FAIL with details
 
@@ -70,6 +105,14 @@ The agent **does not** handle git operations, branch merging, or GitHub release 
 
 4. **Theme Generator Validation**
    - Run generator validation with sample config
+]
+```
+
+### Config File Support
+- All wizard questions can be pre-filled via config file. Use `--config path/to/config.json`.
+- Example config:
+```
+{
    - Verify logs and validation output
    - Check mustache variables replaced correctly
    - Validate generated theme.json and resulting theme metadata/artefacts (templates, patterns, assets)
@@ -80,6 +123,12 @@ The agent **does not** handle git operations, branch merging, or GitHub release 
    - Check for deprecated dependencies
    - Validate composer dependencies
    - Report critical/high severity issues
+}
+```
+
+### Config Schema
+```
+{
 
 ### Phase 2: Reporting & Guidance
 
@@ -90,6 +139,17 @@ Generate comprehensive report. Use the Reporting Agent to capture and store read
 
 ### ✅ Ready to Release
 
+}
+```
+
+### Dry-run/CI
+- Use `WIZARD_MODE=mock` or a test config for CI/non-interactive runs.
+- In dry-run, the agent returns a summary and does not run release scripts.
+
+### Mapping
+- Each wizard question maps to a config field and a release variable in the release process.
+
+See also: [`scripts/agents/release.agent.js`](../../scripts/agents/release.agent.js)
 - [x] Version files consistent (1.0.0)
 - [x] Linting passed (JS, CSS, PHP)
 - [x] Tests passed (dry-run mode + PHP, if applicable)

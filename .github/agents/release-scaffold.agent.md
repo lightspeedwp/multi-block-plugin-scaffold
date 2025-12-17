@@ -16,13 +16,47 @@ metadata:
   guardrails: "Never skip validation steps. Never modify mustache variables. Always verify mustache variables are preserved. Abort if critical checks fail. Log all actions for audit."
 ---
 
-# Multi-Block Plugin Scaffold Release Agent
+# Wizard Integration
 
-## Role
+This agent uses a multi-stage, validated wizard in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) to gather release configuration and run a step-by-step checklist. The wizard supports:
 
-You are the **Release Preparation Agent** for the Multi-Block Plugin Scaffold repository itself. You automate pre-release validation, documentation verification, quality checks, and provide actionable guidance for completing release workflows.
+- **Checklist**: Placeholder checks, version alignment, schema validation, dry-run quality gates, and a generation smoke test.
+- **Automated validation**: The wizard can run shell commands (via the agent script) to check for placeholders, version mismatches, and dry-run results.
+- **Summary report**: At the end, the wizard outputs a markdown report with pass/fail, blockers, and next steps.
+- **Config file support**: Use `--config path/to/config.json` to pre-fill or skip questions.
+- **Dry-run/CI**: Use `WIZARD_MODE=mock` or a test config file for CI/non-interactive runs. In dry-run, the agent returns a summary and does not write files.
 
-**CRITICAL**: This agent is for releasing the SCAFFOLD REPOSITORY itself, not for releasing plugins generated from the scaffold. The scaffold contains `{{mustache}}` template variables that MUST be preserved during the release process.
+## Example Config File
+```
+{
+   "version": "1.2.3",
+   "runDryRun": true,
+   "validateSchema": true
+}
+```
+
+## Wizard Steps
+- Placeholder check
+- Version alignment
+## Wizard Integration
+
+This agent uses an advanced, multi-stage wizard implemented in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) via the `runWizard` function. The wizard supports:
+
+- **Staged, conditional checklist**: Only asks for optional or advanced checks if the user opts in or if required by previous answers.
+- **Config file support**: Use `--config path/to/config.json` to pre-fill answers or run non-interactively. All wizard questions map to config fields and release variables.
+- **Validation and error handling**: Validates version, changelog, test status, and other fields. Suggests corrections and recovers from errors interactively.
+- **Summary and confirmation**: Before release, the wizard summarizes all answers and asks for confirmation.
+- **Dry-run/mock mode**: Use `WIZARD_MODE=mock` or a test config for CI/testing. The wizard returns default/test values and does not run release scripts.
+
+### Wizard Steps
+1. **Release Readiness**: Confirm changelog, version, and build status
+2. **Checklist**: Lint, tests, docs, translations, plugin zip, etc.
+3. **Advanced/Optional**: Custom scripts, pre-release hooks, extra validation
+4. **Summary/Confirmation**: Review all answers before running release
+
+### Example Questions Array
+```
+[
 
 ## Purpose
 
@@ -33,6 +67,14 @@ Ensure every scaffold release is:
 - **Functional**: Plugin generation validates, mustache variables PRESERVED, plugin artifacts verified
 - **Mustache-Safe**: All `{{mustache}}` variables remain intact and functional
 - **Secure**: No critical vulnerabilities, dependencies current
+]
+```
+
+### Config File Support
+- All wizard questions can be pre-filled via config file. Use `--config path/to/config.json`.
+- Example config:
+```
+{
 - **Compliant**: Follows semantic versioning and governance standards
 
 ## Scope
@@ -42,6 +84,12 @@ This agent handles **Phase 1: Pre-Release Preparation** for the scaffold reposit
 1. **Version file validation** (VERSION, package.json, composer.json)
 2. **Mustache variable preservation check** - Verify all `{{variables}}` are intact
 3. **Code quality validation** (linting, formatting, testing)
+}
+```
+
+### Config Schema
+```
+{
 4. **Documentation verification** (README, CHANGELOG, CONTRIBUTING)
 5. **Plugin generation testing** (validate generator works with sample config)
 6. **Mustache registry validation** (verify scan results are current)
@@ -51,6 +99,17 @@ This agent handles **Phase 1: Pre-Release Preparation** for the scaffold reposit
 The agent **does not** handle git operations, branch merging, or GitHub release creation - those remain manual steps following governance.
 
 ## Critical: Mustache Variable Preservation
+}
+```
+
+### Dry-run/CI
+- Use `WIZARD_MODE=mock` or a test config for CI/non-interactive runs.
+- In dry-run, the agent returns a summary and does not run release scripts.
+
+### Mapping
+- Each wizard question maps to a config field and a release variable in the release scaffold process.
+
+See also: [`scripts/agents/release-scaffold.agent.js`](../../scripts/agents/release-scaffold.agent.js)
 
 **This is a SCAFFOLD release, not a plugin release.** The scaffold contains template variables that must be preserved:
 

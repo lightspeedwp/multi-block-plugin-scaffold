@@ -1,13 +1,6 @@
-/**
- * Tests for Release Agent
- *
- * @package multi-block-plugin-scaffold
- * @since 1.0.0
- */
-
-describe('Release Agent', () => {
-	test('placeholder - agent script tests to be implemented', () => {
-		expect(true).toBe(true);
-		// TODO: Implement actual tests for release.agent.js
-	});
+// release.agent.js test
+const main = require('../release.agent');
+test('release agent runs with wizard (dry-run)', async () => {
+  process.env.DRY_RUN = '1';
+  await expect(main()).resolves.toBeUndefined();
 });

@@ -49,6 +49,41 @@ const SCAN_EXTENSIONS = [
 	'.yaml',
 ];
 
+const IGNORE_PATHS = [
+	'scripts/mustache-variables-registry.json',
+	'scripts/fixtures/mustache-variables-registry.example.json',
+	'.github/schemas/examples/mustache-variables-registry.example.json',
+];
+
+/**
+ * Normalise a file path for comparison purposes.
+ *
+ * @param {string} fullPath
+ * @return {string}
+ */
+function normalizeRelativePath(fullPath) {
+	const relative = path.relative(ROOT_DIR, fullPath);
+	return relative ? relative.split(path.sep).join('/') : '';
+}
+
+/**
+ * Determine whether the scanner should skip a given path.
+ *
+ * @param {string} fullPath
+ * @return {boolean}
+ */
+function isIgnoredPath(fullPath) {
+	const relativePath = normalizeRelativePath(fullPath);
+	if (!relativePath) {
+		return false;
+	}
+
+	return IGNORE_PATHS.some(
+		(ignorePath) =>
+			relativePath === ignorePath || relativePath.startsWith(`${ignorePath}/`)
+	);
+}
+
 const MUSTACHE_REGEX = /\{\{([a-zA-Z0-9_]+(?:\|[a-zA-Z0-9_]+)?)\}\}/g;
 
 const CATEGORY_ORDER = [
@@ -80,6 +115,9 @@ function scanDirectory(dir, basePath = '') {
 
 	for (const entry of entries) {
 		const fullPath = path.join(dir, entry.name);
+		if (isIgnoredPath(fullPath)) {
+			continue;
+		}
 		const relativePath = basePath ? path.join(basePath, entry.name) : entry.name;
 
 		if (entry.isDirectory()) {
@@ -250,8 +288,11 @@ function categorizeVariable(varName) {
  * @return {number}
  */
 function countOccurrences(content, varName) {
-	const escaped = varName.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
-	const occurrences = content.match(new RegExp(`\\{\\{${escaped}\\}\\}`, 'g'));
+	const cleaned = varName.split('|')[0];
+	const escaped = cleaned.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+	const occurrences = content.match(
+		new RegExp(`\\{\\{${escaped}(?:\\|[^}]+)?\\}\\}`, 'g')
+	);
 	return occurrences ? occurrences.length : 0;
 }
 
@@ -290,7 +331,11 @@ function buildRegistry(options = {}) {
 
 		summary.filesWithVariables++;
 
-		for (const varName of discovered) {
+		const canonicalVariables = Array.from(
+			new Set(discovered.map((name) => name.split('|')[0]))
+		);
+
+		for (const varName of canonicalVariables) {
 			if (!variables[varName]) {
 				const category = categorizeVariable(varName);
 				variables[varName] = {
