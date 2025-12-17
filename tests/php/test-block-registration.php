@@ -2,11 +2,14 @@
 /**
  * Block Registration Tests.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
 
 /**
  * Test case for Block Registration.
+ */
+/**
+ * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
  */
 class Test_Block_Registration extends WP_UnitTestCase {
 

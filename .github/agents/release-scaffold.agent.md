@@ -107,7 +107,7 @@ The following files MUST contain mustache variables and should NOT be processed:
    - Check CHANGELOG.md (ensure [Unreleased] → [X.Y.Z] transformation)
    - Validate CONTRIBUTING.md mentions current workflow
    - Check for broken internal links
-   - Verify docs/GENERATE-PLUGIN.md is current
+   - Verify docs/GENERATE_PLUGIN.md is current
 
 5. **Plugin Generator Validation**
    - Run generator with sample config from `.github/schemas/examples/plugin-config.example.json`

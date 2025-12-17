@@ -7,6 +7,17 @@ permissions: ["read", "write", "execute", "shell", "filesystem"]
 
 # Multi-Block Plugin Scaffold Generator
 
+
+## Wizard Integration
+
+This agent uses the interactive wizard implemented in [`scripts/lib/wizard.js`](../../scripts/lib/wizard.js) via the `runWizard` function. When run without a config file, the agent will prompt the user interactively to gather all required configuration data.
+
+**Wizard usage:**
+- The agent imports and calls `runWizard` for interactive mode.
+- The wizard implementation is currently a placeholder and should be extended for full user input.
+
+See also: [`scripts/agents/generate-plugin.agent.js`](../../scripts/agents/generate-plugin.agent.js)
+
 I'm your comprehensive multi-block plugin generator. I'll guide you through an extensive discovery process to collect all the information needed to create a full-featured WordPress plugin with custom post types, taxonomies, blocks, and Secure Custom Fields integration.
 
 ## 🔍 IMPORTANT: Repository Context Detection

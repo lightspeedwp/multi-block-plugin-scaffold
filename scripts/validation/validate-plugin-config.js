@@ -8,8 +8,11 @@
  * @module scripts/validation/validate-plugin-config
  */
 // TODO: Consider exporting a CLI-friendly runner that prints warnings/errors with codes.
+const fs = require('fs');
+const path = require('path');
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
+const { loadSchema } = require('./define-config-schema');
 
 /**
  * Validate a plugin configuration object against a JSON schema.
@@ -135,9 +138,69 @@ function checkBestPractices(config) {
 	return warnings;
 }
 
+function loadConfigFile(filePath) {
+	const resolvedPath = path.isAbsolute(filePath)
+		? filePath
+		: path.resolve(__dirname, '..', '..', filePath);
+	if (!fs.existsSync(resolvedPath)) {
+		throw new Error(`Configuration file not found: ${resolvedPath}`);
+	}
+	const raw = fs.readFileSync(resolvedPath, 'utf8');
+	return JSON.parse(raw);
+}
+
+function runCli(args = process.argv.slice(2)) {
+	const helpFlags = ['help', '--help', '-h'];
+	if (args.some((arg) => helpFlags.includes(arg))) {
+		console.log(`
+Usage: node scripts/validation/validate-plugin-config.js [options] [path]
+
+Options:
+  --schema-only       Validate that the canonical schema parses cleanly.
+  --config <path>     Validate a specific config file (defaults to tests/fixtures/plugin-config.mock.json).
+`);
+		return 0;
+	}
+
+	if (args.includes('--schema-only')) {
+		loadSchema();
+		console.log('✅ JSON schema parsed cleanly');
+		return 0;
+	}
+
+	const configArg = args.find(
+		(arg) => !arg.startsWith('--') && !arg.startsWith('-')
+	);
+	const configPath =
+		configArg ||
+		path.join(__dirname, '..', '..', 'tests', 'fixtures', 'plugin-config.mock.json');
+
+	try {
+		const config = loadConfigFile(configPath);
+		const schema = loadSchema();
+		const result = validateConfig(config, schema);
+		if (!result.valid) {
+			console.error('Plugin configuration validation failed:');
+			result.errors.forEach((err) => console.error(err));
+			return 1;
+		}
+		console.log(`✅ Configuration valid: ${path.basename(configPath)}`);
+		return 0;
+	} catch (error) {
+		console.error('Error during configuration validation:', error.message);
+		return 1;
+	}
+}
+
 module.exports = {
 	validateConfig,
 	validateFieldTypes,
 	validateTaxonomies,
 	checkBestPractices,
+	loadConfigFile,
+	runCli,
 };
+
+if (require.main === module) {
+	process.exit(runCli());
+}

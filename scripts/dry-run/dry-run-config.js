@@ -7,6 +7,7 @@
  * template files without requiring plugin generation.
  *
  * @package
+ * @todo Allow per-project overrides so dry-run values stay in sync with generated templates.
  */
 
 const fs = require('fs');
@@ -59,6 +60,24 @@ const DRY_RUN_VALUES = {
 	updatedDate: '2025-12-07',
 };
 
+const MUSTACHE_REGEX = /\{\{\s*([a-z0-9_]+)(?:\|([a-z0-9_]+))?\s*\}\}/gi;
+
+/**
+ * Build a fallback value when no explicit dry-run config key exists.
+ *
+ * @param {string} key    - Placeholder key that lacked a value.
+ * @param {string} filter - Optional filter appended to the placeholder.
+ * @return {string} Clean fallback string for templating.
+ */
+function fallbackDryRunValue(key, filter) {
+	return `dry-run-${(
+		`${key}${filter ? `-${filter}` : ''}`
+			.replace(/[^a-z0-9]+/gi, '-')
+			.replace(/(^-+|-+$)/g, '')
+			.toLowerCase() || 'value'
+	)}`;
+}
+
 /**
  * Get dry-run configuration
  *
@@ -87,9 +106,6 @@ function getDryRunValue(key, defaultValue = '') {
 function isDryRun() {
 	return process.env.DRY_RUN === 'true' || process.env.DRY_RUN === '1';
 }
-
-const SIMPLE_PLACEHOLDER = /\{\{([a-z0-9_]+)\}\}/gi;
-const FILTERED_PLACEHOLDER = /\{\{([a-z0-9_]+)\|([a-z]+)\}\}/gi;
 
 /**
  * Apply a transformation filter to the placeholder value before replacement.
@@ -132,29 +148,17 @@ function applyFilter(value, filter) {
  * @return {string} Content with variables replaced
  */
 function replaceMustacheVars(content, values = DRY_RUN_VALUES) {
-	let result = content;
-
-	result = result.replace(
-		FILTERED_PLACEHOLDER,
-		(match, varName, filter) => {
-			const value = values[varName];
-			if (value === undefined) {
-				return '';
-			}
-			return applyFilter(String(value), filter);
+	return content.replace(MUSTACHE_REGEX, (match, varName, filter) => {
+		if (!varName) {
+			return match;
 		}
-	);
 
-	result = result.replace(SIMPLE_PLACEHOLDER, (match, varName) => {
-		const value = values[varName];
-		return value !== undefined ? String(value) : '';
+		const rawValue = values[varName];
+		const resolvedValue =
+			rawValue !== undefined ? String(rawValue) : fallbackDryRunValue(varName, filter);
+
+		return filter ? applyFilter(resolvedValue, filter) : resolvedValue;
 	});
-
-	// Remove any remaining placeholders (undefined variables)
-	result = result.replace(/\{\{[a-z0-9_]+(?:\|[a-z0-9_]+)?\}\}/gi, '');
-
-	// TODO: Allow consumers to register additional filters without editing the utility.
-	return result;
 }
 
 /**
@@ -200,6 +204,7 @@ function getFilesWithMustacheVars(pattern = '**/*.{js,jsx,php,json,scss,css,html
 
 /**
  * Display dry-run CLI usage instructions.
+ * @return {void}
  */
 function printUsage() {
 	console.log(
@@ -208,7 +213,7 @@ function printUsage() {
   value <key>              Print one configuration value
   files <pattern>          List files containing mustache variables
   replace <file>           Show replaced file contents`
-	);
+		);
 }
 
 /**

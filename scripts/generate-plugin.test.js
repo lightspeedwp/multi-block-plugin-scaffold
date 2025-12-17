@@ -234,6 +234,16 @@ describe('generatePlugin runner', () => {
 				true
 			);
 			expect(fs.existsSync(path.join(outputDir, 'README.md'))).toBe(true);
+			expect(
+				fs.existsSync(
+					path.join(
+						outputDir,
+						'scripts',
+						'dry-run',
+						'__tests__'
+					)
+				)
+			).toBe(false);
 
 			expect(console).toHaveLogged();
 		} finally {

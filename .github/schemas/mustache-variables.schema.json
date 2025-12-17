@@ -1,0 +1,43 @@
+{
+	"$id": "https://lightspeedwp.com/schemas/mustache-variables.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Schema for mustache variable definitions",
+	"description": "Individual entries maintained in the mustache-variable registry.",
+	"type": "object",
+	"properties": {
+		"name": {
+			"description": "The machine name of the mustache variable.",
+			"type": "string"
+		},
+		"category": {
+			"description": "Logical grouping (core_identity, plugin_metadata, etc.).",
+			"type": "string"
+		},
+		"description": {
+			"description": "Human-readable explanation of the variable.",
+			"type": "string"
+		},
+		"files": {
+			"description": "List of repository files where this variable appears.",
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"source": {
+			"description": "Origin or script that populates this variable.",
+			"type": "string"
+		},
+		"type": {
+			"description": "Optional type hint (string, boolean, etc.).",
+			"type": "string"
+		}
+	},
+	"required": ["name", "category", "files"],
+	"additionalProperties": true,
+	"allOf": [
+		{
+			"$ref": "./mustache-variables-registry.schema.json#/$defs/mustacheVariable"
+		}
+	]
+}

@@ -62,7 +62,7 @@ The plugin generator uses a JSON Schema-based configuration system to ensure val
 All schema files are stored in `.github/schemas/` directory:
 
 - **`plugin-config.schema.json`** - JSON Schema defining all configuration options
-- **`plugin-config.example.json`** - Example configuration with realistic values
+- **`plugin-config.example.json`** - Example configuration with realistic values (kept in `scripts/fixtures/`)
 
 ### Schema Structure
 
@@ -81,7 +81,7 @@ You can provide configuration via JSON file:
 
 ```bash
 # Create your configuration file
-cp .github/schemas/plugin-config.example.json my-plugin-config.json
+cp scripts/fixtures/plugin-config.example.json my-plugin-config.json
 
 # Edit with your values
 nano my-plugin-config.json
@@ -96,10 +96,10 @@ Validate your configuration before generation:
 
 ```bash
 # Validate configuration file
-node scripts/validate-plugin-config.js my-plugin-config.json
+node scripts/validation/validate-plugin-config.js my-plugin-config.json
 
 # Validate schema only
-node scripts/validate-plugin-config.js --schema-only
+node scripts/validation/validate-plugin-config.js --schema-only
 ```
 
 The validator checks:
@@ -600,13 +600,13 @@ node scripts/generate-plugin.js
 
 ```bash
 # Start with example configuration
-cp .github/schemas/plugin-config.example.json my-plugin.json
+cp scripts/fixtures/plugin-config.example.json my-plugin.json
 
 # Edit your configuration
 nano my-plugin.json
 
 # Validate configuration
-node scripts/validate-plugin-config.js my-plugin.json
+node scripts/validation/validate-plugin-config.js my-plugin.json
 
 # Generate plugin
 node scripts/generate-plugin.js --config my-plugin.json
@@ -712,6 +712,93 @@ npm run env:start
 # Plugin is automatically activated
 # Access at http://localhost:8888
 ```
+
+### 8. Prepare for Release (Generated Plugins Only)
+
+**⚠️ This step applies ONLY to plugins generated in a NEW repository (not the scaffold itself).**
+
+After generating your plugin and setting up development, you'll eventually want to release it. The generated plugin includes a complete release workflow with the `release.agent.md` file (with all `{{mustache}}` placeholders already replaced).
+
+#### When to Use the Release Agent
+
+Use the release agent when you're ready to:
+
+- Create your first release (v1.0.0)
+- Prepare subsequent releases (bug fixes, features, breaking changes)
+- Validate release readiness before tagging
+
+#### Release Preparation Steps
+
+1. **Verify all mustache placeholders were replaced during generation**:
+
+   ```bash
+   # Should return no results
+   grep -r "{{" . --exclude-dir={node_modules,vendor,generated-plugins}
+   ```
+
+2. **Run the release validation**:
+
+   ```bash
+   # Full validation suite
+   npm run release:validate
+
+   # Quick status check
+   npm run release:status
+   ```
+
+3. **Follow the release process**:
+
+   - See [docs/RELEASE_PROCESS.md](RELEASE_PROCESS.md) in your generated plugin
+   - The release agent (`.github/agents/release.agent.md`) provides automated validation
+   - Use Git Flow for release branches (develop → release/X.Y.Z → main)
+
+#### Key Differences: Scaffold vs Generated Plugin Releases
+
+| Aspect | Scaffold Release | Generated Plugin Release |
+|--------|------------------|--------------------------|
+| **File to Follow** | `RELEASE_PROCESS_SCAFFOLD.md` | `RELEASE_PROCESS.md` |
+| **Release Agent** | `release-scaffold.agent.md` | `release.agent.md` |
+| **Mustache Variables** | ✅ Must be preserved | ❌ Should be replaced |
+| **Version Files** | `VERSION`, `package.json`, `composer.json` | `VERSION`, `package.json`, `composer.json`, plugin header |
+| **Testing** | Dry-run mode, generator validation | Full test suite, build validation |
+
+#### Scaffold-Specific Files Removed During Generation
+
+The generator automatically removes these scaffold-specific files from your new plugin:
+
+- `.github/agents/release-scaffold.agent.md` ❌ (removed)
+- `docs/RELEASE_PROCESS_SCAFFOLD.md` ❌ (removed)
+- `scripts/generate-plugin.js` ❌ (removed)
+- All mustache template infrastructure ❌ (removed)
+
+Your generated plugin retains:
+
+- `.github/agents/release.agent.md` ✅ (with placeholders replaced)
+- `docs/RELEASE_PROCESS.md` ✅ (with placeholders replaced)
+- Complete release workflow and validation ✅
+
+#### Example Release Workflow
+
+```bash
+# 1. Ensure you're in your GENERATED plugin repo (not the scaffold)
+cd my-awesome-plugin/
+
+# 2. Update version files
+# Edit VERSION, package.json, composer.json, plugin header
+
+# 3. Validate release readiness
+npm run release:validate
+
+# 4. Create release branch
+git checkout -b release/1.0.0
+
+# 5. Commit version updates
+git commit -am "chore: prepare release v1.0.0"
+
+# 6. Follow RELEASE_PROCESS.md for merge and tagging
+```
+
+**⚠️ Important**: Never run the release agent from the scaffold repository on a generated plugin, or vice versa. Each has its own release workflow designed for its specific context.
 
 ## Build Scripts
 
@@ -1232,7 +1319,7 @@ The complete schema documentation is available in `.github/schemas/plugin-config
 For complete schema details, see:
 
 - `.github/schemas/plugin-config.schema.json` - Full schema definition
-- `.github/schemas/plugin-config.example.json` - Working example
+- `scripts/fixtures/plugin-config.example.json` - Working example
 
 ## Related Documentation
 
@@ -1288,7 +1375,7 @@ Examples:
   # Display schema
   node generate-plugin.js --schema
 
-For more information, see: docs/GENERATE-PLUGIN.md
+For more information, see: docs/GENERATE_PLUGIN.md
 
 ## Support
 

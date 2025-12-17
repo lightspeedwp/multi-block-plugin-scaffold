@@ -1,3 +1,7 @@
+---
+description: Alternative block plugin refactor prompt with detailed scaffold review and alignment tasks
+---
+
 # Generate Plugin – Scaffold Review & Alignment Task List
 
 ## 0. Global Rules (Non-Negotiable)
@@ -33,7 +37,7 @@
 
   * Mustache placeholders are introduced but not explained
   * Workflow expectations are unclear
-* Ensure `docs/GENERATE-PLUGIN.md`:
+* Ensure `docs/GENERATE_PLUGIN.md`:
 
   * Reflects the **current agent-driven workflow**
   * References SCF + WordPress Core appropriately

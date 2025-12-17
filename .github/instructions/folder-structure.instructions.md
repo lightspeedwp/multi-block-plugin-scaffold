@@ -85,6 +85,14 @@ Use this guide when creating, moving, or auditing files. It covers where to plac
 - Used by `inc/class-block-styles.php` to auto-register block variations
 - **Shipped**: Yes
 
+**`generated-plugins/`** - Sample generator output
+
+- Each subdirectory (e.g., `tour-operator/`) is a generated plugin snapshot used for testing and documentation.
+- Regenerate with `node scripts/generate-plugin.js` if the scaffold changes.
+- Keep these folders in `.gitignore` and do not edit them manually unless updating generated examples.
+
+### Build & Development
+
 ### Build & Development
 
 **`bin/`** - Shell scripts and entry points
@@ -129,6 +137,7 @@ Use this guide when creating, moving, or auditing files. It covers where to plac
 - `instructions/` - AI/Copilot rules
 - `prompts/` - AI prompt templates
 - `workflows/` - GitHub Actions CI/CD
+- `projects/` - Planning outcomes (active/completed/plans folders)
 - **Shipped**: No
 
 ### Runtime Data
@@ -153,7 +162,7 @@ Use this guide when creating, moving, or auditing files. It covers where to plac
 - **Shipped**: No
 - **Safe to delete**: Yes
 
-**`reports/`** - Analysis reports
+**`.github/reports/`** - Analysis reports
 
 - Migration reports
 - Audit results
@@ -231,9 +240,9 @@ Use this guide when creating, moving, or auditing files. It covers where to plac
 
 **Report**:
 
-- **Location**: `reports/`
+- **Location**: `.github/reports/`
 - **Format**: Markdown with date and context
-- **Example**: `reports/STYLELINT-MIGRATION.md`
+- **Example**: `.github/reports/STYLELINT-MIGRATION.md`
 
 ## Naming Conventions
 
@@ -346,7 +355,7 @@ Never ship:
 - `bin/`
 - `logs/`
 - `tmp/`
-- `reports/`
+- `.github/reports/`
 - `node_modules/`
 - `vendor/`
 - All config files

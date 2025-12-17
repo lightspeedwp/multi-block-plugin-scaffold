@@ -5,7 +5,7 @@ const minimist = require('minimist');
 
 const CLI_HELP_DOC_PATH = path.resolve(
 	__dirname,
-	'../../docs/GENERATE-PLUGIN.md'
+	'../../docs/GENERATE_PLUGIN.md'
 );
 /**
  * @file Mode Detector
@@ -188,7 +188,7 @@ function readCliHelpSection() {
 
 /**
  * Displays the CLI help message.
- * It first attempts to read the "CLI Reference" section from `docs/GENERATE-PLUGIN.md`
+ * It first attempts to read the "CLI Reference" section from `docs/GENERATE_PLUGIN.md`
  * to ensure the help text is always synchronized with the documentation. If reading fails,
  * it falls back to a hardcoded help message.
  */
@@ -240,7 +240,7 @@ Examples:
   # Display schema
   node generate-plugin.js --schema
 
-For more information, see: docs/GENERATE-PLUGIN.md
+For more information, see: docs/GENERATE_PLUGIN.md
 	`.trim()
 	);
 }

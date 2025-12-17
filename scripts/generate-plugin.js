@@ -486,6 +486,33 @@ function copyDirWithReplacement(srcDir, destDir, config, excludePaths = []) {
 }
 
 /**
+ * Remove scaffold-only dry-run tests from the generated plugin output.
+ *
+ * These files validate the template during dry-runs and should not ship with
+ * a production plugin to avoid confusion and unnecessary bloat.
+ *
+ * @param {string} outputDir
+ */
+function removeScaffoldOnlyTests(outputDir) {
+	const testDirs = [
+		path.join(outputDir, 'scripts', 'dry-run', '__tests__'),
+	];
+
+	for (const dirPath of testDirs) {
+		if (fs.existsSync(dirPath)) {
+			fs.rmSync(dirPath, { recursive: true, force: true });
+			log(
+				'INFO',
+				`Removed scaffold-only dry-run tests: ${path.relative(
+					outputDir,
+					dirPath
+				)}`
+			);
+		}
+	}
+}
+
+/**
  * Process files in place (template mode)
  * Replaces mustache variables in files in the current directory
  * @param {string} targetDir - Directory to process
@@ -697,6 +724,7 @@ function generatePlugin(config, inPlace = false) {
 			fullConfig,
 			excludePaths
 		);
+		removeScaffoldOnlyTests(outputDir);
 	}
 
 	// Generate package.json
@@ -915,7 +943,7 @@ Examples:
 
 Configuration:
   See .github/schemas/plugin-config.schema.json for schema
-  See .github/schemas/examples/plugin-config.example.json for example
+  See scripts/fixtures/plugin-config.example.json for example
 `);
 }
 

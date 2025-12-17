@@ -2,11 +2,14 @@
 /**
  * Main Plugin Tests.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
 
 /**
  * Test case for main plugin class.
+ */
+/**
+ * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
  */
 class Test_Plugin_Main extends WP_UnitTestCase {
 

@@ -42,11 +42,7 @@ import { useSelect } from '@wordpress/data';
  *   </div>
  * );
  */
-export default function useRepeater(
-	postId,
-	fieldName,
-	postType = '{{cpt_slug}}'
-) {
+export default function useRepeater(postId, fieldName, postType = '{{cpt_slug}}') {
 	return useSelect(
 		(select) => {
 			if (!postId || !fieldName) {

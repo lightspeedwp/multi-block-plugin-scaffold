@@ -2491,4 +2491,4 @@ This plan (Part 2) expands the scaffold to support:
 4. Update remaining instruction files
 5. Create comprehensive examples
 
-**Plan complete and saved to: `docs/plans/PART-2-multi-cpt-wizard-schema-expansion.md`**
+**Plan complete and saved to: `.github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md`**

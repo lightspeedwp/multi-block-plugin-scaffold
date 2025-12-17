@@ -1,831 +1,1458 @@
 {
   "summary": {
-    "totalFiles": 549,
-    "filesWithVariables": 221,
-    "uniqueVariables": 142,
-    "totalOccurrences": 2438
+    "totalFiles": 1030,
+    "filesWithVariables": 357,
+    "uniqueVariables": 189,
+    "totalOccurrences": 5092
   },
   "variables": {
-    "theme_name": {
-      "name": "theme_name",
-      "category": "core_identity",
+    "accent_color": {
+      "name": "accent_color",
+      "category": "design_colors",
       "files": [
-        ".github/README.md",
-        ".github/agents/development-assistant.agent.md",
-        ".github/agents/generate-theme.agent.md",
-        ".github/agents/release-scaffold.agent.md",
-        ".github/agents/release.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/instructions/i18n.instructions.md",
-        ".github/instructions/release-scaffold.instructions.md",
-        ".github/instructions/release.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        ".github/prompts/release.prompt.md",
-        ".github/reports/SETUP-SUMMARY.md",
-        ".github/reports/analysis/2025-12-10-generate-theme-validation.md",
-        "CONTRIBUTING.md",
-        "DEVELOPMENT.md",
-        "README.md",
-        "README.txt",
-        "SECURITY.md",
-        "SUPPORT.md",
-        "docs/AGENTS_OVERVIEW.md",
-        "docs/API_REFERENCE.md",
-        "docs/CONFIGS.md",
-        "docs/GENERATE_THEME.md",
-        "docs/LINTING.md",
-        "docs/README.md",
-        "docs/WORKFLOWS.md",
-        "functions.php",
-        "inc/block-patterns.php",
-        "inc/block-styles.php",
-        "inc/template-functions.php",
-        "package.json",
-        "patterns/404-content.php",
-        "patterns/archive-header.php",
-        "patterns/author-header.php",
-        "patterns/call-to-action.php",
-        "patterns/features.php",
-        "patterns/footer.php",
-        "patterns/header.php",
-        "patterns/hero.php",
-        "patterns/no-search-results.php",
-        "patterns/pagination.php",
-        "patterns/post-card.php",
-        "patterns/post-meta.php",
-        "patterns/query-posts-grid.php",
-        "patterns/query-posts-list.php",
-        "patterns/single-post-content.php",
-        "patterns/testimonials.php",
-        "screenshot.png.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "src/js/editor.js",
-        "style.css",
-        "tests/bootstrap.php",
-        "tests/e2e/theme.spec.js",
-        "tests/js/theme.test.js",
-        "tests/test-block-patterns.php",
-        "tests/test-block-styles.php",
-        "tests/test-template-functions.php",
-        "tests/test-theme-setup.php",
-        "webpack.config.js"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 197
+      "count": 1
     },
-    "theme_slug": {
-      "name": "theme_slug",
-      "category": "core_identity",
+    "agent_slug": {
+      "name": "agent_slug",
+      "category": "other",
       "files": [
-        ".github/agents/development-assistant.agent.md",
-        ".github/agents/generate-theme.agent.md",
-        ".github/agents/release-scaffold.agent.md",
-        ".github/agents/release.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/instructions/i18n.instructions.md",
-        ".github/instructions/release-scaffold.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        ".github/prompts/release.prompt.md",
-        ".github/reports/SETUP-SUMMARY.md",
-        ".github/reports/analysis/2025-12-10-generate-theme-validation.md",
-        ".github/reports/validation/wordpress-packages-validation.md",
-        ".github/workflows/ci.yml",
-        ".github/workflows/i18n.yml",
-        ".github/workflows/release.yml",
-        "CONTRIBUTING.md",
-        "DEVELOPMENT.md",
-        "README.md",
-        "SUPPORT.md",
-        "docs/AGENTS_OVERVIEW.md",
-        "docs/ARCHITECTURE.md",
-        "docs/BUILD_PROCESS.md",
-        "docs/DEPRECATION.md",
-        "docs/GENERATE_THEME.md",
-        "docs/INTERNATIONALIZATION.md",
-        "docs/LINTING.md",
-        "docs/THEME_STRUCTURE.md",
-        "docs/WORKFLOWS.md",
-        "functions.php",
-        "inc/README.md",
-        "inc/block-patterns.php",
-        "inc/block-styles.php",
-        "inc/deprecation.php",
-        "inc/template-functions.php",
-        "languages/README.md",
-        "package-lock.json",
-        "package.json",
-        "parts/README.md",
-        "parts/comments.html",
-        "parts/footer.html",
-        "parts/header.html",
-        "parts/pagination.html",
-        "parts/post-meta.html",
-        "parts/sidebar.html",
-        "patterns/404-content.php",
-        "patterns/README.md",
-        "patterns/archive-header.php",
-        "patterns/author-header.php",
-        "patterns/call-to-action.php",
-        "patterns/comments.php",
-        "patterns/features.php",
-        "patterns/footer.php",
-        "patterns/header.php",
-        "patterns/hero.php",
-        "patterns/no-search-results.php",
-        "patterns/pagination.php",
-        "patterns/post-card.php",
-        "patterns/post-meta.php",
-        "patterns/query-posts-grid.php",
-        "patterns/query-posts-list.php",
-        "patterns/sidebar.php",
-        "patterns/single-post-content.php",
-        "patterns/testimonials.php",
-        "scripts/README.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "src/js/README.md",
-        "src/js/editor.js",
-        "templates/404.html",
-        "templates/README.md",
-        "templates/archive.html",
-        "templates/author.html",
-        "templates/category.html",
-        "templates/front-page.html",
-        "templates/home-sidebar.html",
-        "templates/home.html",
-        "templates/index.html",
-        "templates/search.html",
-        "templates/single.html",
-        "templates/singular.html",
-        "templates/tag.html",
-        "tests/bootstrap.php",
-        "tests/test-block-patterns.php",
-        "tests/test-block-styles.php",
-        "tests/test-template-functions.php",
-        "tests/test-theme-setup.php"
+        ".github/agents/template.agent.md"
       ],
-      "count": 976
-    },
-    "version": {
-      "name": "version",
-      "category": "versioning",
-      "files": [
-        ".github/agents/development-assistant.agent.md",
-        ".github/agents/generate-theme.agent.md",
-        ".github/agents/release.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/instructions/release-scaffold.instructions.md",
-        ".github/instructions/release.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        ".github/prompts/release.prompt.md",
-        ".github/reports/SETUP-SUMMARY.md",
-        ".github/reports/migration/STYLELINT-MIGRATION.md",
-        "DEVELOPMENT.md",
-        "README.md",
-        "README.txt",
-        "SECURITY.md",
-        "docs/GENERATE_THEME.md",
-        "functions.php",
-        "inc/block-patterns.php",
-        "inc/block-styles.php",
-        "inc/deprecation.php",
-        "inc/template-functions.php",
-        "package-lock.json",
-        "patterns/404-content.php",
-        "patterns/archive-header.php",
-        "patterns/author-header.php",
-        "patterns/call-to-action.php",
-        "patterns/features.php",
-        "patterns/footer.php",
-        "patterns/header.php",
-        "patterns/hero.php",
-        "patterns/no-search-results.php",
-        "patterns/pagination.php",
-        "patterns/post-card.php",
-        "patterns/post-meta.php",
-        "patterns/query-posts-grid.php",
-        "patterns/query-posts-list.php",
-        "patterns/single-post-content.php",
-        "patterns/testimonials.php",
-        "scripts/generate-theme.js",
-        "scripts/release.agent.js",
-        "scripts/test-placeholders.js",
-        "tests/test-logger.js",
-        "webpack.config.js"
-      ],
-      "count": 127
-    },
-    "description": {
-      "name": "description",
-      "category": "core_identity",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        "README.md",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "docs/LINTING.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 27
+      "count": 2
     },
     "author": {
       "name": "author",
       "category": "author_contact",
       "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/agents/release.agent.md",
+        ".github/agents/generate-plugin.agent.md",
         ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        ".github/schemas/examples/theme-config.example.json",
-        ".github/schemas/theme-config.schema.json",
-        "README.md",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "style.css"
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "USAGE.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "scripts/utils/placeholders.js",
+        "{{slug}}.php"
       ],
-      "count": 55
+      "count": 71
     },
     "author_uri": {
       "name": "author_uri",
       "category": "author_contact",
       "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        "README.md",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
+        ".github/agents/generate-plugin.agent.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "scripts/utils/placeholders.js",
+        "{{slug}}.php"
       ],
-      "count": 21
+      "count": 23
     },
-    "min_wp_version": {
-      "name": "min_wp_version",
-      "category": "versioning",
+    "author_username": {
+      "name": "author_username",
+      "category": "author_contact",
       "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        "README.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
+        "docs/RELEASE_PROCESS.md"
       ],
-      "count": 17
-    },
-    "tested_wp_version": {
-      "name": "tested_wp_version",
-      "category": "versioning",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 16
-    },
-    "min_php_version": {
-      "name": "min_php_version",
-      "category": "versioning",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/prompts/generate-theme.prompt.md",
-        "README.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 17
-    },
-    "primary_color": {
-      "name": "primary_color",
-      "category": "design_colors",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "README.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "inc/template-functions.php",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 26
-    },
-    "secondary_color": {
-      "name": "secondary_color",
-      "category": "design_colors",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "README.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "inc/template-functions.php",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 20
+      "count": 2
     },
     "background_color": {
       "name": "background_color",
       "category": "design_colors",
       "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        "README.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "inc/template-functions.php",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 17
+      "count": 1
     },
-    "text_color": {
-      "name": "text_color",
-      "category": "design_colors",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md",
-        ".github/instructions/generate-theme.instructions.md",
-        "README.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "inc/template-functions.php",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 17
-    },
-    "font_family": {
-      "name": "font_family",
-      "category": "design_typography",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md"
-      ],
-      "count": 4
-    },
-    "heading_font": {
-      "name": "heading_font",
-      "category": "design_typography",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md"
-      ],
-      "count": 4
-    },
-    "hero_title": {
-      "name": "hero_title",
-      "category": "content_strings",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md",
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
-      ],
-      "count": 6
-    },
-    "cta_text": {
-      "name": "cta_text",
-      "category": "content_strings",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md"
-      ],
-      "count": 4
-    },
-    "footer_text": {
-      "name": "footer_text",
-      "category": "content_strings",
-      "files": [
-        ".github/agents/generate-theme.agent.md",
-        ".github/custom-instructions.md"
-      ],
-      "count": 4
-    },
-    "mustache": {
-      "name": "mustache",
+    "binding_example": {
+      "name": "binding_example",
       "category": "other",
       "files": [
-        ".github/agents/release-scaffold.agent.md",
-        ".github/agents/release.agent.md",
-        ".github/instructions/release-scaffold.instructions.md",
-        ".github/prompts/release-scaffold.prompt.md",
-        "docs/GENERATE_THEME.md",
-        "docs/HUSKY_PRECOMMIT.md",
-        "docs/RELEASE_PROCESS_SCAFFOLD.md"
+        ".github/instructions/scaffold-extensions.instructions.md"
       ],
-      "count": 36
+      "count": 2
     },
-    "license": {
-      "name": "license",
-      "category": "license",
-      "files": [
-        ".github/custom-instructions.md",
-        "CONTRIBUTING.md",
-        "DEVELOPMENT.md",
-        "README.md",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "docs/README.md",
-        "package-lock.json",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "style.css"
-      ],
-      "count": 23
-    },
-    "variable_name": {
-      "name": "variable_name",
+    "block": {
+      "name": "block",
       "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/scan-mustache-variables.js"
+        ".todo/BLOCK-SCHEMA-EVOLUTION.md"
       ],
-      "count": 6
+      "count": 2
     },
-    "accent_color": {
-      "name": "accent_color",
-      "category": "design_colors",
+    "block_category": {
+      "name": "block_category",
+      "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        "readme.txt"
       ],
-      "count": 11
+      "count": 3
     },
-    "neutral_color": {
-      "name": "neutral_color",
-      "category": "design_colors",
+    "block_description": {
+      "name": "block_description",
+      "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
-      "count": 11
+      "count": 2
     },
-    "heading_font_family": {
-      "name": "heading_font_family",
-      "category": "design_typography",
+    "block_features": {
+      "name": "block_features",
+      "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "readme.txt"
       ],
-      "count": 15
+      "count": 1
     },
-    "heading_font_name": {
-      "name": "heading_font_name",
-      "category": "design_typography",
+    "block_icon": {
+      "name": "block_icon",
+      "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
-      "count": 13
+      "count": 2
+    },
+    "block_keywords": {
+      "name": "block_keywords",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "block_name": {
+      "name": "block_name",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "block_namespace": {
+      "name": "block_namespace",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "block_slug": {
+      "name": "block_slug",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md"
+      ],
+      "count": 4
+    },
+    "block_supports": {
+      "name": "block_supports",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        "readme.txt"
+      ],
+      "count": 3
     },
     "body_font_family": {
       "name": "body_font_family",
       "category": "design_typography",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 13
+      "count": 1
     },
     "body_font_name": {
       "name": "body_font_name",
       "category": "design_typography",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 11
-    },
-    "heading_font_weight": {
-      "name": "heading_font_weight",
-      "category": "design_typography",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 16
+      "count": 1
     },
     "body_line_height": {
       "name": "body_line_height",
       "category": "design_typography",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 11
+      "count": 1
     },
-    "heading_line_height": {
-      "name": "heading_line_height",
-      "category": "design_typography",
+    "bug_fix_1": {
+      "name": "bug_fix_1",
+      "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
-      "count": 14
+      "count": 3
     },
-    "button_font_weight": {
-      "name": "button_font_weight",
-      "category": "design_typography",
+    "bug_fix_2": {
+      "name": "bug_fix_2",
+      "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
-      "count": 9
-    },
-    "site_title_font_weight": {
-      "name": "site_title_font_weight",
-      "category": "design_typography",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 9
-    },
-    "content_width": {
-      "name": "content_width",
-      "category": "design_layout",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 15
-    },
-    "wide_width": {
-      "name": "wide_width",
-      "category": "design_layout",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/reports/theme-generation-updates.md",
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
-      ],
-      "count": 13
-    },
-    "content_width_px": {
-      "name": "content_width_px",
-      "category": "design_layout",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".test-temp/scripts/generate-theme.js",
-        "docs/GENERATE_THEME.md",
-        "functions.php",
-        "scripts/generate-theme.js"
-      ],
-      "count": 9
-    },
-    "namespace": {
-      "name": "namespace",
-      "category": "core_identity",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/instructions/i18n.instructions.md",
-        ".github/reports/SETUP-SUMMARY.md",
-        "docs/GENERATE_THEME.md",
-        "docs/THEME_STRUCTURE.md",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 16
-    },
-    "theme_repo_url": {
-      "name": "theme_repo_url",
-      "category": "urls",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "CONTRIBUTING.md",
-        "README.md",
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 26
-    },
-    "support_url": {
-      "name": "support_url",
-      "category": "urls",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/workflows/i18n.yml",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "docs/INTERNATIONALIZATION.md",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 12
-    },
-    "docs_url": {
-      "name": "docs_url",
-      "category": "urls",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "README.txt",
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "docs/INTERNATIONALIZATION.md",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 15
-    },
-    "support_email": {
-      "name": "support_email",
-      "category": "author_contact",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 7
-    },
-    "security_email": {
-      "name": "security_email",
-      "category": "author_contact",
-      "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "CONTRIBUTING.md",
-        "SECURITY.md",
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 10
+      "count": 3
     },
     "business_email": {
       "name": "business_email",
       "category": "author_contact",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 7
+      "count": 1
     },
-    "year": {
-      "name": "year",
-      "category": "author_contact",
+    "button_border_radius": {
+      "name": "button_border_radius",
+      "category": "ui_components",
       "files": [
-        ".github/instructions/generate-theme.instructions.md",
-        ".github/schemas/examples/theme-config.example.json",
-        ".github/schemas/theme-config.schema.json",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "scripts/test-placeholders.js",
-        "style.css"
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "button_font_weight": {
+      "name": "button_font_weight",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "changelog_url": {
+      "name": "changelog_url",
+      "category": "urls",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "content_width": {
+      "name": "content_width",
+      "category": "design_layout",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "contributors": {
+      "name": "contributors",
+      "category": "other",
+      "files": [
+        "readme.txt"
+      ],
+      "count": 1
+    },
+    "cpt_description": {
+      "name": "cpt_description",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_has_archive": {
+      "name": "cpt_has_archive",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "cpt_hierarchical": {
+      "name": "cpt_hierarchical",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_icon": {
+      "name": "cpt_icon",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        "inc/class-post-types.php"
+      ],
+      "count": 3
+    },
+    "cpt_menu_icon": {
+      "name": "cpt_menu_icon",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 6
+    },
+    "cpt_menu_position": {
+      "name": "cpt_menu_position",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_name_plural": {
+      "name": "cpt_name_plural",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 6
+    },
+    "cpt_name_singular": {
+      "name": "cpt_name_singular",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 14
+    },
+    "cpt_name_singular_0": {
+      "name": "cpt_name_singular_0",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_name_singular_1": {
+      "name": "cpt_name_singular_1",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "cpt_name_singular|lowerCase": {
+      "name": "cpt_name_singular|lowerCase",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 8
+    },
+    "cpt_public": {
+      "name": "cpt_public",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "cpt_rewrite_slug": {
+      "name": "cpt_rewrite_slug",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_slug": {
+      "name": "cpt_slug",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor-alt.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/consolidation/SCAFFOLD-REVIEW-PHASED-EXECUTION-2025-12-12.md",
+        ".github/reports/consolidation/SCAFFOLD-REVIEW-TASK-LIST-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASK-4-1-COMPLETION-2025-12-12.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-post-types.php",
+        "patterns/example-card.php",
+        "patterns/{{slug}}-archive.php",
+        "patterns/{{slug}}-card.php",
+        "patterns/{{slug}}-featured.php",
+        "patterns/{{slug}}-grid.php",
+        "patterns/{{slug}}-meta.php",
+        "patterns/{{slug}}-single.php",
+        "patterns/{{slug}}-slider.php",
+        "src/blocks/{{slug}}-card/edit.js",
+        "src/blocks/{{slug}}-collection/block.json",
+        "src/blocks/{{slug}}-collection/edit.js",
+        "src/blocks/{{slug}}-collection/render.php",
+        "src/blocks/{{slug}}-collection/variations.js",
+        "src/blocks/{{slug}}-featured/edit.js",
+        "src/blocks/{{slug}}-featured/render.php",
+        "src/blocks/{{slug}}-slider/render.php",
+        "src/components/PostSelector/PostSelector.js",
+        "src/hooks/useCollection.js",
+        "src/hooks/useFields.js",
+        "src/hooks/usePostType.js",
+        "src/hooks/useRepeater.js",
+        "tmp/test-template-mode/inc/README.md"
+      ],
+      "count": 180
+    },
+    "cpt_slug_0": {
+      "name": "cpt_slug_0",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_slug_1": {
+      "name": "cpt_slug_1",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "cpt_slug_2": {
+      "name": "cpt_slug_2",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "cpt_supports": {
+      "name": "cpt_supports",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        "inc/class-post-types.php"
       ],
       "count": 13
     },
-    "collected_slug": {
-      "name": "collected_slug",
+    "created_date": {
+      "name": "created_date",
       "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 2
+      "count": 1
     },
-    "collected_name": {
-      "name": "collected_name",
+    "custom_dev_url": {
+      "name": "custom_dev_url",
+      "category": "urls",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "description": {
+      "name": "description",
+      "category": "core_identity",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        "docs/GENERATE_PLUGIN.md",
+        "docs/RELEASE_PROCESS.md",
+        "readme.txt",
+        "scripts/utils/placeholders.js",
+        "{{slug}}.php"
+      ],
+      "count": 33
+    },
+    "dev_note_1": {
+      "name": "dev_note_1",
       "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
-      "count": 2
+      "count": 3
     },
-    "collected_description": {
-      "name": "collected_description",
+    "dev_note_2": {
+      "name": "dev_note_2",
       "category": "other",
       "files": [
-        ".github/instructions/generate-theme.instructions.md"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
-      "count": 2
+      "count": 3
     },
-    "collected_author": {
-      "name": "collected_author",
-      "category": "author_contact",
+    "discord_url": {
+      "name": "discord_url",
+      "category": "urls",
       "files": [
-        ".github/instructions/generate-theme.instructions.md"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 2
+      "count": 1
     },
-    "collected_author_uri": {
-      "name": "collected_author_uri",
-      "category": "author_contact",
+    "docs_repo_url": {
+      "name": "docs_repo_url",
+      "category": "urls",
       "files": [
-        ".github/instructions/generate-theme.instructions.md"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 2
+      "count": 1
     },
-    "collected_version": {
-      "name": "collected_version",
-      "category": "versioning",
+    "docs_url": {
+      "name": "docs_url",
+      "category": "urls",
       "files": [
-        ".github/instructions/generate-theme.instructions.md"
+        "readme.txt",
+        "scripts/utils/placeholders.js"
       ],
-      "count": 2
+      "count": 3
     },
-    "prefix": {
-      "name": "prefix",
+    "donate_url": {
+      "name": "donate_url",
+      "category": "urls",
+      "files": [
+        "readme.txt"
+      ],
+      "count": 1
+    },
+    "field_default": {
+      "name": "field_default",
       "category": "other",
       "files": [
-        ".github/instructions/i18n.instructions.md"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "field_instructions": {
+      "name": "field_instructions",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 4
+    },
+    "field_key": {
+      "name": "field_key",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "field_label": {
+      "name": "field_label",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "field_name": {
+      "name": "field_name",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 6
+    },
+    "field_required": {
+      "name": "field_required",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "field_type": {
+      "name": "field_type",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "github_url": {
+      "name": "github_url",
+      "category": "urls",
+      "files": [
+        "readme.txt"
+      ],
+      "count": 10
+    },
+    "has_archive": {
+      "name": "has_archive",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md"
+      ],
+      "count": 2
+    },
+    "heading_font_family": {
+      "name": "heading_font_family",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "heading_font_name": {
+      "name": "heading_font_name",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "heading_font_weight": {
+      "name": "heading_font_weight",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "heading_line_height": {
+      "name": "heading_line_height",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "hierarchical": {
+      "name": "hierarchical",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md"
+      ],
+      "count": 2
+    },
+    "improvement_1": {
+      "name": "improvement_1",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "improvement_2": {
+      "name": "improvement_2",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "layout": {
+      "name": "layout",
+      "category": "other",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "layout_type": {
+      "name": "layout_type",
+      "category": "other",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "license": {
+      "name": "license",
+      "category": "license",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        "CONTRIBUTING.md",
+        "SUPPORT.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "scripts/utils/placeholders.js",
+        "{{slug}}.php"
+      ],
+      "count": 32
+    },
+    "license_uri": {
+      "name": "license_uri",
+      "category": "urls",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "scripts/utils/placeholders.js",
+        "{{slug}}.php"
+      ],
+      "count": 17
+    },
+    "menu_icon": {
+      "name": "menu_icon",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md"
+      ],
+      "count": 2
+    },
+    "metadata": {
+      "name": "metadata",
+      "category": "other",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "metadata_author": {
+      "name": "metadata_author",
+      "category": "author_contact",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "min_php_version": {
+      "name": "min_php_version",
+      "category": "versioning",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "min_wp_version": {
+      "name": "min_wp_version",
+      "category": "versioning",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "missing": {
+      "name": "missing",
+      "category": "other",
+      "files": [
+        "scripts/generate-plugin.test.js"
+      ],
+      "count": 2
+    },
+    "mono_font_family": {
+      "name": "mono_font_family",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "mono_font_name": {
+      "name": "mono_font_name",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "mustache": {
+      "name": "mustache",
+      "category": "other",
+      "files": [
+        ".github/agents/code-quality.agent.md",
+        ".github/agents/generate-plugin.agent.md",
+        ".github/agents/release-scaffold.agent.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/2025-12-21-dry-run-validation-plan.md",
+        ".github/prompts/block-plugin-refactor-alt.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/analysis/2025-12-17-documentation-alignment-audit.md",
+        ".github/reports/consolidation/SCAFFOLD-REVIEW-TASK-LIST-2025-12-12.md",
+        "CHANGELOG.md",
+        "docs/GENERATE_PLUGIN.md",
+        "docs/RELEASE_PROCESS.md",
+        "docs/RELEASE_PROCESS_SCAFFOLD.md",
+        "scripts/dry-run/dry-run-config.js"
+      ],
+      "count": 52
+    },
+    "name": {
+      "name": "name",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/agents/release-scaffold.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/php-tests.instructions.md",
+        ".github/instructions/playwright-tests.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/prompts/prompts.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-BINDINGS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-STYLES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-TEMPLATES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-COMPLETION-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        ".todo/BLOCK-SCHEMA-EVOLUTION.md",
+        ".vscode/README.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "USAGE.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-block-bindings.php",
+        "inc/class-block-templates.php",
+        "inc/class-core.php",
+        "inc/class-fields.php",
+        "inc/class-options.php",
+        "inc/class-patterns.php",
+        "patterns/{{slug}}-archive.php",
+        "patterns/{{slug}}-card.php",
+        "patterns/{{slug}}-featured.php",
+        "patterns/{{slug}}-grid.php",
+        "patterns/{{slug}}-meta.php",
+        "patterns/{{slug}}-single.php",
+        "patterns/{{slug}}-slider.php",
+        "readme.txt",
+        "scripts/__tests__/generate-plugin.test.js",
+        "scripts/dry-run/__tests__/dry-run-config.test.js",
+        "src/blocks/{{slug}}-card/block.json",
+        "src/blocks/{{slug}}-card/editor.scss",
+        "src/blocks/{{slug}}-card/index.js",
+        "src/blocks/{{slug}}-card/style.scss",
+        "src/blocks/{{slug}}-collection/block.json",
+        "src/blocks/{{slug}}-collection/editor.scss",
+        "src/blocks/{{slug}}-collection/index.js",
+        "src/blocks/{{slug}}-collection/style.scss",
+        "src/blocks/{{slug}}-featured/index.js",
+        "src/blocks/{{slug}}-slider/block.json",
+        "src/blocks/{{slug}}-slider/editor.scss",
+        "src/blocks/{{slug}}-slider/index.js",
+        "src/blocks/{{slug}}-slider/style.scss",
+        "styles/blocks/button-primary.json",
+        "styles/blocks/button-rounded.json",
+        "styles/blocks/heading-serif.json",
+        "styles/colors/palette.json",
+        "styles/dark.json",
+        "styles/presets/dark.json",
+        "styles/sections/content-section.json",
+        "styles/sections/hero-section.json",
+        "styles/typography/serif-titles.json",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/style.scss",
+        "{{slug}}.php"
+      ],
+      "count": 239
+    },
+    "name_plural": {
+      "name": "name_plural",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/php-tests.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-post-types.php",
+        "src/blocks/{{slug}}-collection/index.js",
+        "src/blocks/{{slug}}-featured/editor.scss",
+        "src/blocks/{{slug}}-featured/index.js",
+        "src/blocks/{{slug}}-featured/style.scss",
+        "src/blocks/{{slug}}-slider/index.js",
+        "template-parts/{{slug}}-sidebar.html",
+        "templates/single-{{slug}}.html",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/style.scss",
+        "tmp/test-template-mode/template-parts/{{slug}}-sidebar.html",
+        "tmp/test-template-mode/templates/single-{{slug}}.html"
+      ],
+      "count": 54
+    },
+    "name_plural_lower": {
+      "name": "name_plural_lower",
+      "category": "other",
+      "files": [
+        ".github/copilot-tasks.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-post-types.php",
+        "templates/archive-{{slug}}.html",
+        "tmp/test-template-mode/templates/archive-{{slug}}.html"
+      ],
+      "count": 17
+    },
+    "name_singular": {
+      "name": "name_singular",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/php-tests.instructions.md",
+        ".github/instructions/playwright-tests.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-post-types.php",
+        "src/blocks/{{slug}}-card/index.js"
+      ],
+      "count": 35
+    },
+    "name_singular_lower": {
+      "name": "name_singular_lower",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-post-types.php"
+      ],
+      "count": 6
+    },
+    "name|upper": {
+      "name": "name|upper",
+      "category": "other",
+      "files": [
+        "scripts/generate-plugin.test.js"
+      ],
+      "count": 1
+    },
+    "namespace": {
+      "name": "namespace",
+      "category": "core_identity",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/agents/release-scaffold.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/block-json.instructions.md",
+        ".github/instructions/folder-structure.instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/php-tests.instructions.md",
+        ".github/instructions/playwright-tests.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/instructions/security.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        ".github/reports/analysis/ANALYSIS-BLOCK-EDITOR-COMPATIBILITY-2025-12-15.md",
+        ".github/reports/implementation/ESLINT-COMPLIANCE-FIXES-2025-12-15.md",
+        ".github/reports/implementation/PHASE-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3B-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-BINDINGS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-STYLES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-TEMPLATES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-PATTERNS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-REPEATER-FIELDS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-SCF-JSON-VALIDATOR-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-OVERALL-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASK-4-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASKS-4-2-4-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-COMPLETION-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-PLANNING-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        ".github/reports/validation/SCAFFOLD-LINTING-VALIDATION-2025-12-12.md",
+        ".github/reports/validation/VALIDATION-INTEGRATION-TESTING-2025-12-15.md",
+        ".todo/BLOCK-SCHEMA-EVOLUTION.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "USAGE.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-block-bindings.php",
+        "inc/class-block-styles.php",
+        "inc/class-block-templates.php",
+        "inc/class-core.php",
+        "inc/class-fields.php",
+        "inc/class-options.php",
+        "inc/class-patterns.php",
+        "inc/class-post-types.php",
+        "inc/class-repeater-fields.php",
+        "inc/class-scf-json-validator.php",
+        "inc/class-scf-json.php",
+        "inc/class-taxonomies.php",
+        "patterns/{{slug}}-archive.php",
+        "patterns/{{slug}}-card.php",
+        "patterns/{{slug}}-featured.php",
+        "patterns/{{slug}}-grid.php",
+        "patterns/{{slug}}-meta.php",
+        "patterns/{{slug}}-single.php",
+        "patterns/{{slug}}-slider.php",
+        "readme.txt",
+        "scripts/dry-run/__tests__/dry-run-e2e.test.js",
+        "scripts/dry-run/__tests__/dry-run-php.test.js",
+        "scripts/dry-run/dry-run-e2e.js",
+        "scripts/dry-run/dry-run-php.js",
+        "scripts/utils/placeholders.js",
+        "src/blocks/{{slug}}-card/block.json",
+        "src/blocks/{{slug}}-card/edit.js",
+        "src/blocks/{{slug}}-card/editor.scss",
+        "src/blocks/{{slug}}-card/render.php",
+        "src/blocks/{{slug}}-card/style.scss",
+        "src/blocks/{{slug}}-collection/block.json",
+        "src/blocks/{{slug}}-collection/edit.js",
+        "src/blocks/{{slug}}-collection/editor.scss",
+        "src/blocks/{{slug}}-collection/render.php",
+        "src/blocks/{{slug}}-collection/style.scss",
+        "src/blocks/{{slug}}-collection/view.js",
+        "src/blocks/{{slug}}-featured/block.json",
+        "src/blocks/{{slug}}-featured/edit.js",
+        "src/blocks/{{slug}}-featured/editor.scss",
+        "src/blocks/{{slug}}-featured/index.js",
+        "src/blocks/{{slug}}-featured/render.php",
+        "src/blocks/{{slug}}-featured/style.scss",
+        "src/blocks/{{slug}}-slider/block.json",
+        "src/blocks/{{slug}}-slider/edit.js",
+        "src/blocks/{{slug}}-slider/editor.scss",
+        "src/blocks/{{slug}}-slider/render.php",
+        "src/blocks/{{slug}}-slider/style.scss",
+        "src/blocks/{{slug}}-slider/view.js",
+        "src/scss/_template.scss",
+        "styles/blocks/button-primary.json",
+        "styles/blocks/button-rounded.json",
+        "styles/blocks/heading-serif.json",
+        "styles/colors/palette.json",
+        "styles/dark.json",
+        "styles/presets/dark.json",
+        "styles/sections/content-section.json",
+        "styles/sections/hero-section.json",
+        "styles/typography/serif-titles.json",
+        "templates/single-{{slug}}.html",
+        "tests/e2e/dry-run-e2e.spec.js",
+        "tests/php/test-block-registration.php",
+        "tests/php/test-dry-run.php",
+        "tests/php/test-fields.php",
+        "tests/php/test-plugin-main.php",
+        "tests/php/test-scf-json-fixtures.php",
+        "tests/php/test-scf-json-meta.php",
+        "tests/php/test-scf-json-schema-validation.php",
+        "tests/php/test-scf-json.php",
+        "tmp/test-template-mode/patterns/README.md",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/style.scss",
+        "tmp/test-template-mode/src/components/ScrollDownArrow/style.scss",
+        "tmp/test-template-mode/src/components/ScrollToTop/style.scss",
+        "tmp/test-template-mode/src/components/Slider/style.scss",
+        "tmp/test-template-mode/src/scss/_slider.scss",
+        "tmp/test-template-mode/src/scss/editor.scss",
+        "tmp/test-template-mode/src/scss/style.scss",
+        "tmp/test-template-mode/templates/single-{{slug}}.html",
+        "{{slug}}.php"
+      ],
+      "count": 1064
+    },
+    "namespace|filter": {
+      "name": "namespace|filter",
+      "category": "core_identity",
+      "files": [
+        ".github/reports/validation/SCAFFOLD-LINTING-VALIDATION-2025-12-12.md"
+      ],
+      "count": 2
+    },
+    "namespace|lowerCase": {
+      "name": "namespace|lowerCase",
+      "category": "core_identity",
+      "files": [
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/reports/implementation/PHASE-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-STYLES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-TEMPLATES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-PATTERNS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-REPEATER-FIELDS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-SCF-JSON-VALIDATOR-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-OVERALL-COMPLETION-2025-12-12.md",
+        "inc/class-block-bindings.php",
+        "inc/class-block-styles.php",
+        "inc/class-block-templates.php",
+        "inc/class-core.php",
+        "inc/class-fields.php",
+        "inc/class-options.php",
+        "inc/class-patterns.php",
+        "inc/class-post-types.php",
+        "inc/class-repeater-fields.php",
+        "inc/class-scf-json-validator.php",
+        "inc/class-scf-json.php",
+        "inc/class-taxonomies.php",
+        "tmp/test-template-mode/inc/class-taxonomies.php",
+        "{{slug}}.php"
+      ],
+      "count": 113
+    },
+    "namespace|pascalCase": {
+      "name": "namespace|pascalCase",
+      "category": "core_identity",
+      "files": [
+        ".github/instructions/folder-structure.instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-BINDINGS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-STYLES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-TEMPLATES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-FIELDS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-REPEATER-FIELDS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-SCF-JSON-VALIDATOR-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-OVERALL-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-COMPLETION-REPORT-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASK-4-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASKS-4-2-4-3-COMPLETION-2025-12-12.md",
+        "DEVELOPMENT.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-block-bindings.php",
+        "inc/class-block-styles.php",
+        "inc/class-block-templates.php",
+        "inc/class-fields.php",
+        "inc/class-options.php",
+        "inc/class-patterns.php",
+        "inc/class-post-types.php",
+        "inc/class-repeater-fields.php",
+        "inc/class-scf-json-validator.php",
+        "inc/class-scf-json.php",
+        "inc/class-taxonomies.php",
+        "scripts/__tests__/generate-plugin.test.js",
+        "tmp/test-template-mode/inc/README.md",
+        "tmp/test-template-mode/scf-json/schema/README.md"
+      ],
+      "count": 96
+    },
+    "namespace|upper": {
+      "name": "namespace|upper",
+      "category": "core_identity",
+      "files": [
+        ".github/instructions/folder-structure.instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/reports/implementation/PHASE-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-BLOCK-TEMPLATES-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-PATTERNS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-SCF-JSON-VALIDATOR-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-OVERALL-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        "DEVELOPMENT.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-block-styles.php",
+        "inc/class-block-templates.php",
+        "inc/class-core.php",
+        "inc/class-patterns.php",
+        "inc/class-scf-json-validator.php",
+        "inc/class-scf-json.php",
+        "scripts/__tests__/generate-plugin.test.js",
+        "scripts/utils/update-version.js",
+        "{{slug}}.php"
+      ],
+      "count": 99
+    },
+    "neutral_color": {
+      "name": "neutral_color",
+      "category": "design_colors",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "new_feature_1": {
+      "name": "new_feature_1",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "new_feature_2": {
+      "name": "new_feature_2",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "nonexistent": {
+      "name": "nonexistent",
+      "category": "other",
+      "files": [
+        "scripts/__tests__/generate-plugin.test.js"
+      ],
+      "count": 1
+    },
+    "pattern_block_types": {
+      "name": "pattern_block_types",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_categories": {
+      "name": "pattern_categories",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_description": {
+      "name": "pattern_description",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_keywords": {
+      "name": "pattern_keywords",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_name": {
+      "name": "pattern_name",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_namespace": {
+      "name": "pattern_namespace",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_post_types": {
+      "name": "pattern_post_types",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_slug": {
+      "name": "pattern_slug",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "pattern_viewport_width": {
+      "name": "pattern_viewport_width",
+      "category": "design_layout",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "placeholders": {
+      "name": "placeholders",
+      "category": "other",
+      "files": [
+        ".github/reports/implementation/PHASE-3B-COMPLETION-2025-12-12.md"
+      ],
+      "count": 2
+    },
+    "plugin_uri": {
+      "name": "plugin_uri",
+      "category": "urls",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "{{slug}}.php"
+      ],
+      "count": 10
+    },
+    "premium_support_url": {
+      "name": "premium_support_url",
+      "category": "urls",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "primary_color": {
+      "name": "primary_color",
+      "category": "design_colors",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "rel_field_label": {
+      "name": "rel_field_label",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "rel_field_name": {
+      "name": "rel_field_name",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "rel_reverse_field": {
+      "name": "rel_reverse_field",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "rel_reverse_label": {
+      "name": "rel_reverse_label",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "rel_source_cpt": {
+      "name": "rel_source_cpt",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "rel_target_cpt": {
+      "name": "rel_target_cpt",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "release_date": {
+      "name": "release_date",
+      "category": "other",
+      "files": [
+        "readme.txt"
+      ],
+      "count": 1
+    },
+    "requires_php": {
+      "name": "requires_php",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "{{slug}}.php"
+      ],
+      "count": 15
+    },
+    "requires_plugins": {
+      "name": "requires_plugins",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "requires_wp": {
+      "name": "requires_wp",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt",
+        "{{slug}}.php"
+      ],
+      "count": 13
+    },
+    "rewrite_slug": {
+      "name": "rewrite_slug",
+      "category": "other",
+      "files": [
+        ".github/agents/generate-plugin.agent.md"
+      ],
+      "count": 2
     },
     "role": {
       "name": "role",
@@ -835,550 +1462,680 @@
       ],
       "count": 2
     },
-    "placeholders": {
-      "name": "placeholders",
-      "category": "other",
+    "secondary_color": {
+      "name": "secondary_color",
+      "category": "design_colors",
       "files": [
-        ".github/reports/integration/2025-12-09-precommit-testing-integration.md",
-        "docs/LINTING.md"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 6
+      "count": 1
     },
-    "slug": {
-      "name": "slug",
+    "security_email": {
+      "name": "security_email",
+      "category": "author_contact",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "short_description": {
+      "name": "short_description",
       "category": "other",
       "files": [
-        ".github/reports/migration/STYLELINT-MIGRATION.md"
+        "readme.txt"
       ],
-      "count": 2
+      "count": 1
+    },
+    "site_title_font_weight": {
+      "name": "site_title_font_weight",
+      "category": "design_typography",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
     },
     "skip_link_text": {
       "name": "skip_link_text",
       "category": "content_strings",
       "files": [
-        ".github/reports/validation/wordpress-packages-validation.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "src/js/theme.js"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 10
+      "count": 1
     },
-    "github_org": {
-      "name": "github_org",
+    "slug": {
+      "name": "slug",
       "category": "other",
       "files": [
-        ".github/workflows/deploy.yml"
+        ".devcontainer/docker-compose.yml",
+        ".github/agents/generate-plugin.agent.md",
+        ".github/agents/release-scaffold.agent.md",
+        ".github/copilot-tasks.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/block-json.instructions.md",
+        ".github/instructions/folder-structure.instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/instructions.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/php-tests.instructions.md",
+        ".github/instructions/playwright-tests.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/instructions/scf-fields.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/2025-12-17-docker-implementation-plan.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor-alt.prompt.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        ".github/reports/analysis/ANALYSIS-BLOCK-EDITOR-COMPATIBILITY-2025-12-15.md",
+        ".github/reports/consolidation/SCAFFOLD-REVIEW-PHASED-EXECUTION-2025-12-12.md",
+        ".github/reports/consolidation/SCAFFOLD-REVIEW-TASK-LIST-2025-12-12.md",
+        ".github/reports/implementation/ESLINT-COMPLIANCE-FIXES-2025-12-15.md",
+        ".github/reports/implementation/PHASE-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-REPEATER-FIELDS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-COMPLETION-REPORT-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASK-4-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASKS-4-2-4-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-COMPLETION-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-PLANNING-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        ".github/reports/validation/VALIDATION-INTEGRATION-TESTING-2025-12-15.md",
+        ".github/workflows/ci-cd.yml",
+        ".github/workflows/deploy-wporg.yml",
+        ".github/workflows/i18n.yml",
+        ".todo/BLOCK-SCHEMA-EVOLUTION.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "USAGE.md",
+        "docs/GENERATE_PLUGIN.md",
+        "docs/RELEASE_PROCESS.md",
+        "inc/class-core.php",
+        "inc/class-patterns.php",
+        "inc/class-post-types.php",
+        "inc/class-repeater-fields.php",
+        "patterns/{{slug}}-archive.php",
+        "patterns/{{slug}}-card.php",
+        "patterns/{{slug}}-featured.php",
+        "patterns/{{slug}}-grid.php",
+        "patterns/{{slug}}-meta.php",
+        "patterns/{{slug}}-single.php",
+        "patterns/{{slug}}-slider.php",
+        "scripts/__tests__/generate-plugin.test.js",
+        "scripts/blocks.test.js",
+        "scripts/dry-run/__tests__/dry-run-config.test.js",
+        "scripts/dry-run/__tests__/dry-run-e2e.test.js",
+        "scripts/dry-run/__tests__/dry-run-php.test.js",
+        "scripts/dry-run/__tests__/dry-run-test.js",
+        "scripts/dry-run/dry-run-e2e.js",
+        "scripts/dry-run/dry-run-php.js",
+        "scripts/generate-plugin.test.js",
+        "scripts/utils/update-version.js",
+        "src/blocks/{{slug}}-card/block.json",
+        "src/blocks/{{slug}}-card/edit.js",
+        "src/blocks/{{slug}}-card/render.php",
+        "src/blocks/{{slug}}-collection/block.json",
+        "src/blocks/{{slug}}-collection/edit.js",
+        "src/blocks/{{slug}}-collection/render.php",
+        "src/blocks/{{slug}}-collection/view.js",
+        "src/blocks/{{slug}}-featured/block.json",
+        "src/blocks/{{slug}}-featured/edit.js",
+        "src/blocks/{{slug}}-featured/render.php",
+        "src/blocks/{{slug}}-slider/block.json",
+        "src/blocks/{{slug}}-slider/edit.js",
+        "src/blocks/{{slug}}-slider/render.php",
+        "src/blocks/{{slug}}-slider/view.js",
+        "src/index.js",
+        "src/scss/_template.scss",
+        "template-parts/{{slug}}-header.html",
+        "template-parts/{{slug}}-meta.html",
+        "template-parts/{{slug}}-sidebar.html",
+        "templates/archive-{{slug}}.html",
+        "templates/single-{{slug}}.html",
+        "tests/e2e/dry-run-e2e.spec.js",
+        "tests/php/test-block-registration.php",
+        "tests/php/test-dry-run.php",
+        "tests/php/test-fields.php",
+        "tests/php/test-plugin-main.php",
+        "tests/php/test-scf-json-fixtures.php",
+        "tests/php/test-scf-json-meta.php",
+        "tests/php/test-scf-json-schema-validation.php",
+        "tests/php/test-scf-json.php",
+        "tmp/test-template-mode/inc/README.md",
+        "tmp/test-template-mode/inc/class-taxonomies.php",
+        "tmp/test-template-mode/patterns/README.md",
+        "tmp/test-template-mode/scf-json/README.md",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/style.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/editor.scss",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/style.scss",
+        "tmp/test-template-mode/src/scss/editor.scss",
+        "tmp/test-template-mode/template-parts/{{slug}}-header.html",
+        "tmp/test-template-mode/template-parts/{{slug}}-meta.html",
+        "tmp/test-template-mode/template-parts/{{slug}}-sidebar.html",
+        "tmp/test-template-mode/templates/archive-{{slug}}.html",
+        "tmp/test-template-mode/templates/single-{{slug}}.html"
       ],
-      "count": 2
+      "count": 1243
     },
-    "hero_description": {
-      "name": "hero_description",
+    "slug|camelCase": {
+      "name": "slug|camelCase",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        "DEVELOPMENT.md"
       ],
-      "count": 2
+      "count": 3
     },
-    "hero_button_text": {
-      "name": "hero_button_text",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
-      ],
-      "count": 2
-    },
-    "cta_title": {
-      "name": "cta_title",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
-      ],
-      "count": 2
-    },
-    "cta_description": {
-      "name": "cta_description",
+    "slug|pascalCase": {
+      "name": "slug|pascalCase",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        "DEVELOPMENT.md",
+        "patterns/{{slug}}-archive.php",
+        "patterns/{{slug}}-card.php",
+        "patterns/{{slug}}-featured.php",
+        "patterns/{{slug}}-grid.php",
+        "patterns/{{slug}}-meta.php",
+        "patterns/{{slug}}-single.php",
+        "patterns/{{slug}}-slider.php"
       ],
-      "count": 2
+      "count": 15
     },
-    "cta_button_text": {
-      "name": "cta_button_text",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
-      ],
-      "count": 2
-    },
-    "team_title": {
-      "name": "team_title",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
-      ],
-      "count": 2
-    },
-    "team_description": {
-      "name": "team_description",
+    "slug|snakeCase": {
+      "name": "slug|snakeCase",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md"
       ],
-      "count": 2
+      "count": 3
     },
-    "team_member_1_name": {
-      "name": "team_member_1_name",
+    "snake_case_placeholders": {
+      "name": "snake_case_placeholders",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/agents/task-planner.agent.md"
       ],
       "count": 2
     },
-    "team_member_1_role": {
-      "name": "team_member_1_role",
+    "style_block_types": {
+      "name": "style_block_types",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 2
     },
-    "team_member_2_name": {
-      "name": "team_member_2_name",
+    "style_label": {
+      "name": "style_label",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
-      "count": 2
+      "count": 4
     },
-    "team_member_2_role": {
-      "name": "team_member_2_role",
+    "style_name": {
+      "name": "style_name",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
-      "count": 2
+      "count": 6
     },
-    "team_member_3_name": {
-      "name": "team_member_3_name",
+    "support_email": {
+      "name": "support_email",
+      "category": "author_contact",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "support_url": {
+      "name": "support_url",
+      "category": "urls",
+      "files": [
+        "readme.txt",
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 4
+    },
+    "supports": {
+      "name": "supports",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/agents/generate-plugin.agent.md"
       ],
       "count": 2
     },
-    "team_member_3_role": {
-      "name": "team_member_3_role",
+    "supportUrl": {
+      "name": "supportUrl",
       "category": "other",
       "files": [
-        ".test-temp/inc/block-patterns.php",
-        "inc/block-patterns.php"
+        ".github/workflows/i18n.yml"
       ],
       "count": 2
     },
-    "theme_slug|upper": {
-      "name": "theme_slug|upper",
-      "category": "core_identity",
-      "files": [
-        ".test-temp/inc/template-functions.php",
-        ".test-temp/tests/test-theme-setup.php",
-        "docs/GENERATE_THEME.md",
-        "functions.php",
-        "inc/template-functions.php",
-        "tests/test-theme-setup.php"
-      ],
-      "count": 137
-    },
-    "logo_height": {
-      "name": "logo_height",
+    "tag1": {
+      "name": "tag1",
       "category": "other",
       "files": [
-        ".test-temp/inc/template-functions.php",
-        "inc/template-functions.php"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "tag2": {
+      "name": "tag2",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "tag3": {
+      "name": "tag3",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "tag4": {
+      "name": "tag4",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "tag5": {
+      "name": "tag5",
+      "category": "other",
+      "files": [
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
+      ],
+      "count": 3
+    },
+    "tax_attached_to": {
+      "name": "tax_attached_to",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 2
     },
-    "logo_width": {
-      "name": "logo_width",
-      "category": "design_layout",
+    "tax_hierarchical": {
+      "name": "tax_hierarchical",
+      "category": "other",
       "files": [
-        ".test-temp/inc/template-functions.php",
-        "inc/template-functions.php"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "tax_plural": {
+      "name": "tax_plural",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "tax_public": {
+      "name": "tax_public",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 2
     },
-    "archive_excerpt_length": {
-      "name": "archive_excerpt_length",
-      "category": "content_strings",
+    "tax_rewrite_slug": {
+      "name": "tax_rewrite_slug",
+      "category": "other",
       "files": [
-        ".test-temp/inc/template-functions.php",
-        "inc/template-functions.php"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "tax_show_admin_column": {
+      "name": "tax_show_admin_column",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 2
     },
-    "excerpt_more": {
-      "name": "excerpt_more",
-      "category": "content_strings",
+    "tax_singular": {
+      "name": "tax_singular",
+      "category": "other",
       "files": [
-        ".test-temp/scripts/generate-theme.js",
-        "docs/GENERATE_THEME.md",
-        "functions.php",
-        "scripts/generate-theme.js"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 4
+    },
+    "tax_singular_0": {
+      "name": "tax_singular_0",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "tax_singular_1": {
+      "name": "tax_singular_1",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "tax_slug": {
+      "name": "tax_slug",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        "tmp/test-template-mode/inc/README.md"
       ],
       "count": 5
     },
-    "placeholder": {
-      "name": "placeholder",
+    "tax_slug_0": {
+      "name": "tax_slug_0",
       "category": "other",
       "files": [
-        ".test-temp/scripts/test-placeholders.js",
-        "scripts/test-placeholders.js"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 2
     },
-    "key": {
-      "name": "key",
+    "tax_slug_1": {
+      "name": "tax_slug_1",
       "category": "other",
       "files": [
-        ".test-temp/scripts/test-placeholders.js",
-        "scripts/test-placeholders.js"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
       "count": 2
     },
-    "button_style_primary_title": {
-      "name": "button_style_primary_title",
+    "taxonomy_plural": {
+      "name": "taxonomy_plural",
+      "category": "other",
+      "files": [
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        "inc/class-taxonomies.php",
+        "tmp/test-template-mode/inc/class-taxonomies.php"
+      ],
+      "count": 16
+    },
+    "taxonomy_plural_lower": {
+      "name": "taxonomy_plural_lower",
+      "category": "other",
+      "files": [
+        "inc/class-taxonomies.php",
+        "tmp/test-template-mode/inc/class-taxonomies.php"
+      ],
+      "count": 8
+    },
+    "taxonomy_singular": {
+      "name": "taxonomy_singular",
+      "category": "other",
+      "files": [
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        "inc/class-taxonomies.php",
+        "tmp/test-template-mode/inc/class-taxonomies.php"
+      ],
+      "count": 16
+    },
+    "taxonomy_slug": {
+      "name": "taxonomy_slug",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-COMPLETION-2025-12-15.md",
+        "inc/class-taxonomies.php",
+        "patterns/{{slug}}-meta.php"
+      ],
+      "count": 16
+    },
+    "template_description": {
+      "name": "template_description",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "template_name": {
+      "name": "template_name",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "template_post_types": {
+      "name": "template_post_types",
+      "category": "other",
+      "files": [
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
+      ],
+      "count": 2
+    },
+    "template_title": {
+      "name": "template_title",
       "category": "content_strings",
       "files": [
-        ".test-temp/styles/blocks/button-primary.json",
-        "styles/blocks/button-primary.json"
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md"
       ],
-      "count": 3
+      "count": 2
     },
-    "button_style_rounded_title": {
-      "name": "button_style_rounded_title",
+    "tested_up_to": {
+      "name": "tested_up_to",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        "docs/GENERATE_PLUGIN.md",
+        "readme.txt"
+      ],
+      "count": 5
+    },
+    "tested_wp_version": {
+      "name": "tested_wp_version",
+      "category": "versioning",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "text_color": {
+      "name": "text_color",
+      "category": "design_colors",
+      "files": [
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 1
+    },
+    "textdomain": {
+      "name": "textdomain",
       "category": "content_strings",
       "files": [
-        ".test-temp/styles/blocks/button-rounded.json",
-        "styles/blocks/button-rounded.json"
+        ".github/agents/generate-plugin.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/instructions/wpcs-php.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/block-plugin-refactor.prompt.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        ".github/reports/implementation/PHASE-3A-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3B-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-PATTERNS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-REPEATER-FIELDS-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-3C-CLASS-SCF-JSON-VALIDATOR-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-4-TASKS-4-2-4-3-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-1-COMPLETION-2025-12-12.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-COMPLETION-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-2-PLANNING-2025-12-15.md",
+        ".github/reports/implementation/PHASE-5-TASK-5-3-COMPLETION-2025-12-15.md",
+        ".github/workflows/i18n.yml",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "docs/GENERATE_PLUGIN.md",
+        "inc/class-block-bindings.php",
+        "inc/class-block-styles.php",
+        "inc/class-block-templates.php",
+        "inc/class-core.php",
+        "inc/class-fields.php",
+        "inc/class-options.php",
+        "inc/class-patterns.php",
+        "inc/class-post-types.php",
+        "inc/class-repeater-fields.php",
+        "inc/class-taxonomies.php",
+        "patterns/example-card.php",
+        "patterns/{{slug}}-archive.php",
+        "patterns/{{slug}}-card.php",
+        "patterns/{{slug}}-featured.php",
+        "patterns/{{slug}}-grid.php",
+        "patterns/{{slug}}-meta.php",
+        "patterns/{{slug}}-single.php",
+        "patterns/{{slug}}-slider.php",
+        "readme.txt",
+        "scripts/dry-run/__tests__/dry-run-e2e.test.js",
+        "scripts/dry-run/__tests__/dry-run-php.test.js",
+        "scripts/dry-run/dry-run-e2e.js",
+        "scripts/dry-run/dry-run-php.js",
+        "src/blocks/{{slug}}-card/block.json",
+        "src/blocks/{{slug}}-card/edit.js",
+        "src/blocks/{{slug}}-collection/block.json",
+        "src/blocks/{{slug}}-collection/edit.js",
+        "src/blocks/{{slug}}-collection/render.php",
+        "src/blocks/{{slug}}-collection/variations.js",
+        "src/blocks/{{slug}}-featured/block.json",
+        "src/blocks/{{slug}}-featured/edit.js",
+        "src/blocks/{{slug}}-featured/render.php",
+        "src/blocks/{{slug}}-slider/block.json",
+        "src/blocks/{{slug}}-slider/edit.js",
+        "src/blocks/{{slug}}-slider/render.php",
+        "src/components/FieldDisplay/FieldDisplay.js",
+        "src/components/Gallery/Gallery.js",
+        "src/components/PostSelector/PostSelector.js",
+        "src/components/QueryControls/QueryControls.js",
+        "src/components/RepeaterField/RepeaterField.js",
+        "src/components/ScrollDownArrow/ScrollDownArrow.js",
+        "src/components/ScrollToTop/ScrollToTop.js",
+        "src/components/Slider/Slider.js",
+        "src/components/TaxonomyFilter/TaxonomyFilter.js",
+        "src/utils/query.js",
+        "tests/e2e/dry-run-e2e.spec.js",
+        "tests/php/test-block-registration.php",
+        "tests/php/test-dry-run.php",
+        "tests/php/test-fields.php",
+        "tests/php/test-plugin-main.php",
+        "tests/php/test-scf-json-fixtures.php",
+        "tests/php/test-scf-json-meta.php",
+        "tests/php/test-scf-json-schema-validation.php",
+        "tests/php/test-scf-json.php",
+        "tmp/test-template-mode/inc/README.md",
+        "tmp/test-template-mode/inc/class-block-bindings.php",
+        "tmp/test-template-mode/inc/class-block-styles.php",
+        "tmp/test-template-mode/inc/class-block-templates.php",
+        "tmp/test-template-mode/inc/class-fields.php",
+        "tmp/test-template-mode/inc/class-options.php",
+        "tmp/test-template-mode/inc/class-patterns.php",
+        "tmp/test-template-mode/inc/class-post-types.php",
+        "tmp/test-template-mode/inc/class-repeater-fields.php",
+        "tmp/test-template-mode/inc/class-taxonomies.php",
+        "tmp/test-template-mode/patterns/README.md",
+        "tmp/test-template-mode/patterns/example-card.php",
+        "tmp/test-template-mode/patterns/{{slug}}-archive.php",
+        "tmp/test-template-mode/patterns/{{slug}}-meta.php",
+        "tmp/test-template-mode/src/blocks/{{slug}}-card/edit.js",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/edit.js",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/render.php",
+        "tmp/test-template-mode/src/blocks/{{slug}}-collection/variations.js",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/edit.js",
+        "tmp/test-template-mode/src/blocks/{{slug}}-featured/render.php",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/edit.js",
+        "tmp/test-template-mode/src/blocks/{{slug}}-slider/render.php",
+        "tmp/test-template-mode/src/components/FieldDisplay/FieldDisplay.js",
+        "tmp/test-template-mode/src/components/Gallery/Gallery.js",
+        "tmp/test-template-mode/src/components/PostSelector/PostSelector.js",
+        "tmp/test-template-mode/src/components/QueryControls/QueryControls.js",
+        "tmp/test-template-mode/src/components/RepeaterField/RepeaterField.js",
+        "tmp/test-template-mode/src/components/ScrollDownArrow/ScrollDownArrow.js",
+        "tmp/test-template-mode/src/components/ScrollToTop/ScrollToTop.js",
+        "tmp/test-template-mode/src/components/Slider/Slider.js",
+        "tmp/test-template-mode/src/components/TaxonomyFilter/TaxonomyFilter.js",
+        "tmp/test-template-mode/src/hooks/useCollection.js",
+        "tmp/test-template-mode/src/hooks/useFields.js",
+        "tmp/test-template-mode/src/hooks/usePostType.js",
+        "tmp/test-template-mode/src/hooks/useRepeater.js",
+        "tmp/test-template-mode/src/utils/query.js",
+        "tmp/test-template-mode/{{slug}}.php",
+        "uninstall.php",
+        "{{slug}}.php"
       ],
-      "count": 3
+      "count": 1051
     },
-    "heading_style_serif_title": {
-      "name": "heading_style_serif_title",
-      "category": "content_strings",
+    "theme_name": {
+      "name": "theme_name",
+      "category": "core_identity",
       "files": [
-        ".test-temp/styles/blocks/heading-serif.json",
-        "styles/blocks/heading-serif.json"
+        ".github/agents/release.agent.md",
+        ".github/reports/analysis/2025-12-17-documentation-alignment-audit.md",
+        "docs/RELEASE_PROCESS.md",
+        "docs/RELEASE_PROCESS_SCAFFOLD.md",
+        "scripts/utils/__tests__/dry-run-release.test.js",
+        "scripts/utils/placeholders.js"
       ],
-      "count": 3
+      "count": 18
     },
-    "dark_mode_title": {
-      "name": "dark_mode_title",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_background_color": {
-      "name": "dark_background_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_text_color": {
-      "name": "dark_text_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_primary_color": {
-      "name": "dark_primary_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_primary_light_color": {
-      "name": "dark_primary_light_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_primary_dark_color": {
-      "name": "dark_primary_dark_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_cta_color": {
-      "name": "dark_cta_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_100_color": {
-      "name": "dark_neutral_100_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_200_color": {
-      "name": "dark_neutral_200_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_300_color": {
-      "name": "dark_neutral_300_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_400_color": {
-      "name": "dark_neutral_400_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_500_color": {
-      "name": "dark_neutral_500_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_600_color": {
-      "name": "dark_neutral_600_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_700_color": {
-      "name": "dark_neutral_700_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_800_color": {
-      "name": "dark_neutral_800_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_neutral_900_color": {
-      "name": "dark_neutral_900_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_100_color": {
-      "name": "dark_accent_100_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_200_color": {
-      "name": "dark_accent_200_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_300_color": {
-      "name": "dark_accent_300_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_400_color": {
-      "name": "dark_accent_400_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_500_color": {
-      "name": "dark_accent_500_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_600_color": {
-      "name": "dark_accent_600_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_700_color": {
-      "name": "dark_accent_700_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_800_color": {
-      "name": "dark_accent_800_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "dark_accent_900_color": {
-      "name": "dark_accent_900_color",
-      "category": "design_colors",
-      "files": [
-        ".test-temp/styles/dark.json",
-        "styles/dark.json"
-      ],
-      "count": 3
-    },
-    "content_section_style_title": {
-      "name": "content_section_style_title",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/styles/sections/content-section.json",
-        "styles/sections/content-section.json"
-      ],
-      "count": 3
-    },
-    "hero_section_style_title": {
-      "name": "hero_section_style_title",
-      "category": "content_strings",
-      "files": [
-        ".test-temp/styles/sections/hero-section.json",
-        "styles/sections/hero-section.json"
-      ],
-      "count": 3
-    },
-    "license_uri": {
-      "name": "license_uri",
+    "theme_repo_url": {
+      "name": "theme_repo_url",
       "category": "urls",
       "files": [
-        "DEVELOPMENT.md",
-        "README.md",
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
+        "docs/RELEASE_PROCESS.md",
+        "scripts/utils/placeholders.js"
+      ],
+      "count": 13
+    },
+    "theme_slug": {
+      "name": "theme_slug",
+      "category": "core_identity",
+      "files": [
+        "docs/RELEASE_PROCESS.md",
+        "scripts/utils/placeholders.js"
       ],
       "count": 9
     },
-    "body_font": {
-      "name": "body_font",
-      "category": "design_typography",
+    "theme_slug|camelCase": {
+      "name": "theme_slug|camelCase",
+      "category": "core_identity",
       "files": [
-        "README.md"
-      ],
-      "count": 1
-    },
-    "author_username": {
-      "name": "author_username",
-      "category": "author_contact",
-      "files": [
-        "README.txt",
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 3
-    },
-    "wp_version_min": {
-      "name": "wp_version_min",
-      "category": "versioning",
-      "files": [
-        "README.txt"
-      ],
-      "count": 1
-    },
-    "wp_version_max": {
-      "name": "wp_version_max",
-      "category": "versioning",
-      "files": [
-        "README.txt"
-      ],
-      "count": 1
-    },
-    "php_version_min": {
-      "name": "php_version_min",
-      "category": "versioning",
-      "files": [
-        "README.txt"
+        "scripts/utils/placeholders.js"
       ],
       "count": 1
     },
@@ -1386,44 +2143,7 @@
       "name": "theme_tags",
       "category": "theme_metadata",
       "files": [
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 6
-    },
-    "target_audience": {
-      "name": "target_audience",
-      "category": "theme_metadata",
-      "files": [
-        "README.txt",
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 3
-    },
-    "textdomain": {
-      "name": "textdomain",
-      "category": "content_strings",
-      "files": [
-        "README.txt",
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 4
-    },
-    "date": {
-      "name": "date",
-      "category": "other",
-      "files": [
-        "README.txt",
-        "docs/CONFIGS.md"
-      ],
-      "count": 3
-    },
-    "repo_url": {
-      "name": "repo_url",
-      "category": "urls",
-      "files": [
-        "README.txt"
+        "scripts/utils/placeholders.js"
       ],
       "count": 1
     },
@@ -1431,455 +2151,145 @@
       "name": "theme_uri",
       "category": "urls",
       "files": [
-        "README.txt",
-        "docs/GENERATE_THEME.md",
-        "package.json",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 12
-    },
-    "discord_url": {
-      "name": "discord_url",
-      "category": "urls",
-      "files": [
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 5
-    },
-    "premium_support_url": {
-      "name": "premium_support_url",
-      "category": "urls",
-      "files": [
-        "SUPPORT.md",
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 5
-    },
-    "custom_dev_url": {
-      "name": "custom_dev_url",
-      "category": "urls",
-      "files": [
-        "SUPPORT.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 3
-    },
-    "docs_repo_url": {
-      "name": "docs_repo_url",
-      "category": "urls",
-      "files": [
-        "SUPPORT.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 3
-    },
-    "variable": {
-      "name": "variable",
-      "category": "other",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "docs/STYLES.md"
-      ],
-      "count": 6
-    },
-    "created_date": {
-      "name": "created_date",
-      "category": "other",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "package.json",
-        "scripts/test-placeholders.js"
-      ],
-      "count": 4
+      "count": 1
     },
     "updated_date": {
       "name": "updated_date",
       "category": "other",
       "files": [
-        "docs/GENERATE_THEME.md",
-        "package.json",
-        "scripts/test-placeholders.js"
+        "scripts/utils/placeholders.js"
       ],
-      "count": 4
+      "count": 1
     },
-    "changelog_url": {
-      "name": "changelog_url",
-      "category": "urls",
+    "upgrade_notice": {
+      "name": "upgrade_notice",
+      "category": "other",
       "files": [
-        "docs/GENERATE_THEME.md",
-        "package.json",
-        "scripts/test-placeholders.js"
+        "readme.txt"
       ],
-      "count": 4
+      "count": 1
     },
-    "mono_font_family": {
-      "name": "mono_font_family",
-      "category": "design_typography",
+    "use_case_1": {
+      "name": "use_case_1",
+      "category": "other",
       "files": [
-        "docs/GENERATE_THEME.md",
-        "scripts/test-placeholders.js"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
       "count": 3
     },
-    "mono_font_name": {
-      "name": "mono_font_name",
-      "category": "design_typography",
+    "use_case_2": {
+      "name": "use_case_2",
+      "category": "other",
       "files": [
-        "docs/GENERATE_THEME.md",
-        "scripts/test-placeholders.js"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
       "count": 3
     },
-    "button_border_radius": {
-      "name": "button_border_radius",
-      "category": "ui_components",
+    "use_case_3": {
+      "name": "use_case_3",
+      "category": "other",
       "files": [
-        "docs/GENERATE_THEME.md",
-        "scripts/generate-theme.js",
-        "scripts/test-placeholders.js",
-        "theme.json"
+        "generated-plugins/test-plugin/readme.txt",
+        "generated-plugins/tour-operator/readme.txt",
+        "readme.txt"
       ],
-      "count": 5
+      "count": 3
     },
-    "excerpt_length": {
-      "name": "excerpt_length",
+    "var|filter": {
+      "name": "var|filter",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md"
+      ],
+      "count": 2
+    },
+    "variable": {
+      "name": "variable",
+      "category": "other",
+      "files": [
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/reports/validation/VALIDATION-INTEGRATION-TESTING-2025-12-15.md",
+        "docs/GENERATE_PLUGIN.md",
+        "docs/RELEASE_PROCESS.md"
+      ],
+      "count": 20
+    },
+    "variable|filter": {
+      "name": "variable|filter",
+      "category": "other",
+      "files": [
+        ".github/agents/release-scaffold.agent.md"
+      ],
+      "count": 2
+    },
+    "variables": {
+      "name": "variables",
+      "category": "other",
+      "files": [
+        ".github/agents/release-scaffold.agent.md"
+      ],
+      "count": 4
+    },
+    "version": {
+      "name": "version",
+      "category": "versioning",
+      "files": [
+        ".github/agents/generate-plugin.agent.md",
+        ".github/custom-instructions.md",
+        ".github/instructions/generate-plugin.instructions.md",
+        ".github/instructions/markdown.instructions.md",
+        ".github/instructions/scaffold-extensions.instructions.md",
+        ".github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md",
+        ".github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md",
+        ".github/prompts/generate-plugin.prompt.md",
+        ".github/reports/SCAFFOLD-RELEASE-PREPARATION-2025-12-15.md",
+        ".github/reports/analysis/2025-12-17-documentation-alignment-audit.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "USAGE.md",
+        "docs/GENERATE_PLUGIN.md",
+        "docs/RELEASE_PROCESS.md",
+        "readme.txt",
+        "scripts/__tests__/generate-plugin.test.js",
+        "scripts/agents/release.agent.js",
+        "scripts/utils/__tests__/dry-run-release.test.js",
+        "scripts/utils/placeholders.js",
+        "{{slug}}.php"
+      ],
+      "count": 119
+    },
+    "warning_title": {
+      "name": "warning_title",
       "category": "content_strings",
       "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "featured_image_width": {
-      "name": "featured_image_width",
-      "category": "design_layout",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "featured_image_height": {
-      "name": "featured_image_height",
-      "category": "images",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "thumbnail_width": {
-      "name": "thumbnail_width",
-      "category": "design_layout",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "thumbnail_height": {
-      "name": "thumbnail_height",
-      "category": "images",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "gallery_image_width": {
-      "name": "gallery_image_width",
-      "category": "design_layout",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "gallery_image_height": {
-      "name": "gallery_image_height",
-      "category": "images",
-      "files": [
-        "docs/GENERATE_THEME.md",
-        "functions.php"
-      ],
-      "count": 3
-    },
-    "ThemeSlug": {
-      "name": "ThemeSlug",
-      "category": "other",
-      "files": [
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 2
-    },
-    "color1": {
-      "name": "color1",
-      "category": "design_colors",
-      "files": [
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 2
-    },
-    "custom_variable": {
-      "name": "custom_variable",
-      "category": "other",
-      "files": [
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 4
-    },
-    "theme_slug|camel": {
-      "name": "theme_slug|camel",
-      "category": "core_identity",
-      "files": [
-        "docs/GENERATE_THEME.md"
-      ],
-      "count": 44
-    },
-    "org": {
-      "name": "org",
-      "category": "other",
-      "files": [
-        "docs/WORKFLOWS.md"
-      ],
-      "count": 4
-    },
-    "repo": {
-      "name": "repo",
-      "category": "other",
-      "files": [
-        "docs/WORKFLOWS.md"
-      ],
-      "count": 4
-    },
-    "theme_slug|camelCase": {
-      "name": "theme_slug|camelCase",
-      "category": "core_identity",
-      "files": [
-        "scripts/test-placeholders.js",
-        "src/js/editor.js",
-        "src/js/theme.js",
-        "tests/js/theme.test.js"
-      ],
-      "count": 65
-    }
-  },
-  "filesByCategory": {},
-  "categories": {
-    "core_identity": {
-      "variables": [
-        "theme_name",
-        "theme_slug",
-        "description",
-        "namespace",
-        "theme_slug|upper",
-        "theme_slug|camel",
-        "theme_slug|camelCase"
-      ],
-      "count": 7
-    },
-    "versioning": {
-      "variables": [
-        "version",
-        "min_wp_version",
-        "tested_wp_version",
-        "min_php_version",
-        "collected_version",
-        "wp_version_min",
-        "wp_version_max",
-        "php_version_min"
-      ],
-      "count": 8
-    },
-    "author_contact": {
-      "variables": [
-        "author",
-        "author_uri",
-        "support_email",
-        "security_email",
-        "business_email",
-        "year",
-        "collected_author",
-        "collected_author_uri",
-        "author_username"
-      ],
-      "count": 9
-    },
-    "design_colors": {
-      "variables": [
-        "primary_color",
-        "secondary_color",
-        "background_color",
-        "text_color",
-        "accent_color",
-        "neutral_color",
-        "dark_background_color",
-        "dark_text_color",
-        "dark_primary_color",
-        "dark_primary_light_color",
-        "dark_primary_dark_color",
-        "dark_cta_color",
-        "dark_neutral_100_color",
-        "dark_neutral_200_color",
-        "dark_neutral_300_color",
-        "dark_neutral_400_color",
-        "dark_neutral_500_color",
-        "dark_neutral_600_color",
-        "dark_neutral_700_color",
-        "dark_neutral_800_color",
-        "dark_neutral_900_color",
-        "dark_accent_100_color",
-        "dark_accent_200_color",
-        "dark_accent_300_color",
-        "dark_accent_400_color",
-        "dark_accent_500_color",
-        "dark_accent_600_color",
-        "dark_accent_700_color",
-        "dark_accent_800_color",
-        "dark_accent_900_color",
-        "color1"
-      ],
-      "count": 31
-    },
-    "design_typography": {
-      "variables": [
-        "font_family",
-        "heading_font",
-        "heading_font_family",
-        "heading_font_name",
-        "body_font_family",
-        "body_font_name",
-        "heading_font_weight",
-        "body_line_height",
-        "heading_line_height",
-        "button_font_weight",
-        "site_title_font_weight",
-        "body_font",
-        "mono_font_family",
-        "mono_font_name"
-      ],
-      "count": 14
-    },
-    "content_strings": {
-      "variables": [
-        "hero_title",
-        "cta_text",
-        "footer_text",
-        "skip_link_text",
-        "hero_button_text",
-        "cta_title",
-        "cta_button_text",
-        "team_title",
-        "archive_excerpt_length",
-        "excerpt_more",
-        "button_style_primary_title",
-        "button_style_rounded_title",
-        "heading_style_serif_title",
-        "dark_mode_title",
-        "content_section_style_title",
-        "hero_section_style_title",
-        "textdomain",
-        "excerpt_length"
-      ],
-      "count": 18
-    },
-    "other": {
-      "variables": [
-        "mustache",
-        "variable_name",
-        "collected_slug",
-        "collected_name",
-        "collected_description",
-        "prefix",
-        "role",
-        "placeholders",
-        "slug",
-        "github_org",
-        "hero_description",
-        "cta_description",
-        "team_description",
-        "team_member_1_name",
-        "team_member_1_role",
-        "team_member_2_name",
-        "team_member_2_role",
-        "team_member_3_name",
-        "team_member_3_role",
-        "logo_height",
-        "placeholder",
-        "key",
-        "date",
-        "variable",
-        "created_date",
-        "updated_date",
-        "ThemeSlug",
-        "custom_variable",
-        "org",
-        "repo"
-      ],
-      "count": 30
-    },
-    "license": {
-      "variables": [
-        "license"
+        "scripts/utils/placeholders.js"
       ],
       "count": 1
     },
-    "design_layout": {
-      "variables": [
-        "content_width",
-        "wide_width",
-        "content_width_px",
-        "logo_width",
-        "featured_image_width",
-        "thumbnail_width",
-        "gallery_image_width"
-      ],
-      "count": 7
-    },
-    "urls": {
-      "variables": [
-        "theme_repo_url",
-        "support_url",
-        "docs_url",
-        "license_uri",
-        "repo_url",
-        "theme_uri",
-        "discord_url",
-        "premium_support_url",
-        "custom_dev_url",
-        "docs_repo_url",
-        "changelog_url"
-      ],
-      "count": 11
-    },
-    "theme_metadata": {
-      "variables": [
-        "theme_tags",
-        "target_audience"
-      ],
-      "count": 2
-    },
-    "ui_components": {
-      "variables": [
-        "button_border_radius"
+    "wide_width": {
+      "name": "wide_width",
+      "category": "design_layout",
+      "files": [
+        "scripts/utils/placeholders.js"
       ],
       "count": 1
     },
-    "images": {
-      "variables": [
-        "featured_image_height",
-        "thumbnail_height",
-        "gallery_image_height"
+    "year": {
+      "name": "year",
+      "category": "author_contact",
+      "files": [
+        "scripts/utils/placeholders.js"
       ],
-      "count": 3
+      "count": 1
     }
   }
 }

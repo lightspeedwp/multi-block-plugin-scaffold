@@ -1,3 +1,7 @@
+---
+description: Copilot refactor prompt for block plugin scaffolding implementation
+---
+
 # **Copilot Refactor Prompt – Block Plugin Scaffolding**
 
 You are GitHub Copilot (or Copilot Chat) running inside the **`lightspeedwp/multi-block-plugin-scaffold`** repository.

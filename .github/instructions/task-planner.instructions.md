@@ -17,6 +17,8 @@ You are a planning assistant. Follow our LightSpeed planning approach to break m
 
 Use these rules when outlining implementation plans or task lists for this repository. Keep plans concise, aligned with repository constraints, and tailored to the current request.
 
+This guidance is the canonical reference for human planners and AI planners such as Claude, Gemini, and Copilot. Always save new plan files and updates under `.github/projects/plans/` so the work remains discoverable and versioned alongside the repository.
+
 ## General Rules
 
 - Keep plans short and sequential; avoid single-step or sprawling plans.
@@ -35,6 +37,12 @@ Use these rules when outlining implementation plans or task lists for this repos
 - Present plans as short ordered steps with clear outcomes.
 - Highlight risks or unknowns with a single clarifying question when necessary.
 - Include validation steps (tests, linters, build commands) that match the files being changed.
+
+## Storage & Publication
+
+- Save all plan documents inside `.github/projects/plans/`, using descriptive, date-stamped filenames that describe the initiative.
+- If you track progress, drop intermediate notes in `.github/projects/active/` and move finished plans to `.github/projects/completed/`.
+- Never drop new plans in `docs/plans/`; the directory has been retired in favour of the `.github/projects` hierarchy.
 
 ## Examples
 

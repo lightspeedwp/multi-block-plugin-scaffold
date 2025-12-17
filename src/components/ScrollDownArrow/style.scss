@@ -1,10 +1,10 @@
 /**
  * ScrollDownArrow Component Styles
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
-@use "../scss/template" as *;
+@use "../../scss/template" as *;
 
 .#{$namespace}-scroll-down-arrow {
 	position: absolute;

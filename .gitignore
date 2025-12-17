@@ -15,6 +15,10 @@ build/
 # Temporary directory
 tmp/
 
+# Temporary Jest storage
+.test-temp/localstorage
+.test-temp/localstorage/
+
 # Logs directory
 logs/
 

@@ -5,7 +5,7 @@
  * Tests for SCF Local JSON meta operations, including
  * setup, reset, and cleanup functionality.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Test SCF Local JSON meta setup and reset operations.
+ */
+/**
+ * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
  */
 class ExamplePlugin_SCF_JSON_Meta_Test extends WP_UnitTestCase {
 

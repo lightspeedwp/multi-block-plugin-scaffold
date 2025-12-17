@@ -3,8 +3,8 @@ description: >-
   Guidelines for writing Copilot instruction files for the LightSpeed
   multi-block plugin scaffold, focused on block plugin development
 applyTo: '**/.github/instructions/*.instructions.md'
-version: 1
-lastUpdated: 2025-12-11T00:00:00.000Z
+version: "1.0"
+lastUpdated: "2025-12-11"
 references:
   - ../custom-instructions.md
 ---

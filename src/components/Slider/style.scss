@@ -1,10 +1,10 @@
 /**
  * Slider Component Styles
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
-@use "../scss/template" as *;
+@use "../../scss/template" as *;
 
 .#{$namespace}-slider {
 	position: relative;

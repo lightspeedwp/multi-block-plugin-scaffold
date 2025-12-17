@@ -138,7 +138,7 @@ node scripts/generate-plugin.js
 Complete documentation available in the `docs/` directory:
 
 - **[README.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold#readme)** - Overview and quick start
-- **[GENERATE-PLUGIN.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/GENERATE-PLUGIN.md)** - Plugin generation guide
+- **[GENERATE_PLUGIN.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/GENERATE_PLUGIN.md)** - Plugin generation guide
 - **[ARCHITECTURE.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/ARCHITECTURE.md)** - Repository structure
 - **[BUILD-PROCESS.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/BUILD-PROCESS.md)** - Build system details
 - **[TESTING.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/TESTING.md)** - Testing strategies

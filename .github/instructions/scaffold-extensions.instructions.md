@@ -465,7 +465,7 @@ When adding new placeholders:
   - Category (namespace, text, meta)
   - Example value
   - All files where it's used
-- [ ] Update `docs/GENERATE-PLUGIN.md` if it's user-facing
+- [ ] Update `docs/GENERATE_PLUGIN.md` if it's user-facing
 - [ ] Add example to this instruction file showing correct usage
 - [ ] Update `.github/agents/generate-plugin.agent.md` if it affects the generator interface
 

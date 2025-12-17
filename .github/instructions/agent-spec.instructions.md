@@ -3,8 +3,8 @@ description: >-
   How to author, format, and review agent specification files for the LightSpeed
   multi-block plugin scaffold
 applyTo: .github/agents/*.agent.md
-version: 1
-lastUpdated: 2025-12-11T00:00:00.000Z
+version: "1.0"
+lastUpdated: "2025-12-11"
 references:
   - ../custom-instructions.md
 ---

@@ -15,9 +15,10 @@ const path = require('path');
 const { execSync } = require('child_process');
 const glob = require('glob');
 const { replaceMustacheVars, DRY_RUN_VALUES } = require('../dry-run-config');
+const ROOT_DIR = path.resolve(__dirname, '..', '..', '..');
 
 // Create logs directory
-const logsDir = path.resolve(__dirname, '..', 'logs');
+const logsDir = path.join(ROOT_DIR, 'logs');
 if (!fs.existsSync(logsDir)) {
 	fs.mkdirSync(logsDir, { recursive: true });
 }
@@ -28,9 +29,11 @@ const logFile = path.join(logsDir, `dry-run-${timestamp}.log`);
 const logStream = fs.createWriteStream(logFile, { flags: 'a' });
 
 /**
- * Log function
- * @param level
- * @param message
+ * Write a timestamped message to both console output and the persistent log file.
+ *
+ * @param {string} level - Log level identifier (e.g. INFO, WARN, ERROR).
+ * @param {string} message - Message text to record.
+ * @return {void}
  */
 function dryRunLog(level, message) {
 	const entry = `[${new Date().toISOString()}] [${level}] ${message}\n`;
@@ -57,44 +60,76 @@ const colors = {
 };
 
 /**
- * Log with color
- * @param message
- * @param color
+ * Output a coloured log message to stdout.
+ *
+ * @param {string} message - Content to display.
+ * @param {keyof typeof colors} color - Colour key for the message.
+ * @return {void}
  */
 function log(message, color = 'reset') {
 	console.log(`${colors[color]}${message}${colors.reset}`);
 }
 
 /**
- * Get files matching pattern with mustache variables
+ * Get files matching pattern with mustache variables.
+ *
+ * @return {string[]} Absolute paths of files that require replacement.
  */
 function getTargetFiles() {
 	const patterns = [
 		'src/**/*.{js,jsx}',
 		'src/**/*.scss',
+		'src/scss/**/*.scss',
+		'src/blocks/**/*.scss',
 		'inc/**/*.php',
+		'patterns/**/*.{php,html}',
+		'template-parts/**/*.{php,html}',
+		'templates/**/*.{php,html}',
+		'languages/**/*.pot',
+		'scf-json/**/*.json',
 		'tests/**/*.{js,php}',
 		'*.php',
 		'package.json',
 		'composer.json',
 	];
 
+	const ignorePatterns = [
+		'node_modules/**',
+		'vendor/**',
+		'build/**',
+		'dist/**',
+		'coverage/**',
+		'tmp/**',
+		'.git/**',
+		'.github/**',
+		'logs/**',
+		'.dry-run-backup/**',
+		'generated-plugins/**',
+		'artifacts/**',
+		'output-theme/**',
+		'bin/**',
+	];
+
 	const files = new Set();
+
+	// TODO: Cache file lists between runs so repeated dry-run executions stay performant.
 
 	patterns.forEach((pattern) => {
 		const matches = glob.sync(pattern, {
-			cwd: path.resolve(__dirname, '..'),
-			ignore: [
-				'node_modules/**',
-				'vendor/**',
-				'build/**',
-				'.git/**',
-				'bin/**',
-			],
+			cwd: ROOT_DIR,
+			dot: true,
+			ignore: ignorePatterns,
+			nodir: true,
 		});
 
 		matches.forEach((file) => {
-			const fullPath = path.resolve(__dirname, '..', file);
+			const fullPath = path.resolve(ROOT_DIR, file);
+			// Always replace in SCSS files, even if no placeholder found at top level
+			if (file.endsWith('.scss')) {
+				files.add(fullPath);
+				return;
+			}
+
 			const content = fs.readFileSync(fullPath, 'utf8');
 			if (/\{\{[a-z_]+\}\}/i.test(content)) {
 				files.add(fullPath);
@@ -105,12 +140,101 @@ function getTargetFiles() {
 	return Array.from(files);
 }
 
+let currentRenameOperations = [];
+
 /**
- * Create backup of files
- * @param files
+ * Rename block directories that contain mustache placeholders.
+ *
+ * @return {Array<{original: string, replaced: string}>} Information about renamed paths for reversion.
+ */
+function renameBlockDirectories() {
+	// TODO: Add validation that the renamed directories are readable by downstream tooling.
+	const placeholderPattern = 'src/blocks/{{slug}}-*';
+	const matches = glob.sync(placeholderPattern, {
+		cwd: ROOT_DIR,
+		dot: true,
+		nodir: false,
+	});
+
+	const operations = [];
+
+	matches.forEach((relative) => {
+		const originalPath = path.join(ROOT_DIR, relative);
+		if (!fs.existsSync(originalPath)) {
+			return;
+		}
+
+		const stat = fs.statSync(originalPath);
+		if (!stat.isDirectory()) {
+			return;
+		}
+
+		const replacedRelative = replaceMustacheVars(relative);
+		if (replacedRelative === relative) {
+			return;
+		}
+
+		const targetPath = path.join(ROOT_DIR, replacedRelative);
+		if (fs.existsSync(targetPath)) {
+			dryRunLog(
+				'WARN',
+				`Target path already exists, skipping rename: ${replacedRelative}`
+			);
+			return;
+		}
+
+		const targetDir = path.dirname(targetPath);
+		if (!fs.existsSync(targetDir)) {
+			fs.mkdirSync(targetDir, { recursive: true });
+		}
+
+		fs.renameSync(originalPath, targetPath);
+		operations.push({ original: originalPath, replaced: targetPath });
+	});
+
+	return operations;
+}
+
+/**
+ * Revert renamed block directories back to their placeholder names.
+ *
+ * @param {Array<{original: string, replaced: string}>} operations Renaming details to rollback.
+ * @return {void}
+ */
+function revertBlockDirectories(operations) {
+	if (!operations.length) {
+		return;
+	}
+
+	operations
+		.slice()
+		.reverse()
+		.forEach((operation) => {
+			if (!fs.existsSync(operation.replaced)) {
+				dryRunLog(
+					'WARN',
+					`Renamed path missing during revert: ${operation.replaced}`
+				);
+				return;
+			}
+
+			const parentDir = path.dirname(operation.original);
+			if (!fs.existsSync(parentDir)) {
+				fs.mkdirSync(parentDir, { recursive: true });
+			}
+
+			fs.renameSync(operation.replaced, operation.original);
+		});
+}
+
+/**
+ * Create backup copies for every file that will be modified.
+ *
+ * @param {string[]} files - Absolute file paths to backup.
+ * @return {Record<string, string>} Map of original paths to backup paths.
  */
 function backupFiles(files) {
-	const backupDir = path.resolve(__dirname, '..', '.dry-run-backup');
+	const backupDir = path.join(ROOT_DIR, '.dry-run-backup');
 
 	if (!fs.existsSync(backupDir)) {
 		fs.mkdirSync(backupDir, { recursive: true });
@@ -118,11 +242,10 @@ function backupFiles(files) {
 
 	const backupMap = {};
 
+	// TODO: Skip copying a file when the backup already matches to reduce disk churn.
+
 	files.forEach((filePath) => {
-		const relativePath = path.relative(
-			path.resolve(__dirname, '..'),
-			filePath
-		);
+		const relativePath = path.relative(ROOT_DIR, filePath);
 		const backupPath = path.join(backupDir, relativePath);
 		const backupDirPath = path.dirname(backupPath);
 
@@ -138,8 +261,10 @@ function backupFiles(files) {
 }
 
 /**
- * Replace mustache variables in files
- * @param files
+ * Replace mustache placeholders with configured dry-run values in the provided files.
+ *
+ * @param {string[]} files - Absolute file paths eligible for replacement.
+ * @return {void}
  */
 function replaceInFiles(files) {
 	files.forEach((filePath) => {
@@ -150,8 +275,10 @@ function replaceInFiles(files) {
 }
 
 /**
- * Restore files from backup
- * @param backupMap
+ * Restore files from backup copies and remove the backup directory.
+ *
+ * @param {Record<string, string>} backupMap - Map of original paths to backup paths.
+ * @return {void}
  */
 function restoreFiles(backupMap) {
 	Object.entries(backupMap).forEach(([originalPath, backupPath]) => {
@@ -161,16 +288,18 @@ function restoreFiles(backupMap) {
 	});
 
 	// Clean up backup directory
-	const backupDir = path.resolve(__dirname, '..', '.dry-run-backup');
+	const backupDir = path.join(ROOT_DIR, '.dry-run-backup');
 	if (fs.existsSync(backupDir)) {
 		fs.rmSync(backupDir, { recursive: true, force: true });
 	}
 }
 
 /**
- * Run a command
- * @param command
- * @param description
+ * Run a command and track whether it succeeded for logging.
+ *
+ * @param {string} command - Command string executed via execSync.
+ * @param {string} description - Human-readable description for logging.
+ * @return {boolean} True when the command succeeded.
  */
 function runCommand(command, description) {
 	log(`\n🔄 ${description}...`, 'cyan');
@@ -178,7 +307,7 @@ function runCommand(command, description) {
 	try {
 		execSync(command, {
 			stdio: 'inherit',
-			cwd: path.resolve(__dirname, '..'),
+			cwd: ROOT_DIR,
 		});
 		log(`✅ ${description} passed`, 'green');
 		return true;
@@ -189,12 +318,15 @@ function runCommand(command, description) {
 }
 
 /**
- * Main execution
+ * Main execution entry point for the dry-run test scaffold.
+ *
+ * @return {Promise<void>}
  */
 async function main() {
 	const args = process.argv.slice(2);
 	const commands =
 		args.length > 0 ? args : ['lint:js', 'lint:css', 'test:unit'];
+	// TODO: Allow configuring a trimmed command list to speed up quick sanity checks.
 
 	dryRunLog('INFO', 'Dry Run Test Mode starting');
 	dryRunLog('INFO', `Node version: ${process.version}`);
@@ -237,6 +369,31 @@ async function main() {
 		log('   Variables replaced\n', 'green');
 		dryRunLog('INFO', 'Variables replaced successfully');
 
+		currentRenameOperations = renameBlockDirectories();
+		if (currentRenameOperations.length) {
+			log(
+				`   Renamed ${currentRenameOperations.length} placeholder directories`,
+				'green'
+			);
+			dryRunLog(
+				'INFO',
+				`Renamed ${currentRenameOperations.length} placeholder directories`
+			);
+		}
+
+		// Ensure _template.scss is deleted before build/test
+		const templatePartial = path.join(ROOT_DIR, 'src', 'scss', '_template.scss');
+		if (fs.existsSync(templatePartial)) {
+			try {
+				fs.unlinkSync(templatePartial);
+				log('🧹 Deleted _template.scss before build/test', 'yellow');
+				dryRunLog('INFO', 'Deleted _template.scss before build/test');
+			} catch (err) {
+				log(`⚠️  Failed to delete _template.scss: ${err.message}`, 'red');
+				dryRunLog('ERROR', `Failed to delete _template.scss: ${err.message}`);
+			}
+		}
+
 		// Run commands
 		for (const command of commands) {
 			const npmCommand = command.startsWith('npm')
@@ -267,6 +424,11 @@ async function main() {
 			}
 		}
 	} finally {
+		if (currentRenameOperations.length) {
+			revertBlockDirectories(currentRenameOperations);
+			currentRenameOperations = [];
+		}
+
 		// Always restore files
 		log('\n🔄 Restoring original files...', 'cyan');
 		dryRunLog('INFO', 'Restoring original files');
@@ -296,7 +458,11 @@ async function main() {
 process.on('SIGINT', () => {
 	log('\n\n⚠️  Interrupted! Cleaning up...', 'yellow');
 	dryRunLog('WARN', 'Process interrupted, cleaning up');
-	const backupDir = path.resolve(__dirname, '..', '.dry-run-backup');
+	if (currentRenameOperations.length) {
+		revertBlockDirectories(currentRenameOperations);
+		currentRenameOperations = [];
+	}
+	const backupDir = path.join(ROOT_DIR, '.dry-run-backup');
 	if (fs.existsSync(backupDir)) {
 		// Restore from backup if it exists
 		log('🔄 Restoring files...', 'cyan');
@@ -314,26 +480,4 @@ main().catch((error) => {
 	dryRunLog('ERROR', `Stack trace: ${error.stack}`);
 	logStream.end();
 	process.exit(1);
-});
-
-/**
- * Simple integration tests for the dry-run variable replacement helpers.
- *
- * @since 1.0.0
- */
-const { replaceMustacheVars, DRY_RUN_VALUES } = require('../dry-run-config');
-
-describe('dry-run-test.js integration', () => {
-	test('replaceMustacheVars replaces all mustache variables', () => {
-		const template = 'Slug: {{slug}}, Name: {{name}}, Version: {{version}}';
-		const result = replaceMustacheVars(template, DRY_RUN_VALUES);
-		expect(result).toBe('Slug: example-plugin, Name: Example Plugin, Version: 1.0.0');
-	});
-
-	// TODO: Reuse DRY_RUN_VALUES with filtered templates to ensure transform helpers are exercised.
-	test('replaceMustacheVars leaves unknown variables untouched', () => {
-		const template = 'Unknown: {{unknown}}';
-		const result = replaceMustacheVars(template, DRY_RUN_VALUES);
-		expect(result).toBe('Unknown: {{unknown}}');
-	});
 });

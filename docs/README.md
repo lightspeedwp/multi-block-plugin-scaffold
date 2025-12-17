@@ -11,7 +11,7 @@ This directory contains all documentation for the multi-block plugin scaffold. U
 
 ## Quick Start
 
-- **[GENERATE-PLUGIN.md](GENERATE-PLUGIN.md)** - Complete guide to generating plugins from the scaffold
+- **[GENERATE_PLUGIN.md](GENERATE_PLUGIN.md)** - Complete guide to generating plugins from the scaffold
 - **[../README.md](../README.md)** - Main project README with overview and setup
 - **[../USAGE.md](../USAGE.md)** - Usage examples and common workflows
 
@@ -19,9 +19,9 @@ This directory contains all documentation for the multi-block plugin scaffold. U
 
 ### Plugin Generation
 
-- **[GENERATE-PLUGIN.md](GENERATE-PLUGIN.md)** - Comprehensive plugin generation guide
-- **[plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md](plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md)** - WordPress standards compliance plan
-- **[plans/PART-2-multi-cpt-wizard-schema-expansion.md](plans/PART-2-multi-cpt-wizard-schema-expansion.md)** - Multi-CPT schema expansion plan
+- **[GENERATE_PLUGIN.md](GENERATE_PLUGIN.md)** - Comprehensive plugin generation guide
+- **[../.github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md](../.github/projects/plans/2025-12-11-wordpress-standards-compliance-comprehensive-review.md)** - WordPress standards compliance plan
+- **[../.github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md](../.github/projects/plans/PART-2-multi-cpt-wizard-schema-expansion.md)** - Multi-CPT schema expansion plan
 
 ### Build & Development
 
@@ -79,19 +79,20 @@ This directory contains all documentation for the multi-block plugin scaffold. U
 - **[API-REFERENCE.md](../API-REFERENCE.md)** - PHP and JavaScript APIs
 - **[../.github/instructions/schema-files.instructions.md](../.github/instructions/schema-files.instructions.md)** - JSON Schema standards
 
-## Agent & Automation
-
+-## Agent & Automation
+-
 - **[../AGENTS.md](../AGENTS.md)** - AI agent specifications and workflows
 - **[../.github/agents/](../.github/agents/)** - Agent implementation files
 - **[../.github/prompts/](../.github/prompts/)** - Interactive prompts and templates
 - **[../.github/prompts/block-plugin-refactor-alt.prompt.md](../.github/prompts/block-plugin-refactor-alt.prompt.md)** - Phase 6 review checklist for docs, instructions, SCF, inc/class-*, blocks/patterns, template parts and instruction audits
 - **[../.github/reports/consolidation/SCAFFOLD-REVIEW-PHASED-EXECUTION-2025-12-12.md](../.github/reports/consolidation/SCAFFOLD-REVIEW-PHASED-EXECUTION-2025-12-12.md)** - Consolidated execution summary for the latest scaffold review sweep
+- **[FRONTMATTER_SCHEMA.md](FRONTMATTER_SCHEMA.md)** - Agent metadata schema and validation guidance
 
 ## File Categories
 
 ### 📚 Guides & Tutorials
 
-- `GENERATE-PLUGIN.md` - Plugin generation guide
+- `GENERATE_PLUGIN.md` - Plugin generation guide
 - `RELEASE_PROCESS.md` - Release workflow
 - `../USAGE.md` - Usage examples
 
@@ -122,7 +123,7 @@ This directory contains all documentation for the multi-block plugin scaffold. U
 
 ### I'm new to the scaffold
 
-→ Start with [GENERATE-PLUGIN.md](GENERATE-PLUGIN.md) and [../README.md](../README.md)
+→ Start with [GENERATE_PLUGIN.md](GENERATE_PLUGIN.md) and [../README.md](../README.md)
 
 ### I want to contribute code
 
@@ -149,11 +150,9 @@ This directory contains all documentation for the multi-block plugin scaffold. U
 ```text
 docs/
 ├── README.md                    # This index file
-├── GENERATE-PLUGIN.md          # Plugin generation guide
+├── GENERATE_PLUGIN.md          # Plugin generation guide
 ├── RELEASE_PROCESS.md          # Release workflow
-└── plans/                      # Planning documents
-    ├── 2025-12-11-wordpress-standards-compliance-comprehensive-review.md
-    └── PART-2-multi-cpt-wizard-schema-expansion.md
+└── (planning documents now live under .github/projects/plans/)
 ```
 
 ## Related Resources

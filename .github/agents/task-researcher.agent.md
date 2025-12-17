@@ -10,7 +10,7 @@ file_type: "agent"
 category: "research"
 status: "active"
 visibility: "public"
-tags: ["research", "block-plugins", "wordpress", "block-editor", "planning", "automation", "theme.json"]
+tags: ["research", "block-plugins", "wordpress", "block-editor", "planning", "automation", "theme-json"]
 owners: ["lightspeedwp/maintainers"]
 tools: ["changes", "search/codebase", "edit/editFiles", "extensions", "fetch", "problems", "readFile", "runCommands", "runCommands/terminalLastCommand", "runCommands/terminalSelection", "usages", "search", "search/searchResults", "vscodeAPI", "new", "wordpress_docs", "wp_cli", "php_cs", "stylelint", "eslint", "context7"]
 metadata:

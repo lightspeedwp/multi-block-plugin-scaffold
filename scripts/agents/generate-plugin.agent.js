@@ -11,10 +11,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const {
-	getCanonicalConfigSchema,
-	validateConfig,
-} = require('../lib/config-schema.js');
+const { getCanonicalConfigSchema } = require('../validation/validate-config-schema.js');
+const { validateConfig } = require('../validation/validate-plugin-config.js');
 const { runWizard } = require('../lib/wizard.js');
 const { FileLogger } = require('../lib/logger.js');
 const minimist = require('minimist');

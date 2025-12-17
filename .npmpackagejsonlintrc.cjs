@@ -4,7 +4,6 @@ module.exports = {
 		'valid-values-name-scope': [ 'error', [ '@lightspeedwp' ] ],
 		'version-format': 'error',
 		'require-author': 'warning',
-		'prefer-repository': 'error',
 		'require-license': 'error',
 	},
 };

@@ -73,6 +73,7 @@ function findMustacheFilesGlob(rootDir) {
  * Test suite verifying mustache placeholders across the scaffold.
  */
 describe('Dry Run Mustache Variable Validation', () => {
+	// TODO: Expand pattern coverage once the template stabilises to avoid random glob hits.
 	const ROOT_DIR = path.resolve(__dirname, '../../../');
 
 	test('All scaffold files with mustache variables are detected', () => {

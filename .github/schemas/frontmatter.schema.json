@@ -4,7 +4,7 @@
   "title": "Agent Specification Frontmatter Schema",
   "description": "Schema for validating frontmatter metadata in agent specification files",
   "type": "object",
-  "required": ["name", "description", "tools"],
+  "required": ["description"],
   "properties": {
     "name": {
       "type": "string",
@@ -74,27 +74,7 @@
       "type": "array",
       "description": "List of tools the agent is explicitly allowed to use",
       "items": {
-        "type": "string",
-        "enum": [
-          "semantic_search",
-          "read_file",
-          "grep_search",
-          "file_search",
-          "run_in_terminal",
-          "create_file",
-          "update_file",
-          "delete_file",
-          "move_file",
-          "list_directory",
-          "github_api",
-          "wp_cli",
-          "npm",
-          "composer",
-          "git",
-          "Copilot Agents",
-          "Browser",
-          "Terminal"
-        ]
+        "type": "string"
       },
       "uniqueItems": true,
       "minItems": 1
@@ -126,6 +106,18 @@
         ["read", "execute", "github:repo", "github:pulls"],
         ["read", "write", "shell", "filesystem", "network"]
       ]
+    },
+    "runtime": {
+      "type": "string",
+      "description": "Execution environment for the agent",
+      "enum": ["node", "github-copilot", "python", "bash", "php"],
+      "examples": ["node", "github-copilot"]
+    },
+    "entrypoint": {
+      "type": "string",
+      "description": "Path or command that launches the agent",
+      "minLength": 3,
+      "examples": ["scripts/agents/generate-plugin.agent.js", "node scripts/release.agent.js"]
     },
     "metadata": {
       "type": "object",
@@ -174,5 +166,5 @@
       ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": true
 }

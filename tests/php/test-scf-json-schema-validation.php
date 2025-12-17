@@ -4,11 +4,14 @@
  *
  * Comprehensive JSON schema validation tests for SCF field groups.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
 
 /**
  * SCF JSON Schema Validation Test Class.
+ */
+/**
+ * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
  */
 class Test_SCF_JSON_Schema_Validation extends WP_UnitTestCase {
 

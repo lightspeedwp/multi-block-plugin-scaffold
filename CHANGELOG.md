@@ -5,6 +5,21 @@ All notable changes to the Multi-Block Plugin Scaffold will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `docs/FRONTMATTER_SCHEMA.md` now explains the agent frontmatter contract, points to `scripts/validation/audit-frontmatter.js`, and keeps schema updates in sync with `.github/schemas/frontmatter.schema.json`.
+- Canonical schema assets live under `.github/schemas/` (block 6.9 reference, mustache registries, plugin config, plus example configs) and are verified by `scripts/validation/__tests__/validate-schemas.test.js`.
+- Validation tools now centralise their naming conventions in `scripts/validation/README.md` and keep all `validate-*`, `audit-*`, `test-*`, and `define-*` scripts within `scripts/validation/`.
+- `scripts/utils/dry-run-release.js` (and its test) produce sanitized copies of the release docs/agents so dry-runs can exercise templated `{{mustache}}` values without parser failures.
+
+### Changed
+
+- `docs/RELEASE_PROCESS.md` now merges the previous release playbooks, documents reporting/planning folder rules, and highlights the `scripts/utils/dry-run-release.js` helper before `release.agent.js` runs against templated files.
+- `package.json` validation scripts and `docs/GENERATE_PLUGIN.md` now call `scripts/validation/validate-plugin-config.js`, keeping CLI validation aligned with the action-first naming scheme.
+- Instructions and prompts reference `.github/reports/`, `.github/projects/plans/`, and `tmp/` for reporting, planning, and temporary data, and the new frontmatter doc is linked from the docs index.
+
 ## [1.0.1] - 2025-12-15
 
 ### Fixed
@@ -138,7 +153,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 
 - 15 comprehensive documentation files covering all aspects:
   - ARCHITECTURE.md - Repository structure and organization
-  - GENERATE-PLUGIN.md - Complete plugin generation guide
+  - GENERATE_PLUGIN.md - Complete plugin generation guide
   - BUILD-PROCESS.md - Build system documentation
   - TESTING.md - Testing strategies and setup
   - LINTING.md - Code quality standards
@@ -156,7 +171,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 - Renamed agent specification:
   - `scaffold-generator.agent.md` → `generate-plugin.agent.md` for clarity
 - Updated all documentation to reflect dual-mode operational model
-- Consolidated GENERATE-PLUGIN.md from 4 methods to 2 operational modes
+- Consolidated GENERATE_PLUGIN.md from 4 methods to 2 operational modes
 
 #### Code Quality
 
@@ -179,7 +194,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 
 - `docs/ARCHITECTURE.md` - Complete repository structure guide
 - `docs/BUILD-PROCESS.md` - Build system detailed documentation
-- `docs/GENERATE-PLUGIN.md` - Plugin generation comprehensive guide
+- `docs/GENERATE_PLUGIN.md` - Plugin generation comprehensive guide
 - `docs/TESTING.md` - Testing strategies and implementation
 - `docs/LINTING.md` - Linting tools and standards
 - `generated-plugins/README.md` - Output directory usage instructions
@@ -187,7 +202,7 @@ Initial release of the Multi-Block Plugin Scaffold - a comprehensive WordPress p
 #### Enhanced Documentation
 
 - README.md: Added "Using This Scaffold" section with workflow examples
-- GENERATE-PLUGIN.md: Consolidated to 2 clear operational modes
+- GENERATE_PLUGIN.md: Consolidated to 2 clear operational modes
 - All docs include frontmatter metadata for better organization
 
 ### Technical Details

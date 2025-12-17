@@ -36,6 +36,10 @@ Use these steps when asked to research a feature, bug, or process. Focus on evid
 - List authoritative sources (paths, docs, commands) that informed the research.
 - Suggest next-step validation (tests, demos, reviews) without committing to code changes.
 
+## Research Outputs
+
+Research artefacts belong in `.github/reports/research/`. Use descriptive, date-stamped filenames, include frontmatter (title, date, context, audience), and mention supporting logs or tmp data. Agents and developers should avoid placing research notes in `docs/` or other ad-hoc folders—reports must live inside `.github/reports/<category>/research/` so they stay discoverable and versioned.
+
 ## Examples
 
 - Findings: `src/blocks/hero/edit.tsx:42` lacks localisation; lint rule suppressed. Question: should we add `@wordpress/i18n`?

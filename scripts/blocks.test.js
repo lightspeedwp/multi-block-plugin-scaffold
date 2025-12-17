@@ -6,7 +6,23 @@
 
 const { render, screen, fireEvent } = require('@testing-library/react');
 const { useSelect } = require('@wordpress/data');
-const CardEdit = require('../src/blocks/{{slug}}-card/edit').default;
+const { DRY_RUN_VALUES } = require('../scripts/dry-run/dry-run-config');
+
+function requireBlock(modulePathTemplate) {
+	try {
+		return require(modulePathTemplate);
+	} catch (error) {
+		if (!modulePathTemplate.includes('{{slug}}')) {
+			throw error;
+		}
+
+		const slug = DRY_RUN_VALUES.slug || 'example-plugin';
+		const resolvedPath = modulePathTemplate.replace(/{{slug}}/g, slug);
+		return require(resolvedPath);
+	}
+}
+
+const CardEdit = requireBlock('../src/blocks/{{slug}}-card/edit').default;
 
 describe('Example Plugin Blocks', () => {
 	beforeEach(() => {

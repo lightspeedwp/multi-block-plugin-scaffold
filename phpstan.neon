@@ -4,8 +4,8 @@ includes:
 parameters:
 	level: 6
 	paths:
-		- {{slug}}.php
-		- inc/
+		- "{{slug}}.php"
+		- "inc/"
 	excludePaths:
 		- vendor/
 		- tests/

@@ -1,0 +1,46 @@
+{
+  "slug": "tour-operator",
+  "name": "Tour Operator",
+  "description": "Comprehensive tour booking plugin used as a validation fixture.",
+  "author": "LightSpeedWP",
+  "requires_wp": "6.5",
+  "requires_php": "8.0",
+  "license": "GPL-2.0-or-later",
+  "version": "1.0.0",
+  "textdomain": "tour-operator",
+  "namespace": "tour_operator",
+  "cpt_slug": "tour",
+  "cpt_supports": [
+    "title",
+    "editor",
+    "thumbnail",
+    "excerpt",
+    "custom-fields",
+    "revisions"
+  ],
+  "taxonomies": [
+    {
+      "slug": "destination",
+      "singular": "Destination",
+      "plural": "Destinations",
+      "hierarchical": true
+    }
+  ],
+  "fields": [
+    {
+      "name": "price",
+      "label": "Price per Person",
+      "type": "number"
+    },
+    {
+      "name": "difficulty",
+      "label": "Difficulty Level",
+      "type": "select",
+      "choices": {
+        "easy": "Easy",
+        "moderate": "Moderate",
+        "challenging": "Challenging"
+      }
+    }
+  ]
+}

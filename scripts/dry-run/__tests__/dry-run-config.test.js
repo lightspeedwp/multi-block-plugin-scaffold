@@ -2,6 +2,7 @@
  * Unit and integration tests for the dry-run configuration utilities and CLI.
  *
  * @since 1.0.0
+ * @todo Extend coverage once the CLI grows additional commands so regressions stay visible.
  */
 
 const fs = require('fs');
@@ -17,21 +18,22 @@ const {
 	getFilesWithMustacheVars,
 } = require('../dry-run-config');
 
+/** Directory used to hold temporary files for the dry-run config unit tests. */
 const TEMP_DIR = path.join(
 	__dirname,
 	'../../..',
-	'tests',
 	'tmp',
-	'dry-run-tests'
+	'dry_run_tests'
 );
 const ROOT_DIR = path.resolve(__dirname, '../../..');
+/** Path to the CLI driver executed during integration validation. */
 const CLI_SCRIPT = path.join(ROOT_DIR, 'scripts', 'dry-run', 'dry-run-config.js');
+/** Directory used for crafting fixtures consumed by the dry-run CLI tests. */
 const CLI_TEMP_DIR = path.join(
 	__dirname,
 	'../../..',
-	'tests',
 	'tmp',
-	'dry-run-cli'
+	'dry_run_cli'
 );
 
 /**
@@ -125,11 +127,11 @@ describe('Dry Run Configuration', () => {
 		fs.writeFileSync(plainFile, 'Hello world', 'utf8');
 
 		const found = getFilesWithMustacheVars(
-			'tests/tmp/dry-run-tests/**/*.txt'
+			'tmp/dry_run_tests/**/*.txt'
 		);
 
-		expect(found).toContain('tests/tmp/dry-run-tests/with-vars.txt');
-		expect(found).not.toContain('tests/tmp/dry-run-tests/without-vars.txt');
+		expect(found).toContain('tmp/dry_run_tests/with-vars.txt');
+		expect(found).not.toContain('tmp/dry_run_tests/without-vars.txt');
 	});
 });
 
@@ -137,6 +139,7 @@ describe('Dry Run Configuration', () => {
  * Integration tests for the dry-run CLI commands.
  */
 describe('Dry Run CLI commands', () => {
+	// TODO: Expand CLI coverage to ensure missing globs or invalid commands remain user-friendly.
 	beforeAll(() => {
 		fs.mkdirSync(CLI_TEMP_DIR, { recursive: true });
 		fs.writeFileSync(
@@ -182,14 +185,14 @@ describe('Dry Run CLI commands', () => {
 	});
 
 	test('files command honours the provided pattern', () => {
-		const pattern = 'tests/tmp/dry-run-cli/**/*.txt';
+		const pattern = 'tmp/dry_run_cli/**/*.txt';
 		const result = spawnSync('node', [CLI_SCRIPT, 'files', pattern], {
 			encoding: 'utf8',
 			cwd: ROOT_DIR,
 		});
 
 		expect(result.status).toBe(0);
-		expect(result.stdout).toContain('tests/tmp/dry-run-cli/with-vars.txt');
+		expect(result.stdout).toContain('tmp/dry_run_cli/with-vars.txt');
 		expect(result.stdout).not.toContain('without-vars.txt');
 	});
 
@@ -220,6 +223,4 @@ describe('Dry Run CLI commands', () => {
 		);
 	});
 });
-// TODO: Add assertions that CLI commands handle empty matches and missing patterns without crashing.
-// Moved from scripts/dry-run-config.test.js
-// ...existing code...
+// TODO: Add regression tests for invalid CLI commands and empty match sets to keep messaging user-friendly.

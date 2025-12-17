@@ -37,6 +37,8 @@ These instructions define standards for creating, storing, and managing reports 
 
 ## Report Types
 
+Common categories include analysis, migration, performance, audit, consolidation, implementation, and research. Research outputs belong in `.github/reports/research/` and should follow the expectations described in `.github/instructions/task-researcher.instructions.md`.
+
 ## Examples
 
 - `.github/reports/analysis/2025-12-11-instruction-audit.md`
@@ -352,7 +354,7 @@ fs.rmSync(tmpDir, { recursive: true, force: true });
 
 ### By Developers
 
-1. **Create report** in `reports/` with proper naming
+1. **Create report** in `.github/reports/` with proper naming
 2. **Determine category** (e.g., `analysis`, `migration`).
 3. **Place in subdirectory**: Move the file to `.github/reports/{category}/`.
 4. **Include frontmatter** with all required fields.
@@ -362,7 +364,7 @@ fs.rmSync(tmpDir, { recursive: true, force: true });
 
 ### By Scripts/Agents
 
-1. **Verify location**: Always use `reports/` directory
+1. **Verify location**: Always use `.github/reports/` directory
 2. **Create subdirectory** if needed (e.g., `tmp/reports/analysis/`)
 3. **Log execution** to `logs/` directory
 4. **Generate report** file with timestamp
@@ -427,7 +429,7 @@ logStream.end();
 
 Agents MUST:
 
-1. **Always use `reports/` location**: Never create reports in root
+1. **Always use `.github/reports/` location**: Never create reports in root
 2. **Determine category**: Identify the report category (e.g., `analysis`).
 3. **Save to subdirectory**: Save the report in `.github/reports/{category}/`.
 4. **Follow naming**: Use proper naming convention.
@@ -439,7 +441,7 @@ Agents MUST:
 ```
 When generating reports:
 
-1. Always save to `reports/` directory, NEVER to repository root
+1. Always save to `.github/reports/` directory, NEVER to repository root
 2. Use naming format: {TYPE}-{SUBJECT}-{TIMESTAMP}.md
 3. Include YAML frontmatter with title, description, category, audience, date
 4. Organize content with Executive Summary, Context, Findings, Recommendations
@@ -502,7 +504,7 @@ Required fields:
    ↓
 3. Choose name: {TYPE}-{SUBJECT}-{TIMESTAMP}.md
    ↓
-4. Create in reports/ directory
+4. Create in `.github/reports/` directory
    ↓
 5. Add frontmatter with metadata
    ↓
@@ -512,7 +514,7 @@ Required fields:
    ↓
 8. Commit to version control
    ↓
-9. Update reports/README.md with entry if major
+9. Update `.github/reports/README.md` with entry if major
 ```
 
 ### Report Lifecycle
@@ -524,17 +526,17 @@ Analysis Phase
   └─ Script/Agent Runs
 
 Report Generation
-  ├─ Create: reports/{TYPE}-{SUBJECT}-{TIMESTAMP}.md
+  ├─ Create: `.github/reports/{TYPE}-{SUBJECT}-{TIMESTAMP}.md`
   ├─ Add Frontmatter: title, description, category, date
   └─ Structure: Summary, Context, Findings, Recommendations
 
 Publication
   ├─ Version Control: git add, git commit
   ├─ Documentation: Reference in docs/ if needed
-  └─ Update: reports/README.md entry
+  └─ Update: `.github/reports/README.md` entry
 
 Archive
-  ├─ Location: reports/ (permanent)
+  ├─ Location: `.github/reports/` (permanent)
   ├─ Retention: Indefinite (historical record)
   └─ Cleanup: tmp/reports/{type}/ can be cleaned
 ```

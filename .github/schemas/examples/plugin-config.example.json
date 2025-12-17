@@ -1,0 +1,16 @@
+{
+  "slug": "example-plugin",
+  "name": "Example Plugin",
+  "namespace": "example_plugin",
+  "textdomain": "example-plugin",
+  "version": "1.0.0",
+  "author": "LightSpeed",
+  "author_uri": "https://lightspeedwp.agency",
+  "description": "A sample plugin config for schema validation.",
+  "plugin_uri": "https://example.com/plugin",
+  "license": "GPL-3.0-or-later",
+  "license_uri": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "requires_wp": "6.5",
+  "tested_up_to": "6.7",
+  "requires_php": "8.0"
+}

@@ -3,7 +3,7 @@ name: Reporting Agent
 description: "AI agent for generating, organising, and managing reports in the .github/reports/ directory"
 target: github-copilot
 version: v1.0
-last_updated: 2025-12-15
+last_updated: "2025-12-15"
 author: LightSpeedWP
 maintainer: Ash Shaw
 file_type: agent

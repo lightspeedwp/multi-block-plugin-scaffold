@@ -1,6 +1,6 @@
 ---
 title: Release Process
-description: Complete guide for preparing and releasing new versions of the multi-block plugin scaffold
+description: Combined release playbook for the multi-block plugin scaffold and generated themes.
 category: Development
 type: Guide
 audience: Maintainers
@@ -9,67 +9,52 @@ date: 2025-12-10
 
 # Release Process Guide
 
-This guide covers the release process for the **Multi-Block Plugin Scaffold**, following semantic versioning and best practices for maintainability, accessibility, and performance.
+This document tracks the release flow for the multi-block plugin scaffold itself and for the plugins that get generated from it. The first half of this guide covers the scaffold release workflow, while the second half outlines the release process that ships inside generated themes. The generated section keeps {{mustache}} placeholders intact so template builds can substitute values like `{{theme_name}}` and `{{version}}` when they are created.
 
-## Table of Contents
+## Quick Navigation
 
-- [Overview](#overview)
-- [Version Numbering](#version-numbering)
+- [Release Paths](#release-paths)
 - [Release Agent](#release-agent)
-- [Manual Release Process](#manual-release-process)
-- [GitHub Repository Setup](#github-repository-setup)
-- [Release Notes Template](#release-notes-template)
-- [Pre-Release Checklist](#pre-release-checklist)
-- [Post-Release Tasks](#post-release-tasks)
+- [Scaffold Release Workflow](#scaffold-release-workflow)
+- [Generated Theme Release Workflow](#generated-theme-release-workflow)
+- [Reporting & Planning](#reporting--planning)
+- [Troubleshooting](#troubleshooting)
+- [Related Documentation](#related-documentation)
+- [Version History](#version-history)
 
-## Overview
+## Release Paths
 
-The release process follows these key principles:
+Each new version of the project takes one of two routes:
 
-1. **Semantic Versioning**: MAJOR.MINOR.PATCH format
-2. **Quality Gates**: All tests and lints must pass
-3. **Documentation**: Release notes/readme entries are current
-4. **Version Consistency**: All files updated together
-5. **Git Flow**: Release branches → main + develop → tags
+### Scaffold release path
 
-## Version Numbering
+The multi-block plugin scaffold is released from this repository. Use `develop` → `main` flow, the release agent, and the dedicated `docs/RELEASE_PROCESS_SCAFFOLD.md` checklist when preparing scaffold updates. These releases keep the generator, documentation, and supporting infrastructure (agents, instructions, workflows) aligned.
 
-Follow [Semantic Versioning 2.0.0](https://semver.org/):
+### Generated theme release path
 
-- **MAJOR** (1.x.x): Breaking changes, incompatible API changes
-- **MINOR** (x.1.x): New features, backward compatible
-- **PATCH** (x.x.1): Bug fixes, backward compatible
-
-### Pre-release Versions
-
-- **Alpha**: `1.0.0-alpha.1` - Internal testing
-- **Beta**: `1.0.0-beta.1` - Public testing
-- **RC**: `1.0.0-rc.1` - Release candidate
+When you generate a plugin or theme from this scaffold, the generated repository needs its own release workflow. The remainder of this guide (the "Generated Theme Release Workflow" section) is emitted directly into generated documentation with `{{mustache}}` placeholders so that the final plugin can replace values such as `{{theme_repo_url}}`, `{{slug}}`, and `{{description}}` during generation.
 
 ## Release Agent
 
-Use the Release Agent to validate the repository before tagging a release.
+Use `scripts/agents/release.agent.js` whenever you prepare a release, whether you are working on the scaffold or a generated project. It validates all the quality gates before any tagging steps.
 
 ### Usage
 
 ```bash
-# Full validation
 npm run release:validate
-
-# Quick status
 npm run release:status
 ```
 
-### What the Agent Checks
+### What the agent checks
 
-1. ✅ Version alignment across `VERSION`, `package.json`, plugin header/constant, `readme.txt` stable tag, and `src/blocks/**/block.json`
-2. ✅ Linting (dry-run) and formatting check
-3. ✅ Dry-run tests plus PHP unit tests
-4. ✅ Generator validation (`npm run validate:config`)
-5. ✅ Documentation presence and unreplaced mustache variables
-6. ✅ Security audit for high/critical npm vulnerabilities
+1. ✅ Version alignment across `VERSION`, `package.json`, `composer.json` (if present), the plugin header/constant, `style.css` stable tag, `readme.txt` (if present), and block metadata files.
+2. ✅ Linting and formatting (dry-run mode) for JavaScript, CSS, and PHP.
+3. ✅ Dry-run tests plus PHP unit suites.
+4. ✅ Generator validation (`npm run validate:config`) and mustache variable integrity.
+5. ✅ Documentation completeness and absence of unreplaced `{{mustache}}` values.
+6. ✅ Security audit results (no high/critical npm vulnerabilities).
 
-### Example Output
+### Example output
 
 ```
 ============================================================
@@ -97,110 +82,285 @@ Next steps:
 ============================================================
 ```
 
-## Manual Release Process
+## Scaffold Release Workflow
 
-If you prefer manual control or need to handle edge cases:
+### Git Flow Workflow
 
-### Step 1: Create Release Branch
+This repository follows Git Flow conventions:
+
+- `develop` hosts active development.
+- `main` remains stable and only receives release merges.
+- Feature branches branch from and merge back into `develop`.
+- Release branches are created off `develop`, merged into `main`, tagged, and finally merged back into `develop`.
+
+### Creating a Release
+
+#### 1. Prepare on `develop`
 
 ```bash
-# From develop branch
 git checkout develop
 git pull origin develop
+git status  # clean working directory
+```
 
-# Create release branch
+#### 2. Run the release agent
+
+```bash
+# Dry run to preview changes
+node scripts/agents/release-scaffold.agent.js --version=X.Y.Z --dry-run
+
+# Execute the release
+node scripts/agents/release-scaffold.agent.js --version=X.Y.Z
+```
+
+Before invoking the release agent, sanitise the templated release docs:
+
+```bash
+npm run dry-run:release-scaffold
+```
+
+The agent performs the following tasks:
+
+- ✅ Confirms the working directory is clean.
+- ✅ Validates the version string follows semantic versioning.
+- ✅ Runs linting for JavaScript and CSS (respecting dry-run guards).
+- ✅ Runs all test suites.
+- ✅ Updates `CHANGELOG.md` (moves `Unreleased` to `vX.Y.Z`).
+- ✅ Bumps `package.json` version.
+- ✅ Creates a commit: `chore: Release vX.Y.Z`.
+- ✅ Tags `vX.Y.Z`.
+
+#### 3. Push to `develop`
+
+```bash
+git push origin develop
+```
+
+#### 4. Merge to `main`
+
+**Option A (Direct merge — preferred for patch releases)**
+
+```bash
+git checkout main
+git pull origin main
+git merge develop --no-ff -m "Release vX.Y.Z"
+git push origin main
+git push origin vX.Y.Z
+git checkout develop
+```
+
+**Option B (Pull request — preferred for major/minor releases)**
+
+```bash
+# Create PR from develop → main
+gh pr create --base main --head develop --title "Release vX.Y.Z"
+
+# After PR merge:
+git push origin vX.Y.Z
+```
+
+#### 5. Verify the release
+
+GitHub automatically creates a release from the `vX.Y.Z` tag, builds assets, and publishes if configured. Visit `https://github.com/lightspeedwp/multi-block-plugin-scaffold/releases/tag/vX.Y.Z` to confirm the release notes and assets look correct.
+
+### Version Numbering
+
+We follow [Semantic Versioning](https://semver.org/):
+
+- **MAJOR** (X.0.0) for breaking changes.
+- **MINOR** (0.X.0) for backwards-compatible features.
+- **PATCH** (0.0.X) for backwards-compatible fixes.
+
+Examples:
+
+- `1.0.0` → `1.0.1` (bug fix).
+- `1.0.1` → `1.1.0` (feature).
+- `1.1.0` → `2.0.0` (breaking).
+
+### Post-Release
+
+1. **Announce** – Share release notes with the team.
+2. **Monitor** – Watch for issues related to the new version.
+3. **Document** – Update any external documentation impacted by the release.
+4. **Plan** – Start planning the next release milestone.
+
+### Dry‑run release documentation
+
+Before executing any release agent run or automated checks that read templated release specs, generate a sanitized copy of the agent docs, prompts, and release instructions using `node scripts/utils/dry-run-release.js`. The script mirrors `.github/agents/release.agent.md`, `.github/prompts/create-release*.prompt.md`, `.github/instructions/release*.instructions.md`, and both release process guides into `tmp/dry-run-release/`, replacing every `{{mustache}}` token with `dry-run-*` placeholders so validation suites and CI jobs can run without template parsing errors. Review the sanitized output, run your dry‑run commands against it, and delete the temporary directory (`rm -rf tmp/dry-run-release/`) once the gate passes.
+
+### Emergency Hotfix
+
+For critical fixes directly on `main`:
+
+```bash
+git checkout main
+git checkout -b hotfix/X.Y.Z
+# Make fixes
+git add .
+git commit -m "fix: Emergency fix description"
+node scripts/agents/release-scaffold.agent.js --version=X.Y.Z
+
+git checkout main
+git merge hotfix/X.Y.Z --no-ff
+git push origin main
+git push origin vX.Y.Z
+
+git checkout develop
+git merge hotfix/X.Y.Z --no-ff
+git push origin develop
+git branch -d hotfix/X.Y.Z
+git push origin --delete hotfix/X.Y.Z
+```
+
+---
+
+## ⚠️ PART 2: GENERATED PLUGIN RELEASE WORKFLOW
+
+> **IMPORTANT:** Everything below this line is for GENERATED PLUGINS ONLY.
+>
+> This section contains mustache placeholders (`{{variable}}`) that will be replaced during plugin generation. If you're reading this in the **scaffold repository**, you should follow `RELEASE_PROCESS_SCAFFOLD.md` instead.
+
+If you're reading this in a **generated plugin repository**, all placeholders below should have been replaced with your plugin's actual values.
+
+---
+
+## Generated Theme Release Workflow
+
+### Scope & Mustache placeholders
+
+The generated theme release workflow is embedded in the plugin that `generate-plugin` produces. All of the following sections remain untouched by the scaffold so that `{{mustache}}` variables like `{{theme_slug}}`, `{{theme_name}}`, `{{version}}`, and `{{theme_repo_url}}` can be replaced when a developer runs the generator.
+
+### Overview
+
+Key principles:
+
+1. **Semantic Versioning** – Strict MAJOR.MINOR.PATCH increments.
+2. **Quality Gates** – All linting, formatting, and tests must pass before tagging.
+3. **Documentation** – CHANGELOG, README, and release notes must reflect the new version.
+4. **Version Consistency** – Every version file is updated in a single commit.
+5. **Git Flow** – Release branches are cut from `develop`, merged into `main`, tagged, and merged back.
+
+### Version Numbering
+
+Follow [Semantic Versioning 2.0.0](https://semver.org/).
+
+- **MAJOR** (`1.x.x`) – Breaking changes.
+- **MINOR** (`x.1.x`) – New backwards-compatible features.
+- **PATCH** (`x.x.1`) – Bug fixes.
+
+Pre-release suffixes:
+
+- **Alpha**: `1.0.0-alpha.1` – Internal testing.
+- **Beta**: `1.0.0-beta.1` – Public testing.
+- **RC**: `1.0.0-rc.1` – Release candidate.
+
+### Automated Release Validation
+
+The release agent (`scripts/release.agent.js`) validates:
+
+1. ✅ Version alignment (`VERSION`, `package.json`, `composer.json`, `style.css`, `readme.txt`, `theme.json`, `block.json`).
+2. ✅ Linting/formatting/tests (dry-run mode plus PHP suites).
+3. ✅ Documentation checks for README/CHANGELOG/CONTRIBUTING.
+4. ✅ Theme generation dry-run and manifest validation.
+5. ✅ Security audit (`npm audit`).
+
+Commands:
+
+```bash
+npm run release:version      # Check version consistency
+npm run release:validate     # Full validation suite
+npm run release:status       # Quick readiness status
+npm run dry-run:release      # Sanitize templated release docs before running agents
+```
+
+### Manual Release Process
+
+#### Step 1: Create release branch
+
+```bash
+git checkout develop
+git pull origin develop
 git checkout -b release/1.0.0
 ```
 
-### Step 2: Update Version Files
+#### Step 2: Update version files
 
-Update these files with the new version:
+Update the following with `{{version}}` (use real values before tagging):
 
-#### VERSION
-
+**VERSION**
 ```
-1.0.0
+{{version}}
 ```
 
-#### package.json
-
+**package.json**
 ```json
 {
-  "name": "example-plugin",
-  "version": "1.0.0",
+  "name": "{{theme_slug}}",
+  "version": "{{version}}",
   ...
 }
 ```
 
-#### Main plugin file (`{{slug}}.php` or your generated plugin file)
-
-```php
-/**
- * Plugin Name:       Example Plugin
- * Version:           1.0.0
- */
-define( 'EXAMPLE_PLUGIN_VERSION', '1.0.0' );
-```
-
-#### readme.txt
-
-```
-Stable tag: 1.0.0
-```
-
-#### Block metadata
-
+**composer.json**
 ```json
 {
-  "apiVersion": 3,
-  "version": "1.0.0"
+  "name": "{{author_username}}/{{theme_slug}}",
+  "version": "{{version}}",
+  ...
 }
 ```
 
-### Step 3: Update release notes
+**style.css**
+```css
+/*
+Theme Name: {{theme_name}}
+Version: {{version}}
+...
+*/
+```
 
-Maintain a changelog entry in `readme.txt` or `CHANGELOG.md` (if present). Example for `CHANGELOG.md`:
+#### Step 3: Update CHANGELOG
+
+Move the `[Unreleased]` section to the released version and link to the release.
 
 ```markdown
-## [1.0.0] - 2025-12-10
+## [Unreleased]
+
+### Changed
+
+- Placeholder for future changes
+
+## [{{version}}] - YYYY-MM-DD
 
 ### Added
 
-- Initial multi-block plugin scaffold
-- Block patterns, generator, and SCF integration
+- Initial release of {{theme_name}}
+- Full Site Editing support
 
-[Unreleased]: https://github.com/lightspeedwp/multi-block-plugin-scaffold/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/lightspeedwp/multi-block-plugin-scaffold/releases/tag/v1.0.0
+[Unreleased]: {{theme_repo_url}}/compare/v{{version}}...HEAD
+[{{version}}]: {{theme_repo_url}}/releases/tag/v{{version}}
 ```
 
-### Step 4: Run Quality Checks
+#### Step 4: Run quality checks
 
 ```bash
-// Linting
-npm run lint:dry-run
-
-// Formatting
-npm run format -- --check
-
-// Testing
-npm run dry-run:all
+npm run lint
+npm run format
+npm run test:js
 npm run test:php
-
-// Security
-npm audit --audit-level=high
-
-// Generator validation
-npm run validate:config
+npm run test:e2e
+npm audit
+npm run test:dry-run:all
 ```
 
-### Step 5: Commit Changes
+#### Step 5: Commit changes
 
 ```bash
-git add VERSION package.json *.php readme.txt src/blocks/**/block.json CHANGELOG.md
-git commit -m "chore: prepare release v1.0.0"
+git add VERSION package.json composer.json style.css CHANGELOG.md
+git commit -m "chore: prepare release v{{version}}"
 ```
 
-### Step 6: Merge to Main and Develop
+#### Step 6: Merge to main and develop
 
 ```bash
 # Merge to main
@@ -218,72 +378,106 @@ git branch -d release/1.0.0
 git push origin --delete release/1.0.0
 ```
 
-### Step 7: Tag Release
+#### Step 7: Tag release
 
 ```bash
-# Create annotated tag
-git tag -a v1.0.0 -m "Release v1.0.0"
-
-# Push tag
-git push origin v1.0.0
-
-# Or push all tags
-git push origin --tags
+git tag -a v{{version}} -m "Release v{{version}}"
+git push origin v{{version}}
 ```
 
-### Step 8: Create GitHub Release
+#### Step 8: Create GitHub Release
 
-**Using GitHub CLI:**
+**GitHub CLI**
 
 ```bash
-gh release create v1.0.0 \
-  --title "v1.0.0" \
-  --notes "See release notes in readme.txt or CHANGELOG.md"
+gh release create v{{version}} \
+  --title "v{{version}}" \
+  --notes-file CHANGELOG.md
 ```
 
-**Using GitHub UI:**
+**GitHub UI**
 
-1. Go to <https://github.com/lightspeedwp/multi-block-plugin-scaffold/releases/new>
-2. Select tag: `v1.0.0`
-3. Title: `v1.0.0`
-4. Description: Copy from release notes
-5. Attach any assets if needed
-6. Click "Publish release"
+1. Visit `{{theme_repo_url}}/releases/new`.
+2. Choose tag `v{{version}}`.
+3. Title: `v{{version}}`.
+4. Paste release notes from `CHANGELOG.md`.
+5. Attach assets if needed and publish.
 
-## GitHub Repository Setup
+### Pre-Release Checklist
 
-These are typically one-time tasks to complete before the first public release. Verify them when preparing v1.0.0 and whenever the repository settings change.
+#### 1. Code Quality ✅
 
-### Enable Template Repository
+- [ ] `npm run lint` passes with zero errors.
+- [ ] `npm run test` passes with 80%+ coverage.
+- [ ] `npm run format` applied.
+- [ ] No console errors or warnings.
 
-1. Go to repository **Settings** → **Template repository**
-2. Check **Template repository**
-3. Confirm the **Use this template** button appears on the repo home page
+#### 2. Version Files ✅
 
-Notes: requires public visibility and admin/owner permissions.
+- [ ] `VERSION` updated.
+- [ ] `package.json` version updated.
+- [ ] `composer.json` version updated.
+- [ ] `style.css` header updated.
+- [ ] `CHANGELOG.md` completed with release date.
 
-### Add GitHub Topics and Description
+#### 3. Documentation ✅
 
-1. On the repo home page, click the **About** gear icon
-2. Set description:
+- [ ] `README.md` features/requirements up to date.
+- [ ] `CONTRIBUTING.md` workflow current.
+- [ ] All documentation reviewed.
+- [ ] Links and references validated.
 
-   ```
-   WordPress plugin scaffold with multi-block architecture, dual-mode generator, and comprehensive development tools
-   ```
+#### 4. Testing ✅
 
-3. Add topics (comma-separated):
+- [ ] JavaScript unit tests pass.
+- [ ] PHP unit tests pass.
+- [ ] E2E tests pass.
+- [ ] Generator validation passes: `npm run validate:config`.
+- [ ] Mustache variables replaced in dry-run outputs.
 
-   ```
-   wordpress, wordpress-plugin, gutenberg, blocks, block-plugin, scaffold, generator, plugin-template, gutenberg-blocks, wordpress-blocks, wordpress-development, block-editor, mustache-templates, plugin-scaffold, lightspeed
-   ```
+#### 5. Performance & Security ✅
 
-4. (Optional) Website URL: `https://github.com/lightspeedwp/multi-block-plugin-scaffold`
+- [ ] `npm audit` reports no high/critical vulnerabilities.
+- [ ] Lighthouse score acceptable if applicable.
+- [ ] Bundle size within limits.
+- [ ] No deprecated dependencies.
 
-Expected: topics show as badges; description and URL appear in the About panel.
+#### 6. Git & Branches ✅
 
-## Release Notes Template
+- [ ] Working directory clean.
+- [ ] All changes committed.
+- [ ] Release branch merged into `main`.
+- [ ] Release branch merged into `develop`.
+- [ ] No merge conflicts.
 
-Use or adapt this Markdown when drafting the GitHub release entry in Step 8. Replace block lists with the current set if needed.
+### Post-Release Tasks
+
+#### 1. Verify Release
+
+- [ ] Tag visible on GitHub: `{{theme_repo_url}}/releases`.
+- [ ] CHANGELOG references function.
+- [ ] Release notes complete.
+- [ ] Assets attached if necessary.
+- [ ] Template repository shows "Use this template" button.
+- [ ] Topics and description present in the About panel.
+
+#### 2. Communications
+
+- [ ] Update project status.
+- [ ] Notify contributors.
+- [ ] Update any documentation sites.
+- [ ] Announce on social media when appropriate.
+
+#### 3. Planning
+
+- [ ] Create a milestone for the next version.
+- [ ] Review and prioritise issues.
+- [ ] Update the roadmap.
+- [ ] Plan the next release cycle.
+
+### Release Notes Template
+
+Use the following Markdown when drafting GitHub release notes. Replace sections with the current highlights.
 
 ```markdown
 ## 🎉 Initial Release: Multi-Block Plugin Scaffold
@@ -319,9 +513,9 @@ A comprehensive WordPress plugin scaffold with dual-mode generation, mustache te
 - Block bindings API (WordPress 6.5+)
 
 ### 📚 Documentation
-- [GENERATE-PLUGIN.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/GENERATE-PLUGIN.md)
-- [ARCHITECTURE.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/ARCHITECTURE.md)
-- [TESTING.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/TESTING.md)
+- [docs/GENERATE_PLUGIN.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/GENERATE_PLUGIN.md)
+- [docs/ARCHITECTURE.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/ARCHITECTURE.md)
+- [docs/TESTING.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/TESTING.md)
 - [Documentation index](https://github.com/lightspeedwp/multi-block-plugin-scaffold/blob/main/docs/README.md)
 
 ### 🚀 Getting Started
@@ -340,145 +534,90 @@ See [CHANGELOG.md](https://github.com/lightspeedwp/multi-block-plugin-scaffold/b
 Developed by [LightSpeed](https://lightspeedwp.agency) for the WordPress community.
 ```
 
-## Pre-Release Checklist
+## Reporting & Planning
 
-Before tagging a release, verify:
-
-### 1. Code Quality ✅
-
-- [ ] `npm run lint:dry-run` passes with zero errors
-- [ ] `npm run dry-run:all` passes
-- [ ] `npm run test:php` passes
-- [ ] `npm run format -- --check` clean
-- [ ] No console errors or warnings during build/tests
-
-### 2. Version Files ✅
-
-- [ ] VERSION file updated
-- [ ] package.json version updated
-- [ ] Plugin main file header and constant updated
-- [ ] readme.txt stable tag updated
-- [ ] Block metadata (`src/blocks/**/block.json`) updated
-- [ ] CHANGELOG/readme release notes updated
-
-### 3. Documentation ✅
-
-- [ ] README.md features/requirements current
-- [ ] CONTRIBUTING.md workflow up to date
-- [ ] readme.txt updated for stable tag and changelog
-- [ ] All documentation reviewed
-- [ ] Links and references working
-
-### 4. Testing ✅
-
-- [ ] JavaScript tests (dry-run) pass
-- [ ] PHP unit tests pass
-- [ ] E2E tests (if applicable) pass
-- [ ] Generator validation passes: `npm run validate:config`
-- [ ] Mustache variables properly replaced in dry-run
-
-### 5. Performance & Security ✅
-
-- [ ] `npm audit` shows no high/critical vulnerabilities
-- [ ] Lighthouse score acceptable (if applicable)
-- [ ] Bundle size within limits
-- [ ] No deprecated dependencies
-
-### 6. Git & Branches ✅
-
-- [ ] Working directory clean
-- [ ] All changes committed
-- [ ] Release branch merged to main
-- [ ] Release branch merged to develop
-- [ ] No merge conflicts
-
-## Post-Release Tasks
-
-After releasing:
-
-### 1. Verify Release
-
-- [ ] Tag visible on GitHub: `https://github.com/lightspeedwp/multi-block-plugin-scaffold/releases`
-- [ ] Release note links work
-- [ ] Release notes complete
-- [ ] Assets attached (if any)
-- [ ] "Use this template" button visible on repo home
-- [ ] Topics/description present in About panel
-
-### 2. Communications
-
-- [ ] Update project status
-- [ ] Notify contributors
-- [ ] Update documentation sites
-- [ ] Announce on social media (if major release)
-
-### 3. Planning
-
-- [ ] Create milestone for next version
-- [ ] Review and prioritize issues
-- [ ] Update roadmap
-- [ ] Plan next release cycle
+- **Release reporting**: Follow `.github/instructions/reporting.instructions.md` and keep all release readiness/validation reports inside `.github/reports/<category>/`. Every report must include YAML frontmatter and reference supporting logs in `logs/` and temporary data in `tmp/` before committing.
+- **Plans**: Store workplans under `.github/projects/plans/` (per `.github/instructions/task-planner.instructions.md`). Old plan files have been moved out of `docs/plans/`. Use descriptive, date-stamped filenames and mention the associated issue or goal.
+- **Research outputs**: Capture research findings in `.github/reports/research/` alongside frontmatter summaries (see `.github/instructions/task-researcher.instructions.md`).
+- **Temporary data**: Any temporary artifacts or generated helpers belong in `tmp/` (see `.github/instructions/temp-files.instructions.md`). The directory is ignored by Git, and scripts should clean up after themselves.
 
 ## Troubleshooting
 
-### Version Conflicts
+### Working directory is not clean
 
-If version files get out of sync:
+Commit or stash changes before releasing:
 
 ```bash
-# Check current versions
-cat VERSION
-grep '"version"' package.json
-grep 'Version:' *.php
-grep 'Stable tag:' readme.txt
-
-# Re-run version checks
-npm run release:status
+git status
+git add .
+git commit -m "Your commit message"
 ```
 
-### Failed Tests
+### Tests failed
 
-If tests fail during release:
+Fix failing tests before releasing:
 
 ```bash
-# Run specific test suite
-npm run test:js          # JavaScript only
-npm run test:php         # PHP only
-npm run test:e2e         # E2E only
+npm test
+npm run lint:js
+npm run lint:css
+```
 
-# Check test logs
+### Version already exists
+
+If a tag already exists, either bump the version or delete the existing tag (not recommended).
+
+### Version conflicts (generated themes)
+
+If version files go out of sync:
+
+```bash
+cat VERSION
+grep '"version"' package.json
+grep 'Version:' style.css
+npm run release:version
+```
+
+### Failed tests (generated themes)
+
+When validation fails:
+
+```bash
+npm run test:js
+npm run test:php
+npm run test:e2e
 cat logs/test/$(ls -t logs/test/ | head -1)
-
-# Fix issues and re-run
 npm run test
 ```
 
-### Git Issues
+### Git issues (generated themes)
 
-If merge conflicts occur:
+If a merge creates conflicts:
 
 ```bash
-# Abort merge
 git merge --abort
-
-# Resolve conflicts manually
 git checkout main
-git merge release/1.0.0
+git merge release/{{version}}
 # Fix conflicts
 git add .
-git commit -m "chore: merge release/1.0.0 into main"
+git commit -m "chore: merge release/{{version}} into main"
 ```
 
 ## Related Documentation
 
-- [GOVERNANCE.md](GOVERNANCE.md) - Project governance and policies
-- [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution guidelines
-- [CHANGELOG.md](../CHANGELOG.md) - Version history
-- [VALIDATION.md](VALIDATION.md) - Quality validation reference
-- [TESTING.md](TESTING.md) - Testing guide
+- `docs/RELEASE_PROCESS_SCAFFOLD.md` – Scaffold-specific release checklist.
+- `docs/GENERATE_PLUGIN.md` – Generator guide that powers plugin output.
+- `CHANGELOG.md` – Release history and comparison links.
+- `VALIDATION.md`, `TESTING.md` – Quality validation references.
+- `.github/instructions/reporting.instructions.md` – Report storage rules.
+- `.github/instructions/task-planner.instructions.md` – Planning workflow guidance (plans live in `.github/projects/plans/`).
+- `.github/instructions/task-researcher.instructions.md` – Research results go into `.github/reports/research/`.
+- `.github/instructions/temp-files.instructions.md` – Temporary data must stay in `tmp/`.
+- `.github/instructions/folder-structure.instructions.md` – Directory expectations for this repository.
 
 ## Version History
 
 | Date | Change |
 |------|--------|
-| 2025-12-10 | Initial release process documentation (adapted for plugin scaffold) |
+| 2025-12-10 | Initial release process documentation adapted for the scaffold. |
+| 2025-12-18 | Consolidated scaffold and generated theme workflows, added reporting/plan guidance, and updated all release references. |
