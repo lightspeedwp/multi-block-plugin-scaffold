@@ -61,9 +61,7 @@ module.exports = {
 	},
 
 	// Transform ES modules from node_modules
-	transformIgnorePatterns: [
-		'node_modules/(?!(parsel-js)/)',
-	],
+	transformIgnorePatterns: ['node_modules/(?!(parsel-js)/)'],
 
 	// Verbose output
 	verbose: true,

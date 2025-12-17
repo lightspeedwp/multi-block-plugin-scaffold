@@ -4,7 +4,7 @@
  * Shared helper functions for Playwright E2E tests.
  * For Jest unit test helpers, use .github/tests/test-helper.js instead.
  *
- * @package multi-block-plugin-scaffold
+ * @package
  * @see .github/instructions/playwright-tests.instructions.md
  */
 /* global jest */
@@ -74,8 +74,8 @@ async function waitForWpAdmin(page) {
 
 /**
  * Navigate to block editor
- * @param {import('@playwright/test').Page} page - Playwright page object
- * @param {string} postType - Post type (default: 'post')
+ * @param {import('@playwright/test').Page} page     - Playwright page object
+ * @param {string}                          postType - Post type (default: 'post')
  * @return {Promise<void>}
  */
 async function navigateToBlockEditor(page, postType = 'post') {
