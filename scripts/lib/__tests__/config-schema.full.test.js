@@ -20,14 +20,14 @@ describe('Config Schema', () => {
 		const required = configSchema.getRequiredFieldsForStage(1);
 		expect(Array.isArray(required)).toBe(true);
 		expect(required).toContain('slug');
-		expect(required).toContain('name');
+		expect(required).toContain('author');
 	});
 
 	test('getFieldsForStage returns all fields for a stage', () => {
 		const fields = configSchema.getFieldsForStage(2);
 		expect(Array.isArray(fields)).toBe(true);
 		expect(fields).toContain('name_singular');
-		expect(fields).toContain('cpt_slug');
+		expect(fields).toContain('name_plural');
 	});
 
 	test('getFieldConfig returns field config or null', () => {

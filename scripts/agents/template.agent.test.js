@@ -83,9 +83,10 @@ describe('[TEMPLATE] TemplateAgent', () => {
 
 describe('Template File Warning', () => {
 	test('warns that this is a template file', () => {
-		expect(true).toBe(true); // This test always passes
-		console.warn('\n⚠️  This is a TEMPLATE test file, not a functional test suite!');
-		console.warn('Copy and customize this file for your agent.\n');
+		// This test always passes to remind you this is a template
+		// ⚠️  This is a TEMPLATE test file, not a functional test suite!
+		// Copy and customize this file for your agent.
+		expect(true).toBe(true);
 	});
 });
 

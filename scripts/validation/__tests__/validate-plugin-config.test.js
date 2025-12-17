@@ -34,7 +34,6 @@ describe('Plugin configuration validation', () => {
 		'..',
 		'..',
 		'..',
-		'..',
 		'.github',
 		'schemas',
 		'plugin-config.schema.json'

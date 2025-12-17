@@ -173,7 +173,7 @@ function replaceMustacheVarsInFile(filePath, values = DRY_RUN_VALUES) {
 /**
  * Get list of files containing mustache placeholders.
  *
- * @param {string} [pattern='**/*.{js,jsx,php,json,scss,css,html}'] Glob pattern to search.
+ * @param {string} [pattern] Glob pattern to search. Defaults to common source files.
  * @return {string[]} Array of file paths that include `{{mustache}}` tokens.
  */
 function getFilesWithMustacheVars(pattern = '**/*.{js,jsx,php,json,scss,css,html}') {

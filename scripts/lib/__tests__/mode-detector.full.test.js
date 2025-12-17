@@ -43,7 +43,7 @@ describe('Mode Detector', () => {
 
 	test('parseArgs detects --dry-run', () => {
 		const result = modeDetector.parseArgs(['node', 'script.js', '--dry-run']);
-		expect(result.flags.dryRun).toBe(true);
+		expect(result.flags['dry-run']).toBe(true);
 	});
 
 	test('parseArgs detects --verbose', () => {
