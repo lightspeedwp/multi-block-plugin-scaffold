@@ -1,6 +1,6 @@
 {
 	"name": "example-plugin",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A multi-block WordPress plugin scaffold example",
 	"author": "Example Author",
 	"license": "GPL-2.0-or-later",

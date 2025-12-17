@@ -260,6 +260,22 @@ Developed by [LightSpeed](https://lightspeedwp.agency) for the WordPress communi
 
 ### Added
 
+- Nothing yet
+
+### Changed
+
+- Nothing yet
+
+### Fixed
+
+- Nothing yet
+
+---
+
+## [1.1.0] - 2025-12-17
+
+### Added
+
 - **Block Style Variations System**: JSON-based style registration with automatic discovery
   - Enhanced `class-block-styles.php` with comprehensive style loading and validation
   - Support for block-scoped, color, and typography variations
