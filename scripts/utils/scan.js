@@ -1,4 +1,35 @@
 /**
+ * Recursively scan a directory for files matching SCAN_EXTENSIONS, skipping EXCLUDE_DIRS and IGNORE_PATHS.
+ * @param {string} dir - Directory to scan
+ * @param {string} basePath - Relative path prefix
+ * @returns {Array<{ fullPath: string, path: string, lines: string[] }>}
+ */
+function scanDirectory(dir, basePath = '') {
+	let results = [];
+	const entries = fs.readdirSync(dir, { withFileTypes: true });
+	for (const entry of entries) {
+		const entryPath = path.join(dir, entry.name);
+		const relPath = path.join(basePath, entry.name);
+		if (EXCLUDE_DIRS.includes(entry.name) ||
+			IGNORE_PATHS.includes(relPath) ||
+			shouldIgnorePath(relPath, IGNORE_PATTERNS)) {
+			continue;
+		}
+		if (entry.isDirectory()) {
+			results = results.concat(scanDirectory(entryPath, relPath));
+		} else if (SCAN_EXTENSIONS.some(ext => entry.name.endsWith(ext))) {
+			let lines = [];
+			try {
+				lines = fs.readFileSync(entryPath, 'utf8').split(/\r?\n/);
+			} catch (e) {}
+			results.push({ fullPath: entryPath, path: relPath, lines });
+		}
+	}
+	return results;
+}
+// Regex to match mustache variables like {{variable}} or {{variable|filter}}
+const MUSTACHE_REGEX = /\{\{\s*([a-zA-Z0-9_\-|]+)\s*\}\}/g;
+/**
  * Directory scanning helpers used across tooling in the scaffold.
  *
  * Provides reusable helpers for discovering mustache placeholders, categorising
@@ -49,111 +80,273 @@ const SCAN_EXTENSIONS = [
 	'.yaml',
 ];
 
-const IGNORE_PATHS = [
-	'scripts/mustache-variables-registry.json',
-	'scripts/fixtures/mustache-variables-registry.example.json',
-	'.github/schemas/examples/mustache-variables-registry.example.json',
-];
 
 /**
- * Normalise a file path for comparison purposes.
+ * Load ignore patterns from .mustacheignore file
  *
- * @param {string} fullPath
- * @return {string}
+ * @param {string} rootDir - Root directory to search for .mustacheignore
+ * @return {string[]} Array of ignore patterns
  */
-function normalizeRelativePath(fullPath) {
-	const relative = path.relative(ROOT_DIR, fullPath);
-	return relative ? relative.split(path.sep).join('/') : '';
+function loadIgnorePatterns(rootDir = ROOT_DIR) {
+	const ignorePath = path.join(rootDir, '.mustacheignore');
+	if (!fs.existsSync(ignorePath)) {
+		return [];
+	}
+
+	const content = fs.readFileSync(ignorePath, 'utf8');
+	return content
+		.split(/\r?\n/)
+		.map(line => line.trim())
+		.filter(line => line && !line.startsWith('#'));
 }
 
 /**
- * Determine whether the scanner should skip a given path.
+ * Check if a path should be ignored based on patterns
  *
- * @param {string} fullPath
- * @return {boolean}
+ * @param {string} filePath - Path to check
+ * @param {string[]} patterns - Ignore patterns
+ * @return {boolean} True if path should be ignored
  */
-function isIgnoredPath(fullPath) {
-	const relativePath = normalizeRelativePath(fullPath);
-	if (!relativePath) {
+function shouldIgnorePath(filePath, patterns) {
+	if (!patterns || patterns.length === 0) {
 		return false;
 	}
 
-	return IGNORE_PATHS.some(
-		(ignorePath) =>
-			relativePath === ignorePath || relativePath.startsWith(`${ignorePath}/`)
-	);
-}
+	// Normalize path separators
+	const normalizedPath = filePath.replace(/\\/g, '/');
 
-const MUSTACHE_REGEX = /\{\{([a-zA-Z0-9_]+(?:\|[a-zA-Z0-9_]+)?)\}\}/g;
+	for (const pattern of patterns) {
+		const normalizedPattern = pattern.replace(/\\/g, '/');
 
-const CATEGORY_ORDER = [
-	'core_identity',
-	'author_contact',
-	'versioning',
-	'urls',
-	'license',
-	'design_colors',
-	'design_typography',
-	'design_layout',
-	'content_strings',
-	'ui_components',
-	'images',
-	'theme_metadata',
-	'other',
-];
-
-/**
- * Walks directories and collects files that look like mustache templates.
- *
- * @param {string} dir Absolute directory to walk.
- * @param {string} basePath Relative path accumulator.
- * @return {Array<Object>} Discovered files.
- */
-function scanDirectory(dir, basePath = '') {
-	const files = [];
-	const entries = fs.readdirSync(dir, { withFileTypes: true });
-
-	for (const entry of entries) {
-		const fullPath = path.join(dir, entry.name);
-		if (isIgnoredPath(fullPath)) {
-			continue;
-		}
-		const relativePath = basePath ? path.join(basePath, entry.name) : entry.name;
-
-		if (entry.isDirectory()) {
-			if (EXCLUDE_DIRS.includes(entry.name)) {
-				continue;
+		// Simple prefix match for directory patterns
+		if (normalizedPattern.endsWith('/')) {
+			if (normalizedPath.startsWith(normalizedPattern) ||
+				normalizedPath.includes('/' + normalizedPattern)) {
+				return true;
 			}
-
-			files.push(...scanDirectory(fullPath, relativePath));
-			continue;
 		}
 
-		if (!entry.isFile()) {
-			continue;
+		// Glob pattern match
+		if (normalizedPattern.includes('*')) {
+			// Escape special regex characters except * and /
+			let regexPattern = normalizedPattern
+				.replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+				// Replace ** with a placeholder first
+				.replace(/\*\*/g, '__DOUBLESTAR__')
+				// Replace single * with [^/]* (match anything except /)
+				.replace(/\*/g, '[^/]*')
+				// Replace placeholder with .* (match anything including /)
+				.replace(/__DOUBLESTAR__/g, '.*');
+
+			const regex = new RegExp('^' + regexPattern + '$');
+			if (regex.test(normalizedPath)) {
+				return true;
+			}
 		}
 
-		const ext = path.extname(entry.name);
-		if (SCAN_EXTENSIONS.includes(ext)) {
-			files.push({
-				path: relativePath,
-				fullPath,
-				ext,
-			});
+		// Exact match
+		if (normalizedPath === normalizedPattern || normalizedPath.endsWith('/' + normalizedPattern)) {
+			return true;
 		}
 	}
 
-	return files;
+	return false;
 }
 
+// Load custom ignore patterns from .mustacheignore if present
+const IGNORE_PATTERNS = loadIgnorePatterns();
+
+let IGNORE_PATHS = [];
+
 /**
- * Scan configured directories from the repository root.
+ * Infer type/format for a mustache variable based on name, usage, and file context
  *
- * @param {Object} [options={}] Options bag.
- * @param {string[]} [options.directories=SCAN_DIRS]
- * @param {string} [options.rootDir=ROOT_DIR]
- * @return {Array<Object>}
+ * @param {string} varName - Variable name
+ * @param {Array} usage - Usage context
+ * @param {Array} files - Files where variable appears
+ * @return {Object} Type and optional format
  */
+function inferVariableType(varName, usage, files) {
+	const name = varName.toLowerCase();
+	// Heuristics by name
+	if (name.endsWith('_url') || name.endsWith('_uri') || name === 'url' || name === 'uri') {
+		return { type: 'string', format: 'url' };
+	}
+	if (name.endsWith('_email') || name === 'email') {
+		return { type: 'string', format: 'email' };
+	}
+	if (name === 'version' || name.endsWith('_version')) {
+		return { type: 'string', format: 'semver' };
+	}
+	if (name === 'year') {
+		return { type: 'string', format: 'year' };
+	}
+	if (name.endsWith('_color') || name.endsWith('_colour')) {
+		return { type: 'string', format: 'color' };
+	}
+	if (name.startsWith('is_') || name.startsWith('has_')) {
+		return { type: 'boolean' };
+	}
+	if (name.endsWith('_count') || name.endsWith('_number') || name === 'count' || name === 'number') {
+		return { type: 'number' };
+	}
+	if (name.endsWith('_ids') || name.endsWith('_list') || name.endsWith('_array') || name.endsWith('_items')) {
+		return { type: 'array' };
+	}
+	if (name.endsWith('_json')) {
+		return { type: 'object', format: 'json' };
+	}
+	if (name === 'license') {
+		return { type: 'string', format: 'spdx' };
+	}
+	if (name === 'slug' || name.endsWith('_slug')) {
+		return { type: 'string', format: 'slug' };
+	}
+	if (name === 'namespace') {
+		return { type: 'string', format: 'namespace' };
+	}
+	if (name === 'author' || name === 'author_uri') {
+		return { type: 'string' };
+	}
+	// Heuristics by file extension
+	if (files.some(f => f.endsWith('.json'))) {
+		return { type: 'string' };
+	}
+	// Heuristics by usage context (look for array/object in JSON, etc.)
+	// Fallback
+	return { type: 'string' };
+}
+
+function buildRegistry(options = {}) {
+	const files = gatherTemplateFiles(options).map(f => ({ ...f }));
+	const summary = {
+		totalFiles: files.length,
+		filesWithVariables: 0,
+		uniqueVariables: 0,
+		totalOccurrences: 0,
+	};
+
+	const variables = {};
+	const categories = {};
+	// Track all discovered variable names (from files)
+	const discoveredVars = new Set();
+
+	for (const file of files) {
+		let content;
+		try {
+			content = fs.readFileSync(file.fullPath, 'utf8');
+		} catch (error) {
+			continue;
+		}
+
+		const discovered = extractVariables(content);
+		if (!discovered.length) {
+			continue;
+		}
+
+		summary.filesWithVariables++;
+
+		const canonicalVariables = Array.from(
+			new Set(discovered.map((name) => name.split('|')[0]))
+		);
+
+		for (const varName of canonicalVariables) {
+			discoveredVars.add(varName);
+			if (!variables[varName]) {
+				const category = categorizeVariable(varName);
+				variables[varName] = {
+					name: varName,
+					category,
+					files: [],
+					count: 0,
+					usage: [], // Track usage context
+					type: undefined,
+					format: undefined,
+				};
+
+				if (!categories[category]) {
+					categories[category] = {
+						variables: [],
+						count: 0,
+					};
+				}
+				categories[category].variables.push(varName);
+			}
+
+			const meta = variables[varName];
+			if (!meta.files.includes(file.path)) {
+				meta.files.push(file.path);
+			}
+
+			// Track usage: file and line numbers
+			if (file.lines && file.lines.length > 0) {
+				file.lines.forEach((line, idx) => {
+					let match;
+					MUSTACHE_REGEX.lastIndex = 0;
+					while ((match = MUSTACHE_REGEX.exec(line)) !== null) {
+						const foundVar = match[1].split('|')[0];
+						if (foundVar === varName) {
+							meta.usage.push({ file: file.path, line: idx + 1 });
+						}
+					}
+				});
+			}
+
+			const occurrences = countOccurrences(content, varName);
+			meta.count += occurrences;
+			summary.totalOccurrences += occurrences;
+		}
+	}
+
+	// Infer type/format for each variable
+	for (const varName of Object.keys(variables)) {
+		const meta = variables[varName];
+		const files = meta.files || [];
+		const usage = meta.usage || [];
+		const { type, format } = inferVariableType(varName, usage, files);
+		meta.type = type;
+		if (format) meta.format = format;
+	}
+
+	summary.uniqueVariables = Object.keys(variables).length;
+
+	for (const category of Object.keys(categories)) {
+		categories[category].count = categories[category].variables.length;
+	}
+
+	const sortedVariables = Object.values(variables).sort((a, b) => {
+		if (b.count === a.count) {
+			return a.name.localeCompare(b.name);
+		}
+		return b.count - a.count;
+	});
+
+	// Enhancement: Detect unused/undocumented variables
+	let registryVars = [];
+	try {
+		const registryPath = path.join(__dirname, '../mustache-variables-registry.json');
+		if (fs.existsSync(registryPath)) {
+			const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+			registryVars = Object.keys(registry.variables || {});
+		}
+	} catch (e) {
+		// ignore
+	}
+	const missingInRegistry = Array.from(discoveredVars).filter((v) => !registryVars.includes(v));
+	const unusedInFiles = registryVars.filter((v) => !discoveredVars.has(v));
+
+	return {
+		results: {
+			summary,
+			variables,
+			categories,
+			missingInRegistry,
+			unusedInFiles,
+		},
+		sortedVariables,
+	};
+}
+
 function gatherTemplateFiles(options = {}) {
 	const { directories = SCAN_DIRS, rootDir = ROOT_DIR } = options;
 	const files = [];
@@ -294,98 +487,6 @@ function countOccurrences(content, varName) {
 		new RegExp(`\\{\\{${escaped}(?:\\|[^}]+)?\\}\\}`, 'g')
 	);
 	return occurrences ? occurrences.length : 0;
-}
-
-/**
- * Build the registry data structure used to power validation routines.
- *
- * @param {Object} [options={}]
- * @param {string} [options.rootDir]
- * @param {string[]} [options.directories]
- * @return {Object}
- */
-function buildRegistry(options = {}) {
-	const files = gatherTemplateFiles(options);
-	const summary = {
-		totalFiles: files.length,
-		filesWithVariables: 0,
-		uniqueVariables: 0,
-		totalOccurrences: 0,
-	};
-
-	const variables = {};
-	const categories = {};
-
-	for (const file of files) {
-		let content;
-		try {
-			content = fs.readFileSync(file.fullPath, 'utf8');
-		} catch (error) {
-			continue;
-		}
-
-		const discovered = extractVariables(content);
-		if (!discovered.length) {
-			continue;
-		}
-
-		summary.filesWithVariables++;
-
-		const canonicalVariables = Array.from(
-			new Set(discovered.map((name) => name.split('|')[0]))
-		);
-
-		for (const varName of canonicalVariables) {
-			if (!variables[varName]) {
-				const category = categorizeVariable(varName);
-				variables[varName] = {
-					name: varName,
-					category,
-					files: [],
-					count: 0,
-				};
-
-				if (!categories[category]) {
-					categories[category] = {
-						variables: [],
-						count: 0,
-					};
-				}
-				categories[category].variables.push(varName);
-			}
-
-			const meta = variables[varName];
-			if (!meta.files.includes(file.path)) {
-				meta.files.push(file.path);
-			}
-
-			const occurrences = countOccurrences(content, varName);
-			meta.count += occurrences;
-			summary.totalOccurrences += occurrences;
-		}
-	}
-
-	summary.uniqueVariables = Object.keys(variables).length;
-
-	for (const category of Object.keys(categories)) {
-		categories[category].count = categories[category].variables.length;
-	}
-
-	const sortedVariables = Object.values(variables).sort((a, b) => {
-		if (b.count === a.count) {
-			return a.name.localeCompare(b.name);
-		}
-		return b.count - a.count;
-	});
-
-	return {
-		results: {
-			summary,
-			variables,
-			categories,
-		},
-		sortedVariables,
-	};
 }
 
 /**
@@ -595,4 +696,9 @@ module.exports = {
 	validateConfig,
 	flattenConfig,
 	isDerivedVariable,
+	sortVariablesAlphabetically,
+	loadIgnorePatterns,
+	shouldIgnorePath,
+	IGNORE_PATTERNS,
+	inferVariableType,
 };
