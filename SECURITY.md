@@ -132,7 +132,7 @@ We take the following types of vulnerabilities seriously:
 
 #### Preferred Method: Private GitHub Security Advisory
 
-1. Go to the [Security tab](https://github.com/{{author}}/{{slug}}/security) of our repository
+1. Go to the [Security tab](https://github.com/{{author}}/{{plugin_slug}}/security) of our repository
 2. Click "Report a vulnerability"
 3. Fill out the security advisory form with details
 4. Submit the report
@@ -322,7 +322,7 @@ The plugin complies with:
 ### Security Team
 
 * **Security Email**: security@{{author}}.com
-* **GitHub Security**: [Security Tab](https://github.com/{{author}}/{{slug}}/security)
+* **GitHub Security**: [Security Tab](https://github.com/{{author}}/{{plugin_slug}}/security)
 * **Maintainer**: [@{{author}}](https://github.com/{{author}})
 
 ### Security Resources

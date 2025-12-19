@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 	'title'       => __( '{{name}} Slider', '{{textdomain}}' ),
-	'slug'        => '{{slug}}/{{slug}}-slider-pattern',
+	'slug'        => '{{slug}}/item-slider',
 	'description' => __( 'A slider/carousel of items.', '{{textdomain}}' ),
 	'categories'  => array( '{{slug}}' ),
 	'keywords'    => array(
@@ -21,7 +21,7 @@ return array(
 		__( 'carousel', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/group', 'core/query' ),
-	'postTypes'   => array( '{{slug}}' ),
+	'postTypes'   => array( 'item' ),
 	'viewportWidth' => 1200,
-	'content'     => '<!-- wp:{{namespace}}/{{slug}}-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->',
+	'content'     => '<!-- wp:{{namespace}}/item-slider {"source":"posts","autoplay":true,"autoplaySpeed":5000,"showDots":true,"showArrows":true} /-->',
 );

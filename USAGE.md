@@ -15,7 +15,7 @@ This guide explains how to use the {{name}} in your WordPress site.
 
 ### From WordPress Admin
 
-1. Download the plugin ZIP file from the [releases page](https://github.com/{{author}}/{{slug}}/releases)
+1. Download the plugin ZIP file from the [releases page](https://github.com/{{author}}/{{plugin_slug}}/releases)
 2. In your WordPress admin, go to **Plugins > Add New**
 3. Click **Upload Plugin** and select the ZIP file
 4. Click **Install Now** and then **Activate**
@@ -23,13 +23,13 @@ This guide explains how to use the {{name}} in your WordPress site.
 ### Manual Installation
 
 1. Download and extract the plugin files
-2. Upload the `{{slug}}` folder to `/wp-content/plugins/`
+2. Upload the `{{plugin_slug}}` folder to `/wp-content/plugins/`
 3. Activate the plugin through the **Plugins** menu in WordPress
 
 ### Via Composer
 
 ```bash
-composer require {{author}}/{{slug}}
+composer require {{author}}/{{plugin_slug}}
 ```
 
 ## Getting Started
@@ -100,17 +100,17 @@ You can add custom styles using WordPress's Additional CSS feature:
 
 ```css
 /* Target the block wrapper */
-.wp-block-{{namespace}}-{{block-slug}} {
+.wp-block-{{namespace}}-{{block_slug}} {
     /* Your custom styles */
 }
 
 /* Target the content area */
-.wp-block-{{namespace}}-{{block-slug}}__content {
+.wp-block-{{namespace}}-{{block_slug}}__content {
     /* Content-specific styles */
 }
 
 /* Alignment variations */
-.wp-block-{{namespace}}-{{block-slug}}.has-text-align-left {
+.wp-block-{{namespace}}-{{block_slug}}.has-text-align-left {
     /* Left-aligned styles */
 }
 ```
@@ -258,25 +258,25 @@ Yes! See [CONTRIBUTING.md](../CONTRIBUTING.md) for information on how to contrib
 ### Basic Usage
 
 ```html
-<!-- wp:{{namespace}}/{{block-slug}} {"content":"Hello World","alignment":"center"} -->
-<div class="wp-block-{{namespace}}-{{block-slug}} has-text-align-center">
-    <div class="wp-block-{{namespace}}-{{block-slug}}__content">
+<!-- wp:{{namespace}}/{{block_slug}} {"content":"Hello World","alignment":"center"} -->
+<div class="wp-block-{{namespace}}-{{block_slug}} has-text-align-center">
+    <div class="wp-block-{{namespace}}-{{block_slug}}__content">
         <p>Hello World</p>
     </div>
 </div>
-<!-- /wp:{{namespace}}/{{block-slug}} -->
+<!-- /wp:{{namespace}}/{{block_slug}} -->
 ```
 
 ### With Custom Colors
 
 ```html
-<!-- wp:{{namespace}}/{{block-slug}} {"content":"Styled content","textColor":"primary","backgroundColor":"secondary"} -->
-<div class="wp-block-{{namespace}}-{{block-slug}} has-primary-color has-secondary-background-color has-text-color has-background">
-    <div class="wp-block-{{namespace}}-{{block-slug}}__content">
+<!-- wp:{{namespace}}/{{block_slug}} {"content":"Styled content","textColor":"primary","backgroundColor":"secondary"} -->
+<div class="wp-block-{{namespace}}-{{block_slug}} has-primary-color has-secondary-background-color has-text-color has-background">
+    <div class="wp-block-{{namespace}}-{{block_slug}}__content">
         <p>Styled content</p>
     </div>
 </div>
-<!-- /wp:{{namespace}}/{{block-slug}} -->
+<!-- /wp:{{namespace}}/{{block_slug}} -->
 ```
 
 ### In a Pattern
@@ -284,13 +284,13 @@ Yes! See [CONTRIBUTING.md](../CONTRIBUTING.md) for information on how to contrib
 ```html
 <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group">
-    <!-- wp:{{namespace}}/{{block-slug}} {"content":"Pattern Example","alignment":"center"} -->
-    <div class="wp-block-{{namespace}}-{{block-slug}} has-text-align-center">
-        <div class="wp-block-{{namespace}}-{{block-slug}}__content">
+    <!-- wp:{{namespace}}/{{block_slug}} {"content":"Pattern Example","alignment":"center"} -->
+    <div class="wp-block-{{namespace}}-{{block_slug}} has-text-align-center">
+        <div class="wp-block-{{namespace}}-{{block_slug}}__content">
             <p>Pattern Example</p>
         </div>
     </div>
-    <!-- /wp:{{namespace}}/{{block-slug}} -->
+    <!-- /wp:{{namespace}}/{{block_slug}} -->
 </div>
 <!-- /wp:group -->
 ```

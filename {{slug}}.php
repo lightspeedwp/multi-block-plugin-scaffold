@@ -1,20 +1,20 @@
 <?php
 /**
- * Plugin Name:       Example Plugin
- * Plugin URI:        https://example.com/plugins/example-plugin
- * Description:       A multi-block WordPress plugin scaffold example
- * Version:           1.0.0
- * Requires at least: 6.5
- * Requires PHP:      8.0
+ * Plugin Name:       {{name}}
+ * Plugin URI:        {{plugin_uri}}
+ * Description:       {{description}}
+ * Version:           {{version}}
+ * Requires at least: {{requires_wp}}
+ * Requires PHP:      {{requires_php}}
  * Requires Plugins:  secure-custom-fields
- * Author:            Example Author
- * Author URI:        https://example.com
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       example-plugin
+ * Author:            {{author}}
+ * Author URI:        {{author_uri}}
+ * License:           {{license}}
+ * License URI:       {{license_uri}}
+ * Text Domain:       {{textdomain}}
  * Domain Path:       /languages
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'EXAMPLE_PLUGIN_VERSION', '1.0.0' );
-define( 'EXAMPLE_PLUGIN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'EXAMPLE_PLUGIN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'EXAMPLE_PLUGIN_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( '{{namespace|upper}}_VERSION', '{{version}}' );
+define( '{{namespace|upper}}_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( '{{namespace|upper}}_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( '{{namespace|upper}}_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Defensive coding: Check for SCF/ACF functions before using them.
@@ -39,32 +39,32 @@ define( 'EXAMPLE_PLUGIN_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
  * @see https://make.wordpress.org/core/2024/03/05/introducing-plugin-dependencies-in-wordpress-6-5/
  */
 if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-	add_action(
-		'admin_notices',
-		function () {
-			echo '<div class="error"><p>' .
-				esc_html__( 'Example Plugin requires Secure Custom Fields to be active.', 'example-plugin' ) .
-				'</p></div>';
-		}
-	);
-	return;
+       add_action(
+	       'admin_notices',
+	       function () {
+		       echo '<div class="error"><p>' .
+			       esc_html__( '{{name}} requires Secure Custom Fields to be active.', '{{textdomain}}' ) .
+			       '</p></div>';
+	       }
+       );
+       return;
 }
 
 // Include the Core class.
-require_once EXAMPLE_PLUGIN_PLUGIN_DIR . 'inc/class-core.php';
+require_once {{namespace|upper}}_PLUGIN_DIR . 'inc/class-core.php';
 
 /**
  * Initialise the plugin and return the main instance.
  *
- * @return \example_plugin\classes\Core Main plugin instance.
+ * @return \\{{namespace}}\\classes\\Core Main plugin instance.
  */
-function example_plugin_plugin() {
-	global $example_plugin_plugin;
-	if ( null === $example_plugin_plugin ) {
-		$example_plugin_plugin = new \example_plugin\classes\Core();
-	}
-	return $example_plugin_plugin;
+function {{namespace}}_plugin() {
+       global ${{namespace}}_plugin;
+       if ( null === ${{namespace}}_plugin ) {
+	       ${{namespace}}_plugin = new \\{{namespace}}\\classes\\Core();
+       }
+       return ${{namespace}}_plugin;
 }
 
 // Initialize the plugin.
-example_plugin_plugin();
+{{namespace}}_plugin();

@@ -100,7 +100,7 @@ $slider_data = wp_json_encode(
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
-		'class'          => 'wp-block-{{namespace}}-{{slug}}-slider',
+		'class'          => 'wp-block-{{namespace}}-{{block_slug}}-slider',
 		'data-slider'    => $slider_data,
 	)
 );
@@ -109,19 +109,19 @@ $slide_width = 100 / $slides_to_show;
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
-	<div class="wp-block-{{namespace}}-{{slug}}-slider__viewport">
-		<div class="wp-block-{{namespace}}-{{slug}}-slider__track" style="--slides-to-show: <?php echo esc_attr( $slides_to_show ); ?>">
+	<div class="wp-block-{{namespace}}-{{block_slug}}-slider__viewport">
+		<div class="wp-block-{{namespace}}-{{block_slug}}-slider__track" style="--slides-to-show: <?php echo esc_attr( $slides_to_show ); ?>">
 			<?php foreach ( $slider_slides as $index => $slide ) : ?>
-				<div class="wp-block-{{namespace}}-{{slug}}-slider__slide" style="width: <?php echo esc_attr( $slide_width ); ?>%">
+				   <div class="wp-block-{{namespace}}-{{block_slug}}-slider__slide" style="width: <?php echo esc_attr( $slide_width ); ?>%">
 					<?php if ( ! empty( $slide['image']['url'] ) ) : ?>
 						<?php if ( ! empty( $slide['link'] ) ) : ?>
-							<a href="<?php echo esc_url( $slide['link'] ); ?>" class="wp-block-{{namespace}}-{{slug}}-slider__link">
+							   <a href="<?php echo esc_url( $slide['link'] ); ?>" class="wp-block-{{namespace}}-{{block_slug}}-slider__link">
 						<?php endif; ?>
 
 						<img
 							src="<?php echo esc_url( $slide['image']['url'] ); ?>"
 							alt="<?php echo esc_attr( $slide['image']['alt'] ?? '' ); ?>"
-							class="wp-block-{{namespace}}-{{slug}}-slider__image"
+							   class="wp-block-{{namespace}}-{{block_slug}}-slider__image"
 						/>
 
 						<?php if ( ! empty( $slide['link'] ) ) : ?>
@@ -130,15 +130,15 @@ $slide_width = 100 / $slides_to_show;
 					<?php endif; ?>
 
 					<?php if ( ! empty( $slide['title'] ) || ! empty( $slide['caption'] ) ) : ?>
-						<div class="wp-block-{{namespace}}-{{slug}}-slider__content">
+						   <div class="wp-block-{{namespace}}-{{block_slug}}-slider__content">
 							<?php if ( ! empty( $slide['title'] ) ) : ?>
-								<h3 class="wp-block-{{namespace}}-{{slug}}-slider__title">
+								   <h3 class="wp-block-{{namespace}}-{{block_slug}}-slider__title">
 									<?php echo esc_html( $slide['title'] ); ?>
 								</h3>
 							<?php endif; ?>
 
 							<?php if ( ! empty( $slide['caption'] ) ) : ?>
-								<p class="wp-block-{{namespace}}-{{slug}}-slider__caption">
+								   <p class="wp-block-{{namespace}}-{{block_slug}}-slider__caption">
 									<?php echo esc_html( $slide['caption'] ); ?>
 								</p>
 							<?php endif; ?>
@@ -150,22 +150,22 @@ $slide_width = 100 / $slides_to_show;
 	</div>
 
 	<?php if ( $show_arrows && count( $slider_slides ) > $slides_to_show ) : ?>
-		<button class="wp-block-{{namespace}}-{{slug}}-slider__arrow wp-block-{{namespace}}-{{slug}}-slider__arrow--prev" aria-label="<?php esc_attr_e( 'Previous slide', '{{textdomain}}' ); ?>">
+		<button class="wp-block-{{namespace}}-{{block_slug}}-slider__arrow wp-block-{{namespace}}-{{block_slug}}-slider__arrow--prev" aria-label="<?php esc_attr_e( 'Previous slide', '{{textdomain}}' ); ?>">
 			<span aria-hidden="true">&lsaquo;</span>
 		</button>
-		<button class="wp-block-{{namespace}}-{{slug}}-slider__arrow wp-block-{{namespace}}-{{slug}}-slider__arrow--next" aria-label="<?php esc_attr_e( 'Next slide', '{{textdomain}}' ); ?>">
+		<button class="wp-block-{{namespace}}-{{block_slug}}-slider__arrow wp-block-{{namespace}}-{{block_slug}}-slider__arrow--next" aria-label="<?php esc_attr_e( 'Next slide', '{{textdomain}}' ); ?>">
 			<span aria-hidden="true">&rsaquo;</span>
 		</button>
 	<?php endif; ?>
 
 	<?php if ( $show_dots && count( $slider_slides ) > $slides_to_show ) : ?>
-		<div class="wp-block-{{namespace}}-{{slug}}-slider__dots" role="tablist" aria-label="<?php esc_attr_e( 'Slider navigation', '{{textdomain}}' ); ?>">
+		<div class="wp-block-{{namespace}}-{{block_slug}}-slider__dots" role="tablist" aria-label="<?php esc_attr_e( 'Slider navigation', '{{textdomain}}' ); ?>">
 			<?php
 			$total_dots = ceil( ( count( $slider_slides ) - $slides_to_show ) / $slides_to_scroll ) + 1;
 			for ( $i = 0; $i < $total_dots; $i++ ) :
 				?>
 				<button
-					class="wp-block-{{namespace}}-{{slug}}-slider__dot<?php echo 0 === $i ? ' is-active' : ''; ?>"
+					   class="wp-block-{{namespace}}-{{block_slug}}-slider__dot<?php echo 0 === $i ? ' is-active' : ''; ?>"
 					role="tab"
 					aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>"
 					aria-label="<?php printf( esc_attr__( 'Go to slide %d', '{{textdomain}}' ), $i + 1 ); ?>"

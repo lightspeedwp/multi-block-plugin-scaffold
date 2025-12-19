@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-collection",
+	"name": "{{namespace}}/{{block_slug}}-collection",
 	"title": "{{name}} Collection",
-	"category": "{{slug}}",
+	"category": "{{block_slug}}",
 	"icon": "grid-view",
 	"description": "Display a collection of items with filtering and layout options.",
 	"version": "1.0.0",
 	"textdomain": "{{textdomain}}",
-	"keywords": [ "collection", "{{slug}}", "grid", "list", "query" ],
+	"keywords": [ "collection", "{{block_slug}}", "grid", "list", "query" ],
 	"usesContext": [ "postId", "postType" ],
 	"providesContext": {
 		"{{namespace}}/queryId": "queryId",
@@ -91,10 +91,10 @@
 		}
 	},
 	"selectors": {
-		"root": ".{{namespace}}-{{slug}}-collection",
+		"root": ".{{namespace}}-{{block_slug}}-collection",
 		"color": {
-			"text": ".{{namespace}}-{{slug}}-collection__item",
-			"background": ".{{namespace}}-{{slug}}-collection"
+			"text": ".{{namespace}}-{{block_slug}}-collection__item",
+			"background": ".{{namespace}}-{{block_slug}}-collection"
 		}
 	},
 	"editorScript": "file:./index.js",

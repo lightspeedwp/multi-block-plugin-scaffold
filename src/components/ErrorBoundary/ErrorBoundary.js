@@ -22,7 +22,11 @@ export class ErrorBoundary extends Component {
 
 	render() {
 		if (this.state.hasError) {
-			return <div className="{{namespace}}-error-boundary" role="alert">{__('Something went wrong.', '{{textdomain}}')}</div>;
+			return (
+				<div className="{{namespace}}-error-boundary" role="alert">
+					{__('Something went wrong.', '{{textdomain}}')}
+				</div>
+			);
 		}
 		return this.props.children;
 	}

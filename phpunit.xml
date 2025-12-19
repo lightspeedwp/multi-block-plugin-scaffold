@@ -8,14 +8,14 @@
 	convertWarningsToExceptions="true"
 >
 	<testsuites>
-		<testsuite name="{{name}} Test Suite">
+		<testsuite name="{{plugin_slug}} Test Suite">
 			<directory suffix=".php">./tests/php</directory>
 		</testsuite>
 	</testsuites>
 	<coverage>
 		<include>
 			<directory suffix=".php">./inc</directory>
-			<file>./{{slug}}.php</file>
+			<file>./{{plugin_slug}}.php</file>
 		</include>
 	</coverage>
 </phpunit>

@@ -18,7 +18,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-// Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-card/edit.js
+// Folder and file names should use mustache placeholders, e.g. src/blocks/{{block_slug}}-card/edit.js
 /**
  * Card block edit component.
  *
@@ -161,7 +161,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 					)}
 				</div>
 
-								className: 'wp-block-{{slug}}-card',
+								className: 'wp-block-{{block_slug}}-card',
 					<p className="wp-block-{{namespace}}-{{cpt1_slug}}-card__placeholder">
 						{__('Select a post to display.', '{{textdomain}}')}
 					</p>

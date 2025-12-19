@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-slider",
+	"name": "{{namespace}}/{{block_slug}}-slider",
 	"title": "{{name}} Slider",
-	"category": "{{slug}}",
+	"category": "{{block_slug}}",
 	"icon": "slides",
 	"description": "Display items or custom slides in a slider/carousel.",
 	"version": "1.0.0",
 	"textdomain": "{{textdomain}}",
-	"keywords": [ "slider", "carousel", "{{slug}}" ],
+	"keywords": [ "slider", "carousel", "{{block_slug}}" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -81,16 +81,16 @@
 		}
 	},
 	"selectors": {
-		"root": ".{{namespace}}-{{slug}}-slider",
+		"root": ".{{namespace}}-{{block_slug}}-slider",
 		"color": {
-			"text": ".{{namespace}}-{{slug}}-slider__caption",
-			"background": ".{{namespace}}-{{slug}}-slider"
+			   "text": ".{{namespace}}-{{block_slug}}-slider__caption",
+			   "background": ".{{namespace}}-{{block_slug}}-slider"
 		},
 		"typography": {
-			"fontSize": ".{{namespace}}-{{slug}}-slider__caption"
+			   "fontSize": ".{{namespace}}-{{block_slug}}-slider__caption"
 		},
 		"dimensions": {
-			"aspectRatio": ".{{namespace}}-{{slug}}-slider__slide"
+			   "aspectRatio": ".{{namespace}}-{{block_slug}}-slider__slide"
 		}
 	},
 	"editorScript": "file:./index.js",

@@ -11,8 +11,8 @@ parameters:
 		- tests/
 	bootstrapFiles:
 		- tests/phpstan-bootstrap.php
-	ignoreErrors:
-		- '#Function acf_add_local_field_group not found#'
+			- "{{plugin_slug}}.php"
+			- "uninstall-{{plugin_slug}}.php"
 		- '#Function get_field not found#'
 		- '#Function have_rows not found#'
 		- '#Function the_row not found#'

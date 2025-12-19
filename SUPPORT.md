@@ -48,7 +48,7 @@ Need help with {{name}}? This guide provides various support options and resourc
 
 **Best for**: Bug reports, feature requests, technical issues
 
-* **Create an issue**: [{{slug}} Issues](https://github.com/{{author}}/{{slug}}/issues)
+* **Create an issue**: [{{plugin_slug}} Issues](https://github.com/{{author}}/{{plugin_slug}}/issues)
 * **Search existing issues**: Check if your issue already exists
 * **Follow templates**: Use the provided issue templates
 * **Be specific**: Provide detailed information and reproduction steps
@@ -89,7 +89,7 @@ Any other context about the problem here.
 
 **Best for**: Questions, ideas, general discussion
 
-* **Ask questions**: [{{slug}} Discussions](https://github.com/{{author}}/{{slug}}/discussions)
+* **Ask questions**: [{{plugin_slug}} Discussions](https://github.com/{{author}}/{{plugin_slug}}/discussions)
 * **Share ideas**: Discuss potential features
 * **Community help**: Get help from other users
 * **Show and tell**: Share how you're using the plugin
@@ -98,7 +98,7 @@ Any other context about the problem here.
 
 **Best for**: General WordPress questions, plugin installation help
 
-* **Plugin support forum**: [WordPress.org {{slug}} Forum](https://wordpress.org/support/plugin/{{slug}}/)
+* **Plugin support forum**: [WordPress.org {{plugin_slug}} Forum](https://wordpress.org/support/plugin/{{plugin_slug}}/)
 * **Community driven**: Volunteers provide help
 * **Public archive**: Searchable for future users
 * **WordPress focused**: WordPress-specific issues
@@ -286,9 +286,9 @@ A: Deactivate the plugin immediately, then report the issue with your WordPress 
 
 ### Project Links
 
-* **GitHub Repository**: [{{author}}/{{slug}}](https://github.com/{{author}}/{{slug}})
-* **WordPress.org Plugin**: [{{slug}}](https://wordpress.org/plugins/{{slug}}/)
-* **Documentation**: [GitHub Pages](https://{{author}}.github.io/{{slug}}/)
+* **GitHub Repository**: [{{author}}/{{plugin_slug}}](https://github.com/{{author}}/{{plugin_slug}})
+* **WordPress.org Plugin**: [{{plugin_slug}}](https://wordpress.org/plugins/{{plugin_slug}}/)
+* **Documentation**: [GitHub Pages](https://{{author}}.github.io/{{plugin_slug}}/)
 
 ## Contributing to Support
 

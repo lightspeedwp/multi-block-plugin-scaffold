@@ -1,10 +1,10 @@
 <?php
 /**
- * Example Plugin Uninstall
+ * {{name}} Uninstall
  *
  * Fired when the plugin is uninstalled to clean up all plugin data.
  *
- * @package example_plugin
+ * @package {{namespace}}
  */
 
 // If uninstall not called from WordPress, exit.
@@ -14,9 +14,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-$plugin_slug      = 'example-plugin';
-$custom_post_type = 'example-plugin';
-$custom_taxonomy  = 'example-plugin_category';
+$plugin_slug      = '{{plugin_slug}}';
+$custom_post_type = '{{post_type_slug}}';
+$custom_taxonomy  = '{{taxonomy_slug}}';
 
 /**
  * Delete all posts of the custom post type.
@@ -115,6 +115,7 @@ $wpdb->query(
 /**
  * Clear scheduled cron hooks.
  */
+
 $hooks = array(
 	"{$plugin_slug}_cron",
 	"{$plugin_slug}_daily",

@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.9/block.json",
 	"apiVersion": 3,
-	"name": "{{namespace}}/{{slug}}-featured",
+	"name": "{{namespace}}/{{block_slug}}-featured",
 	"title": "Featured Items",
-	"category": "{{slug}}",
+	"category": "{{block_slug}}",
 	"icon": "star-filled",
 	"description": "Display featured items in a highlight section.",
 	"version": "1.0.0",
 	"textdomain": "{{textdomain}}",
-	"keywords": [ "featured", "{{slug}}", "highlight" ],
+	"keywords": [ "featured", "{{block_slug}}", "highlight" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -82,17 +82,17 @@
 		}
 	},
 	"selectors": {
-		"root": ".{{namespace}}-{{slug}}-featured",
+		"root": ".{{namespace}}-{{block_slug}}-featured",
 		"color": {
-			"text": ".{{namespace}}-{{slug}}-featured__item",
-			"background": ".{{namespace}}-{{slug}}-featured"
+			   "text": ".{{namespace}}-{{block_slug}}-featured__item",
+			   "background": ".{{namespace}}-{{block_slug}}-featured"
 		},
 		"typography": {
-			"fontSize": ".{{namespace}}-{{slug}}-featured__title"
+			   "fontSize": ".{{namespace}}-{{block_slug}}-featured__title"
 		},
 		"dimensions": {
-			"aspectRatio": ".{{namespace}}-{{slug}}-featured__image",
-			"minHeight": ".{{namespace}}-{{slug}}-featured--hero"
+			   "aspectRatio": ".{{namespace}}-{{block_slug}}-featured__image",
+			   "minHeight": ".{{namespace}}-{{block_slug}}-featured--hero"
 		}
 	},
 	"editorScript": "file:./index.js",

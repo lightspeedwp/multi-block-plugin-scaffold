@@ -23,8 +23,10 @@ This document provides comprehensive information for developers working on {{nam
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/{{author}}/{{slug}}.git
-cd {{slug}}
+npm install
+composer install
+git clone https://github.com/{{author}}/{{plugin_slug}}.git
+cd {{plugin_slug}}
 npm install
 composer install
 ```
@@ -65,14 +67,14 @@ The plugin follows WordPress block development best practices with multiple bloc
 ```
 src/
 ├── index.js            # Main entry point - registers all blocks
-├── {{block-slug-1}}/   # First block
+├── {{block_slug}}/   # Block directory
 │   ├── block.json      # Block metadata and configuration
 │   ├── edit.js         # Editor component (React)
 │   ├── save.js         # Frontend save component
 │   ├── index.js        # Block registration
 │   ├── render.php      # Server-side render callback
 │   └── style.scss      # Block-specific styles
-├── {{block-slug-2}}/   # Second block
+├── {{block_slug}}/   # Another block
 │   └── ...
 └── shared/             # Shared between blocks
     ├── components/     # Shared React components
@@ -349,7 +351,7 @@ This updates version numbers in:
 
 - `package.json`
 - `composer.json`
-- `{{slug}}.php`
+- `{{plugin_slug}}.php`
 - `src/*/block.json`
 - `README.md`
 
@@ -451,7 +453,7 @@ define( 'SCRIPT_DEBUG', true );
 
 ### Getting Help
 
-1. Check existing [GitHub Issues](https://github.com/{{author}}/{{slug}}/issues)
+1. Check existing [GitHub Issues](https://github.com/{{author}}/{{plugin_slug}}/issues)
 2. Read [WordPress Block Editor Handbook](https://developer.wordpress.org/block-editor/)
 3. Join [WordPress Slack](https://wordpress.slack.com) #core-editor channel
 4. Review [LightSpeed Standards](https://github.com/lightspeedwp/.github)

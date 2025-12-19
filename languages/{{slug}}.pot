@@ -1,25 +1,26 @@
-# Copyright (C) Example Author
-# This file is distributed under the same license as the Example Plugin package.
+
+# Copyright (C) {{author}}
+# This file is distributed under the same license as the {{name}} package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Example Plugin 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/Example Author/example-plugin/issues\n"
-"POT-Creation-Date: 2024-01-01 00:00:00+00:00\n"
+"Project-Id-Version: {{name}} {{version}}\n"
+"Report-Msgid-Bugs-To: https://github.com/{{author}}/{{slug}}/issues\n"
+"POT-Creation-Date: {{pot_date}}\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: WP-CLI\n"
-"X-Domain: example-plugin\n"
+"X-Domain: {{textdomain}}\n"
 
 #. Plugin Name of the plugin
-msgid "Example Plugin"
+msgid "{{name}}"
 msgstr ""
 
 #. Description of the plugin
-msgid "A multi-block WordPress plugin scaffold example"
+msgid "{{description}}"
 msgstr ""
 
 #. Author of the plugin
-msgid "Example Author"
+msgid "{{author}}"
 msgstr ""

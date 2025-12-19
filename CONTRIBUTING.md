@@ -78,11 +78,11 @@ We welcome various types of contributions:
 
 ```bash
 # Fork the repository on GitHub, then clone your fork
-git clone https://github.com/YOUR-USERNAME/{{slug}}.git
-cd {{slug}}
+git clone https://github.com/YOUR-USERNAME/{{plugin_slug}}.git
+cd {{plugin_slug}}
 
 # Add upstream remote
-git remote add upstream https://github.com/{{author}}/{{slug}}.git
+git remote add upstream https://github.com/{{author}}/{{plugin_slug}}.git
 ```
 
 ### 2. Install Dependencies
@@ -206,7 +206,7 @@ export default function Edit( { attributes, setAttributes } ) {
 Example:
 
 ```scss
-.wp-block-{{namespace}}-{{slug}} {
+.wp-block-{{namespace}}-{{block_slug}} {
     &__content {
         padding: var(--wp--preset--spacing--medium);
         border: 1px solid var(--wp--preset--color--border);
@@ -395,7 +395,7 @@ Outstanding contributors may be invited to become:
 
 ### Questions About Contributing
 
-- **General questions** - Use [GitHub Discussions](https://github.com/{{author}}/{{slug}}/discussions)
+- **General questions** - Use [GitHub Discussions](https://github.com/{{author}}/{{plugin_slug}}/discussions)
 - **Specific issues** - Comment on relevant GitHub issues
 - **Development help** - See [SUPPORT.md](SUPPORT.md) for channels
 - **Urgent matters** - Contact maintainers directly

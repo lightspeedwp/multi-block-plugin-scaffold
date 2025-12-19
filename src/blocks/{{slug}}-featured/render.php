@@ -49,7 +49,7 @@ if ( ! $featured_query->have_posts() ) {
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
-		'class' => 'wp-block-{{namespace}}-{{slug}}-featured is-layout-' . esc_attr( $layout ),
+		'class' => 'wp-block-{{namespace}}-{{block_slug}}-featured is-layout-' . esc_attr( $layout ),
 	)
 );
 ?>

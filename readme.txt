@@ -43,44 +43,44 @@ License URI: {{license_uri}}
 * PHP {{requires_php}} or higher
 * Modern browser with JavaScript enabled
 
-= Support =
+=== {{name}} ===
+Contributors: {{author}}
+Donate link: https://github.com/{{author}}/{{plugin_slug}}/donate
+Tags: blocks, gutenberg, {{plugin_slug}}, {{name}}
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-For support requests, please visit {{support_url}} or create an issue on our [GitHub repository]({{github_url}}).
+== Description ==
 
-= Contributing =
-
-We welcome contributions! Please see our [contributing guidelines]({{github_url}}/blob/main/CONTRIBUTING.md) for more information.
-
-= Privacy =
-
-This plugin does not collect or store any personal data. All data remains on your WordPress installation.
+{{name}} is a multi-block plugin scaffold for WordPress. It provides a starting point for building custom blocks, patterns, and templates. All code is namespaced and uses mustache placeholders for code generation.
 
 == Installation ==
 
-= Automatic Installation =
+1. Download the plugin ZIP from [GitHub](https://github.com/{{author}}/{{plugin_slug}}/releases).
+2. Upload to your WordPress site via Plugins > Add New > Upload Plugin.
+3. Activate the plugin.
 
-1. Log in to your WordPress admin panel
-2. Navigate to Plugins → Add New
-3. Search for "{{name}}"
-4. Click "Install Now" and then "Activate"
+== Frequently Asked Questions ==
 
-= Manual Installation =
+= Where can I find documentation? =-
 
-1. Download the plugin ZIP file
-2. Log in to your WordPress admin panel
-3. Navigate to Plugins → Add New → Upload Plugin
-4. Choose the downloaded ZIP file and click "Install Now"
-5. Activate the plugin after installation
+See [USAGE.md](https://github.com/{{author}}/{{plugin_slug}}/blob/main/USAGE.md) for usage instructions.
 
-= After Activation =
+= How do I report a bug? =-
 
-1. Create a new post or page (or edit an existing one)
-2. In the block editor, click the "+" button to add a new block
-3. Search for "{{block_name}}"
-4. Add the block to your content
-5. Customize the block settings in the sidebar
-6. Publish or update your post/page
+Open an issue at [GitHub Issues](https://github.com/{{author}}/{{plugin_slug}}/issues).
 
+= How do I contribute? =-
+
+See [CONTRIBUTING.md](https://github.com/{{author}}/{{plugin_slug}}/blob/main/CONTRIBUTING.md).
+
+== Changelog ==
+
+= 1.0.0 =-
+* Initial release.
 = Configuration =
 
 The plugin works out of the box with default settings. You can customize the blocks' appearance and behavior using the block settings panel in the editor.

@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 	'title'       => __( '{{name}} Grid', '{{textdomain}}' ),
-	'slug'        => '{{slug}}/{{slug}}-grid',
+	'slug'        => '{{slug}}/item-grid',
 	'description' => __( 'A grid of items.', '{{textdomain}}' ),
 	'categories'  => array( '{{slug}}' ),
 	'keywords'    => array(
@@ -23,5 +23,5 @@ return array(
 	'blockTypes'  => array( 'core/group', 'core/query' ),
 	'postTypes'   => array( 'item' ),
 	'viewportWidth' => 1200,
-	'content'     => '<!-- wp:{{slug}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"item","perPage":6}} /-->',
+	'content'     => '<!-- wp:{{slug}}/item-collection {"layout":"grid","columns":3,"query":{"postType":"item","perPage":6}} /-->',
 );

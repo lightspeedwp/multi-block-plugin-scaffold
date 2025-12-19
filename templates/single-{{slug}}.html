@@ -14,7 +14,7 @@
 
 		<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
 
-		<!-- wp:pattern {"slug":"{{slug}}/{{slug}}-meta"} /-->
+		<!-- wp:pattern {"slug":"{{slug}}/item-meta"} /-->
 	</div>
 	<!-- /wp:group -->
 
@@ -23,10 +23,10 @@
 	<!-- /wp:spacer -->
 
 	<!-- wp:heading {"level":2} -->
-	<h2>Related Items</h2>
+	<h2>Related {{name_plural}}</h2>
 	<!-- /wp:heading -->
 
-	<!-- wp:{{namespace}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"{{slug}}","perPage":3}} /-->
+	<!-- wp:{{namespace}}/item-collection {"layout":"grid","columns":3,"query":{"postType":"{{slug}}","perPage":3}} /-->
 </main>
 <!-- /wp:group -->
 

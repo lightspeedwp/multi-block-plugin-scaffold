@@ -7,19 +7,19 @@
  * Example Plugin Collection Block - Editor Component
  *
  * @package
-  // Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-collection/edit.js
-  
+	// Folder and file names should use mustache placeholders, e.g. src/blocks/{{block_slug}}-collection/edit.js
+
   import { __ } from '@wordpress/i18n';
   import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
   import {
   PanelBody,
-  // Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-collection/edit.js
+	// Folder and file names should use mustache placeholders, e.g. src/blocks/{{block_slug}}-collection/edit.js
   SelectControl,
   RangeControl,
   } from '@wordpress/components';
   import { useSelect } from '@wordpress/data';
   import { useMemo } from '@wordpress/element';
-  
+
   /**
  * Collection block edit component.
  *

@@ -7,13 +7,13 @@
  * Featured Items Block - Editor Component
  *
  * @package
-// Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-featured/edit.js
+// Folder and file names should use mustache placeholders, e.g. src/blocks/{{block_slug}}-featured/edit.js
 
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
-// Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-featured/edit.js
+// Folder and file names should use mustache placeholders, e.g. src/blocks/{{block_slug}}-featured/edit.js
 	RangeControl,
 	SelectControl,
 	TextControl,
@@ -55,7 +55,7 @@ export default function Edit({ attributes, setAttributes }) {
 	);
 
 	const blockProps = useBlockProps({
-		className: `wp-block-{{namespace}}-{{slug}}-featured is-layout-${layout}`,
+		className: `wp-block-{{namespace}}-{{block_slug}}-featured is-layout-${layout}`,
 	});
 
 	return (
@@ -88,7 +88,7 @@ export default function Edit({ attributes, setAttributes }) {
 									);
 						onChange={(value) => setAttributes({ layout: value })}
 									const blockProps = useBlockProps({
-										className: `wp-block-{{namespace}}-{{slug}}-featured is-layout-${layout}`,
+										   className: `wp-block-{{namespace}}-{{block_slug}}-featured is-layout-${layout}`,
 									});
 				   <PanelBody title={__('Display Settings', '{{textdomain}}')}>
 											<PanelBody title={__('Settings', '{{textdomain}}')}>
@@ -129,22 +129,22 @@ export default function Edit({ attributes, setAttributes }) {
 													<TextControl
 														label={__('Read More Text', '{{textdomain}}')}
 						checked={displayReadMore}
-												<p className="wp-block-{{namespace}}-{{slug}}-featured__loading">
+												   <p className="wp-block-{{namespace}}-{{block_slug}}-featured__loading">
 							setAttributes({ displayReadMore: value })
 													{__('Loading…', '{{textdomain}}')}
 					/>
-												<p className="wp-block-{{namespace}}-{{slug}}-featured__empty">
+												   <p className="wp-block-{{namespace}}-{{block_slug}}-featured__empty">
 						<TextControl
 													{__(
 														'No featured items found. Mark some as featured in the post editor.',
 														'{{textdomain}}'
 													)}
 							}
-												<div className="wp-block-{{namespace}}-{{slug}}-featured__items">
+												   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__items">
 					)}
 													<article
 														key={post.id}
-														className={`wp-block-{{namespace}}-{{slug}}-featured__item ${
+														   className={`wp-block-{{namespace}}-{{block_slug}}-featured__item ${
 															index === 0 && layout === 'featured-first'
 																? 'is-primary'
 																: ''
@@ -154,29 +154,29 @@ export default function Edit({ attributes, setAttributes }) {
 															post._embedded?.[
 																'wp:featuredmedia'
 															]?.[0] && (
-																<div className="wp-block-{{namespace}}-{{slug}}-featured__image">
+																   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__image">
 							'No featured items found. Mark some as featured in the post editor.',
-														<div className="wp-block-{{namespace}}-{{slug}}-featured__content">
+														   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__content">
 						)}
-															<h3 className="wp-block-{{namespace}}-{{slug}}-featured__title">
+															   <h3 className="wp-block-{{namespace}}-{{block_slug}}-featured__title">
 				)}
-															<p className="wp-block-{{namespace}}-{{slug}}-featured__subtitle">
+															   <p className="wp-block-{{namespace}}-{{block_slug}}-featured__subtitle">
 																{__('Subtitle', '{{textdomain}}')}
-					   <div className="wp-block-{{namespace}}-{{slug}}-featured__items">
+					   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__items">
 															<div
-																className="wp-block-{{namespace}}-{{slug}}-featured__excerpt"
+																   className="wp-block-{{namespace}}-{{block_slug}}-featured__excerpt"
 								key={post.id}
-															<div className="wp-block-{{namespace}}-{{slug}}-featured__meta">
+															   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__meta">
 									index === 0 && layout === 'featured-first'
 															<button
 																type="button"
-																className="wp-block-{{namespace}}-{{slug}}-featured__read-more"
+																   className="wp-block-{{namespace}}-{{block_slug}}-featured__read-more"
 							>
 								{displayFeaturedImage &&
 									post._embedded?.[
 										'wp:featuredmedia'
 									]?.[0] && (
-										   <div className="wp-block-{{namespace}}-{{slug}}-featured__image">
+										   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__image">
 											<img
 												src={
 													post._embedded[
@@ -192,22 +192,22 @@ export default function Edit({ attributes, setAttributes }) {
 										</div>
 									)}
 
-								   <div className="wp-block-{{namespace}}-{{slug}}-featured__content">
+								   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__content">
 									{displayTitle && (
-										   <h3 className="wp-block-{{namespace}}-{{slug}}-featured__title">
+										   <h3 className="wp-block-{{namespace}}-{{block_slug}}-featured__title">
 											{post.title.rendered}
 										</h3>
 									)}
 
 									{displaySubtitle && (
-										   <p className="wp-block-{{namespace}}-{{slug}}-featured__subtitle">
+										   <p className="wp-block-{{namespace}}-{{block_slug}}-featured__subtitle">
 											   {__('Subtitle', '{{textdomain}}')}
 										</p>
 									)}
 
 									{displayExcerpt && (
 										<div
-											   className="wp-block-{{namespace}}-{{slug}}-featured__excerpt"
+											   className="wp-block-{{namespace}}-{{block_slug}}-featured__excerpt"
 											dangerouslySetInnerHTML={{
 												__html: post.excerpt.rendered,
 											}}
@@ -215,7 +215,7 @@ export default function Edit({ attributes, setAttributes }) {
 									)}
 
 									{displayMeta && (
-										   <div className="wp-block-{{namespace}}-{{slug}}-featured__meta">
+										   <div className="wp-block-{{namespace}}-{{block_slug}}-featured__meta">
 											<time>
 												{new Date(
 													post.date
@@ -227,7 +227,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{displayReadMore && (
 										<button
 											type="button"
-											   className="wp-block-{{namespace}}-{{slug}}-featured__read-more"
+											   className="wp-block-{{namespace}}-{{block_slug}}-featured__read-more"
 											onClick={() => {
 												const postUrl = post.link;
 												if (postUrl) {

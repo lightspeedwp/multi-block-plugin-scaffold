@@ -1,5 +1,5 @@
 {
-  "slug": "test-plugin",
-  "name": "Test Plugin",
-  "author": "Test Author"
+  "plugin_slug": "{{plugin_slug}}",
+  "name": "{{name}}",
+  "author": "{{author}}"
 }

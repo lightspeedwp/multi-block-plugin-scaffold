@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
-// Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-slider/edit.js
+// Folder and file names should use mustache placeholders, e.g. src/blocks/{{block_slug}}-slider/edit.js
 	MediaUploadCheck,
 } from '@wordpress/block-editor';
 import {
@@ -70,7 +70,7 @@ export default function Edit({ attributes, setAttributes }) {
 		const newSlides = [...slides];
 		newSlides[index] = { ...newSlides[index], ...updates };
 			const blockProps = useBlockProps({
-				className: 'wp-block-{{namespace}}-{{slug}}-slider',
+				   className: 'wp-block-{{namespace}}-{{block_slug}}-slider',
 			});
 	const removeSlide = (index) => {
 					<PanelBody title={__('Slider Source', '{{textdomain}}')}>
@@ -81,7 +81,7 @@ export default function Edit({ attributes, setAttributes }) {
 								label: __('Custom Slides', '{{textdomain}}'),
 
 								label: __('Posts', '{{textdomain}}'),
-		className: 'wp-block-{{namespace}}-{{slug}}-slider',
+		className: 'wp-block-{{namespace}}-{{block_slug}}-slider',
 								label: __('Repeater Field', '{{textdomain}}'),
 
 					<PanelBody title={__('Slider Settings', '{{textdomain}}')}>
@@ -108,25 +108,25 @@ export default function Edit({ attributes, setAttributes }) {
 						<RangeControl
 							label={__('Slides to Scroll', '{{textdomain}}')}
 				</PanelBody>
-						<div className="wp-block-{{namespace}}-{{slug}}-slider__viewport">
+						   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__viewport">
 				   <PanelBody title={__('Slider Settings', '{{textdomain}}')}>
-							<div className="wp-block-{{namespace}}-{{slug}}-slider__track">
+							   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__track">
 							   label={__('Autoplay', '{{textdomain}}')}
 								<div
 									key={slide.id}
-									className={`wp-block-{{namespace}}-{{slug}}-slider__slide ${
+									   className={`wp-block-{{namespace}}-{{block_slug}}-slider__slide ${
 										index === currentSlide
 											? 'is-active'
 											: ''
 									}`}
 							onChange={(value) =>
-									<div className="wp-block-{{namespace}}-{{slug}}-slider__image-wrapper"
+									   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__image-wrapper"
 							}
-										<div className="wp-block-{{namespace}}-{{slug}}-slider__placeholder">
+										   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__placeholder">
 							max={10000}
 											{__('Click to select image', '{{textdomain}}')}
 						/>
-									<div className="wp-block-{{namespace}}-{{slug}}-slider__slide-content">
+									   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__slide-content">
 					<ToggleControl
 										<TextControl
 											label={__(
@@ -151,24 +151,24 @@ export default function Edit({ attributes, setAttributes }) {
 										onClick={() =>
 											removeSlide(index)
 										}
-										className="wp-block-{{namespace}}-{{slug}}-slider__remove-slide"
+										   className="wp-block-{{namespace}}-{{block_slug}}-slider__remove-slide"
 									>
 										{__(
 											'Remove Slide',
 											'{{textdomain}}'
 										)}
 							setAttributes({ slidesToScroll: value })
-									<div className="wp-block-{{namespace}}-{{slug}}-slider__empty">
+									   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__empty">
 						min={1}
 										{__(
 											'No slides added yet. Click the button below to add slides.',
 											'{{textdomain}}'
 										)}
 
-									<div className="wp-block-{{namespace}}-{{slug}}-slider__nav">
+									   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__nav">
 				{source === 'custom' && (
 										<button
-											className={`wp-block-{{namespace}}-{{slug}}-slider__dot ${
+											   className={`wp-block-{{namespace}}-{{block_slug}}-slider__dot ${
 												index === currentSlide
 													? 'is-active'
 													: ''
@@ -177,19 +177,19 @@ export default function Edit({ attributes, setAttributes }) {
 						<Button
 							variant="primary"
 							onClick={addSlide}
-							className="wp-block-{{namespace}}-{{slug}}-slider__add-slide"
+							   className="wp-block-{{namespace}}-{{block_slug}}-slider__add-slide"
 						>
 							{__('Add Slide', '{{textdomain}}')}
 						</Button>
 													index === currentSlide
-						<div className="wp-block-{{namespace}}-{{slug}}-slider__posts-notice">
+						   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__posts-notice">
 														: 'none',
 							{__(
 								'Slider will display posts from the {{name}} post type.',
 								'{{textdomain}}'
 							)}
 													onSelect={(media) =>
-						<div className="wp-block-{{namespace}}-{{slug}}-slider__repeater-notice">
+						   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__repeater-notice">
 															image: {
 							{__(
 								'Slider will display slides from the repeater field.',
@@ -201,7 +201,7 @@ export default function Edit({ attributes, setAttributes }) {
 													value={slide.image?.id}
 													render={({ open }) => (
 														<div
-															   className="wp-block-{{namespace}}-{{slug}}-slider__image-wrapper"
+															   className="wp-block-{{namespace}}-{{block_slug}}-slider__image-wrapper"
 															onClick={open}
 															role="button"
 															tabIndex={0}
@@ -226,7 +226,7 @@ export default function Edit({ attributes, setAttributes }) {
 																	}
 																/>
 															) : (
-																   <div className="wp-block-{{namespace}}-{{slug}}-slider__placeholder">
+																   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__placeholder">
 																	{__(
 																		'Click to select image',
 																		   '{{textdomain}}'
@@ -238,7 +238,7 @@ export default function Edit({ attributes, setAttributes }) {
 												/>
 											</MediaUploadCheck>
 
-											   <div className="wp-block-{{namespace}}-{{slug}}-slider__slide-content">
+											   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__slide-content">
 												<TextControl
 													label={__(
 														'Title',
@@ -283,7 +283,7 @@ export default function Edit({ attributes, setAttributes }) {
 												onClick={() =>
 													removeSlide(index)
 												}
-												   className="wp-block-{{namespace}}-{{slug}}-slider__remove-slide"
+												   className="wp-block-{{namespace}}-{{block_slug}}-slider__remove-slide"
 											>
 												{__(
 													'Remove Slide',
@@ -294,7 +294,7 @@ export default function Edit({ attributes, setAttributes }) {
 									))}
 								</div>
 							) : (
-								   <div className="wp-block-{{namespace}}-{{slug}}-slider__empty">
+								   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__empty">
 									{__(
 										'No slides added yet. Click the button below to add slides.',
 										   '{{textdomain}}'
@@ -304,11 +304,11 @@ export default function Edit({ attributes, setAttributes }) {
 						</div>
 
 						{slides.length > 1 && (
-							   <div className="wp-block-{{namespace}}-{{slug}}-slider__nav">
+							   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__nav">
 								{slides.map((_, index) => (
 									<button
 										key={index}
-										   className={`wp-block-{{namespace}}-{{slug}}-slider__dot ${
+										   className={`wp-block-{{namespace}}-{{block_slug}}-slider__dot ${
 											index === currentSlide
 												? 'is-active'
 												: ''
@@ -323,7 +323,7 @@ export default function Edit({ attributes, setAttributes }) {
 						<Button
 							variant="primary"
 							onClick={addSlide}
-							   className="wp-block-{{namespace}}-{{slug}}-slider__add-slide"
+							   className="wp-block-{{namespace}}-{{block_slug}}-slider__add-slide"
 						>
 							   {__('Add Slide', '{{textdomain}}')}
 						</Button>
@@ -331,7 +331,7 @@ export default function Edit({ attributes, setAttributes }) {
 				)}
 
 				{source === 'posts' && (
-					   <div className="wp-block-{{namespace}}-{{slug}}-slider__posts-notice">
+					   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__posts-notice">
 						{__(
 							'Slider will display posts from the Example Plugin post type.',
 							   '{{textdomain}}'
@@ -340,7 +340,7 @@ export default function Edit({ attributes, setAttributes }) {
 				)}
 
 				{source === 'repeater' && (
-					   <div className="wp-block-{{namespace}}-{{slug}}-slider__repeater-notice">
+					   <div className="wp-block-{{namespace}}-{{block_slug}}-slider__repeater-notice">
 						{__(
 							'Slider will display slides from the repeater field.',
 							   '{{textdomain}}'
