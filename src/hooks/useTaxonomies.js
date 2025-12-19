@@ -1,4 +1,9 @@
 /**
+ * @file useTaxonomies.js
+ * @description React hook for retrieving taxonomy terms for a post.
+ * @todo Add support for custom taxonomy filtering.
+ */
+/**
  * useTaxonomies Hook
  *
  * Custom hook for fetching taxonomy terms with configurable query options.

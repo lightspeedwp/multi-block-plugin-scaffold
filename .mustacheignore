@@ -1,0 +1,13 @@
+# .mustacheignore
+
+# List of files or directories (relative to repo root) to ignore during mustache variable scan
+
+# Example patterns
+
+# node_modules/
+
+# build/
+
+docs/
+
+# src/experimental/

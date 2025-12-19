@@ -11,16 +11,27 @@ const { execSync } = require('child_process');
  * @return {void}
  */
 function runDryRunE2E() {
-  try {
-    execSync('playwright test tests/e2e/', { stdio: 'inherit' });
-    console.log('E2E dry-run completed.');
-    process.exit(0);
-  } catch (err) {
-    console.error('E2E dry-run failed:', err.message);
-    process.exit(1);
-  }
+	const baseUrl = process.env.PLAYWRIGHT_E2E_URL;
+
+	if (!baseUrl) {
+		console.warn(
+			'Playwright E2E dry-run skipped because PLAYWRIGHT_E2E_URL is not defined.'
+		);
+		process.exit(0);
+	}
+
+	const command = `npx playwright test tests/e2e/ --base-url=${baseUrl}`;
+
+	try {
+		execSync(command, { stdio: 'inherit' });
+		console.log('E2E dry-run completed.');
+		process.exit(0);
+	} catch (err) {
+		console.error('E2E dry-run failed:', err.message);
+		process.exit(1);
+	}
 }
 
 if (require.main === module) {
-  runDryRunE2E();
+	runDryRunE2E();
 }

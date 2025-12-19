@@ -1,4 +1,9 @@
 /**
+ * @file useSlider.js
+ * @description React hook for slider/carousel logic.
+ * @todo Refactor for accessibility and add more tests.
+ */
+/**
  * useSlider Hook
  *
  * Custom hook for managing slider/carousel state and navigation controls.

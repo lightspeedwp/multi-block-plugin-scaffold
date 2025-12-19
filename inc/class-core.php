@@ -1,5 +1,6 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace example_plugin\classes;
+namespace {{namespace}}\classes;
 
 /**
  * Core Class initiating the rest of the classes.
@@ -30,17 +31,17 @@ class Core {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
 		// Initialize components.
-		new Post_Types();
-		new Taxonomies();
-		new Fields();
-		new Repeater_Fields();
-		new Options();
-		new SCF_JSON();
-		new SCF_JSON_Validator();
-		new Block_Templates();
-		new Block_Bindings();
-		new Block_Styles();
-		new Patterns();
+		new {{namespace|pascalCase}}_Post_Types();
+		new {{namespace|pascalCase}}_Taxonomies();
+		new {{namespace|pascalCase}}_Fields();
+		new {{namespace|pascalCase}}_Repeater_Fields();
+		new {{namespace|pascalCase}}_Options();
+		new {{namespace|pascalCase}}_SCF_JSON();
+		new {{namespace|pascalCase}}_SCF_JSON_Validator();
+		new {{namespace|pascalCase}}_Block_Templates();
+		new {{namespace|pascalCase}}_Block_Bindings();
+		new {{namespace|pascalCase}}_Block_Styles();
+		new {{namespace|pascalCase}}_Patterns();
 	}
 
 	/**
@@ -84,7 +85,7 @@ class Core {
 	public function register_blocks() {
 		// Auto-register all blocks in build/blocks/ (filtered for flexibility).
 		$default_dir = {{namespace|upper}}_PLUGIN_DIR . 'build/blocks/';
-		$blocks_dir = apply_filters( '{{slug}}_blocks_dir', $default_dir );
+		$blocks_dir = apply_filters( 'example-plugin_blocks_dir', $default_dir );
 
 		if ( ! is_dir( $blocks_dir ) ) {
 			return;

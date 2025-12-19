@@ -1,5 +1,5 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 /**
  * Block Style Variations Registration.

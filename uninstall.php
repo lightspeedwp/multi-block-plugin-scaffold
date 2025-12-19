@@ -14,8 +14,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-$plugin_slug      = '{{textdomain}}';
-$custom_post_type = '{{textdomain}}';
+$plugin_slug      = 'example-plugin';
+$custom_post_type = 'example-plugin';
 $custom_taxonomy  = 'example-plugin_category';
 
 /**

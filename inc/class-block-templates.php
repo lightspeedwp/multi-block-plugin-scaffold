@@ -1,10 +1,10 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 /**
  * Block Templates Registration.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,10 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Plugin block templates registration.
- *
- * @since 1.0.0
  */
 class {{namespace|pascalCase}}_Block_Templates {
+ */
+class ExamplePlugin_Block_Templates {
 
 	/**
 	 * Constructor.
@@ -44,7 +44,7 @@ class {{namespace|pascalCase}}_Block_Templates {
 
 		if ( file_exists( $template_file ) ) {
 			register_block_template(
-				'{{namespace}}//example-archive',
+				'{{slug}}//example-archive',
 				array(
 					'title'       => __( '{{name}} Example Archive', '{{textdomain}}' ),
 					'description' => __( 'Example archive template registered by the plugin.', '{{textdomain}}' ),

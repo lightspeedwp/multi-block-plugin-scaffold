@@ -1,9 +1,14 @@
 /**
+ * @file RepeaterField.js
+ * @description Component for displaying and editing repeater fields.
+ * @todo Add drag-and-drop reordering and validation.
+ */
+/**
  * Repeater Field Component
  *
  * Display ACF/SCF repeater field data in blocks.
  *
- * @package
+ * @package {{namespace}}
  */
 
 import { useSelect } from '@wordpress/data';
@@ -33,9 +38,9 @@ export default function RepeaterField({
 			}
 
 			const post = select('core').getEntityRecord(
-				'postType',
-				'{{textdomain}}',
-				postId
+				   'postType',
+				   '{{block_slug}}',
+				   postId
 			);
 			const fieldValue =
 				post?.acf?.[fieldName] ?? post?.meta?.[fieldName] ?? null;
@@ -57,20 +62,20 @@ export default function RepeaterField({
 	}
 
 	return (
-		<div className={`example_plugin-repeater-field ${className}`}>
+		<div className={`{{namespace}}-repeater-field ${className}`}>
 			{rows.map((row, index) =>
 				renderRow ? (
 					renderRow(row, index)
 				) : (
-					<div
-						key={index}
-						className="example_plugin-repeater-field__row"
-					>
+					   <div
+						   key={index}
+						   className="{{namespace}}-repeater-field__row"
+					   >
 						{Object.entries(row).map(([key, value]) => (
-							<div
-								key={key}
-								className="example_plugin-repeater-field__field"
-							>
+							   <div
+								   key={key}
+								   className="{{namespace}}-repeater-field__field"
+							   >
 								<strong>{key}:</strong> {String(value)}
 							</div>
 						))}

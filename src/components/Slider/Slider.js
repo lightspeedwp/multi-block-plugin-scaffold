@@ -1,9 +1,14 @@
 /**
+ * @file Slider.js
+ * @description Component for rendering a slider/carousel UI.
+ * @todo Add keyboard navigation and improve accessibility.
+ */
+/**
  * Slider Component
  *
  * A reusable slider/carousel component for the block editor and frontend.
  *
- * @package
+ * @package {{namespace}}
  */
 
 import { useState, useEffect, useRef, useCallback } from '@wordpress/element';
@@ -118,56 +123,56 @@ export default function Slider({
 
 	return (
 		/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */
-		<div
-			className={`example_plugin-slider ${className}`}
-			ref={sliderRef}
-			onMouseEnter={handleMouseEnter}
-			onMouseLeave={handleMouseLeave}
-			onKeyDown={handleKeyDown}
-			role="region"
-			aria-label={__('Slider', '{{textdomain}}')}
-			aria-roledescription="carousel"
-			tabIndex="0"
-		>
-			<div className="example_plugin-slider__viewport">
-				<div
-					className="example_plugin-slider__track"
-					style={{
-						transform: `translateX(${translateX}%)`,
-						transition: 'transform 0.5s ease-in-out',
-					}}
-				>
+		   <div
+			   className={`{{namespace}}-slider ${className}`}
+			   ref={sliderRef}
+			   onMouseEnter={handleMouseEnter}
+			   onMouseLeave={handleMouseLeave}
+			   onKeyDown={handleKeyDown}
+			   role="region"
+			   aria-label={__('Slider', '{{textdomain}}')}
+			   aria-roledescription="carousel"
+			   tabIndex="0"
+		   >
+			   <div className="{{namespace}}-slider__viewport">
+				   <div
+					   className="{{namespace}}-slider__track"
+					   style={{
+						   transform: `translateX(${translateX}%)`,
+						   transition: 'transform 0.5s ease-in-out',
+					   }}
+				   >
 					{slides.map((slide, index) => (
-						<div
-							key={slide.id || index}
-							className="example_plugin-slider__slide"
-							style={{ width: `${slideWidth}%` }}
-							role="group"
-							aria-roledescription="slide"
-							aria-label={`${index + 1} of ${totalSlides}`}
-						>
+						   <div
+							   key={slide.id || index}
+							   className="{{namespace}}-slider__slide"
+							   style={{ width: `${slideWidth}%` }}
+							   role="group"
+							   aria-roledescription="slide"
+							   aria-label={`${index + 1} of ${totalSlides}`}
+						   >
 							{renderSlide ? (
 								renderSlide(slide, index)
 							) : (
 								<>
 									{slide.image && (
-										<img
-											src={slide.image.url}
-											alt={
-												slide.image.alt ||
-												slide.title ||
-												''
-											}
-											className="example_plugin-slider__image"
-										/>
+										   <img
+											   src={slide.image.url}
+											   alt={
+												   slide.image.alt ||
+												   slide.title ||
+												   ''
+											   }
+											   className="{{namespace}}-slider__image"
+										   />
 									)}
 									{slide.title && (
-										<h3 className="example_plugin-slider__title">
+										   <h3 className="{{namespace}}-slider__title">
 											{slide.title}
 										</h3>
 									)}
 									{slide.caption && (
-										<p className="example_plugin-slider__caption">
+										   <p className="{{namespace}}-slider__caption">
 											{slide.caption}
 										</p>
 									)}
@@ -178,31 +183,31 @@ export default function Slider({
 				</div>
 			</div>
 
-			{showArrows && totalSlides > slidesToShow && (
-				<>
-					<Button
-						className="example_plugin-slider__arrow example_plugin-slider__arrow--prev"
-						onClick={prevSlide}
-						icon={chevronLeft}
-						label={__('Previous slide', '{{textdomain}}')}
-						disabled={!infinite && currentIndex === 0}
-					/>
-					<Button
-						className="example_plugin-slider__arrow example_plugin-slider__arrow--next"
-						onClick={nextSlide}
-						icon={chevronRight}
-						label={__('Next slide', '{{textdomain}}')}
-						disabled={!infinite && currentIndex >= maxIndex}
-					/>
-				</>
-			)}
+			   {showArrows && totalSlides > slidesToShow && (
+				   <>
+					   <Button
+						   className="{{namespace}}-slider__arrow {{namespace}}-slider__arrow--prev"
+						   onClick={prevSlide}
+						   icon={chevronLeft}
+						   label={__('Previous slide', '{{textdomain}}')}
+						   disabled={!infinite && currentIndex === 0}
+					   />
+					   <Button
+						   className="{{namespace}}-slider__arrow {{namespace}}-slider__arrow--next"
+						   onClick={nextSlide}
+						   icon={chevronRight}
+						   label={__('Next slide', '{{textdomain}}')}
+						   disabled={!infinite && currentIndex >= maxIndex}
+					   />
+				   </>
+			   )}
 
-			{showDots && totalSlides > slidesToShow && (
-				<div
-					className="example_plugin-slider__dots"
-					role="tablist"
-					aria-label={__('Slider navigation', '{{textdomain}}')}
-				>
+			   {showDots && totalSlides > slidesToShow && (
+				   <div
+					   className="{{namespace}}-slider__dots"
+					   role="tablist"
+					   aria-label={__('Slider navigation', '{{textdomain}}')}
+				   >
 					{Array.from({
 						length:
 							Math.ceil(
@@ -211,12 +216,12 @@ export default function Slider({
 					}).map((_, index) => (
 						<button
 							key={index}
-							className={`example_plugin-slider__dot ${
-								index ===
-								Math.floor(currentIndex / slidesToScroll)
-									? 'is-active'
-									: ''
-							}`}
+							   className={`{{namespace}}-slider__dot ${
+								   index ===
+								   Math.floor(currentIndex / slidesToScroll)
+									   ? 'is-active'
+									   : ''
+							   }`}
 							onClick={() => goToSlide(index * slidesToScroll)}
 							role="tab"
 							aria-selected={

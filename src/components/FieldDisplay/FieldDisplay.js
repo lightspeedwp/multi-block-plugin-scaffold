@@ -1,4 +1,9 @@
 /**
+ * @file FieldDisplay.js
+ * @description Component for displaying a custom field value.
+ * @todo Add prop types and improve accessibility.
+ */
+/**
  * Field Display Component
  *
  * Display ACF/SCF field values in blocks.
@@ -35,7 +40,7 @@ export default function FieldDisplay({
 
 			const post = select('core').getEntityRecord(
 				'postType',
-				'{{textdomain}}',
+				   '{{block_slug}}',
 				postId
 			);
 
@@ -64,7 +69,7 @@ export default function FieldDisplay({
 						<img
 							src={fieldValue.url}
 							alt={fieldValue.alt || ''}
-							className={`${className}__image`}
+							className={`{{namespace}}-field-display__image ${className}`}
 						/>
 					);
 				}
@@ -73,7 +78,9 @@ export default function FieldDisplay({
 			case 'gallery':
 				if (Array.isArray(fieldValue)) {
 					return (
-						<div className={`${className}__gallery`}>
+						<div
+							className={`{{namespace}}-field-display__gallery ${className}`}
+						>
 							{fieldValue.map((image, index) => (
 								<img
 									key={image.id || index}
@@ -109,5 +116,9 @@ export default function FieldDisplay({
 		}
 	};
 
-	return <div className={className}>{renderValue()}</div>;
+	return (
+		<div className={`{{namespace}}-field-display ${className}`}>
+			{renderValue()}
+		</div>
+	);
 }

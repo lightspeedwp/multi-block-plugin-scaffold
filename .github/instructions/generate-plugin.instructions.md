@@ -1,3 +1,21 @@
+# ⚠️ WARNING: Strict Mustache Placeholder Enforcement
+
+All contributors must use the correct mustache placeholders in all template files, folders, and code. Do not use generic placeholders (like `{{slug}}`) where a more specific one is required (e.g., `{{cpt1_slug}}`, `{{taxonomy1_slug}}`).
+
+**Never hard-code plugin-specific values** in the scaffold. All identifiers, class names, translation domains, and meta keys must use the appropriate placeholder as defined in `scripts/mustache-variables-registry.json`.
+
+The mustache registry is updated automatically by running:
+
+```sh
+node scripts/scan-mustache-variables.js --update-registry
+```
+
+If you add, rename, or remove placeholders, always update the registry and review the change report in `scripts/reports/`.
+
+See `docs/GENERATE_PLUGIN.md` for more details and the latest warning.
+
+**Failure to follow these rules will break plugin generation and may result in lost work.**
+
 ---
 name: Plugin Generator Instructions
 description: >-

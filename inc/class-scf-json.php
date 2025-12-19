@@ -1,5 +1,6 @@
+
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 /**
  * SCF Local JSON Configuration.

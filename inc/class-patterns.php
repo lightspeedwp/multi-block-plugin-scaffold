@@ -1,5 +1,5 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 /**
  * Block Patterns Registration.
@@ -36,7 +36,7 @@ class {{namespace|pascalCase}}_Patterns {
 	 */
 	public function register_pattern_category() {
 		register_block_pattern_category(
-			'{{textdomain}}',
+			'{{slug}}',
 			array(
 				'label' => __( '{{name}}', '{{textdomain}}' ),
 			)
@@ -106,6 +106,6 @@ class {{namespace|pascalCase}}_Patterns {
 		$pattern_name = str_replace( '{{slug}}-', '', $filename );
 
 		// Return namespaced slug.
-		return '{{namespace}}/' . $pattern_name;
+		return '{{slug}}/' . $pattern_name;
 	}
 }

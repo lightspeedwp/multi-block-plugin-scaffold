@@ -1,5 +1,5 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 /**
  * Block Bindings Registration.
@@ -13,9 +13,9 @@ class {{namespace|pascalCase}}_Block_Bindings {
 	 * Binding source name.
 	 *
 	 * @since 1.0.0
-	 * @var string
+	public function __construct() {
 	 */
-	const SOURCE = '{{namespace}}/fields';
+	const SOURCE = 'example_plugin/fields';
 
 	/**
 	 * Constructor.
@@ -38,7 +38,7 @@ class {{namespace|pascalCase}}_Block_Bindings {
 		}
 
 		register_block_bindings_source(
-			self::SOURCE,
+			'{{slug}}/post-meta',
 			array(
 				'label'              => __( '{{name}} Post Meta', '{{textdomain}}' ),
 				'get_value_callback' => array( $this, 'get_post_meta_value' ),

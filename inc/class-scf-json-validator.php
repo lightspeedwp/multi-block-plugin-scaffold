@@ -1,5 +1,6 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace example_plugin\classes;
+namespace {{namespace}}\classes;
 
 /**
  * SCF JSON Schema Validator.
@@ -7,6 +8,7 @@ namespace {{namespace|lowerCase}}\classes;
  * Comprehensive JSON Schema validation for SCF field groups using
  * JSON Schema Draft 7 validation.
  *
+ * @package example_plugin
  * @package {{namespace}}
  * @see https://github.com/WordPress/secure-custom-fields/blob/trunk/docs/tutorials/local-json.md
  * @since 1.0.0
@@ -23,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
+class ExamplePlugin_SCF_JSON_Validator {
 class {{namespace|pascalCase}}_SCF_JSON_Validator {
 
 	/**
@@ -31,6 +34,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	 * @var string
 	 */
 	private $schema_path;
+private $schema_path;
 
 	/**
 	 * Decoded schema cache.
@@ -38,13 +42,15 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	 * @var array
 	 */
 	private $schema;
+private $schema;
 
 	/**
 	 * SCF JSON handler instance.
 	 *
-	 * @var {{namespace|pascalCase}}_SCF_JSON
+	 * @var ExamplePlugin_SCF_JSON
 	 */
 	private $scf_json;
+private $scf_json;
 
 	/**
 	 * Valid field types in SCF.
@@ -52,6 +58,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	 * @var array
 	 */
 	private $valid_field_types = array(
+		private $valid_field_types = array(
 		'tab', 'accordion', 'message',
 		'text', 'textarea', 'email', 'url', 'password', 'number',
 		'wysiwyg', 'oembed',
@@ -68,6 +75,7 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	 * @var array
 	 */
 	private $valid_location_params = array(
+		private $valid_location_params = array(
 		'post_type', 'post_format', 'post_status', 'post_taxonomy',
 		'user_role', 'user_form',
 		'taxonomy',
@@ -85,10 +93,12 @@ class {{namespace|pascalCase}}_SCF_JSON_Validator {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->schema_path = EXAMPLE_PLUGIN_PLUGIN_DIR . 'scf-json/schema/scf-field-group.schema.json';
 		$this->schema_path = {{namespace|upper}}_PLUGIN_DIR . 'scf-json/schema/scf-field-group.schema.json';
 
-		if ( class_exists( '{{namespace|lowerCase}}\classes\{{namespace|pascalCase}}_SCF_JSON' ) ) {
-			$this->scf_json = new {{namespace|pascalCase}}_SCF_JSON();
+		if ( class_exists( 'example_plugin\classes\ExamplePlugin_SCF_JSON' ) ) {
+			$this->scf_json = new ExamplePlugin_SCF_JSON();
+				if ( class_exists( '{{namespace}}\\classes\\{{namespace|pascalCase}}_SCF_JSON' ) ) {
 		}
 
 		$this->load_schema();

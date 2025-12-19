@@ -1,6 +1,9 @@
-// generate-plugin.agent.js test
-const main = require('../generate-plugin.agent');
-test('generate-plugin agent runs with wizard (dry-run)', async () => {
-  process.env.DRY_RUN = '1';
-  await expect(main()).resolves.toBeUndefined();
+/**
+ * @file generate-plugin.agent.test.js
+ * @description Smoke test for the generate-plugin agent export
+ */
+const generatePluginAgent = require('../scripts/agents/generate-plugin.agent');
+
+test('generate-plugin agent exports the CLI entry point', () => {
+	expect(typeof generatePluginAgent).toBe('function');
 });

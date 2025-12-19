@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Detect maximum dry run mode
 function isMaximumDryRun(args) {
 	return (
@@ -6,7 +7,6 @@ function isMaximumDryRun(args) {
 		args['max-dry-run'] === true
 	);
 }
-#!/usr/bin/env node
 /* eslint-disable no-console */
 
 /**
@@ -349,5 +349,9 @@ async function main() {
 	}
 }
 
-// Run main function
-main();
+// Run main function if executed directly
+if (require.main === module) {
+	main();
+}
+
+module.exports = main;

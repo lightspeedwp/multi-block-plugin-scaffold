@@ -11,6 +11,7 @@ const RELEASE_AGENT_FILES = [
 const SCAFFOLD_AGENT_FILES = [
 	'.github/agents/release-scaffold.agent.md',
 	'.github/prompts/create-release-scaffold.prompt.md',
+	'.github/prompts/pre-release-validation.prompt.md',
 	'.github/instructions/release-scaffold.instructions.md',
 	'docs/RELEASE_PROCESS_SCAFFOLD.md',
 ];

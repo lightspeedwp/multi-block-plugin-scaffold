@@ -1,3 +1,8 @@
+/**
+ * @file release.agent.js
+ * @description CLI agent for release validation and automation
+ * @todo Refactor to export a testable function for direct testing
+ */
 // Detect maximum dry run mode
 function isMaximumDryRun(argv) {
 	return (
@@ -6,7 +11,6 @@ function isMaximumDryRun(argv) {
 		argv.includes('--max-dry-run')
 	);
 }
-#!/usr/bin/env node
 /* eslint-disable no-console, jsdoc/require-param-type */
 
 /**
@@ -747,7 +751,8 @@ function main() {
 }
 }
 
-// Run main function
+
+// Run main function if executed directly
 if (require.main === module) {
 	const result = main();
 	process.exit(result ? 0 : 1);

@@ -7,10 +7,10 @@
  */
 
 // Import blocks.
-import './blocks/{{slug}}-card';
-import './blocks/{{slug}}-collection';
-import './blocks/{{slug}}-slider';
-import './blocks/{{slug}}-featured';
+import './blocks/example-plugin-card';
+import './blocks/example-plugin-collection';
+import './blocks/example-plugin-slider';
+import './blocks/example-plugin-featured';
 
 // Import global styles.
 import './scss/style.scss';

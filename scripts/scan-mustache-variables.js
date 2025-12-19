@@ -94,6 +94,29 @@ function main() {
 		outputJson();
 		return;
 	}
+	if (args.includes('--ci-fail')) {
+		// CI mode: fail if registry is out of sync
+		const { results } = buildRegistry();
+
+		const issues = [];
+		if (results.missingInRegistry?.length > 0) {
+			issues.push(`${results.missingInRegistry.length} variables in files not in registry`);
+		}
+		if (results.unusedInFiles?.length > 0) {
+			issues.push(`${results.unusedInFiles.length} variables in registry not in files`);
+		}
+
+		if (issues.length > 0) {
+			console.error('❌ Registry validation failed:');
+			issues.forEach(issue => console.error(`  - ${issue}`));
+			console.error('\nRun: node scripts/scan-mustache-variables.js --update-registry');
+			process.exit(1);
+		}
+
+		console.log('✅ Registry is in sync');
+		return;
+	}
+
 	const validateIndex = args.indexOf('--validate');
 	if (validateIndex !== -1) {
 		const configPath = args[validateIndex + 1];

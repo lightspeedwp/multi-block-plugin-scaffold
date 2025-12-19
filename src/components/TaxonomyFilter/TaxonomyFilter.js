@@ -1,9 +1,14 @@
 /**
+ * @file TaxonomyFilter.js
+ * @description Component for filtering items by taxonomy terms.
+ * @todo Add multi-select and accessibility improvements.
+ */
+/**
  * Taxonomy Filter Component
  *
  * A reusable component for filtering by taxonomy terms in the block editor.
  *
- * @package
+ * @package {{namespace}}
  */
 
 import { __ } from '@wordpress/i18n';
@@ -23,7 +28,7 @@ import { SelectControl, Spinner, FormTokenField } from '@wordpress/components';
  * @return {Element} TaxonomyFilter component.
  */
 export default function TaxonomyFilter({
-	taxonomy = 'example-plugin_category',
+	taxonomy = '{{taxonomy_slug}}_category',
 	value = [],
 	onChange,
 	label = __('Filter by Category', '{{textdomain}}'),
@@ -52,13 +57,13 @@ export default function TaxonomyFilter({
 		[taxonomy]
 	);
 
-	if (isLoading) {
-		return <Spinner />;
-	}
+	   if (isLoading) {
+		   return <Spinner />;
+	   }
 
-	if (!terms || terms.length === 0) {
-		return <p>{__('No terms found.', '{{textdomain}}')}</p>;
-	}
+	   if (!terms || terms.length === 0) {
+		   return <p>{__('No terms found.', '{{textdomain}}')}</p>;
+	   }
 
 	if (multiple) {
 		const termNames = terms.map((term) => term.name);
@@ -83,13 +88,13 @@ export default function TaxonomyFilter({
 		);
 	}
 
-	const options = [
-		{ value: '', label: __('All', '{{textdomain}}') },
-		...terms.map((term) => ({
-			value: term.id.toString(),
-			label: term.name,
-		})),
-	];
+	   const options = [
+		   { value: '', label: __('All', '{{textdomain}}') },
+		   ...terms.map((term) => ({
+			   value: term.id.toString(),
+			   label: term.name,
+		   })),
+	   ];
 
 	return (
 		<SelectControl

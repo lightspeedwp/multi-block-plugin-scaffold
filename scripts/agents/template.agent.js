@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 /**
+ * @file template.agent.js
+ * @description Template agent for new agent scripts
+ * @todo Implement concrete agent logic for production use
+ */
+/**
  * TEMPLATE: Agent Script Template
  *
  * ⚠️ THIS IS A TEMPLATE FILE - NOT A FUNCTIONAL AGENT

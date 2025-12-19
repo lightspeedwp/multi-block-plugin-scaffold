@@ -108,7 +108,53 @@ function formatList(items, sample = 3) {
 	return `${items.length} item(s): ${sampleList}${items.length > sample ? ', …' : ''}`;
 }
 
+/**
+ * Check if new variables have placeholder values defined
+ *
+ * @param {string[]} variables - Variable names to check
+ * @param {Object} placeholders - Placeholder map
+ * @return {string[]} Variables without placeholders
+ */
+function checkNewVariablesHavePlaceholders(variables, placeholders) {
+	return variables.filter(varName => {
+		return !placeholders.hasOwnProperty(varName) ||
+			placeholders[varName] === undefined ||
+			placeholders[varName] === '';
+	});
+}
+
+/**
+ * Validate registry with optional strict mode
+ *
+ * @param {Object} registry - Registry object
+ * @param {Object} placeholders - Placeholder values
+ * @param {Object} options - Validation options
+ * @return {Object} Validation result
+ */
+function validateRegistry(registry, placeholders, options = {}) {
+	const errors = [];
+	const warnings = [];
+
+	if (options.strict) {
+		const variables = Object.keys(registry.variables || {});
+		const missing = checkNewVariablesHavePlaceholders(variables, placeholders);
+
+		if (missing.length > 0) {
+			errors.push(...missing);
+		}
+	}
+
+	return {
+		valid: errors.length === 0,
+		errors,
+		warnings,
+	};
+}
+
 function main() {
+	const args = process.argv.slice(2);
+	const strictMode = args.includes('--strict');
+
 	const registry = loadRegistry();
 	const files = gatherTemplateFiles();
 	const foundMap = buildFoundMap(files);
@@ -148,6 +194,24 @@ function main() {
 		);
 	}
 
+	// Strict mode: check for placeholder values
+	if (strictMode && missingRegistry.length > 0) {
+		const placeholdersPath = path.join(ROOT_DIR, 'scripts', 'utils', 'placeholders.js');
+		let placeholders = {};
+		try {
+			placeholders = require(placeholdersPath);
+		} catch (e) {
+			// ignore
+		}
+
+		const missingPlaceholders = checkNewVariablesHavePlaceholders(missingRegistry, placeholders);
+		if (missingPlaceholders.length > 0) {
+			issues.push(
+				`New variables lack placeholder values: ${formatList(missingPlaceholders)}`
+			);
+		}
+	}
+
 	console.log(`✔ Scanned ${files.length} template file(s) across ${SCAN_DIRS.length} directories.`);
 	console.log(`✔ Registry contains ${registryKeys.size} variable(s).`);
 
@@ -163,3 +227,11 @@ function main() {
 if (require.main === module) {
 	main();
 }
+
+module.exports = {
+	loadRegistry,
+	gatherTemplateFiles,
+	buildFoundMap,
+	validateRegistry,
+	checkNewVariablesHavePlaceholders,
+};

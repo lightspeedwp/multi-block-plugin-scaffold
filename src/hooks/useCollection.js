@@ -1,4 +1,9 @@
 /**
+ * @file useCollection.js
+ * @description React hook for retrieving a collection of posts or items.
+ * @todo Add pagination and error handling improvements.
+ */
+/**
  * useCollection Hook
  *
  * Custom hook for querying and filtering posts from a custom post type collection.
@@ -17,7 +22,7 @@ import { useSelect } from '@wordpress/data';
  * data management and automatic loading state tracking.
  *
  * @param {Object}  query          Query parameters.
- * @param {string}  query.postType Custom post type to query. Default: '{{cpt_slug}}'.
+ * @param {string}  query.postType Custom post type to query. Default: 'item'.
  * @param {number}  query.perPage  Number of posts per page. Default: 6.
  * @param {number}  query.page     Current page number. Default: 1.
  * @param {string}  query.order    Sort order ('asc' or 'desc'). Default: 'desc'.
@@ -33,7 +38,7 @@ import { useSelect } from '@wordpress/data';
  *
  * @example
  * const { posts, isLoading, hasNoPosts } = useCollection({
- *   postType: '{{cpt_slug}}',
+ *   postType: 'item',
  *   perPage: 12,
  *   page: 1,
  *   orderBy: 'date',
@@ -48,7 +53,7 @@ import { useSelect } from '@wordpress/data';
  */
 export default function useCollection(query = {}) {
 	const {
-		postType = '{{cpt_slug}}',
+		postType = 'item',
 		perPage = 6,
 		page = 1,
 		order = 'desc',

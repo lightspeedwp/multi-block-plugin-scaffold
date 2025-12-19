@@ -1,5 +1,6 @@
+
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -23,7 +24,7 @@ class {{namespace|pascalCase}}_Post_Types {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const POST_TYPE = '{{cpt_slug}}';
+	const POST_TYPE = '{{slug}}';
 
 	/**
 	 * Constructor.
@@ -59,9 +60,9 @@ class {{namespace|pascalCase}}_Post_Types {
 			'attributes'            => __( '{{name_singular}} Attributes', '{{textdomain}}' ),
 			'insert_into_item'      => __( 'Insert into {{name_singular_lower}}', '{{textdomain}}' ),
 			'uploaded_to_this_item' => __( 'Uploaded to this {{name_singular_lower}}', '{{textdomain}}' ),
-			'filter_items_list'     => __( 'Filter items list', '{{textdomain}}' ),
-			'items_list_navigation' => __( 'Items list navigation', '{{textdomain}}' ),
-			'items_list'            => __( 'Items list', '{{textdomain}}' ),
+			'filter_items_list'     => __( 'Filter {{name_plural_lower}} list', '{{textdomain}}' ),
+			'items_list_navigation' => __( '{{name_plural}} list navigation', '{{textdomain}}' ),
+			'items_list'            => __( '{{name_plural}} list', '{{textdomain}}' ),
 		);
 
 		$args = array(
@@ -78,7 +79,7 @@ class {{namespace|pascalCase}}_Post_Types {
 			'hierarchical'       => false,
 			'menu_position'      => 20,
 			'menu_icon'          => '{{cpt_icon}}',
-			'supports'           => array( {{cpt_supports}} ),
+			'supports'           => {{cpt_supports}},
 			'template'           => array(
 				array( '{{namespace}}/{{slug}}-single' ),
 			),

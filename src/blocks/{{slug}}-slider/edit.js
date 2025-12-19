@@ -1,4 +1,9 @@
 /**
+ * @file edit.js
+ * @description Block editor component for the example slider block.
+ * @todo Add accessibility and responsive design improvements.
+ */
+/**
  * Example Plugin Slider Block - Editor Component
  *
  * @package
@@ -8,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
-	MediaUpload,
+// Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-slider/edit.js
 	MediaUploadCheck,
 } from '@wordpress/block-editor';
 import {
@@ -64,139 +69,139 @@ export default function Edit({ attributes, setAttributes }) {
 	const updateSlide = (index, updates) => {
 		const newSlides = [...slides];
 		newSlides[index] = { ...newSlides[index], ...updates };
-		setAttributes({ slides: newSlides });
-	};
-
+			const blockProps = useBlockProps({
+				className: 'wp-block-{{namespace}}-{{slug}}-slider',
+			});
 	const removeSlide = (index) => {
-		const newSlides = slides.filter((_, i) => i !== index);
+					<PanelBody title={__('Slider Source', '{{textdomain}}')}>
 		setAttributes({ slides: newSlides });
-		if (currentSlide >= newSlides.length) {
-			setCurrentSlide(Math.max(0, newSlides.length - 1));
+						<SelectControl
+							label={__('Slide Source', '{{textdomain}}')}
 		}
-	};
-
-	const blockProps = useBlockProps({
-		className: 'wp-block-{{namespace}}-{{slug}}-slider',
-	});
-
-	return (
-		<>
-			<InspectorControls>
-				<PanelBody title={__('Slider Source', '{{textdomain}}')}>
-					<SelectControl
-						label={__('Slide Source', '{{textdomain}}')}
-						value={source}
-						options={[
-							{
 								label: __('Custom Slides', '{{textdomain}}'),
-								value: 'custom',
-							},
-							{
+
 								label: __('Posts', '{{textdomain}}'),
-								value: 'posts',
-							},
-							{
+		className: 'wp-block-{{namespace}}-{{slug}}-slider',
 								label: __('Repeater Field', '{{textdomain}}'),
-								value: 'repeater',
+
+					<PanelBody title={__('Slider Settings', '{{textdomain}}')}>
+		<>
+						<ToggleControl
+							label={__('Autoplay', '{{textdomain}}')}
+					<SelectControl
+						{autoplay && (
+							<RangeControl
+								label={__('Autoplay Speed (ms)', '{{textdomain}}')}
+							{
+						<ToggleControl
+							label={__('Show Dots', '{{textdomain}}')}
 							},
-						]}
-						onChange={(value) => setAttributes({ source: value })}
-					/>
-				</PanelBody>
-
-				<PanelBody title={__('Slider Settings', '{{textdomain}}')}>
-					<ToggleControl
-						label={__('Autoplay', '{{textdomain}}')}
-						checked={autoplay}
-						onChange={(value) => setAttributes({ autoplay: value })}
-					/>
-					{autoplay && (
+						<ToggleControl
+							label={__('Show Arrows', '{{textdomain}}')}
+								value: 'posts',
+						<ToggleControl
+							label={__('Infinite Loop', '{{textdomain}}')}
+								   label: __('Repeater Field', '{{textdomain}}'),
 						<RangeControl
-							label={__('Autoplay Speed (ms)', '{{textdomain}}')}
-							value={autoplaySpeed}
-							onChange={(value) =>
-								setAttributes({ autoplaySpeed: value })
-							}
-							min={1000}
-							max={10000}
-							step={500}
-						/>
-					)}
-					<ToggleControl
-						label={__('Show Dots', '{{textdomain}}')}
-						checked={showDots}
-						onChange={(value) => setAttributes({ showDots: value })}
-					/>
-					<ToggleControl
-						label={__('Show Arrows', '{{textdomain}}')}
-						checked={showArrows}
-						onChange={(value) =>
-							setAttributes({ showArrows: value })
-						}
-					/>
-					<ToggleControl
-						label={__('Infinite Loop', '{{textdomain}}')}
-						checked={infinite}
-						onChange={(value) => setAttributes({ infinite: value })}
-					/>
-					<RangeControl
-						label={__('Slides to Show', '{{textdomain}}')}
-						value={slidesToShow}
-						onChange={(value) =>
-							setAttributes({ slidesToShow: value })
-						}
-						min={1}
-						max={5}
-					/>
-					<RangeControl
-						label={__('Slides to Scroll', '{{textdomain}}')}
-						value={slidesToScroll}
-						onChange={(value) =>
-							setAttributes({ slidesToScroll: value })
-						}
-						min={1}
-						max={slidesToShow}
-					/>
+							label={__('Slides to Show', '{{textdomain}}')}
+						]}
+						<RangeControl
+							label={__('Slides to Scroll', '{{textdomain}}')}
 				</PanelBody>
-			</InspectorControls>
-
-			<div {...blockProps}>
-				{source === 'custom' && (
-					<>
 						<div className="wp-block-{{namespace}}-{{slug}}-slider__viewport">
-							{slides.length > 0 ? (
-								<div className="wp-block-{{namespace}}-{{slug}}-slider__track">
-									{slides.map((slide, index) => (
-										<div
-											key={slide.id}
-											className={`wp-block-{{namespace}}-{{slug}}-slider__slide ${
+				   <PanelBody title={__('Slider Settings', '{{textdomain}}')}>
+							<div className="wp-block-{{namespace}}-{{slug}}-slider__track">
+							   label={__('Autoplay', '{{textdomain}}')}
+								<div
+									key={slide.id}
+									className={`wp-block-{{namespace}}-{{slug}}-slider__slide ${
+										index === currentSlide
+											? 'is-active'
+											: ''
+									}`}
+							onChange={(value) =>
+									<div className="wp-block-{{namespace}}-{{slug}}-slider__image-wrapper"
+							}
+										<div className="wp-block-{{namespace}}-{{slug}}-slider__placeholder">
+							max={10000}
+											{__('Click to select image', '{{textdomain}}')}
+						/>
+									<div className="wp-block-{{namespace}}-{{slug}}-slider__slide-content">
+					<ToggleControl
+										<TextControl
+											label={__(
+												'Title',
+												'{{textdomain}}'
+											)}
+							   label={__('Show Arrows', '{{textdomain}}')}
+										<TextareaControl
+											label={__(
+												'Caption',
+												'{{textdomain}}'
+											)}
+					<ToggleControl
+										<TextControl
+											label={__(
+												'Link URL',
+												'{{textdomain}}'
+											)}
+							   label={__('Slides to Show', '{{textdomain}}')}
+									<Button
+										isDestructive
+										onClick={() =>
+											removeSlide(index)
+										}
+										className="wp-block-{{namespace}}-{{slug}}-slider__remove-slide"
+									>
+										{__(
+											'Remove Slide',
+											'{{textdomain}}'
+										)}
+							setAttributes({ slidesToScroll: value })
+									<div className="wp-block-{{namespace}}-{{slug}}-slider__empty">
+						min={1}
+										{__(
+											'No slides added yet. Click the button below to add slides.',
+											'{{textdomain}}'
+										)}
+
+									<div className="wp-block-{{namespace}}-{{slug}}-slider__nav">
+				{source === 'custom' && (
+										<button
+											className={`wp-block-{{namespace}}-{{slug}}-slider__dot ${
 												index === currentSlide
 													? 'is-active'
 													: ''
 											}`}
-											style={{
-												display:
+											key={slide.id}
+						<Button
+							variant="primary"
+							onClick={addSlide}
+							className="wp-block-{{namespace}}-{{slug}}-slider__add-slide"
+						>
+							{__('Add Slide', '{{textdomain}}')}
+						</Button>
 													index === currentSlide
-														? 'block'
+						<div className="wp-block-{{namespace}}-{{slug}}-slider__posts-notice">
 														: 'none',
-											}}
-										>
-											<MediaUploadCheck>
-												<MediaUpload
+							{__(
+								'Slider will display posts from the {{name}} post type.',
+								'{{textdomain}}'
+							)}
 													onSelect={(media) =>
-														updateSlide(index, {
+						<div className="wp-block-{{namespace}}-{{slug}}-slider__repeater-notice">
 															image: {
-																id: media.id,
-																url: media.url,
-																alt: media.alt,
-															},
+							{__(
+								'Slider will display slides from the repeater field.',
+								'{{textdomain}}'
+							)}
 														})
 													}
 													allowedTypes={['image']}
 													value={slide.image?.id}
 													render={({ open }) => (
 														<div
-															className="wp-block-{{namespace}}-{{slug}}-slider__image-wrapper"
+															   className="wp-block-{{namespace}}-{{slug}}-slider__image-wrapper"
 															onClick={open}
 															role="button"
 															tabIndex={0}
@@ -221,10 +226,10 @@ export default function Edit({ attributes, setAttributes }) {
 																	}
 																/>
 															) : (
-																<div className="wp-block-{{namespace}}-{{slug}}-slider__placeholder">
+																   <div className="wp-block-{{namespace}}-{{slug}}-slider__placeholder">
 																	{__(
 																		'Click to select image',
-																		'{{textdomain}}'
+																		   '{{textdomain}}'
 																	)}
 																</div>
 															)}
@@ -233,11 +238,11 @@ export default function Edit({ attributes, setAttributes }) {
 												/>
 											</MediaUploadCheck>
 
-											<div className="wp-block-{{namespace}}-{{slug}}-slider__slide-content">
+											   <div className="wp-block-{{namespace}}-{{slug}}-slider__slide-content">
 												<TextControl
 													label={__(
 														'Title',
-														'{{textdomain}}'
+														   '{{textdomain}}'
 													)}
 													value={slide.title}
 													onChange={(value) =>
@@ -249,7 +254,7 @@ export default function Edit({ attributes, setAttributes }) {
 												<TextareaControl
 													label={__(
 														'Caption',
-														'{{textdomain}}'
+														   '{{textdomain}}'
 													)}
 													value={slide.caption}
 													onChange={(value) =>
@@ -261,7 +266,7 @@ export default function Edit({ attributes, setAttributes }) {
 												<TextControl
 													label={__(
 														'Link URL',
-														'{{textdomain}}'
+														   '{{textdomain}}'
 													)}
 													value={slide.link}
 													onChange={(value) =>
@@ -278,32 +283,32 @@ export default function Edit({ attributes, setAttributes }) {
 												onClick={() =>
 													removeSlide(index)
 												}
-												className="wp-block-{{namespace}}-{{slug}}-slider__remove-slide"
+												   className="wp-block-{{namespace}}-{{slug}}-slider__remove-slide"
 											>
 												{__(
 													'Remove Slide',
-													'{{textdomain}}'
+													   '{{textdomain}}'
 												)}
 											</Button>
 										</div>
 									))}
 								</div>
 							) : (
-								<div className="wp-block-{{namespace}}-{{slug}}-slider__empty">
+								   <div className="wp-block-{{namespace}}-{{slug}}-slider__empty">
 									{__(
 										'No slides added yet. Click the button below to add slides.',
-										'{{textdomain}}'
+										   '{{textdomain}}'
 									)}
 								</div>
 							)}
 						</div>
 
 						{slides.length > 1 && (
-							<div className="wp-block-{{namespace}}-{{slug}}-slider__nav">
+							   <div className="wp-block-{{namespace}}-{{slug}}-slider__nav">
 								{slides.map((_, index) => (
 									<button
 										key={index}
-										className={`wp-block-{{namespace}}-{{slug}}-slider__dot ${
+										   className={`wp-block-{{namespace}}-{{slug}}-slider__dot ${
 											index === currentSlide
 												? 'is-active'
 												: ''
@@ -318,27 +323,27 @@ export default function Edit({ attributes, setAttributes }) {
 						<Button
 							variant="primary"
 							onClick={addSlide}
-							className="wp-block-{{namespace}}-{{slug}}-slider__add-slide"
+							   className="wp-block-{{namespace}}-{{slug}}-slider__add-slide"
 						>
-							{__('Add Slide', '{{textdomain}}')}
+							   {__('Add Slide', '{{textdomain}}')}
 						</Button>
 					</>
 				)}
 
 				{source === 'posts' && (
-					<div className="wp-block-{{namespace}}-{{slug}}-slider__posts-notice">
+					   <div className="wp-block-{{namespace}}-{{slug}}-slider__posts-notice">
 						{__(
 							'Slider will display posts from the Example Plugin post type.',
-							'{{textdomain}}'
+							   '{{textdomain}}'
 						)}
 					</div>
 				)}
 
 				{source === 'repeater' && (
-					<div className="wp-block-{{namespace}}-{{slug}}-slider__repeater-notice">
+					   <div className="wp-block-{{namespace}}-{{slug}}-slider__repeater-notice">
 						{__(
 							'Slider will display slides from the repeater field.',
-							'{{textdomain}}'
+							   '{{textdomain}}'
 						)}
 					</div>
 				)}
@@ -346,3 +351,4 @@ export default function Edit({ attributes, setAttributes }) {
 		</>
 	);
 }
+// ...existing code from edit.js for slider block...

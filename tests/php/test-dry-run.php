@@ -2,9 +2,9 @@
 /**
  * Dry Run PHP Test
  *
- * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
+ * Mustache: example_plugin, example-plugin, example-plugin
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 class Test_Dry_Run extends WP_UnitTestCase {

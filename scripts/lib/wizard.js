@@ -241,6 +241,59 @@ const wizardInterfaces = {
 };
 
 /**
+ * Run a custom prompt wizard with a provided question set.
+ *
+ * @param {Object} [options]
+ * @param {Array} options.questions - Inquirer-style questions
+ * @param {string} [options.mode='cli'] - One of 'cli', 'mock', 'json', or 'silent'
+ * @param {string} [options.configFile] - JSON file for non-interactive loads
+ * @param {Object} [options.mockAnswers] - Values to return in mock/silent modes
+ * @returns {Promise<Object>} Collected answers
+ */
+async function runPromptWizard(options = {}) {
+	const { questions, mode = 'cli', configFile, mockAnswers } = options;
+
+	if (!Array.isArray(questions) || questions.length === 0) {
+		throw new Error('runPromptWizard requires a non-empty questions array');
+	}
+
+	const normalizedMode = mode || 'cli';
+
+	const defaults = questions.reduce((acc, question) => {
+		const value =
+			typeof question.default === 'function'
+				? question.default()
+				: question.default;
+		if (value !== undefined) {
+			acc[question.name] = value;
+		}
+		return acc;
+	}, {});
+
+	if (normalizedMode === 'mock' || normalizedMode === 'silent') {
+		return { ...defaults, ...(mockAnswers || {}) };
+	}
+
+	if (normalizedMode === 'json') {
+		if (!configFile) {
+			throw new Error('JSON wizard mode requires a configFile');
+		}
+		const configPath = path.resolve(process.cwd(), configFile);
+		if (!fs.existsSync(configPath)) {
+			throw new Error(`Config file not found: ${configPath}`);
+		}
+		const content = fs.readFileSync(configPath, 'utf8');
+		return JSON.parse(content);
+	}
+
+	if (!inquirer) {
+		throw new Error('CLI wizard mode requires inquirer. Install it or switch to mock/json mode.');
+	}
+
+	return inquirer.prompt(questions);
+}
+
+/**
  * Main wizard runner. Selects interface by options.mode or falls back to CLI/mock.
  * @param {Object} [options]
  * @param {string} [options.mode] - One of 'cli', 'json', 'mock', 'env'.
@@ -269,5 +322,6 @@ function ensureWizardConfig(config) {
 
 module.exports = {
 	runWizard,
+	runPromptWizard,
 	wizardInterfaces,
 };

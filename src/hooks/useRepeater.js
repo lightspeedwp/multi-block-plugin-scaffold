@@ -1,4 +1,9 @@
 /**
+ * @file useRepeater.js
+ * @description React hook for handling repeater fields.
+ * @todo Add support for nested repeaters and validation.
+ */
+/**
  * useRepeater Hook
  *
  * Custom hook for accessing ACF or custom meta field repeater data.
@@ -19,7 +24,7 @@ import { useSelect } from '@wordpress/data';
  *
  * @param {number} postId    Post ID to fetch fields from.
  * @param {string} fieldName Repeater field name (key) to retrieve.
- * @param {string} postType  Post type slug. Default: '{{cpt_slug}}'.
+ * @param {string} postType  Post type slug. Default: 'item'.
  *
  * @return {Object} Hook return value:
  *   - rows: {Array} Array of repeater field items, or empty array if not found.
@@ -28,7 +33,7 @@ import { useSelect } from '@wordpress/data';
  * @throws {Error} If the WordPress data store is unavailable.
  *
  * @example
- * const { rows, isLoading } = useRepeater(123, 'gallery_items', '{{cpt_slug}}');
+ * const { rows, isLoading } = useRepeater(123, 'gallery_items', 'item');
  *
  * if (isLoading) return <Spinner />;
  * if (rows.length === 0) return <p>No items</p>;
@@ -42,7 +47,7 @@ import { useSelect } from '@wordpress/data';
  *   </div>
  * );
  */
-export default function useRepeater(postId, fieldName, postType = '{{cpt_slug}}') {
+export default function useRepeater(postId, fieldName, postType = 'item') {
 	return useSelect(
 		(select) => {
 			if (!postId || !fieldName) {

@@ -2,7 +2,7 @@
 /**
  * Featured Items Block - Server-side Render
  *
- * @package example_plugin
+ * @package {{namespace}}
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block content.
@@ -121,3 +121,4 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		?>
 	</div>
 </div>
+// ...existing code from render.php for featured block...

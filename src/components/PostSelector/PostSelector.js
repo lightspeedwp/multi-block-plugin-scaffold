@@ -1,4 +1,9 @@
 /**
+ * @file PostSelector.js
+ * @description Component for selecting posts from a list.
+ * @todo Add search and filter functionality.
+ */
+/**
  * Post Selector Component
  *
  * A reusable component for selecting posts in the block editor.
@@ -24,7 +29,7 @@ import { ComboboxControl, Spinner } from '@wordpress/components';
  * @return {Element} PostSelector component.
  */
 export default function PostSelector({
-	postType = '{{cpt_slug}}',
+	postType = '{{post_type_slug}}',
 	value,
 	onChange,
 	label = __('Select Post', '{{textdomain}}'),
@@ -63,7 +68,7 @@ export default function PostSelector({
 		})) || [];
 
 	return (
-		<div className="example_plugin-post-selector">
+		<div className="{{namespace}}-post-selector">
 			{isLoading && <Spinner />}
 			<ComboboxControl
 				label={label}

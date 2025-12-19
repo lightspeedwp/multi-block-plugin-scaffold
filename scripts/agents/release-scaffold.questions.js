@@ -2,6 +2,22 @@
 // Staged, validated questions array for the release-scaffold agent wizard
 
 module.exports = [
+  {
+    name: 'workflowMode',
+    type: 'list',
+    message: 'Select release workflow mode:',
+    choices: [
+      {
+        name: 'Pre-release validation only (lint, tests, dry-run checks)',
+        value: 'validation',
+      },
+      {
+        name: 'Full release (validation + tagging + guidance)',
+        value: 'release',
+      },
+    ],
+    default: 'validation',
+  },
   // Stage 1: Release Readiness
   {
     name: 'version',

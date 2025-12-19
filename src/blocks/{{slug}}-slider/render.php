@@ -2,7 +2,7 @@
 /**
  * Example Plugin Slider Block - Server-side Render
  *
- * @package example_plugin
+ * @package {{namespace}}
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block content.
@@ -175,3 +175,4 @@ $slide_width = 100 / $slides_to_show;
 		</div>
 	<?php endif; ?>
 </div>
+// ...existing code from render.php for slider block...

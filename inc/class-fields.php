@@ -1,5 +1,6 @@
+
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 /**
  * Custom Fields Registration using Secure Custom Fields.
@@ -62,8 +63,8 @@ class {{namespace|pascalCase}}_Fields {
 					<?php
 					printf(
 						/* translators: %s: Plugin name */
-						esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', '{{textdomain}}' ),
-						'<strong>{{name}}</strong>'
+							esc_html__( '%s requires Secure Custom Fields plugin to be installed and activated for custom fields functionality.', '{{textdomain}}' ),
+							'<strong>{{name}}</strong>'
 					);
 					?>
 				</p>
@@ -94,7 +95,7 @@ class {{namespace|pascalCase}}_Fields {
 						'name'         => '{{namespace}}_subtitle',
 						'type'         => 'text',
 						'instructions' => __( 'Enter a subtitle for this item.', '{{textdomain}}' ),
-					),
+				),
 					array(
 						'key'          => 'field_{{namespace}}_featured',
 						'label'        => __( 'Featured', '{{textdomain}}' ),
@@ -102,7 +103,7 @@ class {{namespace|pascalCase}}_Fields {
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'instructions' => __( 'Mark this item as featured.', '{{textdomain}}' ),
-					),
+				),
 					array(
 						'key'           => 'field_{{namespace}}_gallery',
 						'label'         => __( 'Gallery', '{{textdomain}}' ),
@@ -112,7 +113,7 @@ class {{namespace|pascalCase}}_Fields {
 						'return_format' => 'array',
 						'preview_size'  => 'medium',
 						'library'       => 'all',
-					),
+				),
 					array(
 						'key'           => 'field_{{namespace}}_related',
 						'label'         => __( 'Related Items', '{{textdomain}}' ),
@@ -122,14 +123,14 @@ class {{namespace|pascalCase}}_Fields {
 						'filters'       => array( 'search', 'taxonomy' ),
 						'return_format' => 'object',
 						'instructions'  => __( 'Select related items.', '{{textdomain}}' ),
-					),
+				),
 				),
 				'location'        => array(
 					array(
 						array(
 							'param'    => 'post_type',
 							'operator' => '==',
-							'value'    => {{namespace|pascalCase}}_Post_Types::POST_TYPE,
+							'value'    => ExamplePlugin_Post_Types::POST_TYPE,
 						),
 					),
 				),

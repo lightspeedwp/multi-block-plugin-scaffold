@@ -1,0 +1,3 @@
+<?php
+// Uninstall script for {{slug}} plugin.
+// ...existing uninstall logic...

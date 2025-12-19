@@ -7,9 +7,7 @@
  * - Add tests for silent mode and error handling
  * - Add integration tests for config validation
  */
-const { runWizard } = require('../wizard');
-
-const { runWizard, wizardInterfaces } = require('../wizard');
+const { runWizard, runPromptWizard, wizardInterfaces } = require('../wizard');
 const path = require('path');
 const fs = require('fs');
 
@@ -49,7 +47,7 @@ describe('wizardInterfaces', () => {
 
 describe('runWizard', () => {
 	it('returns a mock config object by default', async () => {
-		const config = await runWizard();
+		const config = await runWizard({ mode: 'mock' });
 		expect(config).toHaveProperty('slug');
 		expect(config).toHaveProperty('name');
 		expect(config).toHaveProperty('author');
@@ -63,5 +61,56 @@ describe('runWizard', () => {
 
 	it('throws on unknown mode', async () => {
 		await expect(runWizard({ mode: 'notamode' })).rejects.toThrow('Unknown wizard mode: notamode');
+	});
+});
+
+describe('runPromptWizard', () => {
+	const questionSet = [
+		{
+			name: 'workflowMode',
+			type: 'list',
+			choices: [
+				{ name: 'Validation', value: 'validation' },
+				{ name: 'Release', value: 'release' },
+			],
+			default: 'validation',
+		},
+		{
+			name: 'version',
+			type: 'input',
+			message: 'Version:',
+			default: '0.0.1',
+		},
+	];
+
+	it('throws without questions', async () => {
+		await expect(runPromptWizard({})).rejects.toThrow('runPromptWizard requires a non-empty questions array');
+	});
+
+	it('returns defaults when mock mode is specified', async () => {
+		const answers = await runPromptWizard({ questions: questionSet, mode: 'mock' });
+		expect(answers.workflowMode).toBe('validation');
+		expect(answers.version).toBe('0.0.1');
+	});
+
+	it('loads answers from JSON mode', async () => {
+		const tempPath = path.join(__dirname, 'prompt-config.json');
+		const payload = { workflowMode: 'release', version: '2.0.0' };
+		fs.writeFileSync(tempPath, JSON.stringify(payload), 'utf8');
+
+		try {
+			const relativePath = path.relative(process.cwd(), tempPath);
+			const answers = await runPromptWizard({
+				questions: questionSet,
+				mode: 'json',
+				configFile: relativePath,
+			});
+			expect(answers.workflowMode).toBe('release');
+			expect(answers.version).toBe('2.0.0');
+		} finally {
+			if (fs.existsSync(tempPath)) {
+				fs.unlinkSync(tempPath);
+			}
+		}
 	});
 });

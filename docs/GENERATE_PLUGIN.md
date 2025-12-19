@@ -1,4 +1,21 @@
+# ⚠️ WARNING: Strict Mustache Placeholder Enforcement
+
+All template files, folders, and code **must** use the correct mustache placeholders as defined in `scripts/mustache-variables-registry.json`. Do not use generic placeholders (like `{{slug}}`) where a more specific one is required (e.g., `{{cpt1_slug}}`, `{{taxonomy1_slug}}`).
+
+**Do not hard-code any plugin-specific values** in the scaffold. All identifiers, class names, translation domains, and meta keys must use the appropriate placeholder. This ensures the generator can produce multi-entity plugins without manual intervention.
+
+The mustache registry is updated automatically by running:
+
+```sh
+node scripts/scan-mustache-variables.js --update-registry
+```
+
+If you add, rename, or remove placeholders, always update the registry and review the change report in `scripts/reports/`.
+
+**Failure to follow these rules will break plugin generation and may result in lost work.**
+
 ---
+
 title: Plugin Generation Guide
 description: Comprehensive guide to generating WordPress multi-block plugins from the scaffold
 category: Development
@@ -133,6 +150,58 @@ Plugin Name: Tour Operator
 Description: Tour booking plugin
 Author: LightSpeed
 ```
+
+### CRITICAL: Use Specific Placeholders for Multiple CPTs/Taxonomies/Fields
+
+**WARNING:** When building plugins that support multiple custom post types (CPTs), taxonomies, or custom fields, you MUST use specific mustache placeholders for each entity. Do NOT use generic placeholders like `{{slug}}`, `{{cpt_slug}}`, or `{{taxonomy_slug}}` in your templates or code. Instead, use numbered or uniquely named placeholders for each entity, such as `{{cpt1_slug}}`, `{{cpt2_slug}}`, `{{taxonomy1_slug}}`, `{{taxonomy2_slug}}`, `{{field1_name}}`, etc.
+
+**Why?**
+
+- The scaffold now supports generating plugins with multiple CPTs, taxonomies, and fields. Using generic placeholders will result in incorrect or ambiguous replacements during generation.
+- Each placeholder must map to a unique entity in your plugin config (see below for config structure).
+- This applies to ALL files: PHP, JS, block.json, SCF JSON, patterns, templates, and documentation.
+
+**Example:**
+
+```json
+{
+  "cpts": [
+    { "slug": "tour", "name": "Tour" },
+    { "slug": "package", "name": "Package" }
+  ],
+  "taxonomies": [
+    { "slug": "destination", "name": "Destination" },
+    { "slug": "feature", "name": "Feature" }
+  ]
+}
+```
+
+**Template usage:**
+
+```php
+// BAD (do not use):
+register_post_type( '{{cpt_slug}}', ... );
+
+// GOOD (use specific):
+register_post_type( '{{cpt1_slug}}', ... );
+register_post_type( '{{cpt2_slug}}', ... );
+
+// BAD:
+register_taxonomy( '{{taxonomy_slug}}', ... );
+
+// GOOD:
+register_taxonomy( '{{taxonomy1_slug}}', ... );
+register_taxonomy( '{{taxonomy2_slug}}', ... );
+```
+
+**Enforcement:**
+
+- All template files MUST use specific placeholders for each CPT, taxonomy, and field.
+- The plugin config file MUST define arrays for CPTs, taxonomies, and fields, with unique keys for each.
+- The generator will throw an error if generic placeholders are detected in templates.
+- See [Generator Instructions](.github/instructions/generate-plugin.instructions.md) for full variable naming rules.
+
+---
 
 ### How Mustache Values Work
 
@@ -1360,19 +1429,25 @@ Options:
   --help                 Show this help message
 
 Examples:
-  # Interactive mode
+
+# Interactive mode
+
   node generate-plugin.js
 
-  # With config file
+# With config file
+
   node generate-plugin.js --config my-plugin.json
 
-  # From stdin
+# From stdin
+
   echo '{"slug":"my-plugin","name":"My Plugin"}' | node generate-plugin.js --json
 
-  # Validate configuration
+# Validate configuration
+
   node generate-plugin.js --validate my-plugin.json
 
-  # Display schema
+# Display schema
+
   node generate-plugin.js --schema
 
 For more information, see: docs/GENERATE_PLUGIN.md

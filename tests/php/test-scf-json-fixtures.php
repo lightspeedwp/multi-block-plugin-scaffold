@@ -5,7 +5,7 @@
  * Tests using valid and invalid field group fixtures
  * to verify validator functionality with real-world examples.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Test SCF JSON fixtures with validator.
  */
 /**
- * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
+ * Mustache: example_plugin, example-plugin, example-plugin
  */
 class ExamplePlugin_SCF_JSON_Fixtures_Test extends WP_UnitTestCase {
 

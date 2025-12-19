@@ -1,5 +1,5 @@
 <?php
-namespace {{namespace|lowerCase}}\classes;
+namespace {{namespace}}\classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -167,7 +167,7 @@ class {{namespace|pascalCase}}_Options {
 					array(
 						'key'          => 'field_{{namespace}}_tagline',
 						'label'        => __( 'Tagline', '{{textdomain}}' ),
-						'name'         => 'example-plugin_tagline',
+						'name'         => '{{namespace}}_tagline',
 						'type'         => 'text',
 						'instructions' => __( 'Enter a short tagline or slogan.', '{{textdomain}}' ),
 					),
@@ -257,53 +257,53 @@ class {{namespace|pascalCase}}_Options {
 		acf_add_local_field_group(
 			array(
 				'key'      => self::FIELD_GROUP . '_display',
-				'title'    => __( 'Display Settings', '{{textdomain}}' ),
+						'title'    => __( 'Display Settings', '{{textdomain}}' ),
 				'fields'   => array(
 					array(
-						'key'          => 'field_{{namespace}}_items_per_page',
-						'label'        => __( 'Items Per Page', '{{textdomain}}' ),
-						'name'         => '{{namespace}}_items_per_page',
+							'key'          => 'field_{{namespace}}_items_per_page',
+							'label'        => __( 'Items Per Page', '{{textdomain}}' ),
+							'name'         => '{{namespace}}_items_per_page',
 						'type'         => 'number',
 						'default'      => 12,
 						'min'          => 1,
 						'max'          => 100,
-						'instructions' => __( 'Number of items to display per page in archive views.', '{{textdomain}}' ),
+							'instructions' => __( 'Number of items to display per page in archive views.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_{{namespace}}_layout',
-						'label'        => __( 'Archive Layout', '{{textdomain}}' ),
-						'name'         => '{{namespace}}_layout',
+							'key'          => 'field_{{namespace}}_layout',
+							'label'        => __( 'Archive Layout', '{{textdomain}}' ),
+							'name'         => '{{namespace}}_layout',
 						'type'         => 'button_group',
 						'choices'      => array(
-							'grid'    => __( 'Grid', '{{textdomain}}' ),
-							'list'    => __( 'List', '{{textdomain}}' ),
-							'masonry' => __( 'Masonry', '{{textdomain}}' ),
+								'grid'    => __( 'Grid', '{{textdomain}}' ),
+								'list'    => __( 'List', '{{textdomain}}' ),
+								'masonry' => __( 'Masonry', '{{textdomain}}' ),
 						),
 						'default'      => 'grid',
-						'instructions' => __( 'Choose the default layout for archive pages.', '{{textdomain}}' ),
+							'instructions' => __( 'Choose the default layout for archive pages.', '{{textdomain}}' ),
 					),
 					array(
-						'key'          => 'field_{{namespace}}_show_sidebar',
-						'label'        => __( 'Show Sidebar', '{{textdomain}}' ),
-						'name'         => '{{namespace}}_show_sidebar',
+							'key'          => 'field_{{namespace}}_show_sidebar',
+							'label'        => __( 'Show Sidebar', '{{textdomain}}' ),
+							'name'         => '{{namespace}}_show_sidebar',
 						'type'         => 'true_false',
 						'ui'           => 1,
 						'default'      => 1,
-						'instructions' => __( 'Display sidebar on archive and single views.', '{{textdomain}}' ),
+							'instructions' => __( 'Display sidebar on archive and single views.', '{{textdomain}}' ),
 					),
-					array(
-						'key'          => 'field_{{namespace}}_featured_image_size',
-						'label'        => __( 'Featured Image Size', '{{textdomain}}' ),
-						'name'         => 'example-plugin_featured_image_size',
-						'type'         => 'select',
-						'choices'      => array(
-							'thumbnail' => __( 'Thumbnail (150x150)', '{{textdomain}}' ),
-							'medium'    => __( 'Medium (300x300)', '{{textdomain}}' ),
-							'large'     => __( 'Large (1024x1024)', '{{textdomain}}' ),
-							'full'      => __( 'Full Size', '{{textdomain}}' ),
-						),
-						'default'      => 'medium',
-						'instructions' => __( 'Image size for featured images in listings.', '{{textdomain}}' ),
+								array(
+									'key'          => 'field_{{namespace}}_featured_image_size',
+									'label'        => __( 'Featured Image Size', '{{textdomain}}' ),
+									'name'         => '{{namespace}}_featured_image_size',
+									'type'         => 'select',
+									'choices'      => array(
+										'thumbnail' => __( 'Thumbnail (150x150)', '{{textdomain}}' ),
+										'medium'    => __( 'Medium (300x300)', '{{textdomain}}' ),
+										'large'     => __( 'Large (1024x1024)', '{{textdomain}}' ),
+										'full'      => __( 'Full Size', '{{textdomain}}' ),
+									),
+									'default'      => 'medium',
+									'instructions' => __( 'Image size for featured images in listings.', '{{textdomain}}' ),
 					),
 				),
 				'location' => array(

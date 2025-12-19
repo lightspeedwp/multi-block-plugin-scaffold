@@ -2,7 +2,7 @@
 /**
  * Example Plugin Collection Block - Server-side Render
  *
- * @package example_plugin
+ * @package {{namespace}}
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block content.
@@ -52,7 +52,7 @@ $collection_query = new WP_Query( $args );
 
 $wrapper_classes = array(
 	'wp-block-{{namespace}}-{{slug}}-collection',
-	'is-layout-' . esc_attr( $layout ),
+	is-layout-' . esc_attr( $layout ),
 );
 
 if ( 'grid' === $layout ) {
@@ -140,3 +140,4 @@ if ( 'grid' === $layout ) {
 		</p>
 	<?php endif; ?>
 </div>
+// ...existing code from render.php for collection block...

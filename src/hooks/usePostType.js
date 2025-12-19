@@ -1,4 +1,9 @@
 /**
+ * @file usePostType.js
+ * @description React hook for retrieving post type data.
+ * @todo Add more comprehensive documentation and tests.
+ */
+/**
  * usePostType Hook
  *
  * Custom hook for fetching a single post from a custom post type with loading state.
@@ -17,7 +22,7 @@ import { useSelect } from '@wordpress/data';
  * data store for automatic request deduplication and caching.
  *
  * @param {number|null} postId   Post ID to fetch. If falsy, returns null post.
- * @param {string}      postType Post type slug to query. Default: '{{cpt_slug}}'.
+ * @param {string}      postType Post type slug to query. Default: 'item'.
  *
  * @return {Object} Hook return value:
  *   - post: {Object|null} Post object from REST API, or null if not found or postId is missing.
@@ -26,13 +31,13 @@ import { useSelect } from '@wordpress/data';
  * @throws {Error} If the WordPress data store is unavailable.
  *
  * @example
- * const { post, isLoading } = usePostType(123, '{{cpt_slug}}');
+ * const { post, isLoading } = usePostType(123, 'item');
  *
  * if (isLoading) return <Spinner />;
  * if (!post) return <p>Post not found</p>;
  * return <h1>{post.title.rendered}</h1>;
  */
-export default function usePostType(postId, postType = '{{cpt_slug}}') {
+export default function usePostType(postId, postType = 'item') {
 	return useSelect(
 		(select) => {
 			if (!postId) {

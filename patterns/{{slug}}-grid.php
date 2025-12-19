@@ -1,6 +1,6 @@
 <?php
 /**
- * {{slug|pascalCase}} Grid Pattern
+ * ExamplePlugin Grid Pattern
  *
  * @package {{namespace}}
  * @since 1.0.0
@@ -12,16 +12,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 	'title'       => __( '{{name}} Grid', '{{textdomain}}' ),
-	'slug'        => '{{namespace}}/{{slug}}-grid',
+	'slug'        => '{{slug}}/{{slug}}-grid',
 	'description' => __( 'A grid of items.', '{{textdomain}}' ),
-	'categories'  => array( '{{textdomain}}' ),
+	'categories'  => array( '{{slug}}' ),
 	'keywords'    => array(
 		__( 'grid', '{{textdomain}}' ),
 		__( '{{slug}}', '{{textdomain}}' ),
 		__( 'collection', '{{textdomain}}' ),
 	),
 	'blockTypes'  => array( 'core/group', 'core/query' ),
-	'postTypes'   => array( '{{cpt_slug}}' ),
+	'postTypes'   => array( 'item' ),
 	'viewportWidth' => 1200,
-	'content'     => '<!-- wp:{{namespace}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"{{cpt_slug}}","perPage":6}} /-->',
+	'content'     => '<!-- wp:{{slug}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"item","perPage":6}} /-->',
 );

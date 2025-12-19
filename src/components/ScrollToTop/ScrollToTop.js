@@ -1,4 +1,9 @@
 /**
+ * @file ScrollToTop.js
+ * @description Component for a scroll-to-top button.
+ * @todo Add smooth scroll and keyboard accessibility.
+ */
+/**
  * ScrollToTop Component
  *
  * A reusable scroll-to-top button component for WordPress blocks.
@@ -13,7 +18,7 @@
  * - Mobile responsive with proper touch targets
  * - Smooth scroll behavior with fallback for older browsers
  *
- * @package
+ * @package {{namespace}}
  */
 
 import { useState, useEffect, useCallback, useRef } from '@wordpress/element';
@@ -117,14 +122,14 @@ export default function ScrollToTop({
 	}
 
 	return (
-		<Button
-			className={`example_plugin-scroll-to-top ${className}`}
-			onClick={scrollToTop}
-			onKeyDown={handleKeyDown}
-			icon={arrowUp}
-			label={ariaLabel}
-			aria-label={ariaLabel}
-			showTooltip={false}
-		/>
+		   <Button
+			   className={`{{namespace}}-scroll-to-top ${className}`}
+			   onClick={scrollToTop}
+			   onKeyDown={handleKeyDown}
+			   icon={arrowUp}
+			   label={ariaLabel}
+			   aria-label={ariaLabel}
+			   showTooltip={false}
+		   />
 	);
 }

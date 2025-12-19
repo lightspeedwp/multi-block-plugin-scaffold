@@ -2,14 +2,14 @@
 /**
  * Fields Tests.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
  * Test case for Fields class.
  */
 /**
- * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
+ * Mustache: example_plugin, example-plugin, example-plugin
  */
 class Test_Fields extends WP_UnitTestCase {
 

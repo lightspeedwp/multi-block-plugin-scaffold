@@ -1,18 +1,18 @@
 {
-    "key": "group_example-plugin_example",
-    "title": "Example Plugin - Example Field Group",
+    "key": "group_{{slug}}_example",
+    "title": "{{name}} - Example Field Group",
     "fields": [
         {
-            "key": "field_example-plugin_tab_basic",
+            "key": "field_{{slug}}_tab_basic",
             "label": "Basic Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_text",
+            "key": "field_{{slug}}_example_text",
             "label": "Text Field",
-            "name": "example-plugin_example_text",
+            "name": "{{slug}}_example_text",
             "type": "text",
             "instructions": "Enter some text. Maximum 100 characters.",
             "required": 0,
@@ -25,9 +25,9 @@
             }
         },
         {
-            "key": "field_example-plugin_example_textarea",
+            "key": "field_{{slug}}_example_textarea",
             "label": "Textarea Field",
-            "name": "example-plugin_example_textarea",
+            "name": "{{slug}}_example_textarea",
             "type": "textarea",
             "instructions": "Enter a longer description.",
             "rows": 4,
@@ -40,9 +40,9 @@
             }
         },
         {
-            "key": "field_example-plugin_example_number",
+            "key": "field_{{slug}}_example_number",
             "label": "Number Field",
-            "name": "example-plugin_example_number",
+            "name": "{{slug}}_example_number",
             "type": "number",
             "instructions": "Enter a number between 1 and 100.",
             "min": 1,
@@ -51,40 +51,40 @@
             "default_value": 10
         },
         {
-            "key": "field_example-plugin_example_email",
+            "key": "field_{{slug}}_example_email",
             "label": "Email Field",
-            "name": "example-plugin_example_email",
+            "name": "{{slug}}_example_email",
             "type": "email",
             "instructions": "Enter a valid email address.",
             "placeholder": "email@example.com"
         },
         {
-            "key": "field_example-plugin_example_url",
+            "key": "field_{{slug}}_example_url",
             "label": "URL Field",
-            "name": "example-plugin_example_url",
+            "name": "{{slug}}_example_url",
             "type": "url",
             "instructions": "Enter a valid URL.",
             "placeholder": "https://example.com"
         },
         {
-            "key": "field_example-plugin_example_password",
+            "key": "field_{{slug}}_example_password",
             "label": "Password Field",
-            "name": "example-plugin_example_password",
+            "name": "{{slug}}_example_password",
             "type": "password",
             "instructions": "Enter a password (stored securely).",
             "placeholder": ""
         },
         {
-            "key": "field_example-plugin_tab_content",
+            "key": "field_{{slug}}_tab_content",
             "label": "Content Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_wysiwyg",
+            "key": "field_{{slug}}_example_wysiwyg",
             "label": "WYSIWYG Editor",
-            "name": "example-plugin_example_wysiwyg",
+            "name": "{{slug}}_example_wysiwyg",
             "type": "wysiwyg",
             "instructions": "Add rich text content.",
             "tabs": "all",
@@ -92,25 +92,25 @@
             "media_upload": 1
         },
         {
-            "key": "field_example-plugin_example_oembed",
+            "key": "field_{{slug}}_example_oembed",
             "label": "oEmbed Field",
-            "name": "example-plugin_example_oembed",
+            "name": "{{slug}}_example_oembed",
             "type": "oembed",
             "instructions": "Paste a YouTube, Vimeo, or other oEmbed URL.",
             "width": "",
             "height": ""
         },
         {
-            "key": "field_example-plugin_tab_media",
+            "key": "field_{{slug}}_tab_media",
             "label": "Media Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_image",
+            "key": "field_{{slug}}_example_image",
             "label": "Image Field",
-            "name": "example-plugin_example_image",
+            "name": "{{slug}}_example_image",
             "type": "image",
             "instructions": "Upload or select an image.",
             "return_format": "array",
@@ -119,9 +119,9 @@
             "mime_types": "jpg, jpeg, png, gif, webp"
         },
         {
-            "key": "field_example-plugin_example_file",
+            "key": "field_{{slug}}_example_file",
             "label": "File Field",
-            "name": "example-plugin_example_file",
+            "name": "{{slug}}_example_file",
             "type": "file",
             "instructions": "Upload or select a file.",
             "return_format": "array",
@@ -129,9 +129,9 @@
             "mime_types": "pdf, doc, docx, xls, xlsx"
         },
         {
-            "key": "field_example-plugin_example_gallery",
+            "key": "field_{{slug}}_example_gallery",
             "label": "Gallery Field",
-            "name": "example-plugin_example_gallery",
+            "name": "{{slug}}_example_gallery",
             "type": "gallery",
             "instructions": "Add multiple images.",
             "return_format": "array",
@@ -141,16 +141,16 @@
             "max": 10
         },
         {
-            "key": "field_example-plugin_tab_choice",
+            "key": "field_{{slug}}_tab_choice",
             "label": "Choice Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_select",
+            "key": "field_{{slug}}_example_select",
             "label": "Select Field",
-            "name": "example-plugin_example_select",
+            "name": "{{slug}}_example_select",
             "type": "select",
             "instructions": "Choose an option from the dropdown.",
             "choices": {
@@ -166,9 +166,9 @@
             "return_format": "value"
         },
         {
-            "key": "field_example-plugin_example_checkbox",
+            "key": "field_{{slug}}_example_checkbox",
             "label": "Checkbox Field",
-            "name": "example-plugin_example_checkbox",
+            "name": "{{slug}}_example_checkbox",
             "type": "checkbox",
             "instructions": "Select one or more options.",
             "choices": {
@@ -180,9 +180,9 @@
             "return_format": "value"
         },
         {
-            "key": "field_example-plugin_example_radio",
+            "key": "field_{{slug}}_example_radio",
             "label": "Radio Button Field",
-            "name": "example-plugin_example_radio",
+            "name": "{{slug}}_example_radio",
             "type": "radio",
             "instructions": "Select one option.",
             "choices": {
@@ -195,9 +195,9 @@
             "return_format": "value"
         },
         {
-            "key": "field_example-plugin_example_button_group",
+            "key": "field_{{slug}}_example_button_group",
             "label": "Button Group Field",
-            "name": "example-plugin_example_button_group",
+            "name": "{{slug}}_example_button_group",
             "type": "button_group",
             "instructions": "Select a layout option.",
             "choices": {
@@ -210,9 +210,9 @@
             "return_format": "value"
         },
         {
-            "key": "field_example-plugin_example_true_false",
+            "key": "field_{{slug}}_example_true_false",
             "label": "True/False Field",
-            "name": "example-plugin_example_true_false",
+            "name": "{{slug}}_example_true_false",
             "type": "true_false",
             "instructions": "Toggle this option on or off.",
             "default_value": 0,
@@ -221,24 +221,24 @@
             "ui_off_text": "Disabled"
         },
         {
-            "key": "field_example-plugin_tab_relational",
+            "key": "field_{{slug}}_tab_relational",
             "label": "Relational Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_link",
+            "key": "field_{{slug}}_example_link",
             "label": "Link Field",
-            "name": "example-plugin_example_link",
+            "name": "{{slug}}_example_link",
             "type": "link",
             "instructions": "Add a link with title and target.",
             "return_format": "array"
         },
         {
-            "key": "field_example-plugin_example_post_object",
+            "key": "field_{{slug}}_example_post_object",
             "label": "Post Object Field",
-            "name": "example-plugin_example_post_object",
+            "name": "{{slug}}_example_post_object",
             "type": "post_object",
             "instructions": "Select a post.",
             "post_type": ["post", "page"],
@@ -249,9 +249,9 @@
             "ui": 1
         },
         {
-            "key": "field_example-plugin_example_page_link",
+            "key": "field_{{slug}}_example_page_link",
             "label": "Page Link Field",
-            "name": "example-plugin_example_page_link",
+            "name": "{{slug}}_example_page_link",
             "type": "page_link",
             "instructions": "Select a page to link to.",
             "post_type": ["page"],
@@ -259,9 +259,9 @@
             "multiple": 0
         },
         {
-            "key": "field_example-plugin_example_relationship",
+            "key": "field_{{slug}}_example_relationship",
             "label": "Relationship Field",
-            "name": "example-plugin_example_relationship",
+            "name": "{{slug}}_example_relationship",
             "type": "relationship",
             "instructions": "Select related posts.",
             "post_type": ["post"],
@@ -272,9 +272,9 @@
             "return_format": "object"
         },
         {
-            "key": "field_example-plugin_example_taxonomy",
+            "key": "field_{{slug}}_example_taxonomy",
             "label": "Taxonomy Field",
-            "name": "example-plugin_example_taxonomy",
+            "name": "{{slug}}_example_taxonomy",
             "type": "taxonomy",
             "instructions": "Select categories.",
             "taxonomy": "category",
@@ -285,9 +285,9 @@
             "return_format": "id"
         },
         {
-            "key": "field_example-plugin_example_user",
+            "key": "field_{{slug}}_example_user",
             "label": "User Field",
-            "name": "example-plugin_example_user",
+            "name": "{{slug}}_example_user",
             "type": "user",
             "instructions": "Select a user.",
             "role": [],
@@ -296,16 +296,16 @@
             "return_format": "array"
         },
         {
-            "key": "field_example-plugin_tab_datetime",
+            "key": "field_{{slug}}_tab_datetime",
             "label": "Date/Time Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_date_picker",
+            "key": "field_{{slug}}_example_date_picker",
             "label": "Date Picker Field",
-            "name": "example-plugin_example_date_picker",
+            "name": "{{slug}}_example_date_picker",
             "type": "date_picker",
             "instructions": "Select a date.",
             "display_format": "d/m/Y",
@@ -313,9 +313,9 @@
             "first_day": 1
         },
         {
-            "key": "field_example-plugin_example_date_time_picker",
+            "key": "field_{{slug}}_example_date_time_picker",
             "label": "Date Time Picker Field",
-            "name": "example-plugin_example_date_time_picker",
+            "name": "{{slug}}_example_date_time_picker",
             "type": "date_time_picker",
             "instructions": "Select a date and time.",
             "display_format": "d/m/Y H:i",
@@ -323,31 +323,31 @@
             "first_day": 1
         },
         {
-            "key": "field_example-plugin_example_time_picker",
+            "key": "field_{{slug}}_example_time_picker",
             "label": "Time Picker Field",
-            "name": "example-plugin_example_time_picker",
+            "name": "{{slug}}_example_time_picker",
             "type": "time_picker",
             "instructions": "Select a time.",
             "display_format": "H:i",
             "return_format": "H:i:s"
         },
         {
-            "key": "field_example-plugin_example_color_picker",
+            "key": "field_{{slug}}_example_color_picker",
             "label": "Color Picker Field",
-            "name": "example-plugin_example_color_picker",
+            "name": "{{slug}}_example_color_picker",
             "type": "color_picker",
             "instructions": "Select a color.",
             "default_value": "#0073aa"
         },
         {
-            "key": "field_example-plugin_tab_layout",
+            "key": "field_{{slug}}_tab_layout",
             "label": "Layout Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_message",
+            "key": "field_{{slug}}_example_message",
             "label": "",
             "name": "",
             "type": "message",
@@ -357,7 +357,7 @@
             "esc_html": 0
         },
         {
-            "key": "field_example-plugin_example_accordion_start",
+            "key": "field_{{slug}}_example_accordion_start",
             "label": "Accordion Example",
             "name": "",
             "type": "accordion",
@@ -367,14 +367,14 @@
             "endpoint": 0
         },
         {
-            "key": "field_example-plugin_accordion_content",
+            "key": "field_{{slug}}_accordion_content",
             "label": "Accordion Content",
-            "name": "example-plugin_accordion_content",
+            "name": "{{slug}}_accordion_content",
             "type": "text",
             "instructions": "This field is inside an accordion."
         },
         {
-            "key": "field_example-plugin_example_accordion_end",
+            "key": "field_{{slug}}_example_accordion_end",
             "label": "Accordion End",
             "name": "",
             "type": "accordion",
@@ -384,22 +384,22 @@
             "endpoint": 1
         },
         {
-            "key": "field_example-plugin_tab_advanced",
+            "key": "field_{{slug}}_tab_advanced",
             "label": "Advanced Fields",
             "name": "",
             "type": "tab",
             "placement": "top"
         },
         {
-            "key": "field_example-plugin_example_group",
+            "key": "field_{{slug}}_example_group",
             "label": "Group Field",
-            "name": "example-plugin_example_group",
+            "name": "{{slug}}_example_group",
             "type": "group",
             "instructions": "A group of related fields.",
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_example-plugin_group_title",
+                    "key": "field_{{slug}}_group_title",
                     "label": "Title",
                     "name": "title",
                     "type": "text",
@@ -411,7 +411,7 @@
                     }
                 },
                 {
-                    "key": "field_example-plugin_group_description",
+                    "key": "field_{{slug}}_group_description",
                     "label": "Description",
                     "name": "description",
                     "type": "textarea",
@@ -426,9 +426,9 @@
             ]
         },
         {
-            "key": "field_example-plugin_example_repeater",
+            "key": "field_{{slug}}_example_repeater",
             "label": "Repeater Field",
-            "name": "example-plugin_example_repeater",
+            "name": "{{slug}}_example_repeater",
             "type": "repeater",
             "instructions": "Add multiple items.",
             "layout": "table",
@@ -437,14 +437,14 @@
             "max": 10,
             "sub_fields": [
                 {
-                    "key": "field_example-plugin_repeater_item_title",
+                    "key": "field_{{slug}}_repeater_item_title",
                     "label": "Item Title",
                     "name": "item_title",
                     "type": "text",
                     "instructions": ""
                 },
                 {
-                    "key": "field_example-plugin_repeater_item_value",
+                    "key": "field_{{slug}}_repeater_item_value",
                     "label": "Item Value",
                     "name": "item_value",
                     "type": "number",
@@ -453,9 +453,9 @@
             ]
         },
         {
-            "key": "field_example-plugin_example_flexible_content",
+            "key": "field_{{slug}}_example_flexible_content",
             "label": "Flexible Content Field",
-            "name": "example-plugin_example_flexible_content",
+            "name": "{{slug}}_example_flexible_content",
             "type": "flexible_content",
             "instructions": "Build a custom layout using these components.",
             "button_label": "Add Component",
@@ -463,7 +463,7 @@
             "max": 20,
             "layouts": [
                 {
-                    "key": "layout_example-plugin_text_block",
+                    "key": "layout_{{slug}}_text_block",
                     "name": "text_block",
                     "label": "Text Block",
                     "display": "block",
@@ -471,14 +471,14 @@
                     "max": "",
                     "sub_fields": [
                         {
-                            "key": "field_example-plugin_layout_text_heading",
+                            "key": "field_{{slug}}_layout_text_heading",
                             "label": "Heading",
                             "name": "heading",
                             "type": "text",
                             "instructions": ""
                         },
                         {
-                            "key": "field_example-plugin_layout_text_content",
+                            "key": "field_{{slug}}_layout_text_content",
                             "label": "Content",
                             "name": "content",
                             "type": "wysiwyg",
@@ -489,7 +489,7 @@
                     ]
                 },
                 {
-                    "key": "layout_example-plugin_image_block",
+                    "key": "layout_{{slug}}_image_block",
                     "name": "image_block",
                     "label": "Image Block",
                     "display": "block",
@@ -497,7 +497,7 @@
                     "max": "",
                     "sub_fields": [
                         {
-                            "key": "field_example-plugin_layout_image",
+                            "key": "field_{{slug}}_layout_image",
                             "label": "Image",
                             "name": "image",
                             "type": "image",
@@ -506,7 +506,7 @@
                             "preview_size": "medium"
                         },
                         {
-                            "key": "field_example-plugin_layout_image_caption",
+                            "key": "field_{{slug}}_layout_image_caption",
                             "label": "Caption",
                             "name": "caption",
                             "type": "text",
@@ -515,7 +515,7 @@
                     ]
                 },
                 {
-                    "key": "layout_example-plugin_cta_block",
+                    "key": "layout_{{slug}}_cta_block",
                     "name": "cta_block",
                     "label": "Call to Action",
                     "display": "block",
@@ -523,14 +523,14 @@
                     "max": "",
                     "sub_fields": [
                         {
-                            "key": "field_example-plugin_layout_cta_title",
+                            "key": "field_{{slug}}_layout_cta_title",
                             "label": "Title",
                             "name": "title",
                             "type": "text",
                             "instructions": ""
                         },
                         {
-                            "key": "field_example-plugin_layout_cta_description",
+                            "key": "field_{{slug}}_layout_cta_description",
                             "label": "Description",
                             "name": "description",
                             "type": "textarea",
@@ -538,7 +538,7 @@
                             "rows": 2
                         },
                         {
-                            "key": "field_example-plugin_layout_cta_button",
+                            "key": "field_{{slug}}_layout_cta_button",
                             "label": "Button",
                             "name": "button",
                             "type": "link",
@@ -555,14 +555,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
+                "value": "{{slug}}"
             }
         ]
     ],

@@ -8,13 +8,13 @@
 	<div class="wp-block-group">
 		<!-- wp:post-title {"level":1} /-->
 
-		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"{{namespace}}/fields","args":{"key":"{{slug}}_subtitle"}}}}} -->
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"{{slug}}/fields","args":{"key":"{{namespace}}_subtitle"}}}}} -->
 		<p></p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
 
-		<!-- wp:pattern {"slug":"{{namespace}}/{{slug}}-meta"} /-->
+		<!-- wp:pattern {"slug":"{{slug}}/{{slug}}-meta"} /-->
 	</div>
 	<!-- /wp:group -->
 
@@ -23,7 +23,7 @@
 	<!-- /wp:spacer -->
 
 	<!-- wp:heading {"level":2} -->
-	<h2>Related {{name_plural}}</h2>
+	<h2>Related Items</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:{{namespace}}/{{slug}}-collection {"layout":"grid","columns":3,"query":{"postType":"{{slug}}","perPage":3}} /-->

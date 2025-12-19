@@ -3,12 +3,12 @@
 	"apiVersion": 3,
 	"name": "{{namespace}}/{{slug}}-card",
 	"title": "{{name}} Card",
-	"category": "{{slug}}",
+	"category": "{{cpt1_slug}}",
 	"icon": "id-alt",
 	"description": "Display a single item in a card layout.",
 	"version": "1.0.0",
 	"textdomain": "{{textdomain}}",
-	"keywords": [ "card", "{{slug}}", "post" ],
+	"keywords": [ "card", "{{cpt1_slug}}", "post" ],
 	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
@@ -33,16 +33,16 @@
 		}
 	},
 	"selectors": {
-		"root": ".{{namespace}}-{{slug}}-card",
+		"root": ".{{namespace}}-{{cpt1_slug}}-card",
 		"color": {
-			"text": ".{{namespace}}-{{slug}}-card__content",
-			"background": ".{{namespace}}-{{slug}}-card"
+			"text": ".{{namespace}}-{{cpt1_slug}}-card__content",
+			"background": ".{{namespace}}-{{cpt1_slug}}-card"
 		},
 		"typography": {
-			"fontSize": ".{{namespace}}-{{slug}}-card__title"
+			"fontSize": ".{{namespace}}-{{cpt1_slug}}-card__title"
 		},
 		"dimensions": {
-			"aspectRatio": ".{{namespace}}-{{slug}}-card__image"
+			"aspectRatio": ".{{namespace}}-{{cpt1_slug}}-card__image"
 		}
 	},
 	"attributes": {
@@ -86,3 +86,4 @@
 	"style": "file:./style.css",
 	"render": "file:./render.php"
 }
+// ...existing code from block.json for card block...

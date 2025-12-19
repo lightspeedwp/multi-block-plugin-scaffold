@@ -1,5 +1,15 @@
 /**
+ * @file edit.js
+ * @description Block editor component for the example card block.
+ * @todo Add inspector controls and accessibility improvements.
+ */
+/**
  * Example Plugin Card Block - Editor Component
+/**
+ * @file edit.js
+ * @description Block editor component for the example card block.
+ * @todo Add inspector controls and accessibility improvements.
+ */
  *
  * @package
  */
@@ -8,7 +18,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-
+// Folder and file names should use mustache placeholders, e.g. src/blocks/{{slug}}-card/edit.js
 /**
  * Card block edit component.
  *
@@ -39,7 +49,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 
 			return select('core').getEntityRecord(
 				'postType',
-				context.postType || '{{cpt_slug}}',
+				context.postType || 'item',
 				postId
 			);
 		},
@@ -57,7 +67,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 	);
 
 	const blockProps = useBlockProps({
-		className: 'wp-block-{{namespace}}-{{slug}}-card',
+		className: 'wp-block-{{namespace}}-{{cpt1_slug}}-card',
 	});
 
 	return (
@@ -111,7 +121,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 
 			<div {...blockProps}>
 				{displayFeaturedImage && featuredMedia && (
-					<div className="wp-block-{{namespace}}-{{slug}}-card__image">
+					<div className="wp-block-{{namespace}}-{{cpt1_slug}}-card__image">
 						<img
 							src={featuredMedia.source_url}
 							alt={featuredMedia.alt_text || ''}
@@ -119,23 +129,23 @@ export default function Edit({ attributes, setAttributes, context }) {
 					</div>
 				)}
 
-				<div className="wp-block-{{namespace}}-{{slug}}-card__content">
+				<div className="wp-block-{{namespace}}-{{cpt1_slug}}-card__content">
 					{displayTitle && post && (
-						<h3 className="wp-block-{{namespace}}-{{slug}}-card__title">
+						<h3 className="wp-block-{{namespace}}-{{cpt1_slug}}-card__title">
 							{post.title?.rendered ||
 								__('Untitled', '{{textdomain}}')}
 						</h3>
 					)}
 
 					{displaySubtitle && (
-						<p className="wp-block-{{namespace}}-{{slug}}-card__subtitle">
+						<p className="wp-block-{{namespace}}-{{cpt1_slug}}-card__subtitle">
 							{__('Subtitle placeholder', '{{textdomain}}')}
 						</p>
 					)}
 
 					{displayExcerpt && post && (
 						<div
-							className="wp-block-{{namespace}}-{{slug}}-card__excerpt"
+							  className="wp-block-{{namespace}}-{{cpt1_slug}}-card__excerpt"
 							dangerouslySetInnerHTML={{
 								__html: post.excerpt?.rendered || '',
 							}}
@@ -143,16 +153,16 @@ export default function Edit({ attributes, setAttributes, context }) {
 					)}
 
 					{displayMeta && post && (
-						<div className="wp-block-{{namespace}}-{{slug}}-card__meta">
-							<span className="wp-block-{{namespace}}-{{slug}}-card__date">
+						  <div className="wp-block-{{namespace}}-{{cpt1_slug}}-card__meta">
+							<span className="wp-block-{{namespace}}-{{cpt1_slug}}-card__date">
 								{new Date(post.date).toLocaleDateString()}
 							</span>
 						</div>
 					)}
 				</div>
 
-				{!post && (
-					<p className="wp-block-{{namespace}}-{{slug}}-card__placeholder">
+								className: 'wp-block-{{slug}}-card',
+					<p className="wp-block-{{namespace}}-{{cpt1_slug}}-card__placeholder">
 						{__('Select a post to display.', '{{textdomain}}')}
 					</p>
 				)}
@@ -160,3 +170,4 @@ export default function Edit({ attributes, setAttributes, context }) {
 		</>
 	);
 }
+// ...existing code from edit.js for card block...

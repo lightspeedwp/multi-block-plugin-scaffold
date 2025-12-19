@@ -2,14 +2,14 @@
 /**
  * Test SCF JSON validation.
  *
- * @package {{namespace}}
+ * @package example_plugin
  */
 
 /**
  * SCF JSON Test Class.
  */
 /**
- * Mustache: {{namespace}}, {{slug}}, {{textdomain}}
+ * Mustache: example_plugin, example-plugin, example-plugin
  */
 class Test_SCF_JSON extends WP_UnitTestCase {
 

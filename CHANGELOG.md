@@ -8,7 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+#### Shared Components
 
+- Added new and updated shared components in `src/components/`:
+  - `BackToTopButton` (accessible scroll-to-top button)
+  - `ScrollDownArrow` (decorative scroll-down arrow)
+  - `Logo` (accessible logo component)
+  - `Typography` helpers (Heading, Text)
+  - `SocialShare` (accessible social sharing buttons)
+  - `LoadingSpinner` (accessible loading spinner)
+  - `ErrorBoundary` (accessible error boundary)
+  - `SkipLink` (skip to main content link)
+  - `VisuallyHidden` (screen reader-only utility)
+  - `Divider` (accessible divider)
+
+All components use mustache placeholders and follow WordPress accessibility and code structure standards.
 - `docs/FRONTMATTER_SCHEMA.md` now explains the agent frontmatter contract, points to `scripts/validation/audit-frontmatter.js`, and keeps schema updates in sync with `.github/schemas/frontmatter.schema.json`.
 - Canonical schema assets live under `.github/schemas/` (block 6.9 reference, mustache registries, plugin config, plus example configs) and are verified by `scripts/validation/__tests__/validate-schemas.test.js`.
 - Validation tools now centralise their naming conventions in `scripts/validation/README.md` and keep all `validate-*`, `audit-*`, `test-*`, and `define-*` scripts within `scripts/validation/`.

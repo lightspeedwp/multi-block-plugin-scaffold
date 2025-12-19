@@ -58,3 +58,9 @@ Avoid embedding secrets or skipping tests in workflow steps.
 - Run `npm test` and `composer test` where applicable.
 - Run `npm run lint` and `composer lint` to ensure coding standards before release.
 - Dry-run release workflows locally or via workflow_dispatch in a staging branch before production tags.
+
+## Agent prompts & guardrails
+
+- The release-scaffold agent loads `.github/prompts/create-release-scaffold.prompt.md` when running in **full release** mode and `.github/prompts/pre-release-validation.prompt.md` when only validating. Keep both prompts aligned with the instructions so the wizard steps remain consistent.
+- All templated files that contain `{{mustache}}` placeholders must be handled through the dry-run scripts (`npm run lint:dry-run`, `npm run dry-run:all`, `npm run dry-run:release-scaffold`). No workflow updates should mutate the placeholders directly.
+- This instruction set is specific to the `lightspeedwp/block-theme-scaffold` release process — reuse the prompts and validation suite whenever you prepare a new tag for that repository.
